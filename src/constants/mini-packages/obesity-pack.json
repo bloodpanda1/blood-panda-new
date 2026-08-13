@@ -1,0 +1,19 @@
+{
+  "id": "035bcc33-fe76-4104-b255-ebb00b790622",
+  "benefits": [
+    "CBC -13",
+    "Lipid profile",
+    "Random blood glucose",
+    "Insulin test",
+    "High-sensitivity c-reactive protein (hs-crp)",
+    "Total cortisol level"
+  ],
+  "orgPrice": "1820",
+  "disPrice": "1300",
+  "offerPercent": "30",
+  "extraFeatures": [
+    "6 Tests Included",
+    "NABL Certified Labs",
+    "Report in 24 hrs"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "projectName": "blood-panda-v1",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "pnpm",
+  "includeExamples": true,
+  "tailwind": true,
+  "addOnOptions": {
+    "prisma": {
+      "database": "postgres"
+    }
+  },
+  "envVarValues": {},
+  "git": true,
+  "install": true,
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "eslint",
+    "netlify",
+    "prisma",
+    "compiler",
+    "db",
+    "form",
+    "shadcn",
+    "t3env",
+    "table",
+    "tRPC",
+    "better-auth",
+    "store",
+    "posthog",
+    "tanstack-query",
+    "neon"
+  ]
+}

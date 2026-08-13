@@ -1,0 +1,556 @@
+{
+  "health-checks-essential_tests": [
+    {
+      "routine_tests": [
+        {
+          "id": "5ed10999-da1e-43c9-b55f-dd7fdf98ff51",
+          "testName": "Complete Blood Count (CBC)",
+          "orgPrice": "308",
+          "disPrice": "220"
+        },
+        {
+          "id": "9db1ae0d-f6cc-4ed3-8579-0e3955b97115",
+          "testName": "Renal Function Test (RFT)",
+          "orgPrice": "700",
+          "disPrice": "500"
+        },
+        {
+          "id": "b3da9810-a58f-4f56-9523-74046ab6592f",
+          "testName": "Liver Function Test (LFT)",
+          "orgPrice": "630",
+          "disPrice": "450"
+        },
+        {
+          "id": "3bf38422-91d6-48ba-93d0-fe3d04178081",
+          "testName": "Serum Electrolytes (S. ELECTROLYTES)",
+          "orgPrice": "400",
+          "disPrice": "350"
+        },
+        {
+          "id": "947e558e-762e-4ea6-86fb-4341992a9f30",
+          "testName": "Urine Routine & Micro (URINE ROUTINE & MICRO)",
+          "orgPrice": "280",
+          "disPrice": "200"
+        }
+      ],
+      "coagulation-thrombosis": [
+        {
+          "id": "4b8804c0-4566-4e27-b656-37105e2f9260",
+          "testName": "Prothrombin Time (PT)",
+          "orgPrice": "210",
+          "disPrice": "150"
+        },
+        {
+          "id": "56cbd6dc-d458-40d1-a810-2351a2f4834c",
+          "testName": "Activated Partial Thromboplastin Time (APTT)",
+          "orgPrice": "210",
+          "disPrice": "150"
+        },
+        {
+          "id": "4db6f569-2475-4940-951c-be5cb9d1f3c9",
+          "testName": "Protein S (PS)",
+          "orgPrice": "560",
+          "disPrice": "400"
+        }
+      ],
+      "diabetes-metabolic_health": [
+        {
+          "id": "82525200-9d6d-4a21-9229-be8c12a6d9f7",
+          "testName": "Glycated Hemoglobin (HbA1c)",
+          "orgPrice": "532",
+          "disPrice": "380"
+        }
+      ],
+      "lipid-cardiovascular_risk": [
+        {
+          "id": "f616571e-b960-4ffc-9e8c-e9854f86ee5c",
+          "testName": "Lipid Profile (LIPID PROFILE)",
+          "orgPrice": "798",
+          "disPrice": "570"
+        },
+        {
+          "id": "6b9b0202-d361-4166-844d-6177d7b0faf4",
+          "testName": "Homocysteine (HOMOCYSTEINE)",
+          "orgPrice": "770",
+          "disPrice": "550"
+        },
+        {
+          "id": "b756ffa1-8814-4ebd-9672-166c86813b04",
+          "testName": "High Sensitivity CRP (hs-CRP)",
+          "orgPrice": "770",
+          "disPrice": "550"
+        }
+      ],
+      "microbiology-culture": [
+        {
+          "id": "4247fa07-f680-4241-85e5-ade227c3fa22",
+          "testName": "Culture/Sensitivity Urine (C/S URINE)",
+          "orgPrice": "630",
+          "disPrice": "450"
+        },
+        {
+          "id": "63bea98f-2576-4d57-9fc3-69dbcdce134c",
+          "testName": "Culture/Sensitivity Blood (C/S BLOOD)",
+          "orgPrice": "700",
+          "disPrice": "980"
+        },
+        {
+          "id": "a6be4a96-0312-4dbf-9b1c-49dee464cd94",
+          "testName": "Culture/Sensitivity Sputum (C/S SPUTUM)",
+          "orgPrice": "850",
+          "disPrice": "1190"
+        },
+        {
+          "id": "28cdf961-a293-4a5f-b95e-8aa43cb48c03",
+          "testName": "Sputum Acid Fast Bacilli (SPUTUM AFB)",
+          "orgPrice": "280",
+          "disPrice": "200"
+        }
+      ]
+    }
+  ],
+  "hormones, thyroid-tumor_markers": [
+    {
+      "unknown_sub_category": [
+        {
+          "id": "2c155d0a-8f2a-49ca-874a-eb019cbfbba5",
+          "testName": "Thyroid Stimulating Hormone (TSH)",
+          "orgPrice": "280",
+          "disPrice": "200"
+        },
+        {
+          "id": "9e5c5e9e-92de-4b02-a3d0-1c2ff1863fb5",
+          "testName": "Free Triiodothyronine (FT3)",
+          "orgPrice": "378",
+          "disPrice": "270"
+        },
+        {
+          "id": "a149ce51-4ff8-454f-b17e-511e557e7c48",
+          "testName": "Free Thyroxine (FT4)",
+          "orgPrice": "378",
+          "disPrice": "270"
+        },
+        {
+          "id": "185fecea-8343-4380-ac81-0556f9549149",
+          "testName": "Free Thyroid Function Test (Free TFT)",
+          "orgPrice": "490",
+          "disPrice": "350"
+        },
+        {
+          "id": "0e081bdf-3145-4d97-8866-f6cf5e70b4e3",
+          "testName": "Thyroid Function Test (TFT)",
+          "orgPrice": "448",
+          "disPrice": "320"
+        }
+      ]
+    },
+    {
+      "unknown_sub_category": [
+        {
+          "id": "e7447bd6-97f2-4654-a3f2-566e59bfbe05",
+          "testName": "Anti Thyroid Peroxidase Antibody (Anti-TPO)",
+          "orgPrice": "980",
+          "disPrice": "700"
+        },
+        {
+          "id": "cb6860be-661c-4304-8cf3-61c0e01322ae",
+          "testName": "Follicle Stimulating Hormone (FSH)",
+          "orgPrice": "560",
+          "disPrice": "400"
+        },
+        {
+          "id": "b5bff0ca-49ec-4ea5-a153-109bf97e69cb",
+          "testName": "Luteinizing Hormone (LH)",
+          "orgPrice": "490",
+          "disPrice": "350"
+        },
+        {
+          "id": "8bb7a3d5-7a13-4f95-b9e6-5251013e237f",
+          "testName": "Prolactin Hormone (Prolactin)",
+          "orgPrice": "560",
+          "disPrice": "400"
+        },
+        {
+          "id": "433db632-b8c4-4e65-9322-75fc3434bf2c",
+          "testName": "Estradiol (E2) (Estradiol)",
+          "orgPrice": "840",
+          "disPrice": "600"
+        }
+      ]
+    },
+    {
+      "unknown_sub_category": [
+        {
+          "id": "105ce017-7a77-409a-8594-f955669a51c7",
+          "testName": "Progesterone Hormone (Progesterone)",
+          "orgPrice": "630",
+          "disPrice": "450"
+        },
+        {
+          "id": "2a8f42d7-26e0-433a-89a4-b2edc1ebea96",
+          "testName": "Total Testosterone (Testosterone)",
+          "orgPrice": "518",
+          "disPrice": "370"
+        },
+        {
+          "id": "9fd6bd6e-4d88-4b76-91ac-b801f4ab7075",
+          "testName": "Free Testosterone (Free Testosterone)",
+          "orgPrice": "910",
+          "disPrice": "650"
+        },
+        {
+          "id": "76a3684d-de4c-4faa-b4b2-808898044857",
+          "testName": "Beta Human Chorionic Gonadotropin (Beta HCG)",
+          "orgPrice": "1050",
+          "disPrice": "750"
+        },
+        {
+          "id": "a3fd4896-6254-4093-9f8d-5223eb977add",
+          "testName": "Anti Mullerian Hormone (AMH)",
+          "orgPrice": "2380",
+          "disPrice": "1700"
+        }
+      ]
+    },
+    {
+      "unknown_sub_category": [
+        {
+          "id": "9873e5bc-4145-4979-9db2-d20be0b1e795",
+          "testName": "Prostate Specific Antigen (PSA)",
+          "orgPrice": "980",
+          "disPrice": "700"
+        },
+        {
+          "id": "36055188-7cae-43a3-8835-293370c1f984",
+          "testName": "Insulin Fasting / Random (Insulin F/R)",
+          "orgPrice": "840",
+          "disPrice": "600"
+        },
+        {
+          "id": "c3f46fc1-1b51-40b5-b0d3-8953ee5944c8",
+          "testName": "Cortisol Total (Cortisol Total)",
+          "orgPrice": "910",
+          "disPrice": "650"
+        },
+        {
+          "id": "a5886e06-3e1d-46d6-860b-19e27a5edb9a",
+          "testName": "25-OH Vitamin D Total (Vitamin D)",
+          "orgPrice": "1190",
+          "disPrice": "850"
+        },
+        {
+          "id": "22ce8613-24ac-459e-8b98-bb4a75815dcd",
+          "testName": "Vitamin B12 (Vitamin B12)",
+          "orgPrice": "770",
+          "disPrice": "550"
+        }
+      ]
+    },
+    {
+      "unknown_sub_category": [
+        {
+          "id": "473978fd-c1bd-4a18-af2c-334c25e8cce8",
+          "testName": "Cancer Antigen 125 (CA-125)",
+          "orgPrice": "1120",
+          "disPrice": "800"
+        },
+        {
+          "id": "d423a577-6cff-4d01-ac72-c996a222be6a",
+          "testName": "Carcinoembryonic Antigen (CEA)",
+          "orgPrice": "1120",
+          "disPrice": "800"
+        }
+      ]
+    }
+  ],
+  "advanced-specialized_tests": [
+    {
+      "infection-fever_profile": [
+        {
+          "id": "bb90530a-8efa-4405-a741-39cb59898de8",
+          "testName": "Dengue Profile",
+          "orgPrice": "1680",
+          "disPrice": "1200"
+        },
+        {
+          "id": "2b9948ef-3148-4ed7-8793-0d91eb6cd4a2",
+          "testName": "Chikungunya IgM",
+          "orgPrice": "938",
+          "disPrice": "670"
+        },
+        {
+          "id": "50222e7b-14de-4839-a529-fc05ea6cd6d0",
+          "testName": "Chikungunya(IgM & IgG Antibodies)",
+          "orgPrice": "1260",
+          "disPrice": "900"
+        },
+        {
+          "id": "f42d5f2c-ece3-47bb-8f99-47828ab01eaa",
+          "testName": "Typhidot IgG",
+          "orgPrice": "1120",
+          "disPrice": "800"
+        },
+        {
+          "id": "68eb8f0b-5ebb-4930-87dd-d26618322e06",
+          "testName": "Anti HCV",
+          "orgPrice": "1302",
+          "disPrice": "930"
+        }
+      ]
+    },
+    {
+      "unknown_sub_category": [
+        {
+          "id": "0a722e13-d218-4192-b65d-f933bdea0a9c",
+          "testName": "Rubella IgM (Rubella IgM)",
+          "orgPrice": "840",
+          "disPrice": "600"
+        },
+        {
+          "id": "11b60abe-f5fe-48e5-b083-f999f17a1ab2",
+          "testName": "Rubella IgG (Rubella IgG)",
+          "orgPrice": "700",
+          "disPrice": "500"
+        }
+      ]
+    },
+    {
+      "inflammation_rheumatology": [
+        {
+          "id": "a7b73324-b93b-423b-a064-ea75a702adee",
+          "testName": "C-Reactive Protein (CRP)",
+          "orgPrice": "630",
+          "disPrice": "450"
+        },
+        {
+          "id": "e9fcb524-773e-4202-9a5e-14b646f3f235",
+          "testName": "hs-CRP",
+          "orgPrice": "770",
+          "disPrice": "550"
+        },
+        {
+          "id": "e92bcd09-814b-4caf-90e0-ebee4ecd707a",
+          "testName": "Anti Streptolysin O Titre (ASO Titre)",
+          "orgPrice": "518",
+          "disPrice": "370"
+        },
+        {
+          "id": "ade0f0b6-8485-4e9e-b1a2-5ebf4d4699fa",
+          "testName": "Rheumatoid Arthritis Factor (RA Factor)",
+          "orgPrice": "560",
+          "disPrice": "400"
+        },
+        {
+          "id": "a3ef3960-782f-4b97-a14c-9990e0404a59",
+          "testName": "Anti CCP",
+          "orgPrice": "1330",
+          "disPrice": "950"
+        }
+      ]
+    },
+    {
+      "autoimmune-disorders": [
+        {
+          "id": "add2760f-11f2-42bb-a4ed-c224bd4d8e97",
+          "testName": "Antinuclear Antibody",
+          "orgPrice": "840",
+          "disPrice": "600"
+        },
+        {
+          "id": "39a73384-7359-4d9a-a75c-80b938a7226d",
+          "testName": "Indirect Immunofluorescence",
+          "orgPrice": "910",
+          "disPrice": "650"
+        },
+        {
+          "id": "d5d62af2-d8bd-4540-b90c-49bb7ed0530f",
+          "testName": "Extended ANA Panel",
+          "orgPrice": "6720",
+          "disPrice": "4800"
+        }
+      ]
+    },
+    {
+      "cardiac-markers": [
+        {
+          "id": "be9d1333-939f-4220-8321-2f5da7927ee2",
+          "testName": "Cardiac Troponin T",
+          "orgPrice": "1330",
+          "disPrice": "950"
+        },
+        {
+          "id": "440a766a-2df3-4db4-8213-c44d3691f3be",
+          "testName": "Lactate Dehydrogenase",
+          "orgPrice": "770",
+          "disPrice": "550"
+        }
+      ]
+    },
+    {
+      "nutrition_deficiency-profile": [
+        {
+          "id": "61515b2f-ee72-4d8f-bf65-1a6d7fcb849e",
+          "testName": "Iron Storage Protein (Ferritin)",
+          "orgPrice": "700",
+          "disPrice": "500"
+        },
+        {
+          "id": "4af315c0-7e88-4595-8301-c8de72a1462c",
+          "testName": "Serum Iron",
+          "orgPrice": "630",
+          "disPrice": "450"
+        },
+        {
+          "id": "baf7e0c9-0a7e-4703-9e44-316b93c8c162",
+          "testName": "Serum Calcium",
+          "orgPrice": "420",
+          "disPrice": "300"
+        }
+      ]
+    },
+    {
+      "pancreatic-function": [
+        {
+          "id": "82ab371c-0e36-4fab-8fe1-6495d2086a67",
+          "testName": "Pancreatic Enzyme (Amylase)",
+          "orgPrice": "630",
+          "disPrice": "450"
+        },
+        {
+          "id": "236193f5-5d84-4e87-b2a8-2b2aecf390e0",
+          "testName": "Pancreatic Enzyme (Lipase)",
+          "orgPrice": "658",
+          "disPrice": "470"
+        }
+      ]
+    },
+    {
+      "kidney-health": [
+        {
+          "id": "f915439d-ae8f-4b00-8242-1d6c96bbc9fb",
+          "testName": "Renal Function Test (RFT) Test",
+          "orgPrice": "700",
+          "disPrice": "500"
+        },
+        {
+          "id": "d07c96e2-9ba9-4cbb-92fd-ddd6ac40ba3d",
+          "testName": "Urea (Urea)",
+          "orgPrice": "350",
+          "disPrice": "250"
+        },
+        {
+          "id": "9202bd72-f70b-4a7e-95c9-eda158914db9",
+          "testName": "Creatinine (Creatinine)",
+          "orgPrice": "350",
+          "disPrice": "250"
+        },
+        {
+          "id": "b852c2b4-f2f8-459b-87d2-3f17a3a20945",
+          "testName": "Uric Acid (Uric Acid)",
+          "orgPrice": "378",
+          "disPrice": "270"
+        },
+        {
+          "id": "7bea8007-dc98-47b8-94bb-c012b5f5dfc8",
+          "testName": "Urine Microalbumin",
+          "orgPrice": "0",
+          "disPrice": "0"
+        }
+      ]
+    },
+    {
+      "unknown_sub_category": [
+        {
+          "id": "7ff0cc40-660c-48bf-bfe3-50abd83c2b02",
+          "testName": "Na, K, Cl, HCO₃ Panel",
+          "orgPrice": "840",
+          "disPrice": "640"
+        }
+      ]
+    },
+    {
+      "allergy-profile": [
+        {
+          "id": "ec17d836-23e1-468d-93fe-a3de5049a204",
+          "testName": "Immunoglobulin E",
+          "orgPrice": "910",
+          "disPrice": "650"
+        }
+      ]
+    },
+    {
+      "specialized-proteins": [
+        {
+          "id": "e65f05f0-51aa-48b0-8128-f81860b6f23e",
+          "testName": "Serum Protein Electrophoresis (Serum Protein Electrophoresis)",
+          "orgPrice": "1680",
+          "disPrice": "1200"
+        }
+      ]
+    }
+  ],
+  "pregnancy_womens-health-tests": [
+    {
+      "unknown_sub_category": [
+        {
+          "id": "916cd103-20bc-48dc-a30a-0f128177bedd",
+          "testName": "Prenatal Screen I",
+          "orgPrice": "2380",
+          "disPrice": "1700"
+        },
+        {
+          "id": "2d858d05-2a0c-4774-a885-0db7103e8b62",
+          "testName": "Prenatal Screen II",
+          "orgPrice": "2380",
+          "disPrice": "1700"
+        },
+        {
+          "id": "38cfc812-4ac7-4dcf-bfc5-e824080f023d",
+          "testName": "Prenatal Screen (NIPT)",
+          "orgPrice": "4900",
+          "disPrice": "3500"
+        },
+        {
+          "id": "3b94dba4-a958-4bfb-8b49-a740eb0d9a18",
+          "testName": "Beta HCG",
+          "orgPrice": "1050",
+          "disPrice": "750"
+        },
+        {
+          "id": "44602f28-3572-46e4-b090-c44529087b18",
+          "testName": "AMH",
+          "orgPrice": "2380",
+          "disPrice": "1700"
+        }
+      ]
+    },
+    {
+      "unknown_sub_category": [
+        {
+          "id": "1e593d67-8ee0-405b-bba7-30a07ea8a02b",
+          "testName": "Progesterone",
+          "orgPrice": "630",
+          "disPrice": "450"
+        },
+        {
+          "id": "e50f0c80-8a56-498e-a327-dc76e1a1a84f",
+          "testName": "Estradiol",
+          "orgPrice": "840",
+          "disPrice": "600"
+        },
+        {
+          "id": "9a74c3af-e073-4990-9432-e89e1834918e",
+          "testName": "FSH",
+          "orgPrice": "560",
+          "disPrice": "400"
+        },
+        {
+          "id": "d8089ca6-50c0-4dd7-bdfe-71e646d89682",
+          "testName": "LH",
+          "orgPrice": "490",
+          "disPrice": "350"
+        }
+      ]
+    }
+  ]
+}

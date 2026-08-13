@@ -1,0 +1,21 @@
+import type { MiniPackage } from '#/types'
+
+export const renalPack: MiniPackage = {
+  id: crypto.randomUUID(),
+  benefits: [
+    'CBC -13',
+    'Glucose Fasting',
+    'Renal Function Test Bangalore (P01702)',
+    'Urine complete analysis',
+    'Protein Creatinine Ratio, Urine',
+    'Glomerular Filtration Rate (eGFR)',
+  ],
+  orgPrice: '1960',
+  disPrice: '1400',
+  offerPercent: '30',
+  extraFeatures: [
+    '6 Tests Included',
+    'NABL Certified Labs',
+    'Report in 24 hrs',
+  ],
+}

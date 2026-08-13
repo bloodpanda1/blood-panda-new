@@ -1,0 +1,17 @@
+{
+  "id": "efb4240d-7d6c-4af1-a1ed-1c8fa3b52b08",
+  "benefits": [
+    "Fasting blood glucose",
+    "Post-prandial blood glucose",
+    "Glycated hemoglobin (hba1c)",
+    "Urine complete analysis"
+  ],
+  "orgPrice": "910",
+  "disPrice": "650",
+  "offerPercent": "30",
+  "extraFeatures": [
+    "4 Tests Included",
+    "NABL Certified Labs",
+    "Report in 24 hrs"
+  ]
+}

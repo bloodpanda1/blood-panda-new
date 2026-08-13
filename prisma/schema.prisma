@@ -1,0 +1,327 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String    @default("https://avatar.vercel.sh/rauchg?rounded=60")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  role          Role      @default(USER)
+  accounts      Account[]
+  bookings      Booking[]
+  payments      Payment[]
+  posts         Post[]
+  sessions      Session[]
+
+  banned     Boolean?
+  banReason  String?
+  banExpires DateTime? @db.Timestamptz(3)
+
+  prescriptions String[] @default([])
+  testReports   String[] @default([])
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String   @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  impersonatedBy String?
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  accountId             String
+  providerId            String
+  userId                String    @db.Uuid
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Post {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title      String
+  slug       String   @unique
+  postCover  String
+  summary    String
+  content    String
+  categories String[]
+  authorId   String   @db.Uuid
+  draft      Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  author     User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([authorId, slug])
+  @@map("post")
+}
+
+model PrimaryCategory {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  tests     BloodTest[]
+
+  @@map("primary_category")
+}
+
+model SecondaryCategory {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String      @default("General")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  tests     BloodTest[]
+
+  @@map("secondary_category")
+}
+
+model BloodTest {
+  id                  String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                String            @unique
+  originalPrice       String
+  discountAmount      String            @default("30")
+  discountedPrice     String
+  isFastingRequired   Boolean           @default(false)
+  primaryCategoryId   String            @db.Uuid
+  secondaryCategoryId String            @db.Uuid
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  memberId            String?           @db.Uuid
+  member              Member?           @relation(fields: [memberId], references: [id])
+  primaryCategory     PrimaryCategory   @relation(fields: [primaryCategoryId], references: [id], onDelete: Cascade)
+  secondaryCategory   SecondaryCategory @relation(fields: [secondaryCategoryId], references: [id], onDelete: Cascade)
+
+  isRegularItem Boolean @default(false)
+
+  @@index([name])
+  @@map("blood_test")
+}
+
+model PackageCategory {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String    @unique
+  features  String[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  packages  Package[] @relation("PackageToPackageCategory")
+
+  @@map("package_category")
+}
+
+model Package {
+  id                String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name              String            @unique
+  description       String
+  cover             String            @default("/packages-bg.png")
+  originalAmount    String
+  discountedAmount  String
+  offerAmount       String            @default("30")
+  extraFeatures     String[]
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  packageCategories PackageCategory[] @relation("PackageToPackageCategory")
+
+  @@index([name])
+  @@map("package")
+}
+
+model MiniPackage {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String   @unique
+  description      String
+  cover            String   @default("/packages-bg.png")
+  benefits         String[]
+  originalAmount   String
+  discountedAmount String
+  offerAmount      String   @default("30")
+  extraFeatures    String[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([id, name])
+  @@index([name])
+  @@map("mini_package")
+}
+
+model Member {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  email     String
+  phone     String
+  gender    Gender
+  age       String
+  bookingId String?     @db.Uuid
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  testItems BloodTest[]
+  booking   Booking?    @relation(fields: [bookingId], references: [id])
+
+  @@index([bookingId])
+  @@map("member")
+}
+
+model Address {
+  id            String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  type          AddressType @default(HOME)
+  location      String
+  houseNo       String
+  landmark      String?
+  pinCode       String
+  streetAddress String?
+  city          String?
+  state         String?
+  country       String?
+  bookingId     String?     @db.Uuid
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  booking       Booking?    @relation(fields: [bookingId], references: [id])
+
+  @@index([type, pinCode])
+  @@map("address")
+}
+
+model Schedule {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  scheduleDate DateTime
+  slot         String
+  bookingId    String?  @db.Uuid
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  booking      Booking? @relation(fields: [bookingId], references: [id])
+
+  @@index([scheduleDate, slot])
+  @@map("schedule")
+}
+
+model Booking {
+  id        String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  type      BookingType   @default(COD)
+  status    BookingStatus @default(PENDING)
+  userId    String?       @db.Uuid
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  addresses Address[]
+  user      User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  members   Member[]
+  payments  Payment[]
+  schedules Schedule[]
+
+  fullName        String?
+  mobileNumber    String?
+  address         String?
+  city            String?
+  zipcode         String?
+  preferredTime   String?
+  preferredDate   DateTime?
+  testRequirement String?
+  agreeOfTerms    Boolean?
+
+  @@map("booking")
+}
+
+model Payment {
+  id              String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  merchantId      String
+  merchantOrderId String
+  orderId         String
+  state           String
+  amount          String
+  currency        String
+  expireAt        String
+  userId          String       @db.Uuid
+  bookingId       String       @db.Uuid
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  booking         Booking      @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  webhookLogs     WebhookLog[]
+
+  @@index([userId, bookingId, merchantOrderId, orderId, state])
+  @@map("payment")
+}
+
+model WebhookLog {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  payload   Json
+  paymentId String   @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  payment   Payment  @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+
+  @@index([paymentId])
+  @@map("webhook_log")
+}
+
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AddressType {
+  HOME
+  OTHER
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum BookingType {
+  COD
+  ONLINE_PAYMENT
+  INSTANT_BOOKING
+}

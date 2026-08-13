@@ -1,0 +1,33 @@
+{
+  "short_name": "BloodPanda Diagnostics | Home Blood Tests & Health Checkups in Bengaluru",
+  "name": "Create TanStack App Sample",
+  "description": "Book home blood tests in Bengaluru with BloodPanda. NABL-accredited partner labs, doorstep sample collection, affordable health packages, and fast, accurate reports online.",
+  "icons": [
+    {
+      "src": "/favicons/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo-idol.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo-idol.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "categories": [
+    "health",
+    "medical",
+    "diagnostics",
+    "blood tests",
+    "home health checkups"
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "totalTests": 89,
+  "description": "This package includes 89 individual tests under 12 main categories",
+  "categories": [
+    {
+      "id": "5e2dd25e-7efc-4c3b-a14b-faef8dc9b049",
+      "name": "Complete Blood Count",
+      "count": "24 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count",
+        "Differential Count",
+        "Neutrophils",
+        "Lymphocytes",
+        "Eosinophils",
+        "Monocytes",
+        "Basophils",
+        "PCV",
+        "RBC",
+        "MCV",
+        "MCH",
+        "Platelet Count",
+        "Absolute Neutrophil Count",
+        "Absolute Lymphocyte Count",
+        "Absolute Eosinophil Count",
+        "Absolute Monocyte Count",
+        "Absolute Basophil Count",
+        "RDW-CV",
+        "RDW-SD",
+        "PDW MPV",
+        "P-LCR",
+        "PCT"
+      ]
+    },
+    {
+      "id": "6103b7be-5d1d-45dd-a0e0-1c4bbc9a8f10",
+      "name": "Diabetic",
+      "count": "2 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count"
+      ]
+    },
+    {
+      "id": "6a4fd2f7-f5b1-48fa-b80d-c02d2419e5a1",
+      "name": "Kidney Function Tests",
+      "count": "7 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count",
+        "Differential Count",
+        "Neutrophils",
+        "Lymphocytes",
+        "Eosinophils",
+        "Monocytes"
+      ]
+    },
+    {
+      "id": "b45845cb-e658-4bb1-8798-6ee618fb4b2e",
+      "name": "Lipid Profile",
+      "count": "9 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count",
+        "Differential Count",
+        "Neutrophils",
+        "Lymphocytes",
+        "Eosinophils",
+        "Monocytes",
+        "Basophils",
+        "PCV",
+        "RBC"
+      ]
+    },
+    {
+      "id": "8bed1bfd-fb4c-49ec-8af0-3e0d140640af",
+      "name": "Liver Function Tests",
+      "count": "12 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count",
+        "Differential Count",
+        "Neutrophils",
+        "Lymphocytes",
+        "Eosinophils",
+        "Monocytes",
+        "Basophils",
+        "PCV",
+        "RBC",
+        "MCV",
+        "MCH",
+        "Platelet Count"
+      ]
+    },
+    {
+      "id": "5f0298b8-61e0-4ceb-8ba5-ddebbce9a74b",
+      "name": "Electrolytes",
+      "count": "3 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count",
+        "Differential Count"
+      ]
+    },
+    {
+      "id": "5be60b5d-5a18-4f9f-a740-952990ab6831",
+      "name": "Bone Health",
+      "count": "2 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count"
+      ]
+    },
+    {
+      "id": "03ff35d7-9ddd-4ae9-be5c-8401d4cef06f",
+      "name": "Thyroid Function Tests",
+      "count": "3 Tests",
+      "features": [
+        "Neutrophils",
+        "Lymphocytes",
+        "Eosinophils"
+      ]
+    },
+    {
+      "id": "3bd1c9d1-e6bb-483d-99d4-aaf6b7b17a20",
+      "name": "Tumor Marker",
+      "count": "1 Tests",
+      "features": [
+        "Monocytes"
+      ]
+    },
+    {
+      "id": "a43322d8-c548-45cd-b9b0-ed8a98ec04f4",
+      "name": "Vitamins",
+      "count": "2 Tests",
+      "features": [
+        "Lymphocytes",
+        "Eosinophils"
+      ]
+    },
+    {
+      "id": "828ddd26-e5be-4f61-9425-bce3517f161f",
+      "name": "Iron Profile",
+      "count": "4 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count",
+        "Differential Count",
+        "Neutrophils"
+      ]
+    },
+    {
+      "id": "38ff6538-162c-42e1-b5ca-3860028b0804",
+      "name": "Urine Complete Analysis",
+      "count": "20 Tests",
+      "features": [
+        "Haemoglobin",
+        "Total WBC Count",
+        "Differential Count",
+        "Neutrophils",
+        "Lymphocytes",
+        "Eosinophils",
+        "Monocytes",
+        "Basophils",
+        "PCV",
+        "RBC",
+        "MCV",
+        "MCH",
+        "Platelet Count",
+        "Absolute Neutrophil Count",
+        "Absolute Lymphocyte Count",
+        "Absolute Eosinophil Count",
+        "Absolute Monocyte Count",
+        "Absolute Basophil Count",
+        "RDW-CV",
+        "RDW-SD",
+        "PDW MPV",
+        "P-LCR",
+        "PCT"
+      ]
+    }
+  ],
+  "orgPrice": "3499",
+  "disPrice": "4599",
+  "offerPercentage": "30",
+  "extraFeatures": [
+    "85+ Tests Included",
+    "Full Body Master",
+    "NABL Certified Labs",
+    "Report in 24 hrs"
+  ]
+}
