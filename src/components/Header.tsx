@@ -231,7 +231,7 @@ export default function Header() {
             </li>
           ) : !data ? null : (
             <li>
-              <UserButton user={data.user} />
+              <UserButton user={{ ...data.user, image: data.user.image ?? '' }} />
             </li>
           )}
         </ul>

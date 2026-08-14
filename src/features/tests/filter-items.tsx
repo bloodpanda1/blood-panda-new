@@ -7,19 +7,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '#/components/ui/select'
-import { Skeleton } from '#/components/ui/skeleton'
 import { formattedCategoryName } from '#/lib/utils'
 import { Route } from '#/routes/tests'
-import { Await, getRouteApi, useNavigate } from '@tanstack/react-router'
+import { getRouteApi, useNavigate } from '@tanstack/react-router'
 
 const routeApi = getRouteApi('/tests')
 
 export default function FilterItems() {
-  const { primary, secondary } = routeApi.useSearch()
+  const { primary } = routeApi.useSearch()
 
   const navigate = useNavigate({ from: routeApi.id })
 
-  const { primaryCategories, deferredPromise } = Route.useLoaderData()
+  const { primaryCategories } = Route.useLoaderData()
 
   const handlePrimaryChange = (e: string) => {
     navigate({
@@ -33,12 +32,6 @@ export default function FilterItems() {
     })
   }
 
-  const handleSecondaryChange = (e: string) => {
-    navigate({
-      search: (prev) => ({ ...prev, secondary: e, q: undefined }),
-      resetScroll: false,
-    })
-  }
 
   return (
     <div className={'grid grid-cols-3 gap-4'}>
@@ -62,7 +55,7 @@ export default function FilterItems() {
           </SelectContent>
         </Select>
       </div>
-      <div className={'col-span-full sm:col-span-1'}>
+      {/* <div className={'col-span-full sm:col-span-1'}>
         <Await
           promise={deferredPromise}
           fallback={<Skeleton className={'h-10 w-full'} />}
@@ -90,8 +83,8 @@ export default function FilterItems() {
             )
           }}
         </Await>
-      </div>
-      <div className={'col-span-full sm:col-span-1'}>
+      </div> */}
+      {/* <div className={'col-span-full sm:col-span-1'}>
         <Select>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Choose order" />
@@ -104,7 +97,7 @@ export default function FilterItems() {
             </SelectGroup>
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
     </div>
   )
 }

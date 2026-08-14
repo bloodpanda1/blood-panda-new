@@ -145,11 +145,11 @@ export default function HeroCarousel() {
                   <Card className="bg-background/10 backdrop-blur-xs border-none ring-0 shadow-none border-0 h-full justify-center scroll-fade-e gap-4">
                     <CardHeader>
                       <CardDescription>
-                        <p
+                        {/* <p
                           className={'text-destructive font-semibold text-base'}
                         >
                           Bangalore's Trusted Partner for Diagnostic Care
-                        </p>
+                        </p> */}
                       </CardDescription>
                       <CardTitle>
                         <h1

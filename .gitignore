@@ -20,3 +20,7 @@ todos.json
 .content-collections
 
 .erd
+.vercel
+/src/bones
+
+*.csv

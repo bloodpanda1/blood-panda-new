@@ -7,9 +7,9 @@ import CTA from '#/features/home/components/cta'
 import FAQs from '#/features/home/components/faqs'
 import Features from '#/features/home/components/features'
 import HealthCategory from '#/features/home/components/health-category'
-import Hero from '#/features/home/components/hero'
 // import HeroCarousel from '#/features/home/components/hero-carousel'
-import HeroCarouselV2 from '#/features/home/components/hero-carousel-v2'
+import HeroCarouselV2, { HeroStats } from '#/features/home/components/hero-carousel-v2'
+import HeroCallToAction from '#/features/home/components/hero-call-to-action'
 import HowItWorks from '#/features/home/components/how-it-works'
 import IndividualCategory from '#/features/home/components/individual-category'
 import PopularPackages from '#/features/home/components/popular-packages'
@@ -26,7 +26,7 @@ import { createFileRoute, useRouter } from '@tanstack/react-router'
 export const Route = createFileRoute('/')({
   head: () => seo({ path: '/' }),
   loader: () => {
-    const deferredTests = getAllTests({ data: { limit: 12 } })
+    const deferredTests = getAllTests({ data: { limit: 10 } })
     // const defferedPackages = import('#/features/home/components/popular-packages.lazy')
     const defferedPackages = getAllPackages()
 
@@ -57,8 +57,10 @@ export const Route = createFileRoute('/')({
 function App() {
   return (
     <main className={'mx-auto max-w-(--breakpoint-xl) space-y-8 px-4'}>
-      <Hero />
+      {/* <Hero /> */}
       <HeroCarouselV2 />
+      <HeroCallToAction />
+      <HeroStats />
       {/* <HeroCarousel /> */}
       <SearchBar />
 

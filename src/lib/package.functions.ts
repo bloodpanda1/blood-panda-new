@@ -25,6 +25,23 @@ export const getAllPackages = createServerFn().handler(async () => {
   return packages
 })
 
+const CATEGORY_ORDER = [
+  'complete_blood_count',
+  'diabetic',
+  'kidney_function_tests',
+  'lipid_profile',
+  'liver_function_tests',
+  'electrolytes',
+  'bone_health',
+  'thyroid_function_tests',
+  'tumor_marker',
+  'vitamins',
+  'iron_profile',
+  'pancreas_profile',
+  'cardiac_panel',
+  'urine_complete_analysis'
+]
+
 export const getPackageDeatilsByName = createServerFn()
   .validator(paramNamesSchema)
   .handler(async ({ data }) => {
@@ -37,5 +54,19 @@ export const getPackageDeatilsByName = createServerFn()
     if (!existingPackage) {
       throw new Error(`Package with name ${data.name} not found`)
     }
+
+    // Sort categories based on the predefined order
+    existingPackage.packageCategories.sort((a, b) => {
+      const indexA = CATEGORY_ORDER.indexOf(a.name)
+      const indexB = CATEGORY_ORDER.indexOf(b.name)
+      
+      // If a category isn't in the predefined list, put it at the end
+      if (indexA === -1 && indexB === -1) return 0
+      if (indexA === -1) return 1
+      if (indexB === -1) return -1
+      
+      return indexA - indexB
+    })
+
     return existingPackage
   })

@@ -1,5 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from '../app/generated/prisma/client.js'
+import { PrismaClient } from '../src/generated/prisma/client.js'
 
 import type { MiniPackage } from '#/types/index.js'
 import { readdir, readFile } from 'node:fs/promises'
@@ -39,25 +39,25 @@ const prisma = new PrismaClient({
 
 const primaryCategoryFilePath = join(
   process.cwd(),
-  './docs/primary_category.json',
+  './src/constants/primary_category.json',
 )
 // const primaryCategoryFilePath = "../docs/primary_category.json"
 // const secondaryCategoryFilePath = "../docs/secondary_category.json"
 const secondaryCategoryFilePath = join(
   process.cwd(),
-  './docs/secondary_category.json',
+  './src/constants/secondary_category.json',
 )
 
-const bloodTestsFilePath = join(process.cwd(), './docs/blood_test.json')
+const bloodTestsFilePath = join(process.cwd(), './src/constants/blood_test.json')
 
-const miniPackagesFilePath = join(process.cwd(), './docs/mini_package.json')
+const miniPackagesFilePath = join(process.cwd(), './src/constants/mini_package.json')
 
 const packagesCategoryFilePath = join(
   process.cwd(),
-  './docs/package_category.json',
+  './src/constants/package_category.json',
 )
 
-const packagesFilePath = join(process.cwd(), './docs/package_modified.json')
+const packagesFilePath = join(process.cwd(), './src/constants/package_modified.json')
 
 async function readPrimaryCategoryFromFile(
   filePath: string,
@@ -67,8 +67,8 @@ async function readPrimaryCategoryFromFile(
 }
 
 // read all json files only
-const MiniPackagesfilesPath = './app/constants/mini-packages'
-const PackagesfilesPath = './app/constants/packages'
+const MiniPackagesfilesPath = './src/constants/mini-packages'
+const PackagesfilesPath = './src/constants/packages'
 
 async function readingFileFromLocal(
   filesPath: string,

@@ -17,7 +17,7 @@ type SeoDetails = {
 }
 
 export function seo(props: SeoDetails) {
-  const { path, slug, title, description, keywords, image, type, url } = props
+  const { path, slug, title, description, keywords } = props
 
   const titlePath =
     path === '/' ? 'Home' : `${capitalizeFirstLetter(path.split('/')[1])}`

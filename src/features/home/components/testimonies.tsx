@@ -7,7 +7,6 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from '#/components/ui/card'
 import {
   Carousel,
@@ -18,13 +17,11 @@ import { useCallback, useEffect, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar'
 import {
   Item,
-  ItemActions,
   ItemContent,
   ItemDescription,
   ItemMedia,
   ItemTitle,
 } from '#/components/ui/item'
-import { Button } from '#/components/ui/button'
 import { testimonies } from '#/constants'
 import { IconStarFilled } from '@tabler/icons-react'
 import AutoPlay from 'embla-carousel-autoplay'

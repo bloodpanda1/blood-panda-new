@@ -63,10 +63,7 @@ export default function ScheduleSlot() {
     control: form.control,
   })
 
-  function handleReset() {
-    setDate(today)
-    setSelectedSlot(undefined)
-  }
+
 
   useEffect(() => {
     setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone)
@@ -101,7 +98,7 @@ export default function ScheduleSlot() {
             <Controller
               control={form.control}
               name="schedule.scheduleDate"
-              render={({ field, fieldState }) => {
+              render={({ field }) => {
                 return (
                   <Calendar
                     mode="single"

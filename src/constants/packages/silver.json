@@ -16,7 +16,7 @@
         "Monocytes",
         "Basophils",
         "PCV",
-        "RBC",
+        "Red Blood Cell (RBC) Count",
         "MCV",
         "MCH",
         "Platelet Count",
@@ -27,7 +27,8 @@
         "Absolute Basophil Count",
         "RDW-CV",
         "RDW-SD",
-        "PDW MPV",
+        "PDW",
+        "MPV",
         "P-LCR",
         "PCT"
       ]
@@ -37,7 +38,7 @@
       "name": "Diabetic",
       "count": "1 Tests",
       "features": [
-        "Haemoglobin"
+        "Glucose Fasting"
       ]
     },
     {
@@ -45,13 +46,13 @@
       "name": "Kidney Function Tests",
       "count": "7 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count",
-        "Neutrophils",
-        "Lymphocytes",
-        "Eosinophils",
-        "Monocytes"
+        "Urea",
+        "Creatinine",
+        "Uric Acid",
+        "Blood Urea Nitrogen (BUN)",
+        "BUN Creatinine Ratio",
+        "Urea Creatinine Ratio",
+        "Est. GFR"
       ]
     },
     {
@@ -59,16 +60,15 @@
       "name": "Lipid Profile",
       "count": "9 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count",
-        "Neutrophils",
-        "Lymphocytes",
-        "Eosinophils",
-        "Monocytes",
-        "Basophils",
-        "PCV",
-        "RBC"
+        "Total Cholesterol",
+        "Triglycerides",
+        "HDL",
+        "LDL Cholesterol",
+        "VLDL",
+        "CHOL/HDL Ratio",
+        "LDL/HDL Ratio",
+        "Non-HDL",
+        "HDL/LDL Ratio"
       ]
     },
     {
@@ -76,28 +76,20 @@
       "name": "Urine Complete Analysis",
       "count": "20 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count",
-        "Neutrophils",
-        "Lymphocytes",
-        "Eosinophils",
-        "Monocytes",
-        "Basophils",
-        "PCV",
-        "RBC",
-        "MCV",
-        "MCH",
-        "Platelet Count",
-        "Absolute Neutrophil Count",
-        "Absolute Lymphocyte Count",
-        "Absolute Eosinophil Count",
-        "Absolute Monocyte Count",
-        "Absolute Basophil Count",
-        "RDW-CV",
-        "RDW-SD",
-        "PDW MPV",
-        "P-LCR"
+        "Color",
+        "Sp. Gravity",
+        "pH",
+        "Protein",
+        "Glucose",
+        "Bilirubin",
+        "Urobilinogen",
+        "Ketones",
+        "Nitrites",
+        "Leucocytes",
+        "RBC's",
+        "Epithelial Cells",
+        "Cast",
+        "Crystals"
       ]
     }
   ],

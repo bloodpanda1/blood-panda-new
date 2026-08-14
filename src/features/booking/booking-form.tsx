@@ -25,13 +25,6 @@ export default function BookingForm() {
     return
   }
 
-  const handleManualSave = async () => {
-    // const result = await flush() // Save immediately
-    // console.log("Manual save result:", result)
-    // if (result.ok) {
-    //   toast.success("Saved!")
-    // }
-  }
 
   const onSubmit: SubmitHandler<MemberDetailsFormData> = (data) => {
     toast.promise(form.trigger(), {

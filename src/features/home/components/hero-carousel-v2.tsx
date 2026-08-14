@@ -1,16 +1,14 @@
+import { useEffect, useState } from 'react'
 import AutoPlay from 'embla-carousel-autoplay'
-import useEmblaCarousel from 'embla-carousel-react'
-// import { useEffect, useState } from 'react'
-
-import { Card } from '#/components/ui/card'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  type CarouselApi
 } from '#/components/ui/carousel'
 
-import { buttonVariants } from '#/components/ui/button'
-// import type { CarouselApi } from '#/components/ui/carousel'
+import { Card } from '#/components/ui/card'
+
 // import { Progress } from '#/components/ui/progress'
 import {
   Item,
@@ -20,188 +18,106 @@ import {
   ItemTitle,
 } from '#/components/ui/item'
 import { heroStats } from '#/constants'
-import { useMediaQuery } from '#/hooks/use-media-query'
 import { cn } from '#/lib/utils'
-import { ClientOnly, Link } from '@tanstack/react-router'
+import { ClientOnly } from '@tanstack/react-router'
 import { FlaskConicalIcon, PackageOpenIcon } from 'lucide-react'
 import OdometerExample from './odometer-example'
 
-const isDev = import.meta.env.DEV
 
 const heroSlides = [
   {
     id: crypto.randomUUID(),
-    bg: '/hero-new-bg-1.png',
+    bg: '/carousel/1.png',
   },
   {
     id: crypto.randomUUID(),
-    bg: '/hero-new-bg-2.jpeg',
+    bg: '/carousel/2.png',
   },
   {
     id: crypto.randomUUID(),
-    bg: '/hero-new-bg-3.jpeg',
+    bg: '/carousel/3.png',
   },
   {
     id: crypto.randomUUID(),
-    bg: '/hero-new-bg-4.jpeg',
+    bg: '/carousel/4.png',
   },
 ]
 
 export default function HeroCarouselV2() {
-  // const [api, setApi] = useState<CarouselApi>()
-  // const [current, setCurrent] = useState(0)
-  // const [count, setCount] = useState(0)
-  // const [progress, setProgress] = useState(0)
-  const [emblaRef] = useEmblaCarousel(
-    {
-      loop: true,
-      skipSnaps: true,
-      axis: 'x',
-      dragFree: true,
-      dragThreshold: 10,
-    },
-    [
-      ...(!isDev
-        ? [
-            AutoPlay({
-              delay: 5000,
-              stopOnInteraction: false,
-            }),
-          ]
-        : []),
-    ],
-  )
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
 
-  const isMobile = useMediaQuery({ query: `max-width: 575px` })
+  useEffect(() => {
+    if (!api) return
 
-  // useEffect(() => {
-  //   if (!api) return
+    setCurrent(api.selectedScrollSnap())
 
-  //   setCount(api.scrollSnapList().length)
-  //   setCurrent(api.selectedScrollSnap())
-
-  //   api.on('select', () => {
-  //     setCurrent(api.selectedScrollSnap())
-  //   })
-  // }, [api])
-
-  // useEffect(() => {
-  //   if (!api) return
-
-  //   const interval = setInterval(() => {
-  //     setProgress((prevProgress) => {
-  //       const newProgress = prevProgress + 1
-  //       if (newProgress >= 100 && !isDev) {
-  //         if (api.selectedScrollSnap() === api.scrollSnapList().length - 1) {
-  //           api.scrollTo(0)
-  //         } else {
-  //           api.scrollNext()
-  //         }
-  //         return 0
-  //       }
-  //       return newProgress
-  //     })
-  //   }, 1200)
-
-  //   return () => clearInterval(interval)
-  // }, [api])
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
 
   return (
-    <section className={'relative mt-4 grid place-items-center'}>
+    <section className="relative mt-4 w-full overflow-hidden">
       <Carousel
-        ref={emblaRef}
-        // setApi={setApi}
-        className="w-full h-full overflow-x-hidden"
+        setApi={setApi}
+        opts={{
+          loop: true,
+        }}
+        plugins={[
+          AutoPlay({
+            delay: 5000,
+          }),
+        ]}
+        className="w-full h-full"
       >
-        <CarouselContent>
+        <CarouselContent className="-ml-0">
           {heroSlides.map((item, index) => (
-            <CarouselItem key={item.id}>
-              <div className="p-1">
-                <Card className="group/card relative aspect-square sm:aspect-video md:aspect-14/9 lg:aspect-20/9 overflow-hidden border-0 p-0">
+            <CarouselItem key={item.id} className="pl-0">
+              <div className="w-full p-1 outline-none">
+                <Card className="group/card relative overflow-hidden border-0 p-0">
                   <img
                     src={item.bg}
                     alt={`Slide ${index + 1}`}
                     width={800}
                     height={800}
-                    className="absolute inset-0 size-full"
+                    className="w-full h-auto object-cover pointer-events-none select-none"
+                    draggable={false}
                   />
-
-                  {index === 0 ? (
-                    <div
-                      className={cn(
-                        'absolute h-fit w-fit',
-                        isMobile ? 'bottom-4 left-3/12' : 'bottom-8 left-3/12',
-                      )}
-                    >
-                      <div className={'flex items-center gap-2'}>
-                        <Link
-                          to="/booking"
-                          viewTransition
-                          className={buttonVariants({
-                            className:
-                              'bg-destructive! text-accent hover:bg-destructive/90',
-                            size: isMobile ? 'sm' : 'lg',
-                          })}
-                        >
-                          <FlaskConicalIcon className="size-4" /> Book a Test
-                        </Link>
-                        <Link
-                          to="/tests"
-                          viewTransition
-                          className={buttonVariants({
-                            variant: 'outline',
-                            className:
-                              'border-blue-600! border-2 text-blue-600 hover:bg-blue-600 hover:text-accent',
-                            size: isMobile ? 'sm' : 'lg',
-                          })}
-                        >
-                          <PackageOpenIcon className="size-4" />
-                          Explore Packages
-                        </Link>
-                      </div>
-                    </div>
-                  ) : null}
                 </Card>
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        {/* Progress Bar */}
-        {/* <div className="flex justify-center gap-2 py-3 w-full px-6">
-        {Array.from({ length: count }).map((_, index) => (
-          <Progress
-            key={index}
-            value={index === current ? progress : 0}
-            className="h-1 w-full bg-muted-foreground/30! text-background!"
-            onClick={() => api?.scrollTo(index)}
-          />
-        ))}
-      </div> */}
       </Carousel>
 
-      <HeroStats />
+      {/* Pagination Bars */}
+      <div className="flex justify-center gap-2 pt-4 pb-2 w-full px-6 z-20">
+        {heroSlides.map((_, index) => (
+          <button
+            type="button"
+            key={index}
+            className={cn(
+              "h-1.5 rounded-full transition-all duration-300 cursor-pointer block appearance-none border-none p-0 m-0",
+              index === current ? "w-8 bg-[#0C1F70]" : "w-4 bg-[#0C1F70]/30"
+            )}
+            onClick={() => api?.scrollTo(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </section>
   )
 }
 
-function HeroStats() {
+export function HeroStats() {
   return (
-    <div
-      className={
-        'absolute -bottom-96 sm:-bottom-48 md:-bottom-46 lg:-bottom-24 xl:-bottom-24 z-10 bg-background rounded-xl border-0 w-full max-w-6xl px-4 lg:shadow-lg'
-      }
-      // className={
-      //   'col-span-full justify-self-center z-10 bg-accent/10 backdrop-blur-lg border-none ring-0 shadow-none rounded-none border-0 w-full max-w-6xl scroll-fade-e'
-      // }
-    >
-      <div
-        className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4'}
-      >
+    <div className="z-10 w-full max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {heroStats.map((stat) => {
           if (stat.description === 'Rating') {
             return (
-              <Item key={stat.id} variant={'outline'}>
+              <Item key={stat.id} variant={'outline'} className="justify-center sm:justify-start px-4 sm:px-6">
                 <ItemMedia
                   variant="image"
                   className={cn(
@@ -211,7 +127,7 @@ function HeroStats() {
                 >
                   {stat.icon}
                 </ItemMedia>
-                <ItemContent>
+                <ItemContent className="flex-none">
                   <ItemTitle className={'font-semibold text-base'}>
                     <ClientOnly
                       fallback={
@@ -241,7 +157,7 @@ function HeroStats() {
 
           if (stat.description === 'Samples Collected') {
             return (
-              <Item key={stat.id} variant={'outline'}>
+              <Item key={stat.id} variant={'outline'} className="justify-center sm:justify-start px-4 sm:px-6">
                 <ItemMedia
                   variant="image"
                   className={cn(
@@ -251,7 +167,7 @@ function HeroStats() {
                 >
                   {stat.icon}
                 </ItemMedia>
-                <ItemContent>
+                <ItemContent className="flex-none">
                   <ItemTitle className={'font-semibold text-base gap-0'}>
                     <ClientOnly
                       fallback={
@@ -280,14 +196,14 @@ function HeroStats() {
           }
 
           return (
-            <Item key={stat.id} variant={'outline'}>
+            <Item key={stat.id} variant={'outline'} className="justify-center sm:justify-start px-4 sm:px-6">
               <ItemMedia
                 variant="image"
                 className={cn('my-auto p-0.5 rounded-full', `${stat.bgColor}`)}
               >
                 {stat.icon}
               </ItemMedia>
-              <ItemContent>
+              <ItemContent className="flex-none">
                 <ItemTitle className={'font-semibold text-base'}>
                   {stat.stat}
                 </ItemTitle>

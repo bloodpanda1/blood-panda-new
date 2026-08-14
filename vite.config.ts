@@ -1,24 +1,34 @@
 import { devtools } from '@tanstack/devtools-vite'
+import { boneyardPlugin } from 'boneyard-js/vite'
 import { defineConfig, loadEnv } from 'vite'
 
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 
 import contentCollections from '@content-collections/vite'
-
-import netlify from '@netlify/vite-plugin-tanstack-start'
-import babel from '@rolldown/plugin-babel'
-import tailwindcss from '@tailwindcss/vite'
-import viteReact, { reactCompilerPreset } from '@vitejs/plugin-react'
-import { boneyardPlugin } from 'boneyard-js/vite'
 import { nitro } from 'nitro/vite'
+
+import tailwindcss from '@tailwindcss/vite'
+import viteReact from '@vitejs/plugin-react'
 import path from 'node:path'
 import neon from './neon-vite-plugin.ts'
 
-const env = loadEnv('dev', process.cwd(), '')
+const isBuild = process.argv.includes('build') || process.env.NODE_ENV === 'production'
+if (isBuild) {
+  process.env.NODE_ENV = 'production'
+}
 
-const isDev = env['NODE_ENV'] === 'development'
+const env = loadEnv(isBuild ? 'production' : 'dev', process.cwd(), '')
+const isDev = process.env.NODE_ENV !== 'production'
 
 const config = defineConfig({
+  oxc: {
+    jsx: {
+      development: isDev,
+    },
+  },
+  esbuild: {
+    jsxDev: false,
+  },
   resolve: {
     tsconfigPaths: true,
     alias: {
@@ -31,9 +41,7 @@ const config = defineConfig({
   },
   plugins: [
     boneyardPlugin({
-      breakpoints: [
-        375, 480, 576, 640, 768, 1024, 1280, 1440, 1536, 1920, 2560, 3840,
-      ],
+      breakpoints: [414], // iPhone 11 width
       framework: 'react',
       routes: [
         '/packages/gold',
@@ -57,13 +65,15 @@ const config = defineConfig({
     }),
     contentCollections(),
     devtools(),
-    netlify(),
     neon,
     tailwindcss(),
     tanstackStart(),
-    nitro(),
-    viteReact(),
-    babel({ presets: [reactCompilerPreset()] }),
+    nitro({ preset: 'vercel' }),
+    viteReact({
+      babel: {
+        plugins: [['babel-plugin-react-compiler', {}]],
+      },
+    }),
   ],
   optimizeDeps: {
     include: [
@@ -74,7 +84,11 @@ const config = defineConfig({
       'countup.js',
       'odometer_countup',
       'embla-carousel-react',
+      'react-slick',
     ],
+  },
+  ssr: {
+    noExternal: ['react-slick'],
   },
 })
 

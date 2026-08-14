@@ -16,7 +16,7 @@
         "Monocytes",
         "Basophils",
         "PCV",
-        "RBC",
+        "Red Blood Cell (RBC) Count",
         "MCV",
         "MCH",
         "Platelet Count",
@@ -27,7 +27,8 @@
         "Absolute Basophil Count",
         "RDW-CV",
         "RDW-SD",
-        "PDW MPV",
+        "PDW",
+        "MPV",
         "P-LCR",
         "PCT"
       ]
@@ -37,8 +38,8 @@
       "name": "Diabetic",
       "count": "2 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count"
+        "Glucose Fasting",
+        "Hb1Ac"
       ]
     },
     {
@@ -46,13 +47,13 @@
       "name": "Kidney Function Tests",
       "count": "7 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count",
-        "Neutrophils",
-        "Lymphocytes",
-        "Eosinophils",
-        "Monocytes"
+        "Urea",
+        "Creatinine",
+        "Uric Acid",
+        "Blood Urea Nitrogen (BUN)",
+        "BUN Creatinine Ratio",
+        "Urea Creatinine Ratio",
+        "Est. GFR"
       ]
     },
     {
@@ -60,16 +61,15 @@
       "name": "Lipid Profile",
       "count": "9 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count",
-        "Neutrophils",
-        "Lymphocytes",
-        "Eosinophils",
-        "Monocytes",
-        "Basophils",
-        "PCV",
-        "RBC"
+        "Total Cholesterol",
+        "Triglycerides",
+        "HDL",
+        "LDL Cholesterol",
+        "VLDL",
+        "CHO/HDL Ratio",
+        "LDL/HDL Ratio",
+        "Non-HDL",
+        "HDL/LDL Ratio"
       ]
     },
     {
@@ -77,19 +77,18 @@
       "name": "Liver Function Tests",
       "count": "12 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count",
-        "Neutrophils",
-        "Lymphocytes",
-        "Eosinophils",
-        "Monocytes",
-        "Basophils",
-        "PCV",
-        "RBC",
-        "MCV",
-        "MCH",
-        "Platelet Count"
+        "Bilirubin-Total",
+        "Bilirubin-Direct",
+        "Bilirubin-Indirect",
+        "AST/SGOT",
+        "ALT/SGPT",
+        "SGOT/SGPT",
+        "GGT",
+        "Total Protein",
+        "Albumin",
+        "Globulin",
+        "Albumin/Globulin",
+        "ALP"
       ]
     },
     {
@@ -97,9 +96,9 @@
       "name": "Electrolytes",
       "count": "3 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count"
+        "Sodium",
+        "Potassium",
+        "Chloride"
       ]
     },
     {
@@ -107,8 +106,8 @@
       "name": "Bone Health",
       "count": "2 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count"
+        "Calcium",
+        "Phosphorous"
       ]
     },
     {
@@ -116,9 +115,9 @@
       "name": "Thyroid Function Tests",
       "count": "3 Tests",
       "features": [
-        "Neutrophils",
-        "Lymphocytes",
-        "Eosinophils"
+        "T3",
+        "T4",
+        "TSH"
       ]
     },
     {
@@ -126,7 +125,7 @@
       "name": "Tumor Marker",
       "count": "1 Tests",
       "features": [
-        "Monocytes"
+        "PSA for Men / CA-125 for Women"
       ]
     },
     {
@@ -134,8 +133,8 @@
       "name": "Vitamins",
       "count": "2 Tests",
       "features": [
-        "Lymphocytes",
-        "Eosinophils"
+        "25 Hydroxyvitamin D",
+        "Vitamin B12"
       ]
     },
     {
@@ -143,10 +142,10 @@
       "name": "Iron Profile",
       "count": "4 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count",
-        "Neutrophils"
+        "Iron",
+        "UIBC",
+        "TIBC",
+        "Transferrin Saturation"
       ]
     },
     {
@@ -154,29 +153,20 @@
       "name": "Urine Complete Analysis",
       "count": "20 Tests",
       "features": [
-        "Haemoglobin",
-        "Total WBC Count",
-        "Differential Count",
-        "Neutrophils",
-        "Lymphocytes",
-        "Eosinophils",
-        "Monocytes",
-        "Basophils",
-        "PCV",
-        "RBC",
-        "MCV",
-        "MCH",
-        "Platelet Count",
-        "Absolute Neutrophil Count",
-        "Absolute Lymphocyte Count",
-        "Absolute Eosinophil Count",
-        "Absolute Monocyte Count",
-        "Absolute Basophil Count",
-        "RDW-CV",
-        "RDW-SD",
-        "PDW MPV",
-        "P-LCR",
-        "PCT"
+        "Color",
+        "Sp. Gravity",
+        "pH",
+        "Protein",
+        "Glucose",
+        "Bilirubin",
+        "Urobilinogen",
+        "Ketones",
+        "Nitrites",
+        "Leucocytes",
+        "RBC's",
+        "Epithelial Cells",
+        "Cast",
+        "Crystals"
       ]
     }
   ],
@@ -184,7 +174,7 @@
   "disPrice": "4599",
   "offerPercentage": "30",
   "extraFeatures": [
-    "85+ Tests Included",
+    "89+ Tests Included",
     "Full Body Master",
     "NABL Certified Labs",
     "Report in 24 hrs"

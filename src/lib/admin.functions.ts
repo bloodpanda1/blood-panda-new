@@ -69,11 +69,6 @@ export const getTotalPatients = createServerFn({ method: 'GET' })
     })
 
     // actual bookings records with userId null, which means they are not registered users
-    const totalNonRegisteredPatients = await prisma.booking.findMany({
-      where: {
-        userId: null,
-      },
-    })
 
     // mapped with registered patients included-bookings and totalNonRegisteredPatients records
     // merger
