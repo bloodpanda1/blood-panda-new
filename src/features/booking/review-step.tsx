@@ -39,13 +39,7 @@ const paymentOptions = [
     name: 'COD',
     value: 'COD',
     description: 'Pay with cash upon delivery.',
-  },
-  {
-    id: crypto.randomUUID(),
-    name: 'Online Payment',
-    value: 'ONLINE_PAYMENT',
-    description: 'Pay securely using your credit card, debit card, or UPI.',
-  },
+  }
 ]
 
 export default function ReviewStep() {

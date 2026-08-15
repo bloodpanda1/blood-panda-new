@@ -39,12 +39,12 @@ export const addressFormSchema = z.object({
 })
 
 export const scheduleFormSchema = z.object({
-  scheduleDate: z.string(),
-  slotTime: z.string(),
+  scheduleDate: z.string().min(1, 'Please select a date'),
+  slotTime: z.string().min(1, 'Please select a time slot'),
 })
 
 export const reviewOrderSchema = z.object({
-  paymentMode: z.enum(PaymentMethodEnums).default('ONLINE_PAYMENT'),
+  paymentMode: z.enum(PaymentMethodEnums).default('COD'),
 })
 
 export const bookingFormSchema = z.object({

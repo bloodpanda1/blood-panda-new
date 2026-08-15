@@ -103,7 +103,7 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
         addressType: 'HOME',
       },
       schedule: {
-        scheduleDate: '',
+        scheduleDate: new Date().toISOString(),
         slotTime: '',
       },
       reviewOrder: {

@@ -1,4 +1,5 @@
 import { Button } from '#/components/ui/button'
+import { Link } from '@tanstack/react-router'
 import { toast } from 'sonner'
 
 import {
@@ -126,7 +127,7 @@ export default function CartOrderSummary() {
             </div>
             <div className="flex items-center gap-2 text-sm">
               <Shield className="h-4 w-4 text-primary" />
-              <span>Secure payment</span>
+              <span>Cash on Delivery</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <Truck className="h-4 w-4 text-primary" />
@@ -136,12 +137,15 @@ export default function CartOrderSummary() {
 
           {/* Checkout Button */}
           <Button
+            asChild
             className={
               'w-full bg-destructive hover:bg-accent hover:text-destructive transition-all duration-300 ease-in-out'
             }
           >
-            <CreditCard className="mr-2 h-4 w-4" />
-            Proceed to Checkout
+            <Link to="/booking">
+              <CreditCard className="mr-2 h-4 w-4" />
+              Proceed to Checkout
+            </Link>
           </Button>
         </CardContent>
       </Card>

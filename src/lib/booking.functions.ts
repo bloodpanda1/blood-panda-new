@@ -73,10 +73,10 @@ export const createBookingRecord = createServerFn({ method: 'POST' })
             connect: createdMembers.map((member) => ({ id: member.id })),
           },
           addresses: {
-            connect: { id: createdAddress.id },
+            connect: [{ id: createdAddress.id }],
           },
           schedules: {
-            connect: { id: createdSchedule.id },
+            connect: [{ id: createdSchedule.id }],
           },
         },
       })
