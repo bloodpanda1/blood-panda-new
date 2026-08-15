@@ -18,6 +18,61 @@ import { FallbackIndividials } from '../../common/fallback-loaders'
 
 const routeApi = getRouteApi('/')
 
+function IndividualTestCard({ item }: { item: any }) {
+  const { addItem } = useCart()
+
+  return (
+    <Card
+      className={
+        'w-full min-w-xs md:min-w-sm snap-center mt-4 mb-2 md:my-4 pb-3 md:pb-6 [--card-spacing:--spacing(3)] md:[--card-spacing:--spacing(6)]'
+      }
+    >
+      <CardHeader>
+        <CardTitle>
+          <h4>{item.name}</h4>
+        </CardTitle>
+        <CardDescription className={'space-y-2'}>
+          <p>{'N/a'}</p>
+          <p className={'space-x-2'}>
+            <span>Fasting Required:</span>
+            <Badge>{item.isFastingRequired ? 'Yes' : 'No'}</Badge>
+          </p>
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent className="mt-auto">
+        <Badge variant={'ghost'} className={'line-through'}>
+          {formatCurrency(item.originalPrice)}
+        </Badge>
+        <h5 className={'text-lg font-semibold'}>
+          {formatCurrency(item.discountedPrice)}
+        </h5>
+      </CardContent>
+      <CardFooter>
+        <Button
+          variant={'destructive'}
+          className={
+            'w-full rounded-full bg-transparent border-destructive hover:border-destructive hover:bg-destructive/10 text-destructive hover:text-destructive'
+          }
+          onClick={() =>
+            addItem({
+              item: {
+                id: item.id,
+                name: item.name,
+                price: Number(item.discountedPrice),
+                quantity: 1,
+                image: 'https://avatar.vercel.sh/rauchg.png',
+              },
+            })
+          }
+        >
+          Add <PlusCircle className={'size-4'} />
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}
+
 export default function IndividualCategory() {
   const { deferredTests } = routeApi.useLoaderData()
 
@@ -85,62 +140,9 @@ export default function IndividualCategory() {
                       'px-0 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400/50 scrollbar-track-transparent flex gap-4 snap-x snap-mandatory scroll-smooth overflow-x-scroll scroll-fade-x'
                     }
                   >
-                    {firstHalf.map((item) => {
-                      return (
-                        <Card
-                          className={
-                            'w-full min-w-xs md:min-w-sm snap-center my-4 gap-4'
-                          }
-                          key={item.id}
-                        >
-                          <CardHeader>
-                            <CardTitle>
-                              <h4>{item.name}</h4>
-                            </CardTitle>
-                            <CardDescription className={'space-y-2'}>
-                              <p>{'N/a'}</p>
-                              <p className={'space-x-2'}>
-                                <span>Fasting Required:</span>
-                                <Badge>
-                                  {item.isFastingRequired ? 'Yes' : 'No'}
-                                </Badge>
-                              </p>
-                            </CardDescription>
-                          </CardHeader>
-
-                          <CardContent>
-                            <Badge variant={'ghost'} className={'line-through'}>
-                              {formatCurrency(item.originalPrice)}
-                            </Badge>
-                            <h5 className={'text-lg font-semibold'}>
-                              {formatCurrency(item.discountedPrice)}
-                            </h5>
-                          </CardContent>
-                          <CardFooter>
-                            <Button
-                              variant={'destructive'}
-                              className={
-                                'w-full rounded-full bg-transparent border-destructive hover:border-destructive hover:bg-destructive/10 text-destructive hover:text-destructive'
-                              }
-                              onClick={() =>
-                                addItem({
-                                  item: {
-                                    id: item.id,
-                                    name: item.name,
-                                    price: Number(item.discountedPrice),
-                                    quantity: 1,
-                                    image:
-                                      'https://avatar.vercel.sh/rauchg.png',
-                                  },
-                                })
-                              }
-                            >
-                              Add <PlusCircle className={'size-4'} />
-                            </Button>
-                          </CardFooter>
-                        </Card>
-                      )
-                    })}
+                    {firstHalf.map((item) => (
+                      <IndividualTestCard key={item.id} item={item} />
+                    ))}
                   </div>
 
                   <div
@@ -148,62 +150,9 @@ export default function IndividualCategory() {
                       'px-0 scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400/50 scrollbar-track-transparent flex gap-4 snap-x snap-mandatory scroll-smooth overflow-x-scroll scroll-fade-x'
                     }
                   >
-                    {secondHalf.map((item) => {
-                      return (
-                        <Card
-                          className={
-                            'w-full min-w-xs md:min-w-sm snap-center my-4 gap-4'
-                          }
-                          key={item.id}
-                        >
-                          <CardHeader>
-                            <CardTitle>
-                              <h4>{item.name}</h4>
-                            </CardTitle>
-                            <CardDescription className={'space-y-2'}>
-                              <p>{'N/a'}</p>
-                              <p className={'space-x-2'}>
-                                <span>Fasting Required:</span>
-                                <Badge>
-                                  {item.isFastingRequired ? 'Yes' : 'No'}
-                                </Badge>
-                              </p>
-                            </CardDescription>
-                          </CardHeader>
-
-                          <CardContent>
-                            <Badge variant={'ghost'} className={'line-through'}>
-                              {formatCurrency(item.originalPrice)}
-                            </Badge>
-                            <h5 className={'text-lg font-semibold'}>
-                              {formatCurrency(item.discountedPrice)}
-                            </h5>
-                          </CardContent>
-                          <CardFooter>
-                            <Button
-                              variant={'destructive'}
-                              className={
-                                'w-full rounded-full bg-transparent border-destructive hover:border-destructive hover:bg-destructive/10 text-destructive hover:text-destructive'
-                              }
-                              onClick={() =>
-                                addItem({
-                                  item: {
-                                    id: item.id,
-                                    name: item.name,
-                                    price: Number(item.discountedPrice),
-                                    quantity: 1,
-                                    image:
-                                      'https://avatar.vercel.sh/rauchg.png',
-                                  },
-                                })
-                              }
-                            >
-                              Add <PlusCircle className={'size-4'} />
-                            </Button>
-                          </CardFooter>
-                        </Card>
-                      )
-                    })}
+                    {secondHalf.map((item) => (
+                      <IndividualTestCard key={item.id} item={item} />
+                    ))}
                   </div>
                 </CardContent>
               )

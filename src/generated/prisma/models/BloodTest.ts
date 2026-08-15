@@ -20,8 +20,18 @@ export type BloodTestModel = runtime.Types.Result.DefaultSelection<Prisma.$Blood
 
 export type AggregateBloodTest = {
   _count: BloodTestCountAggregateOutputType | null
+  _avg: BloodTestAvgAggregateOutputType | null
+  _sum: BloodTestSumAggregateOutputType | null
   _min: BloodTestMinAggregateOutputType | null
   _max: BloodTestMaxAggregateOutputType | null
+}
+
+export type BloodTestAvgAggregateOutputType = {
+  order: number | null
+}
+
+export type BloodTestSumAggregateOutputType = {
+  order: number | null
 }
 
 export type BloodTestMinAggregateOutputType = {
@@ -37,6 +47,7 @@ export type BloodTestMinAggregateOutputType = {
   updatedAt: Date | null
   memberId: string | null
   isRegularItem: boolean | null
+  order: number | null
 }
 
 export type BloodTestMaxAggregateOutputType = {
@@ -52,6 +63,7 @@ export type BloodTestMaxAggregateOutputType = {
   updatedAt: Date | null
   memberId: string | null
   isRegularItem: boolean | null
+  order: number | null
 }
 
 export type BloodTestCountAggregateOutputType = {
@@ -67,9 +79,18 @@ export type BloodTestCountAggregateOutputType = {
   updatedAt: number
   memberId: number
   isRegularItem: number
+  order: number
   _all: number
 }
 
+
+export type BloodTestAvgAggregateInputType = {
+  order?: true
+}
+
+export type BloodTestSumAggregateInputType = {
+  order?: true
+}
 
 export type BloodTestMinAggregateInputType = {
   id?: true
@@ -84,6 +105,7 @@ export type BloodTestMinAggregateInputType = {
   updatedAt?: true
   memberId?: true
   isRegularItem?: true
+  order?: true
 }
 
 export type BloodTestMaxAggregateInputType = {
@@ -99,6 +121,7 @@ export type BloodTestMaxAggregateInputType = {
   updatedAt?: true
   memberId?: true
   isRegularItem?: true
+  order?: true
 }
 
 export type BloodTestCountAggregateInputType = {
@@ -114,6 +137,7 @@ export type BloodTestCountAggregateInputType = {
   updatedAt?: true
   memberId?: true
   isRegularItem?: true
+  order?: true
   _all?: true
 }
 
@@ -155,6 +179,18 @@ export type BloodTestAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inte
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: BloodTestAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: BloodTestSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: BloodTestMinAggregateInputType
@@ -185,6 +221,8 @@ export type BloodTestGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   _count?: BloodTestCountAggregateInputType | true
+  _avg?: BloodTestAvgAggregateInputType
+  _sum?: BloodTestSumAggregateInputType
   _min?: BloodTestMinAggregateInputType
   _max?: BloodTestMaxAggregateInputType
 }
@@ -202,7 +240,10 @@ export type BloodTestGroupByOutputType = {
   updatedAt: Date
   memberId: string | null
   isRegularItem: boolean
+  order: number
   _count: BloodTestCountAggregateOutputType | null
+  _avg: BloodTestAvgAggregateOutputType | null
+  _sum: BloodTestSumAggregateOutputType | null
   _min: BloodTestMinAggregateOutputType | null
   _max: BloodTestMaxAggregateOutputType | null
 }
@@ -238,6 +279,7 @@ export type BloodTestWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"BloodTest"> | Date | string
   memberId?: Prisma.UuidNullableFilter<"BloodTest"> | string | null
   isRegularItem?: Prisma.BoolFilter<"BloodTest"> | boolean
+  order?: Prisma.IntFilter<"BloodTest"> | number
   member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
   primaryCategory?: Prisma.XOR<Prisma.PrimaryCategoryScalarRelationFilter, Prisma.PrimaryCategoryWhereInput>
   secondaryCategory?: Prisma.XOR<Prisma.SecondaryCategoryScalarRelationFilter, Prisma.SecondaryCategoryWhereInput>
@@ -256,6 +298,7 @@ export type BloodTestOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrderInput | Prisma.SortOrder
   isRegularItem?: Prisma.SortOrder
+  order?: Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
   primaryCategory?: Prisma.PrimaryCategoryOrderByWithRelationInput
   secondaryCategory?: Prisma.SecondaryCategoryOrderByWithRelationInput
@@ -277,6 +320,7 @@ export type BloodTestWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"BloodTest"> | Date | string
   memberId?: Prisma.UuidNullableFilter<"BloodTest"> | string | null
   isRegularItem?: Prisma.BoolFilter<"BloodTest"> | boolean
+  order?: Prisma.IntFilter<"BloodTest"> | number
   member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
   primaryCategory?: Prisma.XOR<Prisma.PrimaryCategoryScalarRelationFilter, Prisma.PrimaryCategoryWhereInput>
   secondaryCategory?: Prisma.XOR<Prisma.SecondaryCategoryScalarRelationFilter, Prisma.SecondaryCategoryWhereInput>
@@ -295,9 +339,12 @@ export type BloodTestOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrderInput | Prisma.SortOrder
   isRegularItem?: Prisma.SortOrder
+  order?: Prisma.SortOrder
   _count?: Prisma.BloodTestCountOrderByAggregateInput
+  _avg?: Prisma.BloodTestAvgOrderByAggregateInput
   _max?: Prisma.BloodTestMaxOrderByAggregateInput
   _min?: Prisma.BloodTestMinOrderByAggregateInput
+  _sum?: Prisma.BloodTestSumOrderByAggregateInput
 }
 
 export type BloodTestScalarWhereWithAggregatesInput = {
@@ -316,6 +363,7 @@ export type BloodTestScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BloodTest"> | Date | string
   memberId?: Prisma.UuidNullableWithAggregatesFilter<"BloodTest"> | string | null
   isRegularItem?: Prisma.BoolWithAggregatesFilter<"BloodTest"> | boolean
+  order?: Prisma.IntWithAggregatesFilter<"BloodTest"> | number
 }
 
 export type BloodTestCreateInput = {
@@ -328,6 +376,7 @@ export type BloodTestCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isRegularItem?: boolean
+  order?: number
   member?: Prisma.MemberCreateNestedOneWithoutTestItemsInput
   primaryCategory: Prisma.PrimaryCategoryCreateNestedOneWithoutTestsInput
   secondaryCategory: Prisma.SecondaryCategoryCreateNestedOneWithoutTestsInput
@@ -346,6 +395,7 @@ export type BloodTestUncheckedCreateInput = {
   updatedAt?: Date | string
   memberId?: string | null
   isRegularItem?: boolean
+  order?: number
 }
 
 export type BloodTestUpdateInput = {
@@ -358,6 +408,7 @@ export type BloodTestUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   member?: Prisma.MemberUpdateOneWithoutTestItemsNestedInput
   primaryCategory?: Prisma.PrimaryCategoryUpdateOneRequiredWithoutTestsNestedInput
   secondaryCategory?: Prisma.SecondaryCategoryUpdateOneRequiredWithoutTestsNestedInput
@@ -376,6 +427,7 @@ export type BloodTestUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BloodTestCreateManyInput = {
@@ -391,6 +443,7 @@ export type BloodTestCreateManyInput = {
   updatedAt?: Date | string
   memberId?: string | null
   isRegularItem?: boolean
+  order?: number
 }
 
 export type BloodTestUpdateManyMutationInput = {
@@ -403,6 +456,7 @@ export type BloodTestUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BloodTestUncheckedUpdateManyInput = {
@@ -418,6 +472,7 @@ export type BloodTestUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BloodTestListRelationFilter = {
@@ -443,6 +498,11 @@ export type BloodTestCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   isRegularItem?: Prisma.SortOrder
+  order?: Prisma.SortOrder
+}
+
+export type BloodTestAvgOrderByAggregateInput = {
+  order?: Prisma.SortOrder
 }
 
 export type BloodTestMaxOrderByAggregateInput = {
@@ -458,6 +518,7 @@ export type BloodTestMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   isRegularItem?: Prisma.SortOrder
+  order?: Prisma.SortOrder
 }
 
 export type BloodTestMinOrderByAggregateInput = {
@@ -473,6 +534,11 @@ export type BloodTestMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   isRegularItem?: Prisma.SortOrder
+  order?: Prisma.SortOrder
+}
+
+export type BloodTestSumOrderByAggregateInput = {
+  order?: Prisma.SortOrder
 }
 
 export type BloodTestCreateNestedManyWithoutPrimaryCategoryInput = {
@@ -559,6 +625,14 @@ export type BloodTestUncheckedUpdateManyWithoutSecondaryCategoryNestedInput = {
   deleteMany?: Prisma.BloodTestScalarWhereInput | Prisma.BloodTestScalarWhereInput[]
 }
 
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type BloodTestCreateNestedManyWithoutMemberInput = {
   create?: Prisma.XOR<Prisma.BloodTestCreateWithoutMemberInput, Prisma.BloodTestUncheckedCreateWithoutMemberInput> | Prisma.BloodTestCreateWithoutMemberInput[] | Prisma.BloodTestUncheckedCreateWithoutMemberInput[]
   connectOrCreate?: Prisma.BloodTestCreateOrConnectWithoutMemberInput | Prisma.BloodTestCreateOrConnectWithoutMemberInput[]
@@ -611,6 +685,7 @@ export type BloodTestCreateWithoutPrimaryCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isRegularItem?: boolean
+  order?: number
   member?: Prisma.MemberCreateNestedOneWithoutTestItemsInput
   secondaryCategory: Prisma.SecondaryCategoryCreateNestedOneWithoutTestsInput
 }
@@ -627,6 +702,7 @@ export type BloodTestUncheckedCreateWithoutPrimaryCategoryInput = {
   updatedAt?: Date | string
   memberId?: string | null
   isRegularItem?: boolean
+  order?: number
 }
 
 export type BloodTestCreateOrConnectWithoutPrimaryCategoryInput = {
@@ -671,6 +747,7 @@ export type BloodTestScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"BloodTest"> | Date | string
   memberId?: Prisma.UuidNullableFilter<"BloodTest"> | string | null
   isRegularItem?: Prisma.BoolFilter<"BloodTest"> | boolean
+  order?: Prisma.IntFilter<"BloodTest"> | number
 }
 
 export type BloodTestCreateWithoutSecondaryCategoryInput = {
@@ -683,6 +760,7 @@ export type BloodTestCreateWithoutSecondaryCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isRegularItem?: boolean
+  order?: number
   member?: Prisma.MemberCreateNestedOneWithoutTestItemsInput
   primaryCategory: Prisma.PrimaryCategoryCreateNestedOneWithoutTestsInput
 }
@@ -699,6 +777,7 @@ export type BloodTestUncheckedCreateWithoutSecondaryCategoryInput = {
   updatedAt?: Date | string
   memberId?: string | null
   isRegularItem?: boolean
+  order?: number
 }
 
 export type BloodTestCreateOrConnectWithoutSecondaryCategoryInput = {
@@ -737,6 +816,7 @@ export type BloodTestCreateWithoutMemberInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isRegularItem?: boolean
+  order?: number
   primaryCategory: Prisma.PrimaryCategoryCreateNestedOneWithoutTestsInput
   secondaryCategory: Prisma.SecondaryCategoryCreateNestedOneWithoutTestsInput
 }
@@ -753,6 +833,7 @@ export type BloodTestUncheckedCreateWithoutMemberInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isRegularItem?: boolean
+  order?: number
 }
 
 export type BloodTestCreateOrConnectWithoutMemberInput = {
@@ -793,6 +874,7 @@ export type BloodTestCreateManyPrimaryCategoryInput = {
   updatedAt?: Date | string
   memberId?: string | null
   isRegularItem?: boolean
+  order?: number
 }
 
 export type BloodTestUpdateWithoutPrimaryCategoryInput = {
@@ -805,6 +887,7 @@ export type BloodTestUpdateWithoutPrimaryCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   member?: Prisma.MemberUpdateOneWithoutTestItemsNestedInput
   secondaryCategory?: Prisma.SecondaryCategoryUpdateOneRequiredWithoutTestsNestedInput
 }
@@ -821,6 +904,7 @@ export type BloodTestUncheckedUpdateWithoutPrimaryCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BloodTestUncheckedUpdateManyWithoutPrimaryCategoryInput = {
@@ -835,6 +919,7 @@ export type BloodTestUncheckedUpdateManyWithoutPrimaryCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BloodTestCreateManySecondaryCategoryInput = {
@@ -849,6 +934,7 @@ export type BloodTestCreateManySecondaryCategoryInput = {
   updatedAt?: Date | string
   memberId?: string | null
   isRegularItem?: boolean
+  order?: number
 }
 
 export type BloodTestUpdateWithoutSecondaryCategoryInput = {
@@ -861,6 +947,7 @@ export type BloodTestUpdateWithoutSecondaryCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   member?: Prisma.MemberUpdateOneWithoutTestItemsNestedInput
   primaryCategory?: Prisma.PrimaryCategoryUpdateOneRequiredWithoutTestsNestedInput
 }
@@ -877,6 +964,7 @@ export type BloodTestUncheckedUpdateWithoutSecondaryCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BloodTestUncheckedUpdateManyWithoutSecondaryCategoryInput = {
@@ -891,6 +979,7 @@ export type BloodTestUncheckedUpdateManyWithoutSecondaryCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   memberId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BloodTestCreateManyMemberInput = {
@@ -905,6 +994,7 @@ export type BloodTestCreateManyMemberInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   isRegularItem?: boolean
+  order?: number
 }
 
 export type BloodTestUpdateWithoutMemberInput = {
@@ -917,6 +1007,7 @@ export type BloodTestUpdateWithoutMemberInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   primaryCategory?: Prisma.PrimaryCategoryUpdateOneRequiredWithoutTestsNestedInput
   secondaryCategory?: Prisma.SecondaryCategoryUpdateOneRequiredWithoutTestsNestedInput
 }
@@ -933,6 +1024,7 @@ export type BloodTestUncheckedUpdateWithoutMemberInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BloodTestUncheckedUpdateManyWithoutMemberInput = {
@@ -947,6 +1039,7 @@ export type BloodTestUncheckedUpdateManyWithoutMemberInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isRegularItem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -964,6 +1057,7 @@ export type BloodTestSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   updatedAt?: boolean
   memberId?: boolean
   isRegularItem?: boolean
+  order?: boolean
   member?: boolean | Prisma.BloodTest$memberArgs<ExtArgs>
   primaryCategory?: boolean | Prisma.PrimaryCategoryDefaultArgs<ExtArgs>
   secondaryCategory?: boolean | Prisma.SecondaryCategoryDefaultArgs<ExtArgs>
@@ -982,6 +1076,7 @@ export type BloodTestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updatedAt?: boolean
   memberId?: boolean
   isRegularItem?: boolean
+  order?: boolean
   member?: boolean | Prisma.BloodTest$memberArgs<ExtArgs>
   primaryCategory?: boolean | Prisma.PrimaryCategoryDefaultArgs<ExtArgs>
   secondaryCategory?: boolean | Prisma.SecondaryCategoryDefaultArgs<ExtArgs>
@@ -1000,6 +1095,7 @@ export type BloodTestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updatedAt?: boolean
   memberId?: boolean
   isRegularItem?: boolean
+  order?: boolean
   member?: boolean | Prisma.BloodTest$memberArgs<ExtArgs>
   primaryCategory?: boolean | Prisma.PrimaryCategoryDefaultArgs<ExtArgs>
   secondaryCategory?: boolean | Prisma.SecondaryCategoryDefaultArgs<ExtArgs>
@@ -1018,9 +1114,10 @@ export type BloodTestSelectScalar = {
   updatedAt?: boolean
   memberId?: boolean
   isRegularItem?: boolean
+  order?: boolean
 }
 
-export type BloodTestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "originalPrice" | "discountAmount" | "discountedPrice" | "isFastingRequired" | "primaryCategoryId" | "secondaryCategoryId" | "createdAt" | "updatedAt" | "memberId" | "isRegularItem", ExtArgs["result"]["bloodTest"]>
+export type BloodTestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "originalPrice" | "discountAmount" | "discountedPrice" | "isFastingRequired" | "primaryCategoryId" | "secondaryCategoryId" | "createdAt" | "updatedAt" | "memberId" | "isRegularItem" | "order", ExtArgs["result"]["bloodTest"]>
 export type BloodTestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.BloodTest$memberArgs<ExtArgs>
   primaryCategory?: boolean | Prisma.PrimaryCategoryDefaultArgs<ExtArgs>
@@ -1057,6 +1154,7 @@ export type $BloodTestPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     updatedAt: Date
     memberId: string | null
     isRegularItem: boolean
+    order: number
   }, ExtArgs["result"]["bloodTest"]>
   composites: {}
 }
@@ -1495,6 +1593,7 @@ export interface BloodTestFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"BloodTest", 'DateTime'>
   readonly memberId: Prisma.FieldRef<"BloodTest", 'String'>
   readonly isRegularItem: Prisma.FieldRef<"BloodTest", 'Boolean'>
+  readonly order: Prisma.FieldRef<"BloodTest", 'Int'>
 }
     
 

@@ -52,30 +52,30 @@ export default function CartItemsSection() {
           </CardAction>
         </CardHeader>
 
-        <ScrollArea className="h-96 w-full">
+        <ScrollArea className="h-auto max-h-96 w-full">
           <CardContent>
             <div className="space-y-4 py-4">
               {items.map((item) => (
                 <Card key={item.id} className="overflow-hidden p-0">
                   <CardContent className="p-0">
-                    <div className="flex h-full flex-col md:flex-row">
+                    <div className="flex h-full flex-row">
                       {/* Product Image */}
-                      <div className="relative h-auto w-full md:w-32 bg-destructive/10">
+                      <div className="relative w-24 sm:w-32 shrink-0 bg-destructive/10">
                         <img
                           // src={'https://avatar.vercel.sh/rauchg?size=30'}
                           src={'/packages/3.svg'}
                           alt={item.name}
                           width={300}
                           height={300}
-                          className="h-full w-full object-cover md:w-32"
+                          className="h-full w-full object-cover"
                         />
                       </div>
 
                       {/* Product Details */}
-                      <div className="flex-1 p-6 pb-3">
-                        <div className="flex justify-between">
+                      <div className="flex-1 p-3 sm:p-6 sm:pb-3 flex flex-col justify-between">
+                        <div className="flex justify-between items-start gap-2">
                           <div>
-                            <h3 className="font-medium">{item.name}</h3>
+                            <h3 className="font-medium text-sm sm:text-base line-clamp-2">{item.name}</h3>
                             {/* <p className="text-sm text-muted-foreground">
                                 {item.color} • {item.size}
                               </p> */}
@@ -83,6 +83,7 @@ export default function CartItemsSection() {
                           <Button
                             variant="destructive"
                             size="icon"
+                            className="h-8 w-8 shrink-0"
                             onClick={() => removeItem({ id: item.id })}
                           >
                             <Trash2Icon className="h-4 w-4" />
@@ -94,6 +95,7 @@ export default function CartItemsSection() {
                             <Button
                               variant="outline"
                               size="icon"
+                              className="h-7 w-7 sm:h-9 sm:w-9 shrink-0"
                               onClick={() => {
                                 if (item.quantity > 1) {
                                   updateQuantity({
@@ -113,12 +115,13 @@ export default function CartItemsSection() {
                             >
                               <MinusIcon className="h-4 w-4" />
                             </Button>
-                            <span className="w-8 text-center">
+                            <span className="w-6 sm:w-8 text-center text-sm sm:text-base">
                               {item.quantity}
                             </span>
                             <Button
                               variant="outline"
                               size="icon"
+                              className="h-7 w-7 sm:h-9 sm:w-9 shrink-0"
                               onClick={() => {
                                 if (item.quantity < 3) {
                                   updateQuantity({
@@ -140,8 +143,8 @@ export default function CartItemsSection() {
                             </Button>
                           </div>
 
-                          <div className="text-right">
-                            <div className="font-medium">
+                          <div className="text-right pl-2">
+                            <div className="font-medium text-sm sm:text-base">
                               {/* ${(item.price * item.quantity).toFixed(2)} */}
                               {formatCurrency(
                                 String(item.price * item.quantity),

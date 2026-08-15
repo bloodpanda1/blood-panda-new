@@ -92,7 +92,7 @@ export default function HealthCategory() {
                       >
                         <Card
                           className={
-                            'border-0 bg-destructive/10 shadow-md ring-2 ring-transparent hover:ring-destructive/50 size-48 mx-auto transition-all duration-300 ease-in-out rounded-full'
+                            'border-0 bg-destructive/10 shadow-md ring-2 ring-transparent hover:ring-destructive/50 size-28 sm:size-32 md:size-48 mx-auto transition-all duration-300 ease-in-out rounded-full'
                           }
                         >
                           <CardContent

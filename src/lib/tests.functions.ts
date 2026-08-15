@@ -43,18 +43,20 @@ export const getAllTests = createServerFn()
             },
             isRegularItem: true,
           },
-          orderBy: {
-            name: 'asc',
-          },
+          orderBy: [
+            { order: 'asc' },
+            { name: 'asc' },
+          ],
         })
       }
 
       return [...specificTests, ...remainingTests]
     } else {
       const records = await prisma.bloodTest.findMany({
-        orderBy: {
-          name: 'asc',
-        },
+        orderBy: [
+          { order: 'asc' },
+          { name: 'asc' },
+        ],
       })
       return records
     }
@@ -84,6 +86,10 @@ export const loadTestsBasedOnSearch = createServerFn()
             mode: 'insensitive',
           },
         },
+        orderBy: [
+          { order: 'asc' },
+          { name: 'asc' },
+        ],
       })
       if (tests.length === 0) {
         return []
@@ -107,6 +113,10 @@ export const loadTestsBasedOnSearch = createServerFn()
 
       const tests = await prisma.bloodTest.findMany({
         where,
+        orderBy: [
+          { order: 'asc' },
+          { name: 'asc' },
+        ],
       })
       if (tests.length === 0) {
         return []

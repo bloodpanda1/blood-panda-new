@@ -117,49 +117,48 @@ export default function PopularPackages() {
                       <Card
                         key={item.id}
                         className={cn(
-                          'relative w-full min-w-xs snap-center my-4 pt-6 pb-0',
+                          'relative w-full min-w-xs md:min-w-[320px] snap-center my-4 pt-4 md:pt-6 pb-0 [--card-spacing:--spacing(4)] md:[--card-spacing:--spacing(6)]',
                           isPopular
                             ? 'ring-2 ring-primary'
                             : 'ring-2 ring-primary/50',
                           'bg-transparent',
                         )}
                       >
-                        {isPopular ? (
-                          <Badge
-                            className={
-                              'absolute top-0 left-0 z-10 w-full rounded-t-lg rounded-b-none'
-                            }
-                          >
-                            <StarIcon
-                              className={
-                                'size-3 stroke-amber-200 fill-yellow-500'
-                              }
-                            />
-                            Most Popular
-                          </Badge>
-                        ) : null}
+                        {/* Badge moved to CardHeader */}
 
                         <CardHeader className={'relative'}>
                           <CardAction
                             className={cn(
-                              'absolute top-px left-0 col-start-1 rounded-lg p-2',
+                              'absolute top-px left-0 col-start-1 rounded-lg p-1.5 md:p-2',
                               returnStyles(idx, 'icon'),
                             )}
                           >
                             <FlaskConicalIcon
-                              className={'size-5 stroke-amber-50'}
+                              className={'size-4 md:size-5 stroke-amber-50'}
                             />
                           </CardAction>
-                          <CardTitle className={'ml-12 capitalize'}>
-                            <h3
-                              className={cn(
-                                'text-xl font-semibold',
-                                returnStyles(idx, 'title'),
-                              )}
-                            >
-                              {item.name}
-                            </h3>
-                          </CardTitle>
+                          <div className="flex items-start sm:items-center justify-between ml-12 gap-2">
+                            <CardTitle className={'capitalize'}>
+                              <h3
+                                className={cn(
+                                  'text-xl font-semibold',
+                                  returnStyles(idx, 'title'),
+                                )}
+                              >
+                                {item.name}
+                              </h3>
+                            </CardTitle>
+                            {isPopular && (
+                              <Badge className={'rounded-full shadow-sm whitespace-nowrap'}>
+                                <StarIcon
+                                  className={
+                                    'size-3 stroke-amber-200 fill-yellow-500 mr-1'
+                                  }
+                                />
+                                Most Popular
+                              </Badge>
+                            )}
+                          </div>
                         </CardHeader>
                         <CardContent>
                           <ul className={'list-inside space-y-2'}>
@@ -191,7 +190,7 @@ export default function PopularPackages() {
                           >
                             {formatCurrency(item.originalAmount)}
                           </Badge>
-                          <h4 className={'mt-6 text-lg font-semibold'}>
+                          <h4 className={'mt-4 md:mt-6 text-lg font-semibold'}>
                             {formatCurrency(item.discountedAmount)}
                           </h4>
 

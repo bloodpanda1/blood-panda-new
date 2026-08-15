@@ -117,7 +117,7 @@ export function HeroStats() {
         {heroStats.map((stat) => {
           if (stat.description === 'Rating') {
             return (
-              <Item key={stat.id} variant={'outline'} className="justify-center sm:justify-start px-4 sm:px-6">
+              <Item key={stat.id} variant={'outline'} className="justify-start px-4 sm:px-6 py-4">
                 <ItemMedia
                   variant="image"
                   className={cn(
@@ -157,7 +157,7 @@ export function HeroStats() {
 
           if (stat.description === 'Samples Collected') {
             return (
-              <Item key={stat.id} variant={'outline'} className="justify-center sm:justify-start px-4 sm:px-6">
+              <Item key={stat.id} variant={'outline'} className="justify-start px-4 sm:px-6 py-4">
                 <ItemMedia
                   variant="image"
                   className={cn(
@@ -196,7 +196,7 @@ export function HeroStats() {
           }
 
           return (
-            <Item key={stat.id} variant={'outline'} className="justify-center sm:justify-start px-4 sm:px-6">
+            <Item key={stat.id} variant={'outline'} className="justify-start px-4 sm:px-6 py-4">
               <ItemMedia
                 variant="image"
                 className={cn('my-auto p-0.5 rounded-full', `${stat.bgColor}`)}

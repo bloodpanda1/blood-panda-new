@@ -37,31 +37,32 @@ export default function HeroCallToAction() {
       </div> */}
 
       {/* Booking Card */}
-      <div className="bg-[#FDFBF7] border border-[#0b1b4d]/10 rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-        <div className="flex items-center gap-4 sm:gap-6">
-          <div className="bg-[#0b1b4d]/10 text-[#0b1b4d] p-4 rounded-full flex-shrink-0">
-            <Phone className="w-8 h-8 fill-current" />
+      <div className="bg-[#FDFBF7] border border-[#0b1b4d]/10 rounded-xl p-4 sm:p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 shadow-sm">
+        <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
+          <div className="bg-[#0b1b4d]/10 text-[#0b1b4d] p-3 sm:p-4 rounded-full flex-shrink-0">
+            <Phone className="w-5 h-5 sm:w-8 sm:h-8 fill-current" />
           </div>
           <div className="text-[#0b1b4d]">
-            <p className="text-sm sm:text-base text-[#0b1b4d]/80 font-medium">Book Your Test Today</p>
-            <p className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-wide mt-1">8277842200</p>
+            <p className="text-xs sm:text-sm md:text-base text-[#0b1b4d]/80 font-medium">Book Your Test Today</p>
+            <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold tracking-wide mt-0.5 sm:mt-1">8277842200</p>
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 w-full md:w-auto min-w-[280px]">
+        <div className="flex flex-row md:flex-col gap-2 w-full md:w-auto md:min-w-[240px]">
           <Link
             to="/booking"
             viewTransition
-            className={cn(buttonVariants({ size: 'lg' }), "bg-red-600 hover:bg-red-700 text-white w-full rounded-lg text-lg font-semibold h-12")}
+            className={cn(buttonVariants({ size: 'lg' }), "bg-red-600 hover:bg-red-700 text-white flex-1 md:flex-none md:w-full rounded-lg text-xs sm:text-base font-semibold h-10 sm:h-12 px-2 sm:px-4")}
           >
             Book a Test
           </Link>
           <Link
             to="/tests"
             viewTransition
-            className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), "bg-white text-[#0b1b4d] hover:bg-slate-100 border-[#0b1b4d]/20 w-full rounded-lg text-lg font-semibold h-12 shadow-sm")}
+            className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), "bg-white text-[#0b1b4d] hover:bg-slate-100 border-[#0b1b4d]/20 flex-1 md:flex-none md:w-full rounded-lg text-xs sm:text-base font-semibold h-10 sm:h-12 shadow-sm px-2 sm:px-4")}
           >
-            Explore Packages
+            <span className="sm:hidden">Packages</span>
+            <span className="hidden sm:inline">Explore Packages</span>
           </Link>
         </div>
       </div>

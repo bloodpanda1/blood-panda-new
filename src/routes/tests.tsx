@@ -73,33 +73,51 @@ export const Route = createFileRoute('/tests')({
 function RouteComponent() {
   return (
     <main className={'mx-auto max-w-(--breakpoint-xl) space-y-8 px-4 py-12'}>
-      <section className={''}>
+      <section className={'flex flex-col lg:block'}>
+        {/* Mobile text, only visible on small screens */}
+        <div
+          className={
+            'flex flex-col items-start justify-center gap-2 px-4 py-4 md:px-8 lg:hidden'
+          }
+        >
+          <h1
+            className={
+              'text-xl sm:text-2xl md:text-3xl font-bold text-primary'
+            }
+          >
+            Blood Test at Home in Bangalore
+          </h1>
+          <p
+            className={
+              'text-sm sm:text-base text-foreground'
+            }
+          >
+            With Blood Panda, book a blood or urine lab test at home & get the
+            fastest blood sample collection from home from a Certified lab
+            near you in Bangalore.
+          </p>
+        </div>
+
+        {/* The Original Container (Text hidden on mobile, image full opacity) */}
         <div
           className={
             'relative aspect-14/9 h-full w-full sm:aspect-video md:aspect-20/9 lg:aspect-26/9'
           }
         >
-          {/* <img
-            src="/packages/packages-bg.png"
-            alt="packages-bg"
-            width={'100%'}
-            height={'100%'}
-            className={'absolute top-0 left-0 -z-10 h-full w-full object-cover'}
-          /> */}
           <Image
             src="/tests-bg.jpg"
-            alt="packages-bg"
+            alt="tests background"
             layout="constrained"
             width={1280}
             height={932}
             className={
-              'absolute top-0 left-0 -z-10 h-full w-full object-contain object-bottom-right opacity-60 lg:opacity-100'
+              'absolute top-0 left-0 -z-10 h-full w-full object-contain object-bottom-right opacity-100 lg:opacity-100'
             }
             priority={true}
           />
           <div
             className={
-              'flex h-full w-full lg:max-w-lg flex-col items-start justify-center gap-2 lg:gap-4 px-4 md:px-8 lg:px-12 backdrop:blur-md bg-accent/70 lg:bg-transparent'
+              'hidden lg:flex h-full w-full lg:max-w-lg flex-col items-start justify-center gap-2 lg:gap-4 px-4 md:px-8 lg:px-12 bg-transparent'
             }
           >
             <h1

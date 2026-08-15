@@ -61,10 +61,10 @@ export default function TestItems() {
                     }
                   >
                     {data.map((test) => (
-                      <Card key={test.id} className={'py-0 gap-4'}>
+                      <Card key={test.id} className={'py-0 gap-2 sm:gap-4'}>
                         <CardHeader
                           className={
-                            'h-18 bg-primary py-2 text-accent content-center'
+                            'min-h-12 h-auto sm:h-18 bg-primary py-2 text-accent content-center'
                           }
                         >
                           <CardTitle>
@@ -72,8 +72,8 @@ export default function TestItems() {
                           </CardTitle>
                         </CardHeader>
 
-                        <CardContent className={'space-y-2'}>
-                          <p className={'space-x-2'}>
+                        <CardContent className={'space-y-1 sm:space-y-2'}>
+                          <p className={'space-x-2 text-xs sm:text-sm'}>
                             <span>Fasting Required:</span>
                             <Badge
                               variant={
@@ -81,30 +81,31 @@ export default function TestItems() {
                                   ? 'destructive'
                                   : 'outline'
                               }
+                              className={'px-1 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-0.5'}
                             >
                               {test.isFastingRequired ? 'Yes' : 'No'}
                             </Badge>
                           </p>
-                          <span className="block">
+                          <span className="block text-xs sm:text-sm">
                             Original Price:{' '}
                             <Badge
                               variant={'outline'}
                               className={
-                                'text-muted-foreground line-through font-semibold'
+                                'text-muted-foreground line-through font-semibold px-1 py-0 text-[10px] sm:text-xs sm:px-2 sm:py-0.5'
                               }
                             >
                               {formatCurrency(test.originalPrice)}
                             </Badge>
                           </span>{' '}
-                          <span className="block">
+                          <span className="block text-xs sm:text-sm">
                             Discounted Price:{' '}
-                            <span className={'text-xl font-bold text-primary '}>
+                            <span className={'text-base sm:text-xl font-bold text-primary '}>
                               {formatCurrency(test.discountedPrice)}
                             </span>
                           </span>
                         </CardContent>
 
-                        <CardFooter className={'py-4'}>
+                        <CardFooter className={'pb-4 pt-0 sm:py-4'}>
                           <Button
                             variant={'destructive'}
                             className={
