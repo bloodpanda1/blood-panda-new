@@ -29,10 +29,12 @@ export default function OdometerExample(props: OdometerExampleProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    let counter: CountUp | null = null;
+
     if (ref.current) {
       // remove the existing fallback text
-      // ref.current.textContent = ''
-      const counter = new CountUp(ref.current.id, value, {
+      ref.current.textContent = ''
+      counter = new CountUp(ref.current, value, {
         plugin: new Odometer({ duration, lastDigitDelay }),
         duration: 3.0,
         useEasing: true,
@@ -50,7 +52,16 @@ export default function OdometerExample(props: OdometerExampleProps) {
       })
       counter.start()
     }
-  }, [])
+
+    return () => {
+      if (counter) {
+        // Pause/stop the animation loop to prevent multiple instances
+        // running simultaneously on the same DOM element.
+        counter.pauseResume();
+        counter.reset();
+      }
+    }
+  }, [value, duration, lastDigitDelay, float, prefix, suffix])
 
   return (
     <span

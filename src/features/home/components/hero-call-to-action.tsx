@@ -39,8 +39,8 @@ export default function HeroCallToAction() {
       {/* Booking Card */}
       <div className="bg-[#FDFBF7] border border-[#0b1b4d]/10 rounded-xl p-4 sm:p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 shadow-sm">
         <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
-          <div className="bg-[#0b1b4d]/10 text-[#0b1b4d] p-3 sm:p-4 rounded-full flex-shrink-0">
-            <Phone className="w-5 h-5 sm:w-8 sm:h-8 fill-current" />
+          <div className="bg-[#E8F7EE] p-3 sm:p-4 rounded-full flex-shrink-0">
+            <img src="/whatsapp-icon.png" alt="WhatsApp" className="w-7 h-7 sm:w-10 sm:h-10 object-contain" />
           </div>
           <div className="text-[#0b1b4d]">
             <p className="text-xs sm:text-sm md:text-base text-[#0b1b4d]/80 font-medium">Book Your Test Today</p>

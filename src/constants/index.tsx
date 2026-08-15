@@ -3,7 +3,7 @@ import {
   IconFileInvoice,
   IconPhoneCall,
 } from '@tabler/icons-react'
-import { FlaskConicalIcon, HomeIcon, PipetteIcon, StarIcon } from 'lucide-react'
+import { FlaskConicalIcon, HomeIcon, PipetteIcon, ShieldCheckIcon, StarIcon, UsersIcon } from 'lucide-react'
 
 export const navLinks = [
   {
@@ -160,31 +160,31 @@ export const featureItems = [
 export const heroStats = [
   {
     id: crypto.randomUUID(),
-    stat: '4.9/5',
-    description: 'Rating',
-    icon: <StarIcon className={'stroke-destructive'} />,
-    bgColor: 'bg-destructive/10',
+    stat: '10,000+',
+    description: 'Samples Collected',
+    icon: <UsersIcon className={'stroke-red-500'} />,
+    bgColor: 'bg-red-500/10',
   },
   {
     id: crypto.randomUUID(),
-    stat: '10000+',
-    description: 'Samples Collected',
-    icon: <PipetteIcon className={'stroke-green-500'} />,
-    bgColor: 'bg-green-500/10',
+    stat: '4.9/5',
+    description: 'Customer Rating',
+    icon: <StarIcon className={'stroke-amber-400 fill-amber-400'} />,
+    bgColor: 'bg-amber-400/10',
   },
   {
     id: crypto.randomUUID(),
     stat: 'Free',
     description: 'Home Collection',
-    icon: <HomeIcon className={'stroke-purple-500'} />,
-    bgColor: 'bg-purple-500/10',
+    icon: <HomeIcon className={'stroke-purple-600'} />,
+    bgColor: 'bg-purple-600/10',
   },
   {
     id: crypto.randomUUID(),
-    stat: 'Certified',
-    description: 'Labs',
-    icon: <FlaskConicalIcon className={'stroke-sky-500'} />,
-    bgColor: 'bg-sky-500/10',
+    stat: 'NABL',
+    description: 'Accredited Labs',
+    icon: <ShieldCheckIcon className={'stroke-green-600'} />,
+    bgColor: 'bg-green-600/10',
   },
 ]
 
