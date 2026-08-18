@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from '#/components/ui/card'
-import { ScrollArea } from '#/components/ui/scroll-area'
 import { formatCurrency } from '#/lib/utils'
 import { useCart } from '#/stores/useCart'
 import { IconTrash } from '@tabler/icons-react'
@@ -52,7 +51,7 @@ export default function CartItemsSection() {
           </CardAction>
         </CardHeader>
 
-        <ScrollArea className="h-auto max-h-96 w-full">
+        <div className="max-h-[60vh] sm:max-h-[70vh] w-full overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400/50 scrollbar-track-transparent pr-2">
           <CardContent>
             <div className="space-y-4 py-4">
               {items.map((item) => (
@@ -167,7 +166,7 @@ export default function CartItemsSection() {
               ))}
             </div>
           </CardContent>
-        </ScrollArea>
+        </div>
       </Card>
     </div>
   )

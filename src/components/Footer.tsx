@@ -3,6 +3,7 @@ import {
   IconBrandInstagram,
   IconBrandThreads,
   IconBrandWhatsapp,
+  IconBrandYoutube,
 } from '@tabler/icons-react'
 import { Link } from '@tanstack/react-router'
 import {
@@ -78,6 +79,15 @@ export default function Footer() {
               className={buttonVariants({ variant: 'link', size: 'icon' })}
             >
               <IconBrandInstagram className={'size-5 stroke-accent'} />
+            </a>
+
+            <a
+              href="https://youtube.com/@bloodpandaofficial?si=r16vTlOfNt222Wsw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonVariants({ variant: 'link', size: 'icon' })}
+            >
+              <IconBrandYoutube className={'size-5 stroke-accent'} />
             </a>
           </div>
         </div>

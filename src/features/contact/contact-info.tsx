@@ -68,10 +68,9 @@ export default function ContactInfo() {
                   <ItemDescription>Our Location</ItemDescription>
                   <address>
                     <p className={'text-sm'}>
-                      8<sup>th</sup> Cross Road, Sai Sree Layout,
-                      <br />(<small>Near Electronic City</small>)
-                      <br />
-                      Bengaluru, Karnataka 560100
+                      No 20, Paradise Mansion, 1<sup>st</sup> Main,
+                      <br />opp to AECS layout, P Agrahara,
+                      <br />Near Electronic City, Bengaluru - 560100
                     </p>
                   </address>
                   <ItemTitle>

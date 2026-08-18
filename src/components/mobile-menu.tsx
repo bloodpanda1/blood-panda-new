@@ -2,6 +2,7 @@ import {
   IconBrandFacebook,
   IconBrandInstagram,
   IconBrandThreads,
+  IconBrandYoutube,
   IconLogout,
   IconMenu4,
 } from '@tabler/icons-react'
@@ -101,7 +102,7 @@ export default function MobileMenu() {
           <IconMenu4 className={'size-4'} />
         </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>
             <div className={'flex flex-col items-center justify-center py-2'}>
@@ -218,10 +219,9 @@ export default function MobileMenu() {
             </p>
             <address className={'space-y-1'}>
               <p className={'text-sm'}>
-                8<sup>th</sup> Cross Road, Sai Sree Layout,
-                <br />(<small>Near Electronic City</small>)
-                <br />
-                Bengaluru, Karnataka 560100
+                No 20, Paradise Mansion, 1<sup>st</sup> Main,
+                <br />opp to AECS layout, P Agrahara,
+                <br />Near Electronic City, Bengaluru - 560100
               </p>
               <p>
                 <strong>Phone 1:</strong>{' '}
@@ -353,6 +353,17 @@ export default function MobileMenu() {
                 })}
               >
                 <IconBrandInstagram className={'size-5'} />
+              </a>
+              <a
+                href="https://youtube.com/@bloodpandaofficial?si=r16vTlOfNt222Wsw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({
+                  variant: 'link',
+                  size: 'icon',
+                })}
+              >
+                <IconBrandYoutube className={'size-5'} />
               </a>
             </li>
           </ul>

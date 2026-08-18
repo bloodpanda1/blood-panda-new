@@ -54,16 +54,7 @@ export default function HealthCategory() {
                 <IconHandClick className={'size-4'} />
               </Link>
             </Button>
-            <Button variant={'outline'} asChild>
-              <Link
-                to="/packages/mini-packages/$miniPackage"
-                params={{ miniPackage: 'renal-pack' }}
-                viewTransition
-              >
-                View All
-                <ScrollTextIcon className={'size-4'} />
-              </Link>
-            </Button>
+
           </CardAction>
         </CardHeader>
 
@@ -92,7 +83,7 @@ export default function HealthCategory() {
                       >
                         <Card
                           className={
-                            'border-0 bg-destructive/10 shadow-md ring-2 ring-transparent hover:ring-destructive/50 size-28 sm:size-32 md:size-48 mx-auto transition-all duration-300 ease-in-out rounded-full'
+                            'border-0 bg-destructive/10 shadow-md ring-2 ring-transparent hover:ring-destructive/50 size-24 sm:size-32 md:size-48 mx-auto transition-all duration-300 ease-in-out rounded-full'
                           }
                         >
                           <CardContent
@@ -110,7 +101,7 @@ export default function HealthCategory() {
                           </CardContent>
                         </Card>
                         <CardDescription>
-                          <p className={'text-base font-semibold'}>
+                          <p className={'text-sm sm:text-base font-semibold'}>
                             {formattedCategoryName(item.name)}
                           </p>
                         </CardDescription>

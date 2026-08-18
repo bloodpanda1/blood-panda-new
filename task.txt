@@ -1,7 +1,0 @@
-center aligned for rating... cards
-book a test section whole section decrease should be smaller than carousel
-9:36 PM
-Test by individual category icons are big for mobile devies decrease them even for packages section in homepage
-in Test Page Background Image in hero section seperate the text and image for mobile device - dont blur the image - text above the image
-9:37 PM
-boxes in tests page is big for mobile devices decrease the height

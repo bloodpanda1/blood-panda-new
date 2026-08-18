@@ -3,6 +3,8 @@
 import { useSelector } from "@xstate/store-react"
 import { cartStore } from "./cart-store"
 
+import { toast } from "sonner"
+
 export function useCart() {
   const cart = useSelector(cartStore, (state) => state.context)
 
@@ -17,6 +19,11 @@ export function useCart() {
 
   const total = subtotal - discount
 
+  const addItem = (event: { item: { id: string; name: string; price: number; quantity?: number; image?: string } }) => {
+    cartStore.trigger.addItem(event)
+    toast.success(`${event.item.name} added to cart!`)
+  }
+
   return {
     ...cart,
 
@@ -24,7 +31,7 @@ export function useCart() {
     discount,
     total,
 
-    addItem: cartStore.trigger.addItem,
+    addItem,
     removeItem: cartStore.trigger.removeItem,
     updateQuantity: cartStore.trigger.updateQuantity,
 

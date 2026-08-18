@@ -1,4 +1,5 @@
 import { getPackageDeatilsByName } from '#/lib/package.functions'
+import { useCart } from '#/stores/useCart'
 import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
 
 import {
@@ -75,6 +76,8 @@ function RouteComponent() {
     queryKey: ['packageDetails', params.package],
     queryFn: () => defferdPackageDetails,
   })
+
+  const { addItem } = useCart()
 
   const packageSlug = params.package
 
@@ -195,7 +198,22 @@ function RouteComponent() {
                   </div>
                 </div>
 
-                <Button className={buttonBg}>
+                <Button 
+                  className={buttonBg}
+                  onClick={() => {
+                    if (data) {
+                      addItem({
+                        item: {
+                          id: data.id,
+                          name: data.name,
+                          price: Number(data.discountedAmount),
+                          quantity: 1,
+                          image: `${imageUrl}/${data.cover}`,
+                        }
+                      })
+                    }
+                  }}
+                >
                   <IconCalendarCheck className={'size-4'} />
                   {`Book ${capitalizeFirstLetter(packageSlug)} Package Now`}
                 </Button>
@@ -330,6 +348,19 @@ function RouteComponent() {
                     className={
                       'w-full bg-destructive hover:bg-accent hover:text-destructive transition-all duration-300 ease-in-out'
                     }
+                    onClick={() => {
+                      if (data) {
+                        addItem({
+                          item: {
+                            id: data.id,
+                            name: data.name,
+                            price: Number(data.discountedAmount),
+                            quantity: 1,
+                            image: `${imageUrl}/${data.cover}`,
+                          }
+                        })
+                      }
+                    }}
                   >
                     Book Now <IconChevronRight className={'size-4'} />
                   </Button>

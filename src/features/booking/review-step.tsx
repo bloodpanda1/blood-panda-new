@@ -36,9 +36,9 @@ import { Controller, useFormContext, useWatch } from 'react-hook-form'
 const paymentOptions = [
   {
     id: crypto.randomUUID(),
-    name: 'COD',
+    name: 'Pay during blood collection',
     value: 'COD',
-    description: 'Pay with cash upon delivery.',
+    description: 'Pay securely when our phlebotomist arrives to collect your sample.',
   }
 ]
 
@@ -125,9 +125,9 @@ export default function ReviewStep() {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <FieldSet data-invalid={fieldState.invalid}>
-                    <FieldLegend>Plan</FieldLegend>
+                    <FieldLegend>Payment Method</FieldLegend>
                     <FieldDescription>
-                      You can upgrade or downgrade your plan at any time.
+                      Please select your preferred payment method for this booking.
                     </FieldDescription>
                     <RadioGroup
                       name={field.name}

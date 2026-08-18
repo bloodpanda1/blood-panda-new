@@ -237,7 +237,63 @@ export default function Header() {
         </ul>
       </nav>
 
-      <div className={'block md:hidden'}>
+      <div className={'flex items-center gap-4 md:hidden'}>
+        {isPending || isRefetching ? (
+          <Skeleton
+            className={buttonVariants({
+              variant: 'ghost',
+              className: 'size-9',
+            })}
+          />
+        ) : !data ? (
+          <Button
+            type="button"
+            variant={'outline'}
+            size={'icon'}
+            className={'relative'}
+            onClick={() =>
+              navigate({
+                to: '/login',
+                hash: 'login',
+                viewTransition: true,
+                search: `?redirectTo=${encodeURIComponent(location.pathname)}`,
+              })
+            }
+          >
+            <ShoppingBasketIcon className={'size-4'} />
+            <Badge
+              variant={'default'}
+              className={'absolute -top-2.5 -right-1.5 z-10 px-1 text-xs'}
+            >
+              {items.length}
+            </Badge>
+          </Button>
+        ) : (
+          <Button
+            type="button"
+            variant={'outline'}
+            size={'icon'}
+            className={
+              'relative border-destructive bg-transparent text-destructive hover:bg-destructive/90 hover:text-accent transition-colors duration-300 ease-in-out'
+            }
+            onClick={() =>
+              navigate({
+                to: '/cart',
+                hash: 'cart',
+                viewTransition: true,
+                search: `?redirectTo=${encodeURIComponent(location.pathname)}`,
+              })
+            }
+          >
+            <ShoppingBasketIcon className={'size-4'} />
+            <Badge
+              variant={'default'}
+              className={'absolute -top-2.5 -right-1.5 z-10 px-1 text-xs'}
+            >
+              {items.length}
+            </Badge>
+          </Button>
+        )}
         <MobileMenu />
       </div>
     </header>

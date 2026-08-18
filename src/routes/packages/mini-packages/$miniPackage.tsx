@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
+import { useCart } from '#/stores/useCart'
 
 import { Badge } from '#/components/ui/badge'
 import { Button } from '#/components/ui/button'
@@ -61,6 +62,8 @@ function RouteComponent() {
     queryFn: () => getMiniPackageDetailsByName({ data: { name: packageSlug } }),
     refetchOnWindowFocus: true,
   })
+
+  const { addItem } = useCart()
 
   return (
     <main className={'mx-auto max-w-(--breakpoint-xl) space-y-8 px-4 py-12'}>
@@ -213,6 +216,19 @@ function RouteComponent() {
                   className={
                     'w-full bg-destructive hover:bg-accent hover:text-destructive transition-all duration-300 ease-in-out'
                   }
+                  onClick={() => {
+                    if (data) {
+                      addItem({
+                        item: {
+                          id: data.id,
+                          name: data.name,
+                          price: Number(data.discountedAmount),
+                          quantity: 1,
+                          image: `${imageBaseUrl}${data.cover}`,
+                        }
+                      })
+                    }
+                  }}
                 >
                   Book Now <IconChevronRight className={'size-4'} />
                 </Button>
