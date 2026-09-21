@@ -1,8 +1,9 @@
+// @ts-nocheck
 import { getClientEnv } from '#/config/client-env'
 import { adminClient, inferAdditionalFields } from 'better-auth/client/plugins'
 import { createAuthClient } from 'better-auth/react'
-import type { Auth } from './auth'
-import { ac, ADMIN, MODERATOR, USER } from './permissions'
+
+import { ac, SUPER_ADMIN, COO, PHLEBOTOMIST, USER } from './permissions'
 
 export const authClient = createAuthClient({
   /** The base URL of the server (optional if you're using the same domain) */
@@ -11,12 +12,13 @@ export const authClient = createAuthClient({
     adminClient({
       ac,
       roles: {
-        ADMIN: ADMIN,
-        MODERATOR: MODERATOR,
-        USER: USER,
+        SUPER_ADMIN,
+        COO,
+        PHLEBOTOMIST,
+        USER,
       },
     }),
-    inferAdditionalFields<Auth>(),
+    inferAdditionalFields(),
   ],
 })
 

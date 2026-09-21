@@ -1,5 +1,5 @@
 import { createMiddleware } from '@tanstack/react-start'
-import { auth } from './auth'
+
 import { ensureSession } from './auth.functions'
 
 export const awesomeMiddleware = createMiddleware({ type: 'function' }).server(
@@ -27,32 +27,9 @@ export function adminAuthorizationMiddleware() {
   return createMiddleware({ type: 'function' })
     .middleware([authMiddleware])
     .server(async ({ next, context }) => {
-      const granted = await auth.api.userHasPermission({
-        body: {
-          role: 'ADMIN',
-          userId: context.user.id,
-          permissions: {
-            user: [
-              'create',
-              'list',
-              'set-role',
-              'ban',
-              'impersonate',
-              'delete',
-              'set-password',
-              'set-email',
-              'get',
-              'update',
-            ],
-            booking: ['create', 'share', 'update', 'delete'],
-          },
-        },
-      })
-
-      if (!granted.success) {
+      if (!['SUPER_ADMIN', 'ADMIN', 'COO', 'PHLEBOTOMIST'].includes(context.user.role)) {
         throw new Error('Forbidden')
       }
-
       return await next({ context: { user: context.user } })
     })
 }

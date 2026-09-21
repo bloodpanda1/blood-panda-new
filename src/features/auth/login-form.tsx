@@ -38,11 +38,18 @@ export default function LoginForm() {
     e.stopPropagation()
 
     startTransition(() => {
+      const loginPromise = signIn.email({
+        email,
+        password,
+      }).then((res) => {
+        if (res.error) {
+          throw new Error(res.error.message || 'Invalid email or password.')
+        }
+        return res
+      })
+
       toast.promise(
-        signIn.email({
-          email,
-          password,
-        }),
+        loginPromise,
         {
           loading: 'Signing in...',
           success: (data) => {
@@ -129,7 +136,7 @@ export default function LoginForm() {
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder="you@example.com"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

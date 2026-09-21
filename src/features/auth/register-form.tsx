@@ -25,6 +25,7 @@ import { toast } from 'sonner'
 export default function RegisterForm() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isPending, startTransition] = useTransition()
@@ -41,18 +42,27 @@ export default function RegisterForm() {
     }
 
     startTransition(() => {
+      const signUpPromise = signUp.email({
+        name,
+        email,
+        password,
+        phone: phone.trim() || undefined,
+      }).then((res) => {
+        if (res.error) {
+          throw new Error(res.error.message || 'Failed to sign up.')
+        }
+        return res
+      })
+
       toast.promise(
-        signUp.email({
-          name,
-          email,
-          password,
-        }),
+        signUpPromise,
         {
           loading: 'Creating account...',
           success: (data) => {
             setTimeout(() => {
               setName('')
               setEmail('')
+              setPhone('')
               setPassword('')
               setConfirmPassword('')
               navigate({ to: '/', search: {}, viewTransition: true })
@@ -133,7 +143,7 @@ export default function RegisterForm() {
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder="you@example.com"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -142,6 +152,16 @@ export default function RegisterForm() {
                 We&apos;ll use this to contact you. We will not share your email
                 with anyone else.
               </FieldDescription>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="phone">Phone Number (Optional)</FieldLabel>
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="+91 9876543210"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
             </Field>
             <Field>
               <Field className="grid grid-cols-1 gap-4 md:grid-cols-2">

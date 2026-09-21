@@ -23,7 +23,17 @@ export const ensureSession = createServerFn({ method: 'GET' }).handler(
 export const getAdminSession = createServerFn({ method: 'GET' })
   .middleware([adminAuthorizationMiddleware()])
   .handler(async ({ context }) => {
-    if (context.user.role !== 'ADMIN') {
+    if (!['SUPER_ADMIN', 'ADMIN'].includes(context.user.role)) {
+      throw new Error('Forbidden')
+    }
+
+    return context.user
+  })
+
+export const getStaffSession = createServerFn({ method: 'GET' })
+  .middleware([adminAuthorizationMiddleware()])
+  .handler(async ({ context }) => {
+    if (!['SUPER_ADMIN', 'ADMIN', 'COO', 'PHLEBOTOMIST'].includes(context.user.role)) {
       throw new Error('Forbidden')
     }
 

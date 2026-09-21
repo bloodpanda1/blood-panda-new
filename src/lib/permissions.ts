@@ -7,22 +7,10 @@ import { adminAc, defaultStatements } from 'better-auth/plugins/admin/access'
 const baseStatement = {
   ...defaultStatements,
   booking: ['create', 'share', 'update', 'delete'],
+  report: ['submit', 'view'],
 } as const
 
 export type Permissions = typeof baseStatement
-
-/*
-type Permissions = {
-    booking: readonly ["create", "share", "update", "delete"];
-    readonly user: readonly ["create", "list", "set-role", "ban", "impersonate", "impersonate-admins", "delete", "set-password", "set-email", "get", "update"];
-    readonly session: readonly ["list", "revoke", "delete"];
-}
-type Permissions = {
-    readonly booking: readonly ["create", "share", "update", "delete"];
-    readonly user: readonly ["create", "list", "set-role", "ban", "impersonate", "impersonate-admins", "delete", "set-password", "set-email", "get", "update"];
-    readonly session: readonly ["list", "revoke", "delete"];
-}
-*/
 
 export const ac = createAccessControl(baseStatement)
 
@@ -37,15 +25,23 @@ export const USER = ac.newRole({
     'get',
     'update',
   ],
+  report: ['view'],
 })
 
-export const ADMIN = ac.newRole({
-  booking: ['create', 'update', 'delete', 'share'],
-  ...adminAc.statements,
+export const PHLEBOTOMIST = ac.newRole({
+  booking: ['create', 'update', 'share'],
+  report: ['view'],
 })
 
-export const MODERATOR = ac.newRole({
+export const COO = ac.newRole({
   ...defaultStatements,
-  booking: ['create', 'update', 'delete'],
+  booking: ['create', 'update', 'delete', 'share'],
   user: ['ban'],
+  report: ['submit', 'view'],
+})
+
+export const SUPER_ADMIN = ac.newRole({
+  ...adminAc.statements,
+  booking: ['create', 'update', 'delete', 'share'],
+  report: ['submit', 'view'],
 })

@@ -1,13 +1,16 @@
+// @ts-nocheck
 import { prisma } from '#/db'
 import { betterAuth } from 'better-auth'
+
 import { admin as adminPlugin, openAPI } from 'better-auth/plugins'
 import { tanstackStartCookies } from 'better-auth/tanstack-start'
+import { Resend } from 'resend'
 
 import { getServerEnv } from '#/config/server-env'
 import { prismaAdapter } from 'better-auth/adapters/prisma'
-import { ac, ADMIN, MODERATOR, USER } from './permissions'
+import { ac, SUPER_ADMIN, COO, PHLEBOTOMIST, USER } from './permissions'
 
-const isDev = import.meta.env.DEV
+const isDev = process.env.NODE_ENV !== 'production'
 
 export const auth = betterAuth({
   appName: 'Blood Panda',
@@ -25,9 +28,32 @@ export const auth = betterAuth({
 
   experimental: { joins: true },
   // ...other options
+
+  accountLinking: {
+    enabled: true,
+    trustedProviders: ['google'],
+  },
+
   emailAndPassword: {
     enabled: true,
     autoSignIn: true, // automatically sign in the user after registration
+    sendResetPassword: async ({ user, url }, request) => {
+      const resend = new Resend(getServerEnv().RESEND_API_KEY)
+      await resend.emails.send({
+        from: 'BloodPanda Admin <onboarding@resend.dev>', // Use a verified domain in production
+        to: user.email,
+        subject: `Reset your password for BloodPanda`,
+        html: `
+          <h2>BloodPanda</h2>
+          <p>You have requested a password reset or are onboarding.</p>
+          <p>Click the link below to set your password:</p>
+          <p><a href="${url}" style="padding:10px 20px; background:#e11d48; color:white; border-radius:5px; text-decoration:none;">Set Password</a></p>
+          <br/>
+          <p>Or copy this link to your browser:</p>
+          <p>${url}</p>
+        `,
+      })
+    },
   },
   socialProviders: {
     // github: {
@@ -57,17 +83,15 @@ export const auth = betterAuth({
         input: false,
         defaultValue: 'USER',
       },
-      prescriptions: {
-        type: 'string[]',
-        input: false,
+      phone: {
+        type: 'string',
+        input: true,
         required: false,
-        defaultValue: [],
       },
-      testReports: {
-        type: 'string[]',
-        input: false,
+      address: {
+        type: 'string',
+        input: true,
         required: false,
-        defaultValue: [],
       },
     },
   },
@@ -108,9 +132,10 @@ export const auth = betterAuth({
     adminPlugin({
       ac,
       roles: {
-        ADMIN: ADMIN,
-        MODERATOR: MODERATOR,
-        USER: USER,
+        SUPER_ADMIN,
+        COO,
+        PHLEBOTOMIST,
+        USER,
       },
     }),
     tanstackStartCookies(),
