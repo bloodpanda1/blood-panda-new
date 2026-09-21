@@ -11,9 +11,8 @@ import {
 import { ScrollArea } from '#/components/ui/scroll-area'
 import { Separator } from '#/components/ui/separator'
 import { formatCurrency } from '#/lib/utils'
-import type { MemberDetailsFormData } from '#/lib/validators/booking-schema'
 import { IconTrash } from '@tabler/icons-react'
-import { TestTube2Icon } from 'lucide-react'
+import { PackagePlusIcon, TestTube2Icon } from 'lucide-react'
 import { useFormContext, useWatch } from 'react-hook-form'
 import AddTestItemsDialog from './add-test-items-dialog'
 
@@ -37,34 +36,39 @@ export default function MembersTestItems({
     <Card>
       <CardContent className={'space-y-6'}>
         {memberTestItems.length <= 0 ? (
-          <p className={'text-base font-medium'}>
-            No member details found. Please add member details to proceed with
-            the booking.
-          </p>
-        ) : memberTestItems.length === 0 ? (
           <p className={'text-lg font-medium'}>
-            No tests or packages selected. Please add at least one test or
+            No tests or packages selected for this member. Please add at least one test or
             package to proceed with the booking.
           </p>
         ) : (
           <ScrollArea className={'h-72 w-full'}>
-            {memberTestItems.map((item) => (
-              <div className={'px-4'} key={item.id}>
-                <Item variant={'outline'} size={'xs'}>
-                  <ItemMedia variant="image">
-                    <TestTube2Icon />
-                  </ItemMedia>
-                  <ItemContent>
-                    <ItemTitle>{item.name}</ItemTitle>
-                    <ItemDescription>
-                      {formatCurrency(String(item.discountedPrice) || '0')}{' '}
-                      (Original:{' '}
-                      <span className={'line-through'}>
-                        {formatCurrency(String(item.originalPrice) || '0')}
-                      </span>
-                      )
-                    </ItemDescription>
-                  </ItemContent>
+            {memberTestItems.map((item) => {
+              const isPackage = item.name.toLowerCase().startsWith('package:')
+              const isMiniPackage = item.name.toLowerCase().startsWith('mini package:')
+
+              return (
+                <div className={'px-4'} key={item.id}>
+                  <Item variant={'outline'} size={'xs'}>
+                    <ItemMedia variant="image">
+                      {isPackage || isMiniPackage ? (
+                        <PackagePlusIcon className="size-4 text-primary" />
+                      ) : (
+                        <TestTube2Icon className="size-4 text-muted-foreground" />
+                      )}
+                    </ItemMedia>
+                    <ItemContent>
+                      <ItemTitle className="flex items-center gap-2">
+                        <span>{item.name}</span>
+                      </ItemTitle>
+                      <ItemDescription>
+                        {formatCurrency(String(item.discountedPrice) || '0')}{' '}
+                        (Original:{' '}
+                        <span className={'line-through'}>
+                          {formatCurrency(String(item.originalPrice) || '0')}
+                        </span>
+                        )
+                      </ItemDescription>
+                    </ItemContent>
                   <ItemActions>
                     <Button
                       type="button"
@@ -91,7 +95,8 @@ export default function MembersTestItems({
                 </Item>
                 <Separator className={'my-2'} />
               </div>
-            ))}
+            )
+          })}
           </ScrollArea>
         )}
       </CardContent>

@@ -1,4 +1,4 @@
-import ScheduleSlot from "./schedule-slot"
+import ScheduleSlot from './schedule-slot'
 
 export default function ScheduleStep() {
   return <ScheduleSlot />

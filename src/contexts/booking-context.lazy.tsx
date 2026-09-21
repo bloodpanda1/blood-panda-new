@@ -9,6 +9,7 @@ import { toast } from 'sonner'
 // import { useFormStorage } from "react-hook-form-storage"
 import useSessionStorage from '#/hooks/use-session-storage'
 import { useFormPersist } from '@liorpo/react-hook-form-persist'
+import { useCart } from '#/stores/useCart'
 import { getRouteApi } from '@tanstack/react-router'
 
 type BookingStats = {
@@ -35,6 +36,7 @@ type BookingContextType = {
   originalPrice: number
   discountedPrice: number
   discountPercentage: number
+  collectionCharges: number
 }
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined)
@@ -71,6 +73,9 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
     initialValue: initialValue,
   })
 
+  const { coupon } = useCart()
+  const discountPercentage = coupon?.code === 'PROMO30' ? 30 : 0
+
   const [step, setStep] = useState(bookingStats.currentStep) // max 4 steps
 
   const canGoToPreviousStep = step > 1
@@ -82,18 +87,7 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
     resolver: zodResolver(bookingFormSchema as any),
     mode: 'onChange',
     defaultValues: {
-      memberDetails: [
-        {
-          name: user.name || '',
-          email: user.email || '',
-          phone: '',
-          gender: 'OTHER',
-          age: '0',
-          testItems: undefined,
-          isAssignedDoctor: false,
-          assignedDoctor: 'no',
-        },
-      ],
+      memberDetails: [],
       address: {
         location: '',
         houseNo: '',
@@ -112,14 +106,13 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
     },
   })
 
-  const discountPercentage = 30
-
   const watchBasicDetails = useWatch({
     control: formInstance.control,
     name: `memberDetails`,
     defaultValue: [],
     compute: (member) => {
-      const testItems = member.map((item) => item.testItems).flat()
+      const memberList = Array.isArray(member) ? member : []
+      const testItems = memberList.flatMap((item) => item?.testItems || [])
 
       const originalPrice = testItems.reduce(
         (acc, cur) => acc + (cur?.originalPrice || 0),
@@ -127,12 +120,21 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
       )
       const discountedPrice =
         originalPrice - originalPrice * (discountPercentage / 100)
-      // const discountedPrice =
-      //   originalPrice - originalPrice * (discountPercentage / 100)
 
-      const totalPrice = discountedPrice * member.length
+      const baseTotalPrice = discountedPrice * memberList.length
 
-      return { originalPrice, discountedPrice, totalPrice, member }
+      const collectionCharges =
+        baseTotalPrice > 500 ? 0 : baseTotalPrice > 0 ? 150 : 0
+
+      const totalPrice = baseTotalPrice + collectionCharges
+
+      return {
+        originalPrice,
+        discountedPrice,
+        collectionCharges,
+        totalPrice,
+        member: memberList,
+      }
     },
   })
 
@@ -150,7 +152,12 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
 
     // without adding testItems cant reach to the next step, so we need to validate testItems as well
     if (fieldToValidate === 'memberDetails') {
-      const memberDetails = formInstance.getValues('memberDetails')
+      const memberDetails = formInstance.getValues('memberDetails') || []
+
+      if (memberDetails.length === 0) {
+        toast.error('Please select at least one family member for testing.')
+        return false
+      }
 
       // with Array.some()
       const isAnyMemberWithoutTestItems = memberDetails.some(
@@ -309,6 +316,7 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
     // isRestored,
     originalPrice: watchBasicDetails.originalPrice,
     discountedPrice: watchBasicDetails.discountedPrice,
+    collectionCharges: watchBasicDetails.collectionCharges,
     totalPrice: watchBasicDetails.totalPrice,
     discountPercentage,
     // totalMember: watchBasicDetails.member.length,

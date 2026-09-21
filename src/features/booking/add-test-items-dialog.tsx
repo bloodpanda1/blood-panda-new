@@ -107,10 +107,11 @@ export default function AddTestItemsDialog({ parentIndex }: Props) {
 
         <Await promise={deferred} fallback={<ReviewsSkeleton />}>
           {(data) => {
+            const dataList = Array.isArray(data) ? data : []
             return (
               <ScrollArea className="h-72 w-full rounded-md border">
                 <div className={'space-y-2 px-4 py-2'}>
-                  {data.map((item) => {
+                  {dataList.map((item) => {
                     const testItem: TestItem = {
                       id: item.id,
                       name: item.name,

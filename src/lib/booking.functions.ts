@@ -3,7 +3,9 @@ import { BookingStatus } from '#/generated/prisma/enums'
 import { createServerFn } from '@tanstack/react-start'
 import z from 'zod'
 import { authMiddleware } from './middleware'
+import { isRedirect } from '@tanstack/react-router'
 import { createCheckOutLink } from './payments.functions'
+import { notifyAdmins } from './notifications'
 import {
   bookingFormSchema,
   instantBookingFormSchema,
@@ -11,6 +13,7 @@ import {
 
 const createBookingRecordSchema = z
   .object({
+    bookingId: z.string().optional(),
     totalPrice: z.number(),
   })
   .extend(bookingFormSchema.shape)
@@ -20,26 +23,114 @@ export const createBookingRecord = createServerFn({ method: 'POST' })
   .validator(createBookingRecordSchema)
   .handler(async ({ data, context }) => {
     const { user } = context
-    const { memberDetails, address, schedule, reviewOrder, totalPrice } = data
+    const { memberDetails, address, schedule, reviewOrder, totalPrice, bookingId: requestedBookingId } = data
 
     try {
+      let existingBooking = null
+
+      if (requestedBookingId) {
+        existingBooking = await prisma.booking.findFirst({
+          where: {
+            id: requestedBookingId,
+            userId: user.id,
+            status: 'PENDING',
+          },
+          include: {
+            members: true,
+            addresses: true,
+            schedules: true,
+          },
+        })
+      }
+
+      if (existingBooking) {
+        // Reuse and update the existing pending booking
+        const updatedBooking = await prisma.booking.update({
+          where: { id: existingBooking.id },
+          data: {
+            type: reviewOrder.paymentMode,
+          },
+        })
+
+        // Update schedule if exists
+        if (existingBooking.schedules?.[0]) {
+          await prisma.schedule.update({
+            where: { id: existingBooking.schedules[0].id },
+            data: {
+              scheduleDate: schedule.scheduleDate,
+              slot: schedule.slotTime,
+            },
+          })
+        }
+
+        // Update address if exists
+        if (existingBooking.addresses?.[0]) {
+          await prisma.address.update({
+            where: { id: existingBooking.addresses[0].id },
+            data: {
+              type: address.addressType,
+              location: address.location,
+              houseNo: address.houseNo ?? 'n/a',
+              landmark: address.landmark,
+              pinCode: address.pincode,
+            },
+          })
+        }
+
+        if (reviewOrder.paymentMode === 'ONLINE_PAYMENT') {
+          const checkoutResponse = await createCheckOutLink({
+            data: {
+              bookingId: updatedBooking.id,
+              totalPrice: totalPrice,
+              memberDetails,
+              address,
+              schedule,
+              reviewOrder,
+            },
+          })
+          return {
+            booking: updatedBooking,
+            paymentSessionId: checkoutResponse.paymentSessionId,
+            orderId: checkoutResponse.orderId,
+            paymentUrl: checkoutResponse.paymentUrl,
+          }
+        } else {
+          return {
+            booking: updatedBooking,
+            paymentSessionId: null,
+            orderId: null,
+            paymentUrl: null,
+          }
+        }
+      }
+
+      // If no existing booking, create new records:
+      // Find all IDs that exist in the BloodTest relation
+      const allItemIds = memberDetails.flatMap((m) => m.testItems?.map((t) => t.id) || [])
+      const existingBloodTests = await prisma.bloodTest.findMany({
+        where: { id: { in: allItemIds } },
+        select: { id: true },
+      })
+      const validBloodTestIds = new Set(existingBloodTests.map((t) => t.id))
+
       // Task 1: Create members in parallel
-      const memberCreationPromises = memberDetails.map((member) =>
-        prisma.member.create({
+      const memberCreationPromises = memberDetails.map((member) => {
+        const connectableTests = (member.testItems || [])
+          .filter((t) => validBloodTestIds.has(t.id))
+          .map((t) => ({ id: t.id }))
+
+        return prisma.member.create({
           data: {
             name: member.name,
             age: member.age,
             gender: member.gender,
             phone: member.phone,
             email: member.email,
-            testItems: member.testItems
-              ? {
-                  connect: member.testItems.map((pkg) => ({ id: pkg.id })),
-                }
-              : undefined,
+            prescriptionUrl: member.prescriptionUrl || null,
+            testItems: connectableTests.length > 0 ? { connect: connectableTests } : undefined,
           },
-        }),
-      )
+        })
+      })
       const createdMembers = await Promise.all(memberCreationPromises)
 
       // Task 2: Create address and schedule in parallel
@@ -50,6 +141,7 @@ export const createBookingRecord = createServerFn({ method: 'POST' })
           houseNo: address.houseNo ?? 'n/a',
           landmark: address.landmark,
           pinCode: address.pincode,
+          userId: user.id,
         },
       })
       const createSchedule = prisma.schedule.create({
@@ -108,10 +200,28 @@ export const createBookingRecord = createServerFn({ method: 'POST' })
           bookingId: createBooking.id,
         },
       })
-      await Promise.all([updateMembers, updateAddress, updateSchedule])
+
+      // Link prescriptions to members and booking
+      const updatePrescriptionsPromises = memberDetails.map((member, idx) => {
+        if (member.prescriptionUrl) {
+          return prisma.prescription.updateMany({
+            where: {
+              fileUrl: member.prescriptionUrl,
+              userId: user.id,
+            },
+            data: {
+              memberId: createdMembers[idx].id,
+              bookingId: createBooking.id,
+            }
+          })
+        }
+        return Promise.resolve()
+      })
+
+      await Promise.all([updateMembers, updateAddress, updateSchedule, ...updatePrescriptionsPromises])
 
       if (reviewOrder.paymentMode === 'ONLINE_PAYMENT') {
-        await createCheckOutLink({
+        const checkoutResponse = await createCheckOutLink({
           data: {
             bookingId: createBooking.id,
             totalPrice: totalPrice,
@@ -121,10 +231,26 @@ export const createBookingRecord = createServerFn({ method: 'POST' })
             reviewOrder,
           },
         })
+        await notifyAdmins('New Booking', `A new booking has been placed via checkout.`, 'NEW_BOOKING', '/admin/bookings')
+        return {
+          booking: createBooking,
+          paymentSessionId: checkoutResponse.paymentSessionId,
+          orderId: checkoutResponse.orderId,
+          paymentUrl: checkoutResponse.paymentUrl,
+        }
       } else {
-        return createBooking
+        await notifyAdmins('New Booking', `A new COD booking has been placed via checkout.`, 'NEW_BOOKING', '/admin/bookings')
+        return {
+          booking: createBooking,
+          paymentSessionId: null,
+          orderId: null,
+          paymentUrl: null,
+        }
       }
     } catch (error) {
+      if (isRedirect(error)) {
+        throw error
+      }
       console.error('Error creating booking:', error)
       throw new Error('Failed to create booking')
     }
@@ -146,6 +272,9 @@ export const updateBookingStatus = createServerFn({ method: 'POST' })
         where: { id: bookingId },
         data: { status },
       })
+      if (status === 'CANCELLED') {
+        await notifyAdmins('Booking Cancelled', `Booking ${bookingId.slice(0, 8)} has been cancelled.`, 'BOOKING_CANCELLED', '/admin/bookings')
+      }
       return updatedBooking
     } catch (error) {
       console.error('Error updating booking:', error)
@@ -172,6 +301,9 @@ export const createInstanstBookingRecord = createServerFn({ method: 'POST' })
           agreeOfTerms: data.agreeOfTerms,
         },
       })
+      
+      await notifyAdmins('New Instant Booking', `A new instant booking request was received from ${data.fullName}.`, 'NEW_BOOKING', '/admin/bookings')
+
       return newBooking
     } catch (error) {
       console.error('Error creating instant booking:', error)

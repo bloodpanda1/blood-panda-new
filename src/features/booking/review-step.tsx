@@ -31,19 +31,29 @@ import { RadioGroup, RadioGroupItem } from '#/components/ui/radio-group'
 import type { BookingFormData } from '#/lib/validators/booking-schema'
 import { format } from 'date-fns'
 import { Clock10, MapPinCheck } from 'lucide-react'
+import { formatCurrency } from '#/lib/utils'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
+import { useBookingContext } from '#/contexts/booking-context.lazy'
 
 const paymentOptions = [
   {
     id: crypto.randomUUID(),
     name: 'Pay during blood collection',
     value: 'COD',
-    description: 'Pay securely when our phlebotomist arrives to collect your sample.',
-  }
+    description:
+      'Pay securely when our phlebotomist arrives to collect your sample.',
+  },
+  {
+    id: crypto.randomUUID(),
+    name: 'Online Payment (UPI / Cards)',
+    value: 'ONLINE_PAYMENT',
+    description: 'Pay instantly via UPI, Credit/Debit Cards, or Net Banking.',
+  },
 ]
 
 export default function ReviewStep() {
   const form = useFormContext<BookingFormData>()
+  const { totalPrice } = useBookingContext()
 
   const watchedAddressValues = useWatch({
     name: 'address',
@@ -64,7 +74,7 @@ export default function ReviewStep() {
         <CardDescription>
           <p>Order Summary</p>
         </CardDescription>
-        <CardAction>0.00</CardAction>
+        <CardAction>{formatCurrency(String(totalPrice))}</CardAction>
       </CardHeader>
       <CardContent className="px-0">
         <Card className={'gap-2 rounded-none shadow-none ring-0'}>
@@ -83,9 +93,16 @@ export default function ReviewStep() {
                 <ItemContent>
                   <ItemTitle>From Home</ItemTitle>
                   <ItemDescription>
-                    {/* Bengaluru, Karnataka 560002, India */}
-                    {watchedAddressValues.location || 'N/A'},{' '}
-                    {watchedAddressValues.pincode || '000000'}, India
+                    {[
+                      watchedAddressValues.houseNo,
+                      watchedAddressValues.landmark,
+                      watchedAddressValues.location,
+                      watchedAddressValues.pincode
+                        ? `${watchedAddressValues.pincode}, India`
+                        : undefined,
+                    ]
+                      .filter(Boolean)
+                      .join(', ') || 'N/A'}
                   </ItemDescription>
                 </ItemContent>
                 <ItemActions>
@@ -127,7 +144,8 @@ export default function ReviewStep() {
                   <FieldSet data-invalid={fieldState.invalid}>
                     <FieldLegend>Payment Method</FieldLegend>
                     <FieldDescription>
-                      Please select your preferred payment method for this booking.
+                      Please select your preferred payment method for this
+                      booking.
                     </FieldDescription>
                     <RadioGroup
                       name={field.name}

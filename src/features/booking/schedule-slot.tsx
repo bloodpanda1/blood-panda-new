@@ -1,5 +1,5 @@
 import { IconClock } from '@tabler/icons-react'
-import { format } from 'date-fns'
+import { format, isToday, parse, addDays } from 'date-fns'
 import { CheckCircle2 } from 'lucide-react'
 import { Fragment, useEffect, useState } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
@@ -48,13 +48,29 @@ function CalendarFooter({
 
 export default function ScheduleSlot() {
   const today = new Date()
-  const [date, setDate] = useState<Date | undefined>(today)
+  
+  let defaultDate = new Date()
+  const day = defaultDate.getDay()
+  if (day === 6) {
+    defaultDate = addDays(defaultDate, 2)
+  } else if (day === 0) {
+    defaultDate = addDays(defaultDate, 1)
+  }
+
+  const [date, setDate] = useState<Date | undefined>(defaultDate)
   const [timeZone, setTimeZone] = useState<string | undefined>(undefined)
   const [selectedSlot, setSelectedSlot] = useState<string | undefined>(
     undefined,
   )
 
-  const slots = generateTimeSlots('06:00', '18:00', 15)
+  const allSlots = generateTimeSlots('06:00', '18:00', 15)
+  const slots = allSlots.filter((slot) => {
+    if (date && isToday(date)) {
+      const slotTime = parse(slot, 'hh:mm aaa', new Date())
+      return slotTime > new Date()
+    }
+    return true
+  })
 
   const form = useFormContext<BookingFormData>()
 
@@ -63,10 +79,11 @@ export default function ScheduleSlot() {
     control: form.control,
   })
 
-
-
   useEffect(() => {
     setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone)
+    if (!form.getValues('schedule.scheduleDate')) {
+      form.setValue('schedule.scheduleDate', defaultDate.toISOString())
+    }
   }, [])
 
   return (
@@ -102,8 +119,7 @@ export default function ScheduleSlot() {
                 return (
                   <Calendar
                     mode="single"
-                    // selected={new Date(field.value) || date}
-                    selected={new Date(field.value || date || today)}
+                    selected={field.value ? new Date(field.value) : (date || defaultDate)}
                     onSelect={(selectedDate) => {
                       setDate(selectedDate)
                       if (selectedDate) {
@@ -120,8 +136,9 @@ export default function ScheduleSlot() {
                     footer={
                       <CalendarFooter
                         date={
-                          date ||
-                          new Date(watchedSchedule.scheduleDate || today)
+                          field.value 
+                            ? new Date(field.value) 
+                            : (date || defaultDate)
                         }
                         slot={selectedSlot || watchedSchedule.slotTime}
                       />

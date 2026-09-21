@@ -1,3 +1,4 @@
+import { Button } from '#/components/ui/button'
 import {
   Card,
   CardContent,
@@ -17,6 +18,8 @@ import {
 import { RadioGroup, RadioGroupItem } from '#/components/ui/radio-group'
 import type { MemberDetailsFormData } from '#/lib/validators/booking-schema'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
+import { Input } from '#/components/ui/input'
+import { Label } from '#/components/ui/label'
 import UploadPrescriptionDialog from './upload-prescription-dialog'
 
 type UploadPrescriptionProps = {
@@ -25,13 +28,13 @@ type UploadPrescriptionProps = {
 
 const uploadPreferences = [
   {
-    id: crypto.randomUUID(),
+    id: 'pref-yes',
     title: 'Yes',
     description: 'I have a prescription from my doctor.',
     value: 'yes',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'pref-no',
     title: 'No',
     description: "I don't have a prescription.",
     value: 'no',
@@ -42,10 +45,15 @@ export default function UploadPrescription(props: UploadPrescriptionProps) {
   const { parentIdx: idx } = props
   const form = useFormContext<MemberDetailsFormData>()
 
-  const watchAssignedDoctor = useWatch({
+  const assignedDoctor = useWatch({
     control: form.control,
-    name: `memberDetails.${idx}.isAssignedDoctor`,
-    compute: (value) => value,
+    name: `memberDetails.${idx}.assignedDoctor`,
+    defaultValue: 'no',
+  })
+
+  const prescriptionUrl = useWatch({
+    control: form.control,
+    name: `memberDetails.${idx}.prescriptionUrl`,
   })
 
   return (
@@ -64,28 +72,38 @@ export default function UploadPrescription(props: UploadPrescriptionProps) {
           <Controller
             name={`memberDetails.${idx}.assignedDoctor`}
             control={form.control}
+            defaultValue="no"
             render={({ field, fieldState }) => (
               <RadioGroup
                 name={field.name}
-                value={field.value}
-                onValueChange={(e) => {
-                  field.onChange(e)
+                value={field.value || 'no'}
+                onValueChange={(val) => {
+                  field.onChange(val)
                   form.setValue(
                     `memberDetails.${idx}.isAssignedDoctor`,
-                    !watchAssignedDoctor,
+                    val === 'yes',
                     {
                       shouldDirty: true,
                       shouldTouch: true,
                       shouldValidate: true,
                     },
                   )
+                  if (val === 'no') {
+                    form.setValue(
+                      `memberDetails.${idx}.prescriptionUrl`,
+                      undefined,
+                      {
+                        shouldDirty: true,
+                      },
+                    )
+                  }
                 }}
                 aria-invalid={fieldState.invalid}
               >
                 {uploadPreferences.map((preference) => (
                   <FieldLabel
                     key={preference.id}
-                    htmlFor={`form-rhf-radiogroup-${preference.title}`}
+                    htmlFor={`form-rhf-radiogroup-${idx}-${preference.value}`}
                   >
                     <Field
                       orientation="horizontal"
@@ -100,7 +118,7 @@ export default function UploadPrescription(props: UploadPrescriptionProps) {
                       </FieldContent>
                       <RadioGroupItem
                         value={preference.value}
-                        id={`form-rhf-radiogroup-${preference.title}`}
+                        id={`form-rhf-radiogroup-${idx}-${preference.value}`}
                         aria-invalid={fieldState.invalid}
                       />
                     </Field>
@@ -110,9 +128,78 @@ export default function UploadPrescription(props: UploadPrescriptionProps) {
             )}
           />
         </CardContent>
-        {!watchAssignedDoctor ? (
-          <CardFooter className={'transition-opacity delay-300 duration-300'}>
-            <UploadPrescriptionDialog />
+        {assignedDoctor === 'yes' ? (
+          <CardFooter className={'flex flex-col items-start gap-4 pt-2'}>
+            <div className="w-full max-w-md space-y-2">
+              <Label htmlFor={`doctorName-${idx}`}>Doctor Name (Optional)</Label>
+              <Controller
+                name={`memberDetails.${idx}.doctorName`}
+                control={form.control}
+                render={({ field }) => (
+                  <Input 
+                    id={`doctorName-${idx}`} 
+                    placeholder="E.g. Dr. John Doe" 
+                    {...field} 
+                    value={field.value || ''} 
+                  />
+                )}
+              />
+            </div>
+            {prescriptionUrl ? (
+              <div className="flex items-center gap-3 rounded-lg border p-2.5 bg-muted/20 w-full max-w-md">
+                <a
+                  href={prescriptionUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="size-12 rounded border overflow-hidden shrink-0 bg-background flex items-center justify-center hover:opacity-80 transition-opacity"
+                  title="Click to preview prescription"
+                >
+                  {prescriptionUrl.endsWith('.pdf') ? (
+                    <span className="text-xs font-bold text-primary">PDF</span>
+                  ) : (
+                    <img
+                      src={prescriptionUrl}
+                      alt="Prescription"
+                      className="size-full object-cover"
+                    />
+                  )}
+                </a>
+
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-semibold text-green-600 dark:text-green-400 flex items-center gap-1">
+                    ✓ Prescription Attached
+                  </p>
+                  <p className="text-[11px] text-muted-foreground truncate">
+                    Ready for phlebotomist and lab review
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <UploadPrescriptionDialog parentIdx={idx} />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="xs"
+                    className="text-muted-foreground hover:text-destructive"
+                    onClick={() => {
+                      form.setValue(`memberDetails.${idx}.prescriptionUrl`, undefined, {
+                        shouldDirty: true,
+                        shouldTouch: true,
+                      })
+                    }}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-1.5">
+                <UploadPrescriptionDialog parentIdx={idx} />
+                <p className="text-[11px] text-muted-foreground">
+                  Select from your saved account prescriptions or upload a new file.
+                </p>
+              </div>
+            )}
           </CardFooter>
         ) : null}
       </Card>

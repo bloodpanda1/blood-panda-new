@@ -1,3 +1,4 @@
+import { Badge } from '#/components/ui/badge'
 import { Button } from '#/components/ui/button'
 import {
   Card,
@@ -74,10 +75,19 @@ export default function CartItemsSection() {
                       <div className="flex-1 p-3 sm:p-6 sm:pb-3 flex flex-col justify-between">
                         <div className="flex justify-between items-start gap-2">
                           <div>
+                            <div className="flex items-center gap-2 mb-1">
+                              {item.name.toLowerCase().startsWith('package:') && (
+                                <Badge variant="secondary" className="text-[11px] bg-primary/10 text-primary border-primary/20">
+                                  Package
+                                </Badge>
+                              )}
+                              {item.name.toLowerCase().startsWith('mini package:') && (
+                                <Badge variant="secondary" className="text-[11px] bg-amber-500/10 text-amber-600 border-amber-500/20">
+                                  Mini Package
+                                </Badge>
+                              )}
+                            </div>
                             <h3 className="font-medium text-sm sm:text-base line-clamp-2">{item.name}</h3>
-                            {/* <p className="text-sm text-muted-foreground">
-                                {item.color} • {item.size}
-                              </p> */}
                           </div>
                           <Button
                             variant="destructive"

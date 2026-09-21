@@ -18,25 +18,47 @@ import { formatCurrency } from '#/lib/utils'
 import { useCart } from '#/stores/useCart'
 import { CreditCard, Package, Shield, Trash2, Truck } from 'lucide-react'
 import { useState } from 'react'
+import { useSession } from '#/lib/auth-client'
+import { useTRPC } from '#/integrations/trpc/react'
+import { useQueryClient } from '@tanstack/react-query'
 
 export default function CartOrderSummary() {
   const [couponCode, setCouponCode] = useState('PROMO30')
 
+  const [isApplying, setIsApplying] = useState(false)
+  const { data: session } = useSession()
+  const trpc = useTRPC()
+  const queryClient = useQueryClient()
   const { total, subtotal, coupon, applyCoupon, removeCoupon } = useCart()
 
-  function handleApplyCoupon() {
+  async function handleApplyCoupon() {
     if (couponCode.trim() === '') {
       toast.error('Please enter a valid coupon code.')
       return
     }
 
-    // For demonstration, let's assume "PROMO30" gives a 30% discount
-    if (couponCode === 'PROMO30') {
-      applyCoupon({ code: couponCode, discountPercentage: 30 })
-      toast.success('Coupon applied successfully!')
-    } else {
-      toast.error('Invalid coupon code.')
-      setCouponCode('') // Clear the input field on invalid code
+    if (!session) {
+      toast.error('Please login to apply coupons.')
+      return
+    }
+
+    setIsApplying(true)
+    try {
+      const res = await queryClient.fetchQuery(
+        trpc.users.checkPromoEligibility.queryOptions({ code: couponCode })
+      )
+      if (res.isValid) {
+        applyCoupon({ code: couponCode, discountPercentage: res.discountPercentage || 0 })
+        toast.success(res.message)
+      } else {
+        toast.error(res.message)
+        setCouponCode('')
+      }
+    } catch (e: any) {
+      toast.error(e.message || 'Error validating promo code.')
+      setCouponCode('')
+    } finally {
+      setIsApplying(false)
     }
   }
 
@@ -78,8 +100,7 @@ export default function CartOrderSummary() {
                 <Input
                   placeholder="Enter promo code"
                   value={couponCode}
-                  readOnly
-                  className={'pointer-events-none select-none'}
+                  onChange={(e) => setCouponCode(e.target.value)}
                 />
                 <Button variant="outline">Apply</Button>
               </form>

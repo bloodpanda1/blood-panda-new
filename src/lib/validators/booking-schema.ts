@@ -1,26 +1,31 @@
 import { AddressTypeEnums, GenderEnums, PaymentMethodEnums } from '#/constants'
 import z from 'zod'
+import { isToday, parse, isBefore } from 'date-fns'
 
 export const testItemSchema = z.object({
   id: z.string(),
   name: z.string(),
   originalPrice: z.number(),
   discountedPrice: z.number(),
-  discountAmount: z.number(),
-  primaryCategory: z.string(),
-  secondaryCategory: z.string(),
-  isFastingRequired: z.boolean(),
+  discountAmount: z.number().default(0),
+  primaryCategory: z.string().optional().nullable(),
+  secondaryCategory: z.string().optional().nullable(),
+  isFastingRequired: z.boolean().optional().default(false),
 })
 
 const memberDetailsField = z.object({
-  name: z.string().min(2),
-  email: z.email(),
-  phone: z.string().min(10),
-  gender: z.enum(GenderEnums),
-  age: z.string(),
+  id: z.string().optional(),
+  memberId: z.string().optional(),
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().optional().default(''),
+  phone: z.string().optional().default(''),
+  gender: z.enum(GenderEnums).default('OTHER'),
+  age: z.string().default('0'),
   testItems: z.array(testItemSchema).optional(),
   isAssignedDoctor: z.boolean().default(false),
   assignedDoctor: z.enum(['yes', 'no']).default('no'),
+  prescriptionUrl: z.string().optional().nullable(),
+  doctorName: z.string().optional().nullable(),
 })
 
 export const memberDetailsFormSchema = z.object({
@@ -41,6 +46,39 @@ export const addressFormSchema = z.object({
 export const scheduleFormSchema = z.object({
   scheduleDate: z.string().min(1, 'Please select a date'),
   slotTime: z.string().min(1, 'Please select a time slot'),
+}).superRefine((data, ctx) => {
+  if (data.scheduleDate && data.slotTime) {
+    const selectedDate = new Date(data.scheduleDate)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    
+    const selectedDateOnly = new Date(selectedDate)
+    selectedDateOnly.setHours(0, 0, 0, 0)
+    
+    if (selectedDateOnly < today) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['scheduleDate'],
+        message: 'Selected date cannot be in the past',
+      })
+      return
+    }
+
+    if (isToday(selectedDate)) {
+      try {
+        const slotTimeDate = parse(data.slotTime, 'hh:mm aaa', new Date())
+        if (isBefore(slotTimeDate, new Date())) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['slotTime'],
+            message: 'Selected time slot has already passed',
+          })
+        }
+      } catch (e) {
+        // ignore format errors
+      }
+    }
+  }
 })
 
 export const reviewOrderSchema = z.object({

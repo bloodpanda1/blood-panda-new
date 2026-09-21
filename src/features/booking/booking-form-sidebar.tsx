@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Badge } from '#/components/ui/badge'
 import { Button } from '#/components/ui/button'
 import {
@@ -30,6 +31,9 @@ Key Points
 
 */
 
+import { initiateCashfreePayment } from '#/lib/cashfree-checkout'
+import { cartStore } from '#/stores/cart-store'
+
 export default function BookingFormSidebar() {
   const form = useFormContext<BookingFormData>()
   const {
@@ -41,28 +45,20 @@ export default function BookingFormSidebar() {
     originalPrice,
     discountPercentage,
     discountedPrice,
+    collectionCharges,
     canGoToNextStep,
     clearStorage,
   } = useBookingContext()
 
   const router = useRouter()
 
-  const totalMembers = useWatch({
-    control: form.control,
-    name: `memberDetails`,
-    defaultValue: [],
-  })
-
-  const watchedPaymentMode = useWatch({
-    control: form.control,
-    name: `reviewOrder.paymentMode`,
-    defaultValue: 'COD',
-  })
-
   const watchedMemberValues = useWatch({
     control: form.control,
     name: `memberDetails`,
-  })
+    defaultValue: [],
+  }) || []
+
+  const totalMembers = Array.isArray(watchedMemberValues) ? watchedMemberValues : []
 
   const watchedAddressValues = useWatch({
     control: form.control,
@@ -79,50 +75,35 @@ export default function BookingFormSidebar() {
     name: `reviewOrder`,
   })
 
-  const isAnyMemberWithoutTestItems = watchedMemberValues.every(
-    (member) => member.testItems && member.testItems.length > 0,
-  )
+  const watchedPaymentMode = watchedReviewOrderValues?.paymentMode || 'COD'
 
-  const bookingData = {
-    memberDetails: watchedMemberValues,
-    address: watchedAddressValues,
-    schedule: watchedScheduleValues,
-    reviewOrder: watchedReviewOrderValues,
-    totalPrice: totalPrice,
-  }
+  const [createdBookingId, setCreatedBookingId] = useState<string | null>(null)
+
+  const isAnyMemberWithoutTestItems =
+    totalMembers.length > 0 &&
+    totalMembers.every((member) => member?.testItems && member.testItems.length > 0)
 
   const createbookingFn = useServerFn(createBookingRecord)
-  // const createCheckOutFn = useServerFn(createCheckOutLink)
 
   const {
     mutateAsync: bookingMutation,
     isPending: isBookingPending,
     isPaused: isBookingPaused,
   } = useMutation({
-    mutationFn: () => createbookingFn({ data: bookingData }),
+    mutationFn: () =>
+      createbookingFn({
+        data: {
+          memberDetails: watchedMemberValues,
+          address: watchedAddressValues,
+          schedule: watchedScheduleValues,
+          reviewOrder: watchedReviewOrderValues,
+          totalPrice: totalPrice,
+          bookingId: createdBookingId || undefined,
+        },
+      }),
   })
 
-  // const {
-  //   mutateAsync: checkOutMutation,
-  //   isPending: isCheckOutPending,
-  //   isPaused: isCheckOutPaused,
-  // } = useMutation({
-  //   mutationFn: (bookingId: string) =>
-  //     createCheckOutFn({
-  //       data: {
-  //         bookingId: bookingId,
-  //         totalPrice: totalPrice,
-  //         memberDetails: watchedMemberValues,
-  //         address: watchedAddressValues,
-  //         schedule: watchedScheduleValues,
-  //         reviewOrder: watchedReviewOrderValues,
-  //       },
-  //     }),
-  // })
-
   function handleFinalSubmit() {
-    // const fakePromise = new Promise((resolve) => setTimeout(resolve, 2000))
-
     if (step === 1 || step === 2 || step === 3) {
       return nextStep()
     } else {
@@ -130,27 +111,58 @@ export default function BookingFormSidebar() {
       if (watchedPaymentMode === 'COD') {
         // create the booking and show the success page
         toast.promise(bookingMutation, {
-          loading: 'Creating booking...',
-          success: () => {
-            // cleared form data and reset the booking context
+          loading: 'Processing booking...',
+          success: (data) => {
             clearStorage()
-            router.navigate({ to: '/profile' }) // Navigate to the success page
+            cartStore.trigger.clearCart()
+            setCreatedBookingId(null)
+            router.navigate({
+              to: '/payment-status',
+              search: { bookingId: data?.booking?.id || '' },
+            })
             router.invalidate({
               filter: (route) => route.id === 'profile',
               sync: true,
-            }) // Refresh route loaders to reflect the new booking
-            return 'Booking created successfully!'
+            })
+            return 'Booking placed successfully!'
           },
-          error: 'Failed to create booking.',
+          error: (err) => err?.message || 'Failed to create booking.',
         })
       } else {
-        toast.promise(bookingMutation, {
-          loading: 'Redirecting to payment gateway...',
-          success: () => {
-            return 'Booking created successfully!'
+        toast.promise(
+          (async () => {
+            const data = await bookingMutation()
+            if (data?.booking?.id) {
+              setCreatedBookingId(data.booking.id)
+            }
+            if (data.paymentSessionId) {
+              await initiateCashfreePayment({
+                paymentSessionId: data.paymentSessionId,
+                mode: 'sandbox',
+                redirectTarget: '_self',
+              })
+              clearStorage()
+              cartStore.trigger.clearCart()
+            } else if (data.paymentUrl) {
+              clearStorage()
+              cartStore.trigger.clearCart()
+              window.location.href = data.paymentUrl
+            } else {
+              clearStorage()
+              cartStore.trigger.clearCart()
+              router.navigate({
+                to: '/payment-status',
+                search: { bookingId: data?.booking?.id || '' },
+              })
+            }
+            return data
+          })(),
+          {
+            loading: 'Initializing Cashfree Sandbox Checkout...',
+            success: 'Opening Cashfree Payment Gateway...',
+            error: (err) => err?.message || 'Failed to initialize payment gateway.',
           },
-          error: 'Failed to create booking.',
-        })
+        )
       }
     }
   }
@@ -182,7 +194,13 @@ export default function BookingFormSidebar() {
         <Separator />
         <p className={'flex items-center justify-between'}>
           <span className={'font-medium'}>Collection Charges</span>
-          <span className={'font-semibold'}>{formatCurrency('0')}</span>
+          <span className={'font-semibold'}>
+            {collectionCharges === 0 ? (
+              <span className="text-green-600">Free</span>
+            ) : (
+              formatCurrency(String(collectionCharges))
+            )}
+          </span>
         </p>
       </CardContent>
 
