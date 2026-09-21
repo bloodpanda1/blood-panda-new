@@ -14,24 +14,48 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '#/components/ui/sidebar'
+import { authClient } from '#/lib/auth-client'
+import { Link, useRouter } from '@tanstack/react-router'
 import {
-  BellIcon,
   CircleUserRoundIcon,
-  CreditCardIcon,
   EllipsisVerticalIcon,
+  HomeIcon,
   LogOutIcon,
+  ShieldCheckIcon,
 } from 'lucide-react'
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string
-    email: string
-    avatar: string
+export interface NavUserProps {
+  user?: {
+    name?: string | null
+    email?: string | null
+    image?: string | null
+    role?: string | null
   }
-}) {
+}
+
+export function NavUser({ user: propUser }: NavUserProps) {
   const { isMobile } = useSidebar()
+  const { data: session } = authClient.useSession()
+  const router = useRouter()
+
+  const user = {
+    name: propUser?.name || session?.user?.name || 'Admin',
+    email: propUser?.email || session?.user?.email || 'admin@bloodpanda.com',
+    image: propUser?.image || session?.user?.image || '',
+    role: (propUser as any)?.role || (session?.user as any)?.role || 'ADMIN',
+  }
+
+  const initials = (user.name || user.email || 'A')
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2)
+
+  const handleLogout = async () => {
+    await authClient.signOut()
+    router.navigate({ to: '/' })
+  }
 
   return (
     <SidebarMenu>
@@ -42,9 +66,11 @@ export function NavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              <Avatar className="h-8 w-8 rounded-lg">
+                {user.image && <AvatarImage src={user.image} alt={user.name} />}
+                <AvatarFallback className="rounded-lg bg-primary/10 text-primary font-medium">
+                  {initials}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
@@ -64,8 +90,10 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  {user.image && <AvatarImage src={user.image} alt={user.name} />}
+                  <AvatarFallback className="rounded-lg bg-primary/10 text-primary font-medium">
+                    {initials}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
@@ -77,22 +105,22 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <CircleUserRoundIcon />
-                Account
+              <DropdownMenuItem asChild>
+                <Link to="/profile">
+                  <CircleUserRoundIcon className="size-4" />
+                  My Profile
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCardIcon />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <BellIcon />
-                Notifications
+              <DropdownMenuItem asChild>
+                <Link to="/">
+                  <HomeIcon className="size-4" />
+                  Main Website
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">
-              <LogOutIcon />
+            <DropdownMenuItem variant="destructive" onClick={handleLogout} className="cursor-pointer">
+              <LogOutIcon className="size-4" />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

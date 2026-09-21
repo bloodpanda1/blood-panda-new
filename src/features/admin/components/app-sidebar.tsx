@@ -1,7 +1,10 @@
 import * as React from 'react'
+import { ShieldIcon } from 'lucide-react'
+import { useSession } from '#/lib/auth-client'
 
 import { IconLockCog, IconReceipt } from '@tabler/icons-react'
 import {
+  CalendarIcon,
   CameraIcon,
   ChartBarIcon,
   CircleHelpIcon,
@@ -10,7 +13,6 @@ import {
   FileIcon,
   FileTextIcon,
   LayoutDashboardIcon,
-  PandaIcon,
   SearchIcon,
   Settings2Icon,
   UsersIcon,
@@ -32,128 +34,61 @@ import { NavUser } from '#/features/admin/components/nav-user'
 import { Link } from '@tanstack/react-router'
 
 const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
   navMain: [
     {
       title: 'Dashboard',
-      url: '/dashboard',
+      url: '/admin/dashboard',
       icon: <LayoutDashboardIcon />,
     },
     {
+      title: 'Accounts',
+      url: '/admin/accounts',
+      icon: <UsersIcon />,
+    },
+    {
       title: 'Patients',
-      url: '/patients',
+      url: '/admin/patients',
       icon: <UsersIcon />,
     },
     {
       title: 'Bookings',
-      url: '/bookings',
+      url: '/admin/bookings',
       icon: <ChartBarIcon />,
     },
     {
+      title: 'Calendar',
+      url: '/admin/calendar',
+      icon: <CalendarIcon />,
+    },
+    {
       title: 'Subscribers',
-      url: '/subscribers',
+      url: '/admin/subscribers',
       icon: <IconReceipt />,
     },
     {
       title: 'Prescriptions',
-      url: '/prescriptions',
+      url: '/admin/prescriptions',
       icon: <FileChartColumnIcon />,
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: <IconLockCog />,
-    },
-  ],
-  navClouds: [
-    {
-      title: 'Capture',
-      icon: <CameraIcon />,
-      isActive: true,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Proposal',
-      icon: <FileTextIcon />,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Prompts',
-      icon: <FileTextIcon />,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: 'Settings',
-      url: '#',
-      icon: <Settings2Icon />,
-    },
-    {
-      title: 'Get Help',
-      url: '#',
-      icon: <CircleHelpIcon />,
-    },
-    {
-      title: 'Search',
-      url: '#',
-      icon: <SearchIcon />,
-    },
-  ],
-  documents: [
-    {
-      name: 'Data Library',
-      url: '#',
-      icon: <DatabaseIcon />,
-    },
-    {
-      name: 'Reports',
-      url: '#',
-      icon: <FileChartColumnIcon />,
-    },
-    {
-      name: 'Word Assistant',
-      url: '#',
-      icon: <FileIcon />,
     },
   ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { data: session } = useSession()
+  const userRole = (session?.user as any)?.role
+
+  const navMainWithStaff = React.useMemo(() => {
+    const nav = [...data.navMain]
+    if (userRole === 'SUPER_ADMIN') {
+      nav.splice(6, 0, {
+        title: 'Staff',
+        url: '/admin/staff',
+        icon: <ShieldIcon />,
+      })
+    }
+    return nav
+  }, [userRole])
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -164,7 +99,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
               <Link to="/" viewTransition>
-                <PandaIcon className="size-5!" />
+                <img src="/logo-idol.png" alt="Blood Panda Logo" className="size-6 shrink-0 object-contain" />
                 <span className="text-base font-semibold">Blood Panda</span>
               </Link>
             </SidebarMenuButton>
@@ -172,12 +107,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={navMainWithStaff} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   )
