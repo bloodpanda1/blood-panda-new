@@ -1,0 +1,626 @@
+# Cashfree Payments Developer Documentation
+
+- [Payments (261 pages)](https://www.cashfree.com/docs/_llms/payments.md): Documentation for Payments.
+
+## Payouts
+
+### Payouts
+
+- [Introduction](https://www.cashfree.com/docs/payouts/payouts/introduction.md): Use Cashfree Payouts to send instant, programmable transfers to Indian bank accounts, UPI IDs, cards, and wallets via a single API or dashboard interface.
+- [Co-Lending](https://www.cashfree.com/docs/payouts/payouts/co-lending.md): Use the Cashfree Payments Co-Lending program to partner with NBFCs, distribute joint loans, and expand your borrower base through a single payouts platform.
+- [Beneficiary Management](https://www.cashfree.com/docs/payouts/payouts/beneficiaries-management.md): Add and manage Cashfree Payouts beneficiaries with bank account or UPI details so you can send instant, automated disbursements to customers and vendors.
+- [Downtimes](https://www.cashfree.com/docs/payouts/payouts/downtimes.md): Track scheduled and unscheduled downtimes for the bank fund sources connected to Cashfree Payouts so you can plan disbursements and reduce failed transfers.
+- [Payouts: General FAQs](https://www.cashfree.com/docs/payouts/payouts/general-faqs.md): Find answers to general questions about Cashfree Payouts, including supported transfer modes, beneficiary onboarding, balance management, and reconciliation.
+
+#### Dashboard
+
+- [Payouts Dashboard](https://www.cashfree.com/docs/payouts/payouts/dashboard/introduction.md): Use the Cashfree Payouts Dashboard to track balances, initiate transfers, manage beneficiaries, and configure fund sources from one centralised control panel.
+- [Transfer Efficiency](https://www.cashfree.com/docs/payouts/payouts/dashboard/transfer-efficiency.md): View transfer success rate and turnaround time data from the Cashfree Payouts Dashboard Summary page to spot issues and reduce escalations on payouts.
+- [Email Notifications](https://www.cashfree.com/docs/payouts/payouts/dashboard/set-email-notifications.md): Configure Cashfree Payouts email notifications to receive scheduled reports and key alerts about transfers, beneficiaries, balances, and account events.
+- [Payouts Reports](https://www.cashfree.com/docs/payouts/payouts/dashboard/reports.md): Access Cashfree Payouts reports from the dashboard or schedule them via email to monitor fund flow, reconcile transfers, and review business health daily.
+
+#### Make Payouts
+
+- [Lifecycle](https://www.cashfree.com/docs/payouts/payouts/make-payouts/lifecycle.md): Understand the Cashfree Payouts transfer lifecycle, including every state a payout moves through from initiation to success, failure, or reversal.
+- [Make Payouts to Customers](https://www.cashfree.com/docs/payouts/payouts/make-payouts/customers.md): Send instant Cashfree Payouts to customers, vendors, suppliers, or employees from the dashboard, APIs, or batch uploads as long as your balance is sufficient.
+- [Assign Roles to Request and Approve Transfers](https://www.cashfree.com/docs/payouts/payouts/make-payouts/initiator-approver.md): Assign Initiator and Approver roles in Cashfree Payouts so team members can request transfers separately from senior staff who review and approve them.
+- [Transfer Reversals](https://www.cashfree.com/docs/payouts/payouts/make-payouts/transfer-reversals.md): View every Cashfree Payouts transfer reversed by the partner bank in the Reversed section and reconcile balances and downstream beneficiary records easily.
+- [Transfer Status](https://www.cashfree.com/docs/payouts/payouts/make-payouts/transfer-status.md): Check detailed Cashfree Payouts transfer status descriptions in the Merchant Dashboard to understand each state and follow up on pending or failed transfers.
+- [Recall Transfers Made](https://www.cashfree.com/docs/payouts/payouts/make-payouts/recall-transfers-made.md): Raise a recall request from your Cashfree Payouts account when a transfer goes to the wrong beneficiary or amount, and track recall progress until completion.
+- [Payout Methods](https://www.cashfree.com/docs/payouts/payouts/make-payouts/payout-methods.md): Choose from Cashfree Payouts methods such as IMPS, NEFT, RTGS, UPI, cards, and wallets to pay each party using the rail they prefer or that suits the amount.
+- [Webhooks](https://www.cashfree.com/docs/payouts/payouts/make-payouts/webhooks.md): Configure Cashfree Payouts webhooks to receive HTTP callbacks for every transfer status change so your systems stay synced without polling the API.
+
+#### Pay2Phone
+
+- [Payouts Through Phone Number](https://www.cashfree.com/docs/payouts/payouts/pay-2-phone/through-phone-number.md): Use Cashfree Pay-to-Phone to send payouts using only a beneficiary's phone number, removing the need to collect bank account numbers or IFSC codes upfront.
+- [Using Phone Number and Beneficiary Name](https://www.cashfree.com/docs/payouts/payouts/pay-2-phone/and-beneficiary-name.md): Send Cashfree Pay-to-Phone payouts using only the beneficiary's phone number and name, removing the need to collect bank account numbers or IFSC codes.
+- [Using Phone Number and Last 4 Digits of Credit Card](https://www.cashfree.com/docs/payouts/payouts/pay-2-phone/and-credit-card.md): Send Cashfree Pay-to-Phone payouts using just the beneficiary's phone number and the last four digits of their credit card for accurate beneficiary routing.
+- [Using Phone Number and Beneficiary Bank](https://www.cashfree.com/docs/payouts/payouts/pay-2-phone/and-beneficiary-bank.md): Send Cashfree Pay-to-Phone payouts using just the beneficiary's phone number and their bank, without collecting an account number or IFSC code upfront.
+
+#### Fund Sources
+
+- [Overview](https://www.cashfree.com/docs/payouts/payouts/fund-management/introduction.md): Add and manage multiple fund sources in Cashfree Payouts, from the default Cashfree Wallet to your connected bank accounts, all from a single dashboard.
+- [Cashfree Wallet](https://www.cashfree.com/docs/payouts/payouts/fund-management/cashfree-wallet.md): Use the Cashfree Wallet virtual account to add funds, send payouts across bank, card, UPI, and wallet rails, and withdraw balances to your business account.
+- [Bank Account](https://www.cashfree.com/docs/payouts/payouts/fund-management/bank-account.md): Connect your business bank account as a Cashfree Payouts fund source to power instant UPI payouts without pre-funding the Cashfree Wallet for each cycle.
+- [Manage Transfers Between Fund Sources](https://www.cashfree.com/docs/payouts/payouts/fund-management/manage-transfers.md): Route Cashfree Payouts across multiple fund sources by selecting them per transfer or by weightage so disbursements continue even during bank downtimes.
+- [Accounts](https://www.cashfree.com/docs/payouts/payouts/accounts.md): Review your Cashfree Payouts account information, including registered business details and the bank accounts linked for wallet recharge in one place.
+
+#### Low Balance
+
+- [Set Low Balance Threshold](https://www.cashfree.com/docs/payouts/payouts/low-balance/set-threshold.md): Set a minimum balance threshold for every Cashfree Payouts fund source and trigger email alerts whenever an account drops below the configured limit.
+- [Low Balance Transfer Queuing](https://www.cashfree.com/docs/payouts/payouts/low-balance/low-balance-transfer-queuing.md): Let Cashfree Payouts queue transfers that fail because of insufficient funds and automatically release them once your wallet or connected source is topped up.
+
+#### Integration
+
+- [Integrations](https://www.cashfree.com/docs/payouts/payouts/integrations/integrations.md): Explore sample Cashfree Payouts integration flows for standard transfers, batch transfers, error handling, and webhooks to build production-ready disbursals.
+- [Batch Transfer](https://www.cashfree.com/docs/payouts/payouts/integrations/batch-transfer.md): Integrate the Cashfree Batch Transfer API to send multiple payouts in a single request and track each batch's status until every transfer completes.
+- [Data to Test Integration](https://www.cashfree.com/docs/payouts/payouts/integrations/data-to-test.md): Use these Cashfree Payouts sandbox bank, UPI, and wallet credentials to trigger every validation, transfer, and mocked response while building your integration.
+- [2FA - IP Whitelisting and Public Keys](https://www.cashfree.com/docs/payouts/payouts/integrations/payouts-2fa.md): Secure Cashfree Payouts API access with two-factor authentication by whitelisting IPs and uploading public keys so only verified servers can initiate transfers.
+- [Sample Integration Kits](https://www.cashfree.com/docs/payouts/payouts/integrations/samples.md): Browse Cashfree Payouts sample integration kits on GitHub that show direct API calls and SDK usage across popular languages for a faster integration.
+- [Error Handling](https://www.cashfree.com/docs/payouts/payouts/integrations/error-handling.md): Learn how Cashfree Payouts APIs return errors and sub-codes so your integration can detect failed operations, retry requests, and surface clear merchant messages.
+- [Go-Live Checklist](https://www.cashfree.com/docs/payouts/payouts/integrations/payouts-go-live.md): Follow the Cashfree Payouts go-live checklist to validate API keys, webhooks, signatures, and IP whitelisting before switching from test to production.
+
+### One Escrow
+
+- [Overview](https://www.cashfree.com/docs/payouts/oneescrow/overview.md): Use Cashfree OneEscrow to operate a regulated escrow account with virtual accounts, fund allocation, and payouts for marketplaces, co-lending, and partners.
+- [Create Virtual Account](https://www.cashfree.com/docs/payouts/oneescrow/create-virtual-account.md): Create dedicated virtual accounts inside Cashfree OneEscrow to organise customer funds, improve reconciliation, and streamline payouts to specific stakeholders.
+- [Manage Virtual Account](https://www.cashfree.com/docs/payouts/oneescrow/manage-virtual-account.md): Use the Cashfree OneEscrow dashboard to view virtual account details, update settings, monitor balances, and manage day-to-day fund movements with ease.
+- [Delete Virtual Account](https://www.cashfree.com/docs/payouts/oneescrow/delete-virtual-account.md): Delete unused Cashfree OneEscrow virtual accounts with a zero balance directly from the dashboard to keep your escrow setup organised and uncluttered.
+- [Allocate Funds](https://www.cashfree.com/docs/payouts/oneescrow/allocate-funds.md): Use Cashfree OneEscrow to allocate funds from your escrow account into virtual accounts, organising money for different business needs without manual transfers.
+- [Initiate Payout](https://www.cashfree.com/docs/payouts/oneescrow/initiate-payout.md): Initiate payouts from Cashfree OneEscrow virtual accounts to manage cash flow, improve security, and simplify reconciliation across business workflows.
+- [Internal Fund Transfer](https://www.cashfree.com/docs/payouts/oneescrow/internal-fund-transfer.md): Move funds between Cashfree OneEscrow virtual accounts using internal transfers, so you can rebalance allocations without touching the master escrow account.
+- [Whitelist Bank Account](https://www.cashfree.com/docs/payouts/oneescrow/whitelist-bank-account.md): Use the Cashfree Whitelist Bank Account API to register a sender bank account for recharging a Cashfree OneEscrow virtual account securely.
+
+### Cashgram
+
+- [Overview](https://www.cashfree.com/docs/payouts/cashgram/cashgram.md): Use Cashfree Cashgram to send instant payout links via WhatsApp, email, or SMS so beneficiaries can collect funds without sharing bank or UPI details upfront.
+- [Create Cashgram](https://www.cashfree.com/docs/payouts/cashgram/create-new-cashgram.md): Create and send Cashfree Cashgrams to beneficiaries from the Payouts Dashboard or APIs, with single and batch upload options for faster bulk disbursements.
+- [Approve Batch Cashgrams](https://www.cashfree.com/docs/payouts/cashgram/approve-cashgrams.md): Set up an approver profile in your Cashfree account so batch-uploaded Cashgrams require sign-off before disbursing funds to beneficiaries.
+- [Verify Beneficiary Name](https://www.cashfree.com/docs/payouts/cashgram/verify-bene-name.md): Use Cashfree to verify a beneficiary's bank account name before sending Cashgrams so funds reach the correct recipient and avoid costly transfer reversals.
+- [Redeem a Cashgram](https://www.cashfree.com/docs/payouts/cashgram/redeem-a-cashgram.md): Help beneficiaries redeem a Cashfree Cashgram link before expiry by entering their preferred bank account, UPI ID, or wallet to receive funds instantly.
+- [Lifecycle](https://www.cashfree.com/docs/payouts/cashgram/cashgram-lifecycle.md): Understand the Cashfree Cashgram lifecycle, including every status from creation and beneficiary notification to redemption, expiry, and refunded states.
+- [Payouts: Cashgram FAQs](https://www.cashfree.com/docs/payouts/cashgram/cashgram-faq.md): Find answers to common questions about Cashfree Cashgram, including link generation, beneficiary redemption, expiry rules, refunds, and bulk disbursements.
+
+#### Integration
+
+- [Integration](https://www.cashfree.com/docs/payouts/cashgram/integration/integration.md): Integrate Cashfree Cashgram from scratch to create payout links and fetch their status, enabling instant beneficiary payouts without collecting bank details.
+- [Cashgram Integration](https://www.cashfree.com/docs/payouts/cashgram/integration/cashgram-integration.md): Integrate Cashfree Cashgram to send instant payouts to beneficiaries via shareable links, including creating Cashgrams and fetching their status via API.
+- [Customise Cashgram](https://www.cashfree.com/docs/payouts/cashgram/integration/customise-cashgram.md): Customise Cashfree Cashgram branding, expiry, supported payout modes, and notification channels by raising a request from the merchant support form.
+- [Webhooks](https://www.cashfree.com/docs/payouts/cashgram/integration/webhooks.md): Configure Cashfree Cashgram webhooks to receive real-time HTTP callbacks for Cashgram status changes, so your systems stay in sync with disbursements.
+- [Data to Test Integration](https://www.cashfree.com/docs/payouts/cashgram/integration/data-to-test-integration.md): Use these Cashfree test bank, card, UPI, and wallet credentials to validate every payout and Cashgram flow in the sandbox before going live.
+- [Go-Live Checklist](https://www.cashfree.com/docs/payouts/cashgram/integration/go-live-checklist.md): Use this Cashfree Cashgram go-live checklist to validate every configuration as you transition your payout link integration from sandbox to production.
+
+#### Cashgram Classic Dashboard
+
+- [Create Cashgram](https://www.cashfree.com/docs/payouts/cashgram/cashgram-classic-dashboard/create-cashgram.md): Create a single Cashgram from the Cashfree classic Payouts Dashboard or APIs and send the link to a customer to collect funds from your Payouts Account.
+- [Create Bulk Cashgram](https://www.cashfree.com/docs/payouts/cashgram/cashgram-classic-dashboard/create-bulk-cashgram.md): Send Cashgrams to many customers at once by uploading a beneficiary file through the Cashfree classic Payouts Dashboard for fast bulk disbursements.
+- [Approve Bulk Cashgram](https://www.cashfree.com/docs/payouts/cashgram/cashgram-classic-dashboard/approve-bulk-cashgram.md): Use the Cashfree classic Payouts Dashboard to review and approve bulk-uploaded Cashgrams before they are released to customers for collection.
+- [Verify Beneficiary Name](https://www.cashfree.com/docs/payouts/cashgram/cashgram-classic-dashboard/verify-beneficiary-name.md): Use the Cashfree Beneficiary Name Verification feature to confirm that an account is valid and held by the intended recipient before transferring funds.
+
+### Payout Protect
+
+- [Payout Protect](https://www.cashfree.com/docs/payouts/payout-protect/payout-protect.md): Use Cashfree Payout Protect to scan, flag, and block risky outgoing transfers in real time, shielding your business from fraud and unauthorised payouts.
+- [Getting Started](https://www.cashfree.com/docs/payouts/payout-protect/overview.md): Get started with Cashfree Payout Protect to scan, block, or review outgoing transfers that show signs of fraud or potential financial loss to your business.
+- [My Blacklists](https://www.cashfree.com/docs/payouts/payout-protect/my-blacklists.md): Maintain a personal Cashfree blacklist of suspect beneficiaries so any future transfers to those accounts are automatically blocked by Payout Protect.
+- [Smart Rules](https://www.cashfree.com/docs/payouts/payout-protect/smartlimits.md): Use Cashfree Payout Protect Smart Rules to set velocity-based limits on outgoing transfers, capping count and amount per beneficiary or account to control risk.
+
+#### Risky Transfers
+
+- [Flagged Transfers](https://www.cashfree.com/docs/payouts/payout-protect/flagged-transfer.md): Review Cashfree Payout Protect flagged transfers that were paused for manual verification, then approve or reject each transaction from the dashboard.
+- [Blocked Transfers](https://www.cashfree.com/docs/payouts/payout-protect/blocked-transfers.md): Review Cashfree Payout Protect blocked transfers to see which payouts were stopped automatically because of fraud signals, policy rules, or blacklist matches.
+
+### Change Log
+
+- [Payouts Change Log](https://www.cashfree.com/docs/payouts/payouts/change-log-payouts.md): Track new features and improvements in the Cashfree Payouts product, including escrow VA management, transfer reliability fixes, and dashboard upgrades.
+
+## Secure ID
+
+### Secure ID
+
+- [Introduction](https://www.cashfree.com/docs/secure-id/introduction.md): Cashfree Secure ID provides identity verification, KYC, document OCR, biometric checks, and bank account verification APIs built for the Indian market.
+- [Dashboard](https://www.cashfree.com/docs/secure-id/dashboard.md): Use the Cashfree Secure ID Merchant Dashboard to manage verifications, monitor wallet balance, configure products, and access reports and developer tools.
+- [E-Sign](https://www.cashfree.com/docs/secure-id/e-sign/e-sign.md): Use Cashfree E-Sign to collect legally valid electronic signatures on documents using Aadhaar authentication, removing the need for physical paperwork.
+
+#### Get Started
+
+- [Wallet Recharge and Bank Accounts Whitelisting](https://www.cashfree.com/docs/secure-id/get-started/wallet-recharge.md): Add funds to your Cashfree Wallet and whitelist sender bank accounts so you can recharge securely and run verifications without payment friction.
+
+##### Integration Guide
+
+- [IP Whitelisting](https://www.cashfree.com/docs/secure-id/get-started/integration/ip-whitelisting-verification.md): Whitelist your public IPv4 address for Cashfree Secure ID so only authorised servers can call the Verification APIs in sandbox and production.
+- [Sample Responses From Bank](https://www.cashfree.com/docs/secure-id/get-started/integration/sample-responses-from-bank.md): Review sample bank responses returned during Cashfree bank account verification to understand status codes, account holder names, and IFSC details.
+- [Go-Live Checklist](https://www.cashfree.com/docs/secure-id/get-started/integration/go-live-checklist.md): Move your Cashfree Secure ID integration to production by following this checklist for credentials, endpoints, IP whitelisting, and Success Rate alerts.
+
+#### KYC Stack
+
+- [KYC Stack](https://www.cashfree.com/docs/secure-id/kyc-stack/overview.md): Use Cashfree KYC Stack to verify Aadhaar, PAN, bank accounts, and other identity documents against authoritative Indian databases during onboarding.
+- [Bank Account Verification](https://www.cashfree.com/docs/secure-id/kyc-stack/verify-bank-account.md): Use Cashfree Bank Account Verification to confirm that an Indian bank account is active and owned by the intended customer using IMPS rails and NPCI data.
+- [Reverse Penny Drop](https://www.cashfree.com/docs/secure-id/kyc-stack/reverse-penny-drop.md): Use Cashfree Reverse Penny Drop to validate customer bank accounts through a customer-initiated UPI payment, without collecting account numbers or IFSC codes.
+- [IFSC](https://www.cashfree.com/docs/secure-id/kyc-stack/verify-ifsc.md): Use Cashfree IFSC verification to look up bank, branch, address, and supported payment modes for any IFSC code through the dashboard or API.
+- [Verify PAN (Standard and OCR)](https://www.cashfree.com/docs/secure-id/kyc-stack/verify-pan.md): Use Cashfree PAN verification to validate individual or business PANs in real time using standard checks or OCR extraction from uploaded PAN card images.
+- [Aadhaar Verification](https://www.cashfree.com/docs/secure-id/kyc-stack/verify-aadhaar.md): Comprehensive guide to Aadhaar verification methods including DigiLocker integration and Optical Character Recognition (OCR)-based approaches.
+- [KYC Links](https://www.cashfree.com/docs/secure-id/kyc-stack/kyc-links.md): Use Cashfree KYC Links to send a hosted verification form to customers via email, SMS, or WhatsApp and start collecting KYC data without any code.
+
+#### Know Your Business
+
+- [Overview](https://www.cashfree.com/docs/secure-id/know-your-business/overview.md): Use Cashfree Know Your Business verifications, including GSTIN, PAN-to-GSTIN, and CIN checks, to validate business entities and stay compliant with regulators.
+- [Verify GSTIN](https://www.cashfree.com/docs/secure-id/know-your-business/verify-gstin.md): Verify Goods and Services Tax Identification Numbers in real-time to ensure business compliance, prevent fraud, and streamline KYC processes.
+
+#### Video KYC
+
+- [Video KYC Overview](https://www.cashfree.com/docs/secure-id/video-kyc/overview.md): Use Cashfree Video KYC to verify customers through a real-time video session with a trained KYC agent, complying with RBI vCIP guidelines in India.
+- [Agent Journey](https://www.cashfree.com/docs/secure-id/video-kyc/agent-journey.md): Walk through how a Cashfree Video KYC agent verifies a customer's identity in real time using the Agent Dashboard during a live VKYC session.
+- [Auditor Journey](https://www.cashfree.com/docs/secure-id/video-kyc/auditor-journey.md): Walk through how a Cashfree Video KYC auditor reviews completed VKYC sessions in the Auditor Dashboard to ensure compliance and final approval.
+- [End User Journey](https://www.cashfree.com/docs/secure-id/video-kyc/user-journey.md): Walk through the Cashfree Video KYC end-user journey, from launching the session and consenting to ID checks through live agent verification and outcome.
+- [Video KYC FAQs](https://www.cashfree.com/docs/secure-id/video-kyc/vkyc-faqs.md): Find answers to common questions about Cashfree Video KYC, including session flows, agent and auditor roles, RBI vCIP compliance, and supported documents.
+
+##### Merchant Journey
+
+- [Overview](https://www.cashfree.com/docs/secure-id/video-kyc/merchant-journey.md): Set up Cashfree Video KYC for your business by testing the VKYC flow, adding agents and auditors, integrating the SDK, and monitoring sessions via reports.
+- [Add an Agent or Auditor](https://www.cashfree.com/docs/secure-id/video-kyc/add-agent-auditor.md): Add Cashfree Video KYC users with the Agent or Auditor role from the merchant dashboard so they can run live KYC sessions or audit completed cases.
+- [Generate Reports](https://www.cashfree.com/docs/secure-id/video-kyc/generate-reports.md): Generate detailed Cashfree Video KYC reports for agents and auditors in the Merchant Dashboard with custom date ranges, file formats, and data columns.
+- [Manage Agents and Auditors](https://www.cashfree.com/docs/secure-id/video-kyc/manage-agents.md): Manage Cashfree Video KYC users with Agent or Auditor roles from the merchant dashboard, including permissions, activation toggles, and role updates.
+
+#### DigiLocker/Aadhaar
+
+- [DigiLocker Overview](https://www.cashfree.com/docs/secure-id/digilocker/digilocker.md): Use Cashfree DigiLocker integration to run consent-based KYC for Aadhaar, PAN, and Driving Licence in line with UIDAI guidelines and the DPDP Act in India.
+- [DigiLocker FAQs](https://www.cashfree.com/docs/secure-id/digilocker/digilocker-faqs.md): Find answers to common questions about Cashfree DigiLocker integration, including consent flows, supported documents, KYC use cases, and error handling.
+- [Aadhaar Masking](https://www.cashfree.com/docs/secure-id/digilocker/aadhaar-masking.md): Use Cashfree Aadhaar Masking to automatically obscure the first eight digits of customer Aadhaar cards before storage, helping you meet UIDAI privacy rules.
+
+#### 1-Click Onboarding
+
+- [Overview](https://www.cashfree.com/docs/secure-id/1-click-onboarding/overview.md): Use Cashfree 1-Click Onboarding to simplify user onboarding and consent management across web, Android, and iOS apps with a single integration.
+- [Creating Template](https://www.cashfree.com/docs/secure-id/1-click-onboarding/creating-template.md): Create a brand-customised 1-Click Onboarding template in the Cashfree Secure ID dashboard by adding your logo, brand name, and primary colour.
+- [Mobile 360](https://www.cashfree.com/docs/secure-id/1-click-onboarding/mobile360/mobile-360.md): Use Cashfree Mobile 360 to verify users and prefill onboarding forms with personal, financial, and KYC details from just a mobile number with consent.
+- [Advanced Employment](https://www.cashfree.com/docs/secure-id/1-click-onboarding/advance-employment.md): Verify detailed employment history and recent Provident Fund contributions from EPFO sources using Cashfree Advanced Employment Verification.
+
+#### Smart OCR
+
+- [Overview](https://www.cashfree.com/docs/secure-id/smart-ocr/overview.md): Use Cashfree Smart OCR to extract structured data from government IDs and PDFs, with built-in quality, forgery, and rule checks for automated KYC flows.
+- [FAQs](https://www.cashfree.com/docs/secure-id/smart-ocr/faqs.md): Find answers to common questions about Cashfree Smart OCR, including supported documents, file formats, extraction accuracy, and forgery detection rules.
+
+#### Officially Valid Documents
+
+- [Overview](https://www.cashfree.com/docs/secure-id/ovd/overview.md): Use Cashfree Officially Valid Document checks to verify Voter ID, Driving Licence, Vehicle RC, and Passport details against government records during KYC.
+- [Voter ID Verification](https://www.cashfree.com/docs/secure-id/ovd/voter-id.md): Use Cashfree Voter ID verification to validate EPIC numbers against India's electoral records and fetch voter and constituency details in real time.
+- [Driving Licence Verification](https://www.cashfree.com/docs/secure-id/ovd/driving-licence.md): Use Cashfree Driving Licence verification to validate authenticity, fetch holder details, and confirm vehicle class against official RTO records in real time.
+- [Passport Verification](https://www.cashfree.com/docs/secure-id/ovd/passport.md): Validate passport authenticity using the Cashfree Passport Verification API to confirm passport file numbers and date of birth against government records.
+- [Vehicle RC Verification](https://www.cashfree.com/docs/secure-id/ovd/vehicle-rc.md): Use the Cashfree Vehicle RC Verification API to confirm registration, ownership, chassis, and insurance details for any motor vehicle registered in India.
+
+#### Biometric KYC
+
+- [Biometric KYC Overview](https://www.cashfree.com/docs/secure-id/biometric-kyc/overview.md): Use Cashfree Biometric KYC to verify identities with facial recognition, liveness detection, and AI-powered name matching for fraud-resistant onboarding.
+- [Face Match](https://www.cashfree.com/docs/secure-id/biometric-kyc/face-match.md): Use Cashfree Face Match to compare two photos and confirm whether they belong to the same person with an AI-powered similarity score and match result.
+- [Name Match](https://www.cashfree.com/docs/secure-id/biometric-kyc/name-match.md): Use Cashfree's AI-powered Name Match API to compare two Indian names, handle initials and spelling variations, and decide KYC or payout outcomes confidently.
+- [Face Liveness](https://www.cashfree.com/docs/secure-id/biometric-kyc/face-liveness.md): Use Cashfree Face Liveness to detect whether a face capture is live, blocking spoofing attempts via photos, prints, or masks during biometric KYC.
+
+#### Address Verification
+
+- [Address Verification](https://www.cashfree.com/docs/secure-id/address-verification/overview.md): Validate user addresses with Cashfree Secure ID using Geocoding and Reverse Geocoding to map coordinates, detect fraud, and meet KYC requirements.
+- [Reverse Geocoding](https://www.cashfree.com/docs/secure-id/address-verification/reverse-geocoding.md): Use Cashfree Reverse Geocoding to convert latitude and longitude coordinates into structured, human-readable addresses for KYC and verification workflows.
+- [Geocoding](https://www.cashfree.com/docs/secure-id/address-verification/geocoding.md): Use Cashfree Geocoding to convert structured, human-readable street addresses into precise latitude and longitude coordinates for mapping and verification.
+
+#### Reports
+
+- [Bank Validation](https://www.cashfree.com/docs/secure-id/reports/bank-validation-report.md): Download the Cashfree Bank Validation report to review every verified bank account, including account status, validation result, and beneficiary details.
+- [PAN Verification](https://www.cashfree.com/docs/secure-id/reports/pan-verification-report.md): Download the Cashfree PAN verification report to review verified PANs with status, registered name, provided name, and PAN type for audit trails.
+- [Aadhaar Verification](https://www.cashfree.com/docs/secure-id/reports/aadhaar-verification-report.md): Download the Cashfree Aadhaar verification report to review every Aadhaar checked, including status, registered state, age band, and gender for audits.
+- [GSTIN Verification](https://www.cashfree.com/docs/secure-id/reports/gstin-verification-report.md): Download the Cashfree GSTIN verification report to review verified GSTINs with status, legal business name, registration date, and taxpayer type.
+
+## Partners and Platforms
+
+### Partners and Platforms
+
+- [Introduction](https://www.cashfree.com/docs/partners/introduction.md): Discover Cashfree's Partners and Platforms programs, designed to help SaaS providers, ERPs, and affiliates monetise payment integrations and merchant referrals.
+
+### Embedded Payments
+
+- [Embedded Payments Overview](https://www.cashfree.com/docs/partners/embedded/overview.md): Discover how Cashfree Embedded Payments lets platforms, ERPs, and SaaS providers offer compliant in-product payments with built-in merchant onboarding.
+- [Get Started with Embedded Payments](https://www.cashfree.com/docs/partners/embedded/get-started.md): Sign up for Cashfree Embedded Payments, activate your partner account, and access the dashboard to onboard merchants and integrate the payment gateway.
+- [Adding Merchants with Embedded Payments](https://www.cashfree.com/docs/partners/embedded/add-merchants.md): Onboard new merchants from your Embedded Payments dashboard or APIs, activate their Cashfree accounts, and manage their transactions inside your platform.
+- [Embedded Payments Dashboard](https://www.cashfree.com/docs/partners/embedded/dashboard.md): Navigate the Cashfree Embedded Payments Partner Dashboard to manage merchants, view transactions, track settlements, and access reports from one workspace.
+- [Commissions and Invoices](https://www.cashfree.com/docs/partners/embedded/commissions-and-invoices.md): Track Embedded Payments commissions, review monthly payout cycles, and download partner invoices for transactions processed by your referred merchants.
+
+#### Integration
+
+- [Embedded Payment Gateway Integration](https://www.cashfree.com/docs/partners/embedded/integration/gateway-integration.md): Integrate the Cashfree Embedded Payment Gateway to let your merchants accept cards, UPI, NetBanking, wallets, EMI, and Pay Later through a single checkout.
+- [Sandbox Environment for Embedded Payments Partners](https://www.cashfree.com/docs/partners/embedded/integration/gateway-sandbox-environment.md): Use the Cashfree Embedded Payments sandbox to test gateway integrations, onboarding APIs, and webhooks safely before going live in the production environment.
+- [Partner Platform OAuth Integration](https://www.cashfree.com/docs/partners/embedded/oauth-flow.md): Enable businesses to securely connect their Cashfree payment accounts to your partner platform using OAuth and process payments on their behalf.
+- [Embedded Merchant Onboarding for Platforms](https://www.cashfree.com/docs/partners/embedded/embedded-merchant-onboarding.md): Enable your platform to onboard and activate merchants on Cashfree without leaving your interface using embedded KYC collection and verification workflows.
+
+#### Embedded Payments Reports
+
+- [Overview](https://www.cashfree.com/docs/partners/embedded/reports/reports.md): Browse the Cashfree Embedded Payments reports suite to reconcile transactions, review adjustments, analyse settlements, and download data for any date range.
+- [Transactions Report](https://www.cashfree.com/docs/partners/embedded/reports/transaction-reports.md): Use the Cashfree partner Transactions Report to review customer details, payment methods, transaction statuses, settled amounts, and vendor splits per period.
+- [Settlement Reports](https://www.cashfree.com/docs/partners/embedded/reports/settlement-reports.md): View the Cashfree partner Settlement Report to see each settlement ID, status, date, and UTR so you can confirm credits for merchants over any selected period.
+- [Refunds Report](https://www.cashfree.com/docs/partners/embedded/reports/refunds-reports.md): Use the Cashfree Embedded Payments refunds report to view initiated refunds with order IDs, refund IDs, ARN, transaction amounts, and processing dates.
+- [Dispute Report](https://www.cashfree.com/docs/partners/embedded/reports/dispute-reports.md): View the Cashfree Embedded Payments dispute report to track disputed transactions, chargeback statuses, and resolution timelines for any selected date range.
+- [Ledger Report](https://www.cashfree.com/docs/partners/embedded/reports/ledger-reports.md): Review the Cashfree Embedded Payments ledger report to see every credit and debit on your partner account for any selected date range and reconcile balances.
+- [Settlement Recon Report](https://www.cashfree.com/docs/partners/embedded/reports/settlement-recon-reports.md): Reconcile every Cashfree settlement with the partner Settlement Recon report, which lists transactions, adjustments, refunds, and disputes per settlement cycle.
+
+### Affiliate Program
+
+- [Overview](https://www.cashfree.com/docs/partners/affiliates/overview.md): Explore the Cashfree Affiliate Program, a referral initiative that lets you recommend Cashfree products to merchants and earn commissions on every transaction.
+- [Get Started as Affiliate Partner](https://www.cashfree.com/docs/partners/affiliates/become-cashfree-affiliate.md): Sign up for the Cashfree Affiliate Partner program, access the Affiliate Dashboard, refer merchants, track activations, and earn commissions on payments.
+- [Partner Earnings Guide](https://www.cashfree.com/docs/partners/affiliates/partner-commissions-and-invoices.md): Understand how Cashfree Affiliate Partner commissions are calculated, when payouts are issued, and how to download invoices for referred merchant transactions.
+- [Marketing Kit](https://www.cashfree.com/docs/partners/affiliates/marketing-kit.md): Download the Cashfree Affiliate Marketing Kit for ready-made collateral, product brochures, banners, and pitch decks that help you onboard merchants faster.
+- [Affiliate Partner Dashboard](https://www.cashfree.com/docs/partners/affiliates/dashboard.md): Explore the Cashfree Affiliate Partner Dashboard to add and manage referred merchants, track commissions, monitor activations, and analyse business performance.
+- [FAQs](https://www.cashfree.com/docs/partners/affiliates/faqs.md): Find answers to common questions about the Cashfree Affiliate Partner program, including signup, commission payouts, merchant onboarding, and dashboard usage.
+
+#### Refer and Assist Merchants
+
+- [Refer and Onboard Merchants](https://www.cashfree.com/docs/partners/affiliates/refer-merchants.md): Learn how Cashfree Affiliate Partners can refer businesses, assist with KYC verification, and guide them through integration to earn commissions on activations.
+- [Merchants KYC](https://www.cashfree.com/docs/partners/affiliates/assist-merchant/merchants-kyc.md): Help your referred merchants complete the Cashfree KYC process by submitting documents, verifying bank details, and activating their account quickly.
+- [Merchants Integration](https://www.cashfree.com/docs/partners/affiliates/assist-merchant/merchants-integration.md): Help referred merchants complete Cashfree integration by choosing the right product, configuring checkout, and going live faster as an Affiliate Partner.
+
+- [Payments APIs (509 pages)](https://www.cashfree.com/docs/_llms/payments-apis.md): Documentation for Payments APIs.
+
+## Payouts APIs
+
+### Payout APIs
+
+- [Overview](https://www.cashfree.com/docs/api-reference/payouts/overview.md): Explore the Cashfree Payouts APIs that disburse funds to bank accounts, UPI IDs, and cards with sandbox endpoints, authentication, and webhooks.
+- [Getting Started](https://www.cashfree.com/docs/api-reference/payouts/getting-started-with-payouts-apis.md): Review the prerequisites, sandbox credentials, IP whitelisting, and signature setup you need before testing Cashfree Payouts APIs in your integration.
+
+#### Account
+
+- [Get Balance](https://www.cashfree.com/docs/api-reference/payouts/v1/get-balance.md): Use this API to get the ledger balance and available balance of your account. Available balance is ledger balance minus the sum of all pending transfers (transfers triggered and processing or pending now).
+- [Internal Transfer](https://www.cashfree.com/docs/api-reference/payouts/v1/internal-transfer.md): Use this API to request an internal transfer at Cashfree. The internal transfer API is useful for multiple Payouts accounts. The API response will either result in an ERROR or SUCCESS response.
+- [Self Withdrawal](https://www.cashfree.com/docs/api-reference/payouts/v1/self-withdrawal.md): Use this API to request a self withdrawal at Cashfree. Self withdrawal is allowed a maximum of 3 times a day. The API response will either result in an ERROR or SUCCESS response. The status of the withdrawal request is available on the dashboard.
+- [Get Balance V1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/get-balance-v12.md): Use this API to get the ledger balance and available balance of your account. Available balance is ledger balance minus the sum of all pending transfers (transfers triggered and processing or pending now).
+- [Internal Transfer V1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/internal-transfer-v12.md): Use this API to request an internal transfer. It is useful for accounts with multiple fund sources. You need to provide either the rechargeAccount or paymentInstrumentId and toPaymentInstrumentId along with the amount.
+
+#### Authentication
+
+- [Authorize](https://www.cashfree.com/docs/api-reference/payouts/v1/authorize.md): Use this API to authenticate with the Cashfree system and obtain the authorization bearer token. All other API calls must have this token as Authorization header in the format 'Bearer <token>' (without quotes) for them to get processed.
+- [Verify](https://www.cashfree.com/docs/api-reference/payouts/v1/verify-1.md): Verify the bearer token generated. If the token does not exist, is invalid, or has expired, the response "Token is not valid" is returned. Regenerate token in case of token expiry for making API calls ( use /payout/v1/authorize for this).
+
+### V2
+
+- [Overview](https://www.cashfree.com/docs/api-reference/payouts/v2/payouts-api-v2-new.md): Learn the benefits of upgrading to Cashfree Payouts v2 APIs, including the unified transfers endpoint, richer beneficiary management, and v1 to v2 migration.
+- [Webhooks Version V2](https://www.cashfree.com/docs/api-reference/payouts/v2/webhooks/webhooks-v2.md): Set up Cashfree Payouts v2 webhooks to receive HTTP callbacks for transfer events, configure retries, whitelist Cashfree IPs, and explore sample event payloads.
+- [Response Codes](https://www.cashfree.com/docs/api-reference/payouts/v2/response-codes.md): Look up Cashfree Payouts v2 response codes for beneficiary and transfer APIs, with HTTP status, error subcodes, sample messages, and recommended next actions.
+
+#### Transfers V2
+
+- [Get Transfer Status V2](https://www.cashfree.com/docs/api-reference/payouts/v2/transfers-v2/get-transfer-status-v2.md): Use this API to get the status of the initiated transfer. You can use either the transfer_id or cf_transfer_id to fetch the details.
+- [Standard Transfer V2](https://www.cashfree.com/docs/api-reference/payouts/v2/transfers-v2/standard-transfer-v2.md): Use this API to initiate an amount transfer at Cashfree Payments. It is an async request by default.
+- [Get Batch Transfer Status V2](https://www.cashfree.com/docs/api-reference/payouts/v2/transfers-v2/get-batch-transfer-status-v2.md): Use this API to get the status of the initiated batch transfer. You can use either the batch_transfer_id or cf_batch_transfer_id to fetch the details.
+- [Batch Transfer V2](https://www.cashfree.com/docs/api-reference/payouts/v2/transfers-v2/batch-transfer-v2.md): Use this API to initiate a batch transfer request at Cashfree Payments. You can transfer money to multiple beneficiaries. The batch transfer limit is 5,000 in the production environment and 1,000 by default in the test environment.
+
+#### Beneficiary V2
+
+- [Get Beneficiary V2](https://www.cashfree.com/docs/api-reference/payouts/v2/beneficiary-v2/get-beneficiary-v2.md): Use this API to get the details of a particular beneficiary from your account. You can pass either beneficiary_id or the combination of bank_account_number and bank_ifsc to fetch the details.
+- [Create Beneficiary V2](https://www.cashfree.com/docs/api-reference/payouts/v2/beneficiary-v2/create-beneficiary-v2.md): Use this API to add a beneficiary to your Cashfree Payments account by providing the bank account number, IFSC, and other required details. Ensure the successful creation of the benficiary in your account before initiating a transfer.
+- [Remove Beneficiary V2](https://www.cashfree.com/docs/api-reference/payouts/v2/beneficiary-v2/remove-beneficiary-v2.md): Use this API to remove an existing beneficiary from the list of added beneficiaries.
+
+#### Verify and Pay
+
+- [Validate Payout](https://www.cashfree.com/docs/api-reference/payouts/v2/validate-payout-v2.md): Validates a UPI VPA or phone number and returns a single-use transfer token valid for one hour. Pass this token to the [Process Validated Payout API](/docs/api-reference/payouts/v2/verify-and-pay-transfers-v2) (`POST /payout/transfers`) to initiate the payout.
+- [Process Validated Payout](https://www.cashfree.com/docs/api-reference/payouts/v2/verify-and-pay-transfers-v2.md): Initiates a UPI payout using the transfer token returned by the [Validate Payout API](/docs/api-reference/payouts/v2/validate-payout-v2). The token is single-use and expires after one hour. When you use a transfer token, only `upi` is supported as the transfer mode.
+
+### V1
+
+- [Overview](https://www.cashfree.com/docs/api-reference/payouts/v1/payouts-api-overview.md): Use Cashfree Payouts v1 APIs to send funds to bank accounts, UPI IDs, cards, and wallets, with sandbox and production keys, request parameters, and error codes.
+- [Webhook Version V1](https://www.cashfree.com/docs/api-reference/payouts/v2/webhooks/webhooks-v1.md): Configure Cashfree Payouts v1 webhooks to receive HTTP callbacks for transfer events, set the webhook URL in the dashboard, and verify signatures.
+
+#### Batch Transfer V1.3
+
+- [Get Batch Transfer Status](https://www.cashfree.com/docs/api-reference/payouts/v1/get-batch-transfer-status-1.md): Use this API to get the status of the Batch Transfer.
+
+#### Beneficiary
+
+- [Add Beneficiary](https://www.cashfree.com/docs/api-reference/payouts/v1/add-beneficiary.md): Use this API to add a beneficiary to your Cashfree account by providing the bank account number, IFSC, and other required details. Before you request a transfer, ensure the account has been successfully added as a beneficiary.
+- [Get Beneficiary ID](https://www.cashfree.com/docs/api-reference/payouts/v1/get-beneficiary-id.md): Use this API to get the beneficiary ID by providing the bank account number and ifsc.
+- [Remove Beneficiary](https://www.cashfree.com/docs/api-reference/payouts/v1/remove-beneficiary.md): Use this API to remove an existing beneficiary from a list of added beneficiaries.
+- [Get Beneficiary Details](https://www.cashfree.com/docs/api-reference/payouts/v1/get-beneficiary-details.md): Use this API to get the details of a particular beneficiary in your account.
+- [Get Beneficiary History](https://www.cashfree.com/docs/api-reference/payouts/v1/get-beneficiary-history.md): Use this API to fetch the transaction history for a particular beneficiary and for a desired period of time.
+
+#### Incidents
+
+- [Get Incidents](https://www.cashfree.com/docs/api-reference/payouts/v1/get-incidents.md): Use this API to get the list of incidents on banks(Resolved,Unresolved,All) for a given time range.
+
+#### Transfers
+
+- [Overview](https://www.cashfree.com/docs/api-reference/payouts/v1/transfer.md): Transfer funds to your beneficiaries through Cashfree Payouts v1 using bank transfers, Paytm, Amazon Pay, UPI, IMPS, and NEFT, with sync and async modes.
+- [Get Batch Transfer Status](https://www.cashfree.com/docs/api-reference/payouts/v1/get-batch-transfer-status.md): Use this API to get the status of the Batch Transfer.
+- [Standard Transfer Async](https://www.cashfree.com/docs/api-reference/payouts/v1/standard-transfer-async.md): Use this API to initiate an amount transfer request at Cashfree by providing beneficiary id, amount, and transfer id. This is an async transfer request.
+- [Get Transfer Status](https://www.cashfree.com/docs/api-reference/payouts/v1/get-transfer-status.md): Use these details to get details of a particular transfer. You can pass referenceId or transferId to fetch the details.
+- [Standard Transfer Sync](https://www.cashfree.com/docs/api-reference/payouts/v1/standard-transfer-sync.md): Use this API to initiate an amount transfer request at Cashfree by providing beneficiary id, amount, and transfer id. This is a sync transfer request.
+- [Batch Transfer](https://www.cashfree.com/docs/api-reference/payouts/v1/batch-transfer.md): Use this API to create multiple transfers to multiple beneficiaries. This API accepts an array of transfer objects under the batch field.
+- [Direct Transfer](https://www.cashfree.com/docs/api-reference/payouts/v1/direct-transfer.md): Use this API to initiate amount transfers directly to the beneficiary account via a bank transfer or UPI. You can add the beneficiary details in the same API request.
+- [CardPay](https://www.cashfree.com/docs/api-reference/payouts/v1/cardpay.md): Use this API to transfer money to beneficiary cards. Provide details such as beneficiary name, card type, network type, and transfer ID.
+- [Lend](https://www.cashfree.com/docs/api-reference/payouts/v1/lend.md): Use this API to send requests for loan disbursement to the beneficiary. The service charges are pooled for the respective party and disbursed at the end of day. Disbursement amount = (Amount - total service charges).
+
+#### Transfers V1.2
+
+- [Overview](https://www.cashfree.com/docs/api-reference/payouts/v1/transfer-v12.md): Use the Payouts Transfers v1.2 API to disburse funds to beneficiaries through bank accounts, UPI, IMPS, NEFT, Paytm, and Amazon Pay wallets.
+- [Standard Transfer Sync v1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/standard-transfer-sync-v12.md): Use this API to initiate an amount transfer request at Cashfree by providing beneficiary id, amount, and transfer id. This is a sync transfer request.
+- [Get Batch Transfer Status V1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/get-batch-transfer-status-v12.md): Use this API to get the status of the Batch Transfer.
+- [Standard Transfer Async v1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/standard-transfer-async-v12.md): Use this API to initiate an amount transfer request at Cashfree by providing beneficiary id, amount, and transfer id. This is an async transfer request.
+- [Batch Transfer V1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/batch-transfer-v12.md): Use this API to create transfers to multiple beneficiaries. This API accepts an array of transfer objects under the batch field.
+- [Get Transfer Status V1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/get-transfer-status-v12.md): Use these details to get details of a particular transfer. You can pass referenceId or transferId to fetch the details.
+- [Direct Transfer V1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/direct-transfer-v12.md): Use this API to initiate amount transfers directly to the beneficiary account via a bank transfer or UPI. You can add the beneficiary details in the same API request.
+
+#### Verify and Pay
+
+- [Validate Payout V1](https://www.cashfree.com/docs/api-reference/payouts/v1/validate-payout-v1.md): Validates a UPI VPA or phone number and returns a single-use transfer token valid for one hour. Pass this token to the [Process Validated Payout API](/api-reference/payouts/v1/verify-and-pay-direct-transfer-v1) to initiate the payout.
+- [Direct Transfer](https://www.cashfree.com/docs/api-reference/payouts/v1/verify-and-pay-direct-transfer-v1.md): Use this API to initiate amount transfers directly to the beneficiary account via a bank transfer or UPI. You can add the beneficiary details in the same API request.
+- [Validate Payout V1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/validate-payout-v1-2.md): Validates either a Virtual Payment Address (VPA) on UPI or a phone number, and returns a single-use transfer token valid for one hour. Pass this token to the [Process Validated Payout API](/api-reference/payouts/v1/verify-and-pay-direct-transfer-v1-2) to initiate the payout.
+- [Direct Transfer V1.2](https://www.cashfree.com/docs/api-reference/payouts/v1/verify-and-pay-direct-transfer-v1-2.md): Use this API to initiate amount transfers directly to the beneficiary account via a bank transfer or UPI. You can add the beneficiary details in the same API request.
+
+### One Escrow
+
+- [Create Virtual Account](https://www.cashfree.com/docs/api-reference/payouts/v1/oneescrow/create-virtual-account.md): Use this API to create a virtual account that helps streamline the management of funds, enhance tracking capabilities, and simplify the financial process.
+- [Transfer Funds Between VAs](https://www.cashfree.com/docs/api-reference/payouts/v1/oneescrow/transfer-funds-between-vas.md): Use this API to transfer funds between virtual accounts (VAs).
+- [Get Account Statement](https://www.cashfree.com/docs/api-reference/payouts/v1/oneescrow/get-account-statement.md): Use this API to fetch the account statement of the virtual account in a paginated format using cursor-based pagination.
+- [Allocate Funds to Virtual Account](https://www.cashfree.com/docs/api-reference/payouts/v1/oneescrow/recharge-oneescrow-account.md): Use this API to recharge the OneEscrow account (notional credit) using a payment instrument.
+- [Get Fund Source Details](https://www.cashfree.com/docs/api-reference/payouts/v1/oneescrow/get-fund-source-details.md): Use this API to get the details of the fund source.
+- [Add Registered Recharge Account(Whitelist Bank Account)](https://www.cashfree.com/docs/api-reference/payouts/v1/oneescrow/add-registered-recharge-accountwhitelist-bank-account.md)
+- [Debit Connected Wallet](https://www.cashfree.com/docs/api-reference/payouts/v1/oneescrow/debit-connected-wallet.md)
+
+### Cashgram
+
+- [End Points](https://www.cashfree.com/docs/api-reference/payouts/v1/end-points.md): Find the production and sandbox base URLs for Cashfree Payouts v1 APIs, plus the credentials verification endpoint you use to validate your AppId and SecretKey.
+- [Postman Collection](https://www.cashfree.com/docs/api-reference/payouts/v1/cashgram-postman-collection.md): Download the Cashfree Cashgram Postman collection, import it into Postman, and start trying Cashgram API requests against sandbox without writing code.
+- [Webhooks](https://www.cashfree.com/docs/api-reference/payouts/v1/webhooks.md): Configure Cashgram webhooks to receive real-time HTTP callbacks for redeemed, reversed, and expired events, and learn how Cashfree polls bank status updates.
+- [Create Cashgram](https://www.cashfree.com/docs/api-reference/payouts/v1/create-cashgram.md): Use this API to create a Cashgram.
+- [Deactivate Cashgram](https://www.cashfree.com/docs/api-reference/payouts/v1/deactivate-cashgram.md)
+- [Get Cashgram Status](https://www.cashfree.com/docs/api-reference/payouts/v1/get-cashgram-status.md): Use this API to get the status of the Cashgram created.
+- [Response Codes](https://www.cashfree.com/docs/api-reference/payouts/v1/response-codes.md): Look up Cashfree Payouts v1 response codes for Cashgram, beneficiary, and transfer APIs, with HTTP status, error codes, messages, and recommended next actions.
+
+- [Secure ID APIs (88 pages)](https://www.cashfree.com/docs/_llms/secure-id-apis.md): Documentation for Secure ID APIs.
+
+## Additional APIs
+
+### Prepaid Payment Instrument APIs
+
+- [Overview](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/overview.md): Integrate and manage PPI APIs for wallet creation, balance checks, and transaction management in digital payments.
+- [Getting Started](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/getting-started.md): Get started with the Cashfree PPI APIs by reviewing endpoints, generating API keys, configuring webhooks, and contacting Cashfree for production access.
+- [Webhook Signature Verification](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/webhook-signature-verification.md): Verify Cashfree PPI webhook signatures using your client secret and the supplied timestamp header to confirm authenticity before processing wallet events.
+
+#### Users
+
+- [Create User](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/user-management/create-ppi-user.md): Creates a new user in the PPI system with the provided personal information. This endpoint enables merchants  to onboard new users who can then be associated with wallets or cards.
+- [Get User Details](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/user-management/get-ppi-user-details.md): Retrieves details of an existing user in the PPI system based on the provided user ID. Returns the user's personal information and account status.
+- [Update User](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/user-management/update-ppi-user.md): Updates user details in the PPI system. Only the fields provided in the request body will be updated;  all other user fields remain unchanged.
+
+#### User KYC
+
+- [Initiate Video KYC](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/kyc-verification/video-kyc-verification.md): Initiates Video KYC for a user and generates a VKYC link. This endpoint creates a VKYC verification request and sends the notification across the requested channels.
+- [Get Video KYC Details](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/kyc-verification/get-video-kyc-status.md): Retrieves the current status and other details of a Video KYC verification request, using the `user_id` and `verification_id` you supplied while initiating the request.
+- [Video KYC Webhooks](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/kyc-verification/webhook-vkyc.md): Configure Video KYC webhooks to receive real-time notifications when VKYC verification status changes in your PPI integration.
+- [VKYC Status and Status-Code Mapping](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/kyc-verification/vkyc-status-descriptions.md): Reference for PPI Video KYC status and status-code combinations returned by VKYC APIs and webhooks, with recommended actions for each scenario.
+
+#### Wallets
+
+- [Create Wallet](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/create-wallet.md): Creates a primary wallet and the associated sub-wallets for a user based on the specified program ID. The sub-wallet types, such as meal, fuel, and gift wallets, are determined by the program configuration. If the program is linked to a card program, a card is automatically created and associated wi…
+- [Credit Wallet](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/credit-wallet.md): Credits funds to a specified user sub-wallet, adding money to their available balance. Supports various sub-wallet types with behaviour determined by wallet configuration.
+- [Debit Wallet](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/debit-wallet.md): Debits funds from a user's sub-wallet for purchases. The behaviour varies based on the sub-wallet type:
+- [Verify Debit Wallet](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/verify-debit-wallet.md): Completes a debit transaction that requires OTP verification for SMALL_PPI or FULL_KYC_PPI sub-wallets. Use this endpoint after the [Debit Wallet API](/api-reference/prepaid-payment-instruments/wallet-management/debit-wallet) returns status_code: OTP_GENERATED. Pass the debit_id from that response a…
+- [Debit Status and Status-Code Mapping](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/debit-status-descriptions.md): Understand debit status and status_code combinations returned by PPI Debit Wallet and Verify Debit Wallet APIs, with recommended actions for each scenario.
+- [Refund Debit Wallet](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/refund-wallet.md): Processes a refund for a previously debited transaction from a user's sub-wallet. The refund operation  credits the amount back to the user's sub-wallet, effectively reversing a debit transaction: - `GIFT_PPI`: Credits amount back to gift wallet. - `CLOSED_LOOP_PPI` and `SMALL_PPI`: Credits amount b…
+- [Close Wallet](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/close-wallet.md): Closes a user's sub-wallet, making it inactive for future transactions. The closure process may require approval  depending on the sub-wallet type and business rules: - Any remaining balance is handled according to the configured closure policy.
+- [Check Transaction Eligibility](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/check-wallet-eligibility.md): Validates a user’s eligibility to perform credit or debit transactions on a sub-wallet based on compliance rules.
+- [Get Wallet Details](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/get-wallet-details.md): Use this API to fetch wallet details and associated sub-wallet balances for a specified user. You can query by wallet ID, card ID, or a combination of either with a sub-wallet ID.
+- [Get Wallet Statement](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/get-wallet-statement.md): Retrieves a paginated wallet statement for a user, including both credit and debit transactions for a specific sub-wallet. - The statement can be fetched for a specified date range. If no range is provided, the API returns transactions from the last 6 months. - The `from` date **cannot** be earlier…
+- [Wallet Webhooks](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/webhook-wallet.md): Configure Cashfree Wallet webhooks to receive event-based notifications whenever wallet balances, transactions, or user statuses change in your PPI integration.
+- [Card Webhooks](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/wallet-management/webhook-card.md): Configure Cashfree Card webhooks to receive event-based notifications whenever card transactions, refunds or card status updates occur in your PPI integration.
+
+#### Beneficiaries
+
+- [Create Beneficiary](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/user-beneficiary/create-user-bene.md): Creates a new beneficiary to user's Full KYC wallet by providing bank account number or VPA and other required details. Ensure the successful creation of the beneficiary before initiating a fund transfer.
+- [Get Beneficiary Details](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/user-beneficiary/get-user-bene.md): Retrieves details of an existing beneficiary of user in the PPI system. - If `bene_instrument_id` is provided, the response includes details for the specified instrument only. - If `bene_instrument_id` is not provided, the response includes details for all `bene_instruments` linked to the given `ben…
+- [Remove Beneficiary](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/user-beneficiary/remove-user-bene.md): Removes an existing beneficiary of the user in the PPI system. - If `bene_instrument_id` is provided, only the specified instrument is removed from the beneficiary. - If `bene_instrument_id` is not provided, the entire beneficiary along with all its `bene_instruments` is removed.
+
+#### Transfers
+
+- [Initiate Transfer](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/transfers/initiate-transfer.md): Initiates a fund transfer from a user's FULL_KYC_PPI sub-wallet to a beneficiary account. Supports multiple transfer modes including RTGS, NEFT, IMPS, and UPI. It is an async request by default.
+- [Verify Transfer](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/transfers/verify-transfer.md): Submits the OTP for a wallet transfer that was initiated with mode `OTP_VERIFICATION`.  Use **Get Transfer Details** or webhooks for terminal status.
+- [Get Transfer Details](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/transfers/get-transfer-details.md): Retrieves detailed information about a specific transfer transaction, including current status, beneficiary details.
+- [Transfer Webhook Events](https://www.cashfree.com/docs/api-reference/prepaid-payment-instruments/transfers/webhook-transfer.md): Configure Transfer webhooks to receive event-based notifications whenever a wallet transfer changes status in your PPI integration.
+
+## Partners APIs
+
+### Platform APIs
+
+- [Overview](https://www.cashfree.com/docs/api-reference/platforms/overview.md): Use Cashfree Platform APIs to onboard merchants, manage their lifecycle, and process payments inside your marketplace or SaaS application end to end.
+- [Getting Started](https://www.cashfree.com/docs/api-reference/platforms/latest/merchant-onboarding/getting-started.md): Set up Cashfree Merchant Onboarding APIs for your platform with API keys, sandbox access, webhooks, and KYC document flows for sub-merchant lifecycles.
+
+### v2023-08-01
+
+#### Merchant Onboarding APIs
+
+- [Create Merchant](https://www.cashfree.com/docs/api-reference/platforms/latest/merchant-onboarding/create-merchant.md): Use this API to create a sub-merchant account. You can provide basic merchant details during creation. KYC documents are required to activate the account.
+- [Get Merchant Status](https://www.cashfree.com/docs/api-reference/platforms/latest/merchant-onboarding/get-merchant-status.md): Use this API to get merchant onboarding details for the sub-merchant account.
+- [Update Merchant](https://www.cashfree.com/docs/api-reference/platforms/latest/merchant-onboarding/update-merchant.md): Use this API to update a sub-merchant account. You can modify basic details only if the account is not yet active.
+- [Upload Documents](https://www.cashfree.com/docs/api-reference/platforms/latest/merchant-onboarding/upload-documents.md): Use this API to upload KYC documents for merchants.
+- [Create Embeddable Onboarding Link (does not require login)](https://www.cashfree.com/docs/api-reference/platforms/latest/merchant-onboarding/create-embeddable-onboarding-link-does-not-require-login.md): Use this API to create a pre-built onboarding link for the sub-merchant account. Embed this link within your platform so that merchants can complete their KYC process. The link remains active for 1 hour only.
+- [Create Standard Onboarding Link (with login required by merchant)](https://www.cashfree.com/docs/api-reference/platforms/latest/merchant-onboarding/create-standard-onboarding-link-with-login-required-by-merchant.md): Use this API to create a pre-built onboarding link for the sub-merchant account. Share this link with the sub-merchant so they can complete their KYC process. The merchant needs to log in using their Cashfree password or OTP received on their registered email.
+- [Webhooks](https://www.cashfree.com/docs/api-reference/platforms/latest/merchant-onboarding/webhooks.md): This is list of webhooks triggered from the Cashfree system. These webhooks allow partners to remain alert to state changes for their merchants.
+
+## Additional APIs
+
+### BBPS for Business
+
+- [BBPS for Business](https://www.cashfree.com/docs/api-reference/other-apis/bbps/overview.md): API reference for Cashfree BBPS for Business covering NPCI-compliant biller API design, transaction status, complaint handling, and onboarding configuration.
+- [APIs to Implement](https://www.cashfree.com/docs/api-reference/other-apis/bbps/apis-to-implement.md): Reference for the APIs billers must expose to join the BBPS network, covering bill fetch, payment posting, and authentication requirements.
+- [Next Steps for Biller](https://www.cashfree.com/docs/api-reference/other-apis/bbps/next-steps-for-biller.md): Follow these next steps after implementing the BBPS biller APIs, including sharing endpoints and credentials with Cashfree to complete onboarding and go live.
+- [Check Transaction Status](https://www.cashfree.com/docs/api-reference/other-apis/bbps/check-transaction-status.md): The check transaction status API allows billers to retrieve the current status of a transaction using the unique BBPS transaction ID associated with the bill. This endpoint serves as a reliable method for querying transaction details, providing merchants with real-time updates on payment status.
+- [NPCI Onboarding Configurations](https://www.cashfree.com/docs/api-reference/other-apis/bbps/npci-onboarding-configurations.md): Configure BBPS biller onboarding fields including customer input parameters, payment amount exactness, extra bill fetch response data, and acceptance rules.
+
+### BBPS for Customers
+
+- [BBPS for Customers](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/overview.md): Cashfree BBPS for Customers APIs cover authentication, biller discovery, bill fetch, bill payment, ticket handling, and wallet operations for Agent Institutions.
+
+#### Billers
+
+- [Fetch Biller Categories](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/billers/categories.md): Use this API to fetch the list of all active biller categories available on the BBPS network. Agent Institutions can use this to populate category selection in their UI. Since this data changes infrequently, it is recommended to fetch and cache it at predefined intervals instead of calling the API o…
+- [Fetch Billers Info](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/billers/info.md): Use this API to fetch the complete catalog and MDM (Master Data Management) details of billers registered under BBPS. Use this to understand biller configuration, required customer input parameters, supported payment modes and channels, and fee structures. If the request body is omitted, all billers…
+
+#### Bill Fetch
+
+- [Bill Fetch Request](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/bill-fetch/request.md): Use this API to initiate a bill fetch or bill validation request for a customer. This is an **async** API. It returns only an acknowledgement with a `ref_id`. The actual bill details must be retrieved separately by polling the Bill Fetch Response API using this `ref_id`.
+- [Bill Fetch Response](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/bill-fetch/response.md): Use this API to poll the result of a previously initiated Bill Fetch or Bill Validation request. Use the `ref_id` from the Bill Fetch Request API to retrieve the status and bill details.
+
+#### Bill Payment
+
+- [Bill Payment Request](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/bill-payment/request.md): Use this API to initiate a bill payment against a previously fetched or validated bill. This is an **async** API. It returns only an acknowledgement with a `transaction_ref_id`. Poll the Bill Payment Response API using both `bill_fetch_ref_id` and `transaction_ref_id` to get the final payment status…
+- [Bill Payment Response](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/bill-payment/response.md): Use this API to poll for the result of a previously submitted bill payment request. Call this using both `bill_fetch_ref_id` and `transaction_ref_id` from the Bill Payment Request API.
+
+#### Ticket
+
+- [Raise a Ticket Request](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/ticket/request.md): Use this API to raise a support ticket for a previously processed bill payment. This is an **async** API. It returns an acknowledgement with a `ref_id`. Poll the Ticket Status API using `ref_id` to get the current status of your ticket.
+- [Poll Ticket Status Response](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/ticket/response.md): Use this API to poll the status of a previously raised ticket. Call this using the `ref_id` returned from the Raise Ticket Request API.
+
+#### Wallet
+
+- [Fetch Agent Wallet Balance](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/wallet/balance.md): Use this API to fetch the current available wallet balance for a given Agent Institution. This balance reflects funds available for BBPS bill payment transactions.
+- [Fetch Agent Wallet Ledger](https://www.cashfree.com/docs/api-reference/other-apis/bbps-cou/wallet/ledger.md): Use this API to fetch a paginated list of wallet ledger entries for a given Agent Institution. Includes credits (recharges) and debits (bill payments). Results can be filtered by date range, transaction type, or UTR. All request body fields are optional. An empty body returns all entries.
+
+## API Reference
+
+### API Reference
+
+- [Overview](https://www.cashfree.com/docs/api-reference/overview.md): Browse the Cashfree API reference, covering payments, payouts, identity verification, and platform APIs with sandbox testing and language-specific examples.
+- [Rate Limits](https://www.cashfree.com/docs/api-reference/rate-limits.md): Understand how Cashfree API rate limits work, including per-minute thresholds, response headers, and best practices for handling 429 throttling errors.
+- [Authentication](https://www.cashfree.com/docs/api-reference/authentication.md): Learn how to authenticate Cashfree APIs using API keys, generate sandbox and production credentials, and pass headers correctly across payments and payouts.
+- [Postman Collections](https://www.cashfree.com/docs/api-reference/postman-collections.md): Download Cashfree Postman collections for payments, payouts, and verification APIs to test endpoints with preconfigured requests and sample data.
+- [API Best Practices](https://www.cashfree.com/docs/api-reference/api-best-practices.md): Recommended practices for building secure, reliable, and performant integrations with Cashfree APIs.
+- [Troubleshooting](https://www.cashfree.com/docs/api-reference/integration-troubleshooting/overview-ts.md): Resolve common Cashfree integration issues across payments, payouts, webhooks, SDKs, and Secure ID with quick fixes, error references, and debug steps.
+
+## AI Stack
+
+### Cashfree AI Stack
+
+- [Cashfree AI Stack](https://www.cashfree.com/docs/tools-ai/overview.md): Explore Cashfree AI Stack: AI assistants, agent toolkits, MCP servers, device intelligence, SDKs, and integrations that accelerate payment development.
+- [Lovable Integration](https://www.cashfree.com/docs/tools-ai/lovable-integration.md): Integrate Cashfree Payments into Lovable apps with a chat-driven setup, then progress to advanced flows using Supabase, custom server logic, and webhooks.
+- [Replit Integration](https://www.cashfree.com/docs/tools-ai/replit-integration.md): Integrate Cashfree Payments into Replit projects with a chat-driven workflow that generates pages, routes, and payment flows from plain-language prompts.
+- [MCP Server](https://www.cashfree.com/docs/tools-ai/mcp-server.md): Use the Cashfree Payments MCP Server to let AI agents query transactions, settlements, and reports, and call Payment Gateway APIs through the Model Context Protocol.
+- [WhatsApp Assistant](https://www.cashfree.com/docs/tools-ai/whatsapp-assistant.md): Use the Cashfree WhatsApp Assistant to generate payment links, resolve queries, and track payments directly from WhatsApp chats without opening the dashboard.
+- [Cashfree Agent Toolkit](https://www.cashfree.com/docs/tools-ai/cashfree-agent-toolkit.md): Build AI-powered payment agents with the Cashfree Agent Toolkit for LangChain, Vercel AI SDK, and OpenAI Agents SDK, exposing Cashfree APIs as tool calls.
+- [Cashfree Agent Skills](https://www.cashfree.com/docs/tools-ai/cashfree-agent-skills.md): Install Cashfree Agent Skills to load Cashfree product knowledge into Cursor, Claude Code, VS Code Copilot, Gemini CLI, and other AI coding assistants.
+- [Cashfree SDKs](https://www.cashfree.com/docs/tools-ai/sdk.md): Browse Cashfree SDK libraries for web, mobile, and server-side languages to integrate payments, payouts, verification, and reconciliation across stacks.
+- [Cashfree HERE](https://www.cashfree.com/docs/tools-ai/cashfree-here.md): Add Cashfree HERE to AI chat interfaces like ChatGPT and Claude so users can pay with UPI, QR codes, or cards directly inside the conversation safely.
+
+#### Relay
+
+- [Cashfree Relay](https://www.cashfree.com/docs/tools-ai/relay/overview.md): Build and automate payment operations with Cashfree Relay using a no-code visual canvas, AI-powered Skills, and an MCP server for plain-language control.
+- [Create a Workflow](https://www.cashfree.com/docs/tools-ai/relay/create-workflow.md): Create an automated Cashfree Relay workflow from the Merchant Dashboard by configuring triggers, adding action nodes, mapping data, and activating it.
+- [Setting Up Connections](https://www.cashfree.com/docs/tools-ai/relay/add-connections.md): Set up Cashfree Relay connections to link Gmail, Slack, Google Sheets, and other external apps so your automated workflows can act on real data.
+- [Manage Workflows](https://www.cashfree.com/docs/tools-ai/relay/manage-workflows.md): Manage Cashfree Relay workflows from the Merchant Dashboard: view runs, edit logic, activate or pause schedules, troubleshoot failures, and delete unused flows.
+- [Relay MCP Server](https://www.cashfree.com/docs/tools-ai/relay/relay-mcp-server.md): Connect your AI agent to the Cashfree Relay MCP server to create, edit, activate, and monitor payment workflows using natural-language prompts.
+- [Relay Skills](https://www.cashfree.com/docs/tools-ai/relay/skills.md): Use pre-built Cashfree Relay Skills to create common payment workflows instantly by describing what you need in plain language in Claude Desktop.
+
+### Cashfree Trust and Safety
+
+- [Security Features](https://www.cashfree.com/docs/security.md): Review the security features in Cashfree Payments that protect your infrastructure, customer data, and merchant accounts from fraud and unauthorised access.
+
+## Help Center
+
+### Help Center
+
+- [Cashfree Payments FAQs](https://www.cashfree.com/docs/help/overview.md): Find answers and support resources for Cashfree Payments, with FAQs grouped by product and direct contact options for the merchant support team.
+
+#### Create Account
+
+- [Account Overview](https://www.cashfree.com/docs/help/account/overview.md): Set up, activate, and manage your Cashfree Payments account, covering onboarding, KYC verification, team access, and account operations.
+- [Account Activation](https://www.cashfree.com/docs/help/account/account-activation.md): Follow Cashfree Payments account activation steps for your business entity: KYC documents, bank verification, and entity-specific onboarding lists.
+- [Account Management](https://www.cashfree.com/docs/help/account/account-management.md): Update Cashfree Payments profile details, configure two-factor authentication, manage notification preferences, view login history, and download tax invoices.
+- [Access Management](https://www.cashfree.com/docs/help/account/access-management.md): Manage user access for your Cashfree Payments account: invite team members, assign roles, create custom permissions, and audit role-based access controls.
+
+### Account and Onboarding
+
+- [Account](https://www.cashfree.com/docs/help/account/faq.md): Find answers to frequently asked questions about Cashfree Payments account activation, KYC documents, onboarding flows, and post-go-live account management.
+- [Account Onboarding](https://www.cashfree.com/docs/help/onboarding-related/onboarding-faqs.md): Find answers on Cashfree Payments onboarding covering business eligibility, prohibited categories, website compliance, KYC documents, and activation timelines.
+- [Account Management](https://www.cashfree.com/docs/help/account/account-management-faqs.md): Browse common Cashfree account management questions about updating phone numbers, enabling two-factor authentication, login alerts, and invoice downloads.
+- [Access Management](https://www.cashfree.com/docs/help/account/access-management-faqs.md): Find answers to common Cashfree access management questions about user invitations, roles, custom permissions, multi-role assignments, and audit trails.
+- [Pricing](https://www.cashfree.com/docs/help/account/pricing.md): Find answers to Cashfree Payments pricing questions covering TDR, TDS, Form 16A, billing, invoices, gateway charges, UPI fees, and integration costs.
+- [Terms and Conditions](https://www.cashfree.com/docs/help/account/termsandcondition.md): Review the terms and conditions for Cashfree Payments offers and promotions, plus links to the official terms of service, privacy policy, and grievance policy.
+
+### Payment Gateway
+
+- [General](https://www.cashfree.com/docs/help/payments/transactions/generalfaqs.md): Find general answers to Cashfree transaction FAQs about order creation, payment statuses, failure reasons, retries, and reconciliation across all channels.
+- [Transactions](https://www.cashfree.com/docs/help/payments/transactions/transactions.md): Get answers to Cashfree transactions FAQs covering capture flows, authorisation holds, partial refunds, dispute handling, and status updates from the dashboard.
+- [Settlements](https://www.cashfree.com/docs/help/payments/settlements/settlements.md): Understand how Cashfree settles funds to your bank account, including cycles, on-demand settlements, holds, and reconciling credits in the dashboard.
+- [Integrations](https://www.cashfree.com/docs/help/payments/integrations/integrations.md): Find answers to Cashfree payment integration FAQs covering ecommerce plugins, hosted checkout, custom server flows, supported platforms, and webhook setup.
+- [Orders and Payments](https://www.cashfree.com/docs/help/payments/orders-and-payments/orders-and-payments.md): Find answers to orders and payments FAQs covering accepting payments without an integration, order creation, payment statuses, and customer payment options.
+- [Transaction Reports](https://www.cashfree.com/docs/help/payments/transaction-reports/transaction-reports.md): Find answers to transaction report FAQs covering report types, custom filters, download formats, column definitions, and reconciling payment activity quickly.
+- [Offers](https://www.cashfree.com/docs/help/payments/offers/offers.md): Find answers to Cashfree offers FAQs covering bank discounts, EMI promotions, cashback rules, offer configuration on checkout, and customer eligibility checks.
+- [External Analytics](https://www.cashfree.com/docs/help/payments/external-analytics/external-analytics.md): Find answers to external analytics FAQs about Meta Pixel and Google Analytics integrations on Cashfree checkouts, event tracking, and configuration steps.
+- [Product Walkthrough](https://www.cashfree.com/docs/help/payments/product-walkthrough/product-walkthrough.md): Get a guided product walkthrough of Cashfree Payment Gateway features, including the new dashboard, hosted checkout, payment links, refunds, and reporting.
+- [Payment Links](https://www.cashfree.com/docs/help/payment-links/faqs/faqs.md): Find answers to payment links FAQs covering link creation, bulk uploads, sharing options, expiry rules, partial payments, and tracking customer collections.
+- [Payment Forms](https://www.cashfree.com/docs/help/payment-forms/faqs/faqs.md): Find answers to payment forms FAQs covering form creation, custom fields, branding, sharing options, supported payment modes, and submission tracking workflows.
+- [Easy Split](https://www.cashfree.com/docs/help/easy-split/faqs/faqs.md): Find answers to Easy Split FAQs covering vendor onboarding, split rules, settlement cycles, vendor payout reconciliation, and supported business use cases.
+- [Subscriptions](https://www.cashfree.com/docs/help/subscriptions/faqs/faqs.md): Find answers to subscriptions FAQs covering recurring payment modes, mandate setup, NACH and UPI AutoPay support, retry logic, and mandate cancellation steps.
+- [One Click Checkout](https://www.cashfree.com/docs/help/one-click-checkout.md): Find answers to One Click Checkout FAQs covering COD and shipping profile setup, Shopify conversion-data syncing, and native checkout fallback scenarios.
+- [FlowWise](https://www.cashfree.com/docs/help/flowwise/general-faqs.md): Get answers to common questions about Cashfree FlowWise, including supported payment partners, routing rules, settlements, refunds, and onboarding requirements.
+- [SoftPOS](https://www.cashfree.com/docs/help/softpos/softpos.md): Find answers to SoftPOS FAQs on tap-to-pay setup on Android phones, supported card networks, transaction limits, settlement timelines, and device requirements.
+
+### Payouts
+
+- [Payouts](https://www.cashfree.com/docs/help/payouts/general-faqs.md): Find answers to general Cashfree Payouts questions on transfer reversals, beneficiary errors, processing timelines, IFSC validation, and bank technical issues.
+- [Cashgram](https://www.cashfree.com/docs/help/payouts/Cashgram.md): Find answers to common Cashgram questions about generating payout links, redeeming funds, expiry policies, refunds, and supported beneficiary payment modes.
+- [IP Whitelist and Public Key](https://www.cashfree.com/docs/help/payouts/ip-whitelist.md): Learn why Cashfree Payouts requires IP whitelisting and a public key, how to register them, and how these controls add an extra layer of API authentication.
+
+### Secure ID
+
+- [Aadhaar Verification](https://www.cashfree.com/docs/help/secure-id/aadhaar-verification.md): Find answers to Aadhaar verification FAQs covering supported APIs, consent requirements, masking rules, response codes, and accepted document formats.
+- [PAN Verification](https://www.cashfree.com/docs/help/secure-id/pan-verification.md): Find answers to PAN verification FAQs covering basic and advanced API checks, name match rules, response codes, and accepted document formats during KYC.
+- [Bank Account Verification](https://www.cashfree.com/docs/help/secure-id/bav.md): Get answers to bank account verification FAQs about penny-drop checks, name match logic, response codes, supported banks, and resolving verification failures.
+- [Reverse Penny Drop](https://www.cashfree.com/docs/help/secure-id/reverse-penny-drop.md): Get answers to reverse penny drop FAQs covering verification flow, supported banks, customer experience, refund handling, and integration prerequisites for KYC.
+- [GSTIN Verification](https://www.cashfree.com/docs/help/secure-id/gstin-verification.md): Find answers to GSTIN verification FAQs on validating business identifiers, retrieving company details, handling cancelled GSTINs, and decoding response codes.
+- [Secure ID](https://www.cashfree.com/docs/help/secure-id/general-faqs.md): Browse Cashfree Secure ID FAQs covering supported verification APIs, onboarding requirements, pricing models, sandbox testing, and rate-limit guidelines.
+
+### End Customer
+
+- [Disputes and Chargebacks](https://www.cashfree.com/docs/help/end-customer/disputes-and-chargeback.md): Find answers to common customer questions about raising disputes and chargebacks for card or UPI payments processed through Cashfree on merchant websites.
+- [Order and Delivery](https://www.cashfree.com/docs/help/end-customer/order-and-delivery.md): Get answers to order and delivery questions, including how to check order status, track shipments, and contact merchants for payments processed via Cashfree.
+- [Payment](https://www.cashfree.com/docs/help/end-customer/payment-related.md): Read payment FAQs to understand failed transactions, debited but failed payments, refund timelines, and what to do when issues arise on Cashfree checkouts.
+- [Refunds](https://www.cashfree.com/docs/help/end-customer/refunds.md): Get answers to refund FAQs covering how to check refund status from the Merchant Dashboard, expected processing timelines, and steps for troubleshooting delays.
+- [Fraud Prevention](https://www.cashfree.com/docs/help/end-customer/fraud-prevention.md): Read fraud prevention FAQs to learn how customers can spot suspicious transactions, protect payment credentials, and stay safe while paying through Cashfree.
+- [Report a Fraud](https://www.cashfree.com/docs/help/end-customer/report-fraud.md): Learn how to identify and report suspicious Cashfree-related charges on your statement, raise complaints with the merchant, and protect yourself from fraud.
+- [Subscriptions](https://www.cashfree.com/docs/help/end-customer/subscriptions.md): Find answers about cancelling or modifying NACH mandates, managing recurring payments, and resolving subscription issues for merchants using Cashfree Payments.
+
+- [Other (104 pages)](https://www.cashfree.com/docs/_llms/other.md): Documentation for Other.
+
+## OpenAPI Specs
+
+- [v2026-01-01](/docs/openapi/payments/v2026-01-01.yaml)
+- [pgvba](/docs/openapi/pgvba/pgvba.yaml)
+- [v2025-01-01](/docs/openapi/cb-imports/v2025-01-01.yaml)
+- [v2026-01-01](/docs/openapi/cb-imports/v2026-01-01.yaml)
+- [v2025-01-01](/docs/openapi/payments/v2025-01-01.yaml)
+- [merchant-spec](/docs/openapi/cb-imports/merchant-spec.json)
+- [v2023-08-01](/docs/openapi/payments/v2023-08-01.yaml)
+- [v2022-09-01](/docs/openapi/payments/v2022-09-01.yaml)
+- [ppi](/docs/openapi/ppi/ppi.yaml)
+- [bbps-cou](/docs/openapi/bbps/bbps-cou.yaml)
+- [risk-details](/docs/openapi/payments/risk-details.yaml)
+- [openapi](/docs/api-reference/openapi.json)
+- [bbps](/docs/openapi/bbps/bbps.yaml)
+- [partner-spec](/docs/openapi/global-collections/partner-spec.yaml)
+- [lrs](/docs/openapi/lrs/lrs.yaml)
+- [2023-01-01](/docs/openapi/merchantonboarding/2023-01-01.yaml)
+- [oneescrow](/docs/openapi/oneescrow/oneescrow.yaml)
+- [apple-pay](/docs/openapi/payments/apple-pay.yaml)
+- [ConnectedWalletDebit](/docs/openapi/payouts/ConnectedWalletDebit.yaml)
+- [payoutsv1](/docs/openapi/payouts/payoutsv1.yaml)
+- [payoutsv2](/docs/openapi/payouts/payoutsv2.yaml)
+- [payoutsv2extra](/docs/openapi/payouts/payoutsv2extra.yaml)
+- [whitelist-bank-account](/docs/openapi/payouts/whitelist-bank-account.yaml)
+- [subscriptionsv1](/docs/openapi/subscriptions/subscriptionsv1.yml)
+- [vrsv1](/docs/openapi/vrs/vrsv1.yaml)
+- [vrsv2](/docs/openapi/vrs/vrsv2.yaml)
+- [package-lock](/docs/package-lock.json)
+- [package](/docs/package.json)
+
+> The links below point to documentation indexes. Follow each `/_llms/` index recursively until you reach documentation pages.
+
+## Indexes
+
+- [Payments (261 pages)](https://www.cashfree.com/docs/_llms/payments.md): Documentation for Payments.
+- [Payments APIs (509 pages)](https://www.cashfree.com/docs/_llms/payments-apis.md): Documentation for Payments APIs.
+- [Payments APIs / Other Versions (348 pages)](https://www.cashfree.com/docs/_llms/payments-apis/other-versions.md): Documentation for Payments APIs / Other Versions.
+- [Secure ID APIs (88 pages)](https://www.cashfree.com/docs/_llms/secure-id-apis.md): Documentation for Secure ID APIs.
+- [Other (104 pages)](https://www.cashfree.com/docs/_llms/other.md): Documentation for Other.

@@ -3,7 +3,7 @@ import {
   IconFileInvoice,
   IconPhoneCall,
 } from '@tabler/icons-react'
-import { FlaskConicalIcon, HomeIcon, PipetteIcon, ShieldCheckIcon, StarIcon, UsersIcon } from 'lucide-react'
+import { HomeIcon, ShieldCheckIcon, StarIcon, UsersIcon } from 'lucide-react'
 
 export const navLinks = [
   {
@@ -501,7 +501,7 @@ export const howItWorks = [
   {
     id: crypto.randomUUID(),
     title: 'free home collection',
-    desc: 'A certified phiebotomist visits your doorstep, hygienic and on time.',
+    desc: 'A certified phlebotomist visits your doorstep, hygienic and on time.',
     cover: '/how-it-works/2.png',
     coverColor: 'bg-custom-2',
     stepName: 'collect',

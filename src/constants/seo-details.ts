@@ -97,6 +97,10 @@ export function seo(props: SeoDetails) {
         name: 'google-site-verification',
         content: '4uPUnRNCMEh9V7rLYPCGf3pznyY8Dk5EVsbRrxYpw28',
       },
+      {
+        name: 'msapplication-TileImage',
+        content: '/favicons/mstile-144x144.png',
+      },
     ],
     links: [
       {
@@ -138,10 +142,6 @@ export function seo(props: SeoDetails) {
         rel: 'apple-touch-icon',
         sizes: '180x180',
         href: '/favicons/apple-touch-icon.png',
-      },
-      {
-        name: 'msapplication-TileImage',
-        content: '/favicons/mstile-144x144.png',
       },
       {
         rel: 'shortcut icon',

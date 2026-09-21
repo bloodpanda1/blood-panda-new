@@ -1,0 +1,21 @@
+Dashboard Features Suggestions for BloodPanda
+(Inspired by Tata 1mg, Orange Health Labs, Thyrocare)
+
+1. Super Admin & COO Dashboard (Order Management & Analytics)
+- Real-Time Monitoring: Visual snapshots of lab workflows (waiting lists, in-progress tests, and completed reports).
+- Operational Analytics: Real-time visibility into Turnaround Time (TAT), sample volumes, pending tests, and revenue trends.
+- Order & Inventory Management: Tools to track incoming test requests, manage supply chains (e.g., barcoded vials), and monitor inventory levels.
+- Bottleneck Detection: Automated alerts when TATs are exceeded or when specific departments experience high pending volumes.
+- Compliance & Quality Control: Features to manage certification documentation, digital signatures, and audit trails for regulatory compliance.
+- Partner Management: Tools for managing onboarding, performance metrics, and business growth for diagnostic partners or B2B clients.
+
+2. Phlebotomist (Field Executive) App / Dashboard
+- Task Scheduling & Route Optimization: Real-time dispatch of home-collection requests with optimized routing to ensure minimal ETA (e.g. 60-minute targets like Orange Health).
+- Sample Tracking & Digital ID: Integration with barcodes to link specific samples to patient IDs, ensuring "zero-error" sample handling from collection to lab entry.
+- Patient & Test Management: Access to patient demographics, specific test requirements, and digital forms for patient consent or health history.
+- Real-Time Status Updates: Ability to mark samples as "collected," "in transit," or "delivered to lab," which updates the central dashboard and triggers automated SMS/WhatsApp notifications for the patient.
+
+3. Doctors / Clinics Portal (B2B)
+- Booking Management: A specific module for doctors to manage patient bookings directly.
+- Report Access: Track sample collection status and access test reports seamlessly for their referred patients.
+- Analytics: Track total referrals, commissions, or bulk-booking metrics.

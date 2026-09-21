@@ -569,10 +569,8 @@ export type TestItem = {
 export type PrimaryCategory = keyof typeof tests
 
 // extract the subcategory keys from the first element of each primary category
-// type SubCategoryGroupType = {
 //   [key in keyof typeof data]: keyof (typeof data)[key]
 // }
-type SubCategoryGroup = {
   // [key in keyof typeof tests]: {
   // [key: string]: TestItem[]
   // [key in keyof (typeof tests)[key][number]]: TestItem[]
@@ -583,7 +581,6 @@ type SubCategoryGroup = {
   // [key in PrimaryCategory]: {
   //   [subCategoryGroupKey: string]: TestItem[]
   // }[]
-}
 
 const buildTestIndex = () => {
   const index = new Map<string, TestItem>() // exact lookup

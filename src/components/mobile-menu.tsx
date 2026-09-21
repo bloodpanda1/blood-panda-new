@@ -386,15 +386,34 @@ export default function MobileMenu() {
               </Link>
             </Button>
           ) : (
-            <Button
-              type="button"
-              onClick={handleSignOut}
-              className={
-                'w-full bg-destructive hover:bg-accent hover:text-destructive transition-all duration-300 ease-in-out'
-              }
-            >
-              LogOut <IconLogout className={'size-4'} />
-            </Button>
+            <div className="flex flex-col gap-2 w-full">
+              {data.user.role !== 'USER' && (
+                <Button asChild className="w-full" variant="outline">
+                  {data.user.role === 'ADMIN' || data.user.role === 'SUPER_ADMIN' ? (
+                    <Link to="/admin/dashboard" viewTransition onClick={handleClose}>
+                      Admin Dashboard
+                    </Link>
+                  ) : data.user.role === 'COO' ? (
+                    <Link to="/coo/tasks" viewTransition onClick={handleClose}>
+                      COO Portal
+                    </Link>
+                  ) : (
+                    <Link to="/phlebotomist/appointments" viewTransition onClick={handleClose}>
+                      Phlebotomist Portal
+                    </Link>
+                  )}
+                </Button>
+              )}
+              <Button
+                type="button"
+                onClick={handleSignOut}
+                className={
+                  'w-full bg-destructive hover:bg-accent hover:text-destructive transition-all duration-300 ease-in-out'
+                }
+              >
+                LogOut <IconLogout className={'size-4'} />
+              </Button>
+            </div>
           )}
 
           <SheetClose asChild>

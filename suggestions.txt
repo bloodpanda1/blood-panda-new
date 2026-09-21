@@ -1,0 +1,26 @@
+Dashboard Feature Suggestions for BloodPanda
+Based on competitive analysis of Tata 1mg, Orange Health Labs, and Thyrocare, here are suggestions for implementing a world-class dashboard experience for our users (patients, admins, and partners).
+
+1. Real-Time Tracking (Patient & Admin)
+- Live Phlebotomist Tracking: Users should be able to see exactly where their assigned phlebotomist is (Uber-style tracking) once dispatched.
+
+2. AI-Powered "Smart Reports" & Insights (Patient)
+- Health Journey/Longitudinal View: Instead of just showing individual normal/abnormal results, the dashboard should plot biomarkers over time (e.g., HbA1c over the last 3 years).
+- Actionable Intelligence: AI-driven summaries that explain complex medical jargon in simple terms and highlight organ health (e.g., "Liver Health: 85%").
+- Third-Party Report Uploads: Allow users to upload past reports from other labs to maintain a unified health record.
+
+3. Corporate Health Portal (B2B/COO)
+- Employer-Sponsored Bookings: A dedicated view for corporate clients to offer pre-approved packages to employees.
+- Employee Health Analytics: Aggregated, anonymized insights for HR teams.
+
+4. Centralized Document Vault (Patient)
+- EHR Integration: A secure place for patients to store prescriptions, past lab reports, and vaccination records.
+- Instant Verification: Implement QR codes on reports that can be scanned for instant authenticity verification.
+
+5. Operations & Logistics Console (Admin/COO)
+- Specimen Logistics Tracking: Track batches of samples moving from collection centers/phlebotomists to the central processing lab.
+- Quality Control Queue: An automated flagging system that highlights abnormal results for manual review by a doctor before the report is released to the patient.
+
+6. Franchise/Partner Tools (B2B)
+- E-Clinic Integration: Features to manage "Point of Care" stations or partner clinics.
+- Bulk Reporting: Tools for partners to download bulk reports or integrate via API.

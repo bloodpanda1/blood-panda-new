@@ -205,7 +205,7 @@ function RouteComponent() {
                       addItem({
                         item: {
                           id: data.id,
-                          name: data.name,
+                          name: data.name.startsWith('Package: ') ? data.name : `Package: ${data.name}`,
                           price: Number(data.discountedAmount),
                           quantity: 1,
                           image: `${imageUrl}/${data.cover}`,
@@ -353,7 +353,7 @@ function RouteComponent() {
                         addItem({
                           item: {
                             id: data.id,
-                            name: data.name,
+                            name: data.name.startsWith('Package: ') ? data.name : `Package: ${data.name}`,
                             price: Number(data.discountedAmount),
                             quantity: 1,
                             image: `${imageUrl}/${data.cover}`,

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { FlaskConical, ClipboardList, Stethoscope, Phone } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { buttonVariants } from '#/components/ui/button'

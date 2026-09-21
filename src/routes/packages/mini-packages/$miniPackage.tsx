@@ -221,7 +221,7 @@ function RouteComponent() {
                       addItem({
                         item: {
                           id: data.id,
-                          name: data.name,
+                          name: data.name.startsWith('Mini Package: ') ? data.name : `Mini Package: ${data.name}`,
                           price: Number(data.discountedAmount),
                           quantity: 1,
                           image: `${imageBaseUrl}${data.cover}`,

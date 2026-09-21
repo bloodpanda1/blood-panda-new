@@ -143,7 +143,7 @@ export function generateTimeSlots(
     isEqual(currentTime, endTimeParsed)
   ) {
     // slots.push(format(currentTime, "HH:mm"))
-    slots.push(format(currentTime, 'HH:mm aaa'))
+    slots.push(format(currentTime, 'hh:mm aaa'))
     currentTime = addMinutes(currentTime, interval)
   }
 
