@@ -14,10 +14,12 @@ import neon from './neon-vite-plugin.ts'
 
 const isBuild = process.argv.includes('build') || process.env.NODE_ENV === 'production'
 if (isBuild) {
+// @ts-expect-error - readonly assignment
   process.env.NODE_ENV = 'production'
 }
 
-const env = loadEnv(isBuild ? 'production' : 'dev', process.cwd(), '')
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+loadEnv(isBuild ? 'production' : 'dev', process.cwd(), '')
 const isDev = process.env.NODE_ENV !== 'production'
 
 const config = defineConfig({
@@ -70,6 +72,7 @@ const config = defineConfig({
     tanstackStart(),
     nitro({ preset: 'vercel' }),
     viteReact({
+      // @ts-expect-error - babel exists in options
       babel: {
         plugins: [['babel-plugin-react-compiler', {}]],
       },

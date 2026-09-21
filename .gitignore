@@ -24,3 +24,4 @@ todos.json
 /src/bones
 
 *.csv
+.vercel

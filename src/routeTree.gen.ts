@@ -10,30 +10,44 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as ProtectedRouteImport } from './routes/_protected'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
+import { Route as InviteAcceptRouteImport } from './routes/invite-accept'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionRouteImport } from './routes/terms-and-condition'
 import { Route as TestsRouteImport } from './routes/tests'
-import { Route as AdminBookingsRouteImport } from './routes/_admin/bookings'
-import { Route as AdminDashboardRouteImport } from './routes/_admin/dashboard'
-import { Route as AdminPatientsRouteImport } from './routes/_admin/patients'
-import { Route as AdminPrescriptionsRouteImport } from './routes/_admin/prescriptions'
-import { Route as AdminSubscribersRouteImport } from './routes/_admin/subscribers'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as ProtectedBookingRouteImport } from './routes/_protected/booking'
+import { Route as ProtectedCalendarRouteImport } from './routes/_protected/calendar'
 import { Route as ProtectedCartRouteImport } from './routes/_protected/cart'
-import { Route as ProtectedPaymentSuccessRouteImport } from './routes/_protected/payment-success'
+import { Route as ProtectedFamilyMembersRouteImport } from './routes/_protected/family-members'
+import { Route as ProtectedMyOrdersRouteImport } from './routes/_protected/my-orders'
+import { Route as ProtectedMyPrescriptionsRouteImport } from './routes/_protected/my-prescriptions'
+import { Route as ProtectedMyReportsRouteImport } from './routes/_protected/my-reports'
+import { Route as ProtectedPaymentStatusRouteImport } from './routes/_protected/payment-status'
 import { Route as ProtectedProfileRouteImport } from './routes/_protected/profile'
+import { Route as ProtectedSavedAddressesRouteImport } from './routes/_protected/saved-addresses'
+import { Route as AdminAccountsRouteImport } from './routes/admin/accounts'
+import { Route as AdminBookingsRouteImport } from './routes/admin/bookings'
+import { Route as AdminCalendarRouteImport } from './routes/admin/calendar'
+import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminPatientsRouteImport } from './routes/admin/patients'
+import { Route as AdminPrescriptionsRouteImport } from './routes/admin/prescriptions'
+import { Route as AdminStaffRouteImport } from './routes/admin/staff'
+import { Route as AdminSubscribersRouteImport } from './routes/admin/subscribers'
+import { Route as ApiCleanupRouteImport } from './routes/api/cleanup'
 import { Route as BlogsIndexRouteImport } from './routes/blogs/index'
+import { Route as CooTasksRouteImport } from './routes/coo.tasks'
+import { Route as InvoiceBookingIdRouteImport } from './routes/invoice.$bookingId'
 import { Route as PackagesIndexRouteImport } from './routes/packages/index'
 import { Route as PackagesPackageRouteImport } from './routes/packages/$package'
+import { Route as PhlebotomistAppointmentsRouteImport } from './routes/phlebotomist.appointments'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiPaymentCallbackRouteImport } from './routes/api/payment/callback'
 import { Route as ApiPaymentCheckoutRouteImport } from './routes/api/payment/checkout'
@@ -46,10 +60,6 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/_admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/_auth',
   getParentRoute: () => rootRouteImport,
@@ -58,9 +68,19 @@ const ProtectedRoute = ProtectedRouteImport.update({
   id: '/_protected',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactUsRoute = ContactUsRouteImport.update({
   id: '/contact-us',
   path: '/contact-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InviteAcceptRoute = InviteAcceptRouteImport.update({
+  id: '/invite-accept',
+  path: '/invite-accept',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
@@ -93,9 +113,80 @@ const TestsRoute = TestsRouteImport.update({
   path: '/tests',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthRegisterRoute = AuthRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => AuthRoute,
+} as any)
+const ProtectedBookingRoute = ProtectedBookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedCalendarRoute = ProtectedCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedCartRoute = ProtectedCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedFamilyMembersRoute = ProtectedFamilyMembersRouteImport.update({
+  id: '/family-members',
+  path: '/family-members',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedMyOrdersRoute = ProtectedMyOrdersRouteImport.update({
+  id: '/my-orders',
+  path: '/my-orders',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedMyPrescriptionsRoute =
+  ProtectedMyPrescriptionsRouteImport.update({
+    id: '/my-prescriptions',
+    path: '/my-prescriptions',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedMyReportsRoute = ProtectedMyReportsRouteImport.update({
+  id: '/my-reports',
+  path: '/my-reports',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedPaymentStatusRoute = ProtectedPaymentStatusRouteImport.update({
+  id: '/payment-status',
+  path: '/payment-status',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedProfileRoute = ProtectedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const ProtectedSavedAddressesRoute = ProtectedSavedAddressesRouteImport.update({
+  id: '/saved-addresses',
+  path: '/saved-addresses',
+  getParentRoute: () => ProtectedRoute,
+} as any)
+const AdminAccountsRoute = AdminAccountsRouteImport.update({
+  id: '/accounts',
+  path: '/accounts',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBookingsRoute = AdminBookingsRouteImport.update({
   id: '/bookings',
   path: '/bookings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCalendarRoute = AdminCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
@@ -113,44 +204,34 @@ const AdminPrescriptionsRoute = AdminPrescriptionsRouteImport.update({
   path: '/prescriptions',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminStaffRoute = AdminStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminSubscribersRoute = AdminSubscribersRouteImport.update({
   id: '/subscribers',
   path: '/subscribers',
   getParentRoute: () => AdminRoute,
 } as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AuthRoute,
-} as any)
-const AuthRegisterRoute = AuthRegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => AuthRoute,
-} as any)
-const ProtectedBookingRoute = ProtectedBookingRouteImport.update({
-  id: '/booking',
-  path: '/booking',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-const ProtectedCartRoute = ProtectedCartRouteImport.update({
-  id: '/cart',
-  path: '/cart',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-const ProtectedPaymentSuccessRoute = ProtectedPaymentSuccessRouteImport.update({
-  id: '/payment-success',
-  path: '/payment-success',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-const ProtectedProfileRoute = ProtectedProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => ProtectedRoute,
+const ApiCleanupRoute = ApiCleanupRouteImport.update({
+  id: '/api/cleanup',
+  path: '/api/cleanup',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogsIndexRoute = BlogsIndexRouteImport.update({
   id: '/blogs/',
   path: '/blogs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CooTasksRoute = CooTasksRouteImport.update({
+  id: '/coo/tasks',
+  path: '/coo/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoiceBookingIdRoute = InvoiceBookingIdRouteImport.update({
+  id: '/invoice/$bookingId',
+  path: '/invoice/$bookingId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PackagesIndexRoute = PackagesIndexRouteImport.update({
@@ -163,6 +244,12 @@ const PackagesPackageRoute = PackagesPackageRouteImport.update({
   path: '/packages/$package',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PhlebotomistAppointmentsRoute =
+  PhlebotomistAppointmentsRouteImport.update({
+    id: '/phlebotomist/appointments',
+    path: '/phlebotomist/appointments',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -197,25 +284,40 @@ const PackagesMiniPackagesMiniPackageRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/contact-us': typeof ContactUsRoute
+  '/invite-accept': typeof InviteAcceptRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-condition': typeof TermsAndConditionRoute
   '/tests': typeof TestsRoute
-  '/bookings': typeof AdminBookingsRoute
-  '/dashboard': typeof AdminDashboardRoute
-  '/patients': typeof AdminPatientsRoute
-  '/prescriptions': typeof AdminPrescriptionsRoute
-  '/subscribers': typeof AdminSubscribersRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/booking': typeof ProtectedBookingRoute
+  '/calendar': typeof ProtectedCalendarRoute
   '/cart': typeof ProtectedCartRoute
-  '/payment-success': typeof ProtectedPaymentSuccessRoute
+  '/family-members': typeof ProtectedFamilyMembersRoute
+  '/my-orders': typeof ProtectedMyOrdersRoute
+  '/my-prescriptions': typeof ProtectedMyPrescriptionsRoute
+  '/my-reports': typeof ProtectedMyReportsRoute
+  '/payment-status': typeof ProtectedPaymentStatusRoute
   '/profile': typeof ProtectedProfileRoute
+  '/saved-addresses': typeof ProtectedSavedAddressesRoute
+  '/admin/accounts': typeof AdminAccountsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/calendar': typeof AdminCalendarRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/patients': typeof AdminPatientsRoute
+  '/admin/prescriptions': typeof AdminPrescriptionsRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
+  '/api/cleanup': typeof ApiCleanupRoute
+  '/coo/tasks': typeof CooTasksRoute
+  '/invoice/$bookingId': typeof InvoiceBookingIdRoute
   '/packages/$package': typeof PackagesPackageRoute
+  '/phlebotomist/appointments': typeof PhlebotomistAppointmentsRoute
   '/blogs/': typeof BlogsIndexRoute
   '/packages/': typeof PackagesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -227,25 +329,40 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/contact-us': typeof ContactUsRoute
+  '/invite-accept': typeof InviteAcceptRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-condition': typeof TermsAndConditionRoute
   '/tests': typeof TestsRoute
-  '/bookings': typeof AdminBookingsRoute
-  '/dashboard': typeof AdminDashboardRoute
-  '/patients': typeof AdminPatientsRoute
-  '/prescriptions': typeof AdminPrescriptionsRoute
-  '/subscribers': typeof AdminSubscribersRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
   '/booking': typeof ProtectedBookingRoute
+  '/calendar': typeof ProtectedCalendarRoute
   '/cart': typeof ProtectedCartRoute
-  '/payment-success': typeof ProtectedPaymentSuccessRoute
+  '/family-members': typeof ProtectedFamilyMembersRoute
+  '/my-orders': typeof ProtectedMyOrdersRoute
+  '/my-prescriptions': typeof ProtectedMyPrescriptionsRoute
+  '/my-reports': typeof ProtectedMyReportsRoute
+  '/payment-status': typeof ProtectedPaymentStatusRoute
   '/profile': typeof ProtectedProfileRoute
+  '/saved-addresses': typeof ProtectedSavedAddressesRoute
+  '/admin/accounts': typeof AdminAccountsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/calendar': typeof AdminCalendarRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/patients': typeof AdminPatientsRoute
+  '/admin/prescriptions': typeof AdminPrescriptionsRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
+  '/api/cleanup': typeof ApiCleanupRoute
+  '/coo/tasks': typeof CooTasksRoute
+  '/invoice/$bookingId': typeof InvoiceBookingIdRoute
   '/packages/$package': typeof PackagesPackageRoute
+  '/phlebotomist/appointments': typeof PhlebotomistAppointmentsRoute
   '/blogs': typeof BlogsIndexRoute
   '/packages': typeof PackagesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -258,28 +375,42 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_admin': typeof AdminRouteWithChildren
   '/_auth': typeof AuthRouteWithChildren
   '/_protected': typeof ProtectedRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/contact-us': typeof ContactUsRoute
+  '/invite-accept': typeof InviteAcceptRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-condition': typeof TermsAndConditionRoute
   '/tests': typeof TestsRoute
-  '/_admin/bookings': typeof AdminBookingsRoute
-  '/_admin/dashboard': typeof AdminDashboardRoute
-  '/_admin/patients': typeof AdminPatientsRoute
-  '/_admin/prescriptions': typeof AdminPrescriptionsRoute
-  '/_admin/subscribers': typeof AdminSubscribersRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
   '/_protected/booking': typeof ProtectedBookingRoute
+  '/_protected/calendar': typeof ProtectedCalendarRoute
   '/_protected/cart': typeof ProtectedCartRoute
-  '/_protected/payment-success': typeof ProtectedPaymentSuccessRoute
+  '/_protected/family-members': typeof ProtectedFamilyMembersRoute
+  '/_protected/my-orders': typeof ProtectedMyOrdersRoute
+  '/_protected/my-prescriptions': typeof ProtectedMyPrescriptionsRoute
+  '/_protected/my-reports': typeof ProtectedMyReportsRoute
+  '/_protected/payment-status': typeof ProtectedPaymentStatusRoute
   '/_protected/profile': typeof ProtectedProfileRoute
+  '/_protected/saved-addresses': typeof ProtectedSavedAddressesRoute
+  '/admin/accounts': typeof AdminAccountsRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/calendar': typeof AdminCalendarRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/patients': typeof AdminPatientsRoute
+  '/admin/prescriptions': typeof AdminPrescriptionsRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin/subscribers': typeof AdminSubscribersRoute
+  '/api/cleanup': typeof ApiCleanupRoute
+  '/coo/tasks': typeof CooTasksRoute
+  '/invoice/$bookingId': typeof InvoiceBookingIdRoute
   '/packages/$package': typeof PackagesPackageRoute
+  '/phlebotomist/appointments': typeof PhlebotomistAppointmentsRoute
   '/blogs/': typeof BlogsIndexRoute
   '/packages/': typeof PackagesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -293,25 +424,40 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/contact-us'
+    | '/invite-accept'
     | '/privacy-policy'
     | '/refund-policy'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/terms-and-condition'
     | '/tests'
-    | '/bookings'
-    | '/dashboard'
-    | '/patients'
-    | '/prescriptions'
-    | '/subscribers'
     | '/login'
     | '/register'
     | '/booking'
+    | '/calendar'
     | '/cart'
-    | '/payment-success'
+    | '/family-members'
+    | '/my-orders'
+    | '/my-prescriptions'
+    | '/my-reports'
+    | '/payment-status'
     | '/profile'
+    | '/saved-addresses'
+    | '/admin/accounts'
+    | '/admin/bookings'
+    | '/admin/calendar'
+    | '/admin/dashboard'
+    | '/admin/patients'
+    | '/admin/prescriptions'
+    | '/admin/staff'
+    | '/admin/subscribers'
+    | '/api/cleanup'
+    | '/coo/tasks'
+    | '/invoice/$bookingId'
     | '/packages/$package'
+    | '/phlebotomist/appointments'
     | '/blogs/'
     | '/packages/'
     | '/api/auth/$'
@@ -323,25 +469,40 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/contact-us'
+    | '/invite-accept'
     | '/privacy-policy'
     | '/refund-policy'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/terms-and-condition'
     | '/tests'
-    | '/bookings'
-    | '/dashboard'
-    | '/patients'
-    | '/prescriptions'
-    | '/subscribers'
     | '/login'
     | '/register'
     | '/booking'
+    | '/calendar'
     | '/cart'
-    | '/payment-success'
+    | '/family-members'
+    | '/my-orders'
+    | '/my-prescriptions'
+    | '/my-reports'
+    | '/payment-status'
     | '/profile'
+    | '/saved-addresses'
+    | '/admin/accounts'
+    | '/admin/bookings'
+    | '/admin/calendar'
+    | '/admin/dashboard'
+    | '/admin/patients'
+    | '/admin/prescriptions'
+    | '/admin/staff'
+    | '/admin/subscribers'
+    | '/api/cleanup'
+    | '/coo/tasks'
+    | '/invoice/$bookingId'
     | '/packages/$package'
+    | '/phlebotomist/appointments'
     | '/blogs'
     | '/packages'
     | '/api/auth/$'
@@ -353,28 +514,42 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/_admin'
     | '/_auth'
     | '/_protected'
+    | '/admin'
     | '/contact-us'
+    | '/invite-accept'
     | '/privacy-policy'
     | '/refund-policy'
     | '/robots.txt'
     | '/sitemap.xml'
     | '/terms-and-condition'
     | '/tests'
-    | '/_admin/bookings'
-    | '/_admin/dashboard'
-    | '/_admin/patients'
-    | '/_admin/prescriptions'
-    | '/_admin/subscribers'
     | '/_auth/login'
     | '/_auth/register'
     | '/_protected/booking'
+    | '/_protected/calendar'
     | '/_protected/cart'
-    | '/_protected/payment-success'
+    | '/_protected/family-members'
+    | '/_protected/my-orders'
+    | '/_protected/my-prescriptions'
+    | '/_protected/my-reports'
+    | '/_protected/payment-status'
     | '/_protected/profile'
+    | '/_protected/saved-addresses'
+    | '/admin/accounts'
+    | '/admin/bookings'
+    | '/admin/calendar'
+    | '/admin/dashboard'
+    | '/admin/patients'
+    | '/admin/prescriptions'
+    | '/admin/staff'
+    | '/admin/subscribers'
+    | '/api/cleanup'
+    | '/coo/tasks'
+    | '/invoice/$bookingId'
     | '/packages/$package'
+    | '/phlebotomist/appointments'
     | '/blogs/'
     | '/packages/'
     | '/api/auth/$'
@@ -387,17 +562,22 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRouteWithChildren
   ProtectedRoute: typeof ProtectedRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
   ContactUsRoute: typeof ContactUsRoute
+  InviteAcceptRoute: typeof InviteAcceptRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndConditionRoute: typeof TermsAndConditionRoute
   TestsRoute: typeof TestsRoute
+  ApiCleanupRoute: typeof ApiCleanupRoute
+  CooTasksRoute: typeof CooTasksRoute
+  InvoiceBookingIdRoute: typeof InvoiceBookingIdRoute
   PackagesPackageRoute: typeof PackagesPackageRoute
+  PhlebotomistAppointmentsRoute: typeof PhlebotomistAppointmentsRoute
   BlogsIndexRoute: typeof BlogsIndexRoute
   PackagesIndexRoute: typeof PackagesIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
@@ -417,13 +597,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_admin': {
-      id: '/_admin'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_auth': {
       id: '/_auth'
       path: ''
@@ -438,11 +611,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact-us': {
       id: '/contact-us'
       path: '/contact-us'
       fullPath: '/contact-us'
       preLoaderRoute: typeof ContactUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invite-accept': {
+      id: '/invite-accept'
+      path: '/invite-accept'
+      fullPath: '/invite-accept'
+      preLoaderRoute: typeof InviteAcceptRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -487,41 +674,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_admin/bookings': {
-      id: '/_admin/bookings'
-      path: '/bookings'
-      fullPath: '/bookings'
-      preLoaderRoute: typeof AdminBookingsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/_admin/dashboard': {
-      id: '/_admin/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AdminDashboardRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/_admin/patients': {
-      id: '/_admin/patients'
-      path: '/patients'
-      fullPath: '/patients'
-      preLoaderRoute: typeof AdminPatientsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/_admin/prescriptions': {
-      id: '/_admin/prescriptions'
-      path: '/prescriptions'
-      fullPath: '/prescriptions'
-      preLoaderRoute: typeof AdminPrescriptionsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/_admin/subscribers': {
-      id: '/_admin/subscribers'
-      path: '/subscribers'
-      fullPath: '/subscribers'
-      preLoaderRoute: typeof AdminSubscribersRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/_auth/login': {
       id: '/_auth/login'
       path: '/login'
@@ -543,6 +695,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedBookingRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/calendar': {
+      id: '/_protected/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof ProtectedCalendarRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/cart': {
       id: '/_protected/cart'
       path: '/cart'
@@ -550,11 +709,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedCartRouteImport
       parentRoute: typeof ProtectedRoute
     }
-    '/_protected/payment-success': {
-      id: '/_protected/payment-success'
-      path: '/payment-success'
-      fullPath: '/payment-success'
-      preLoaderRoute: typeof ProtectedPaymentSuccessRouteImport
+    '/_protected/family-members': {
+      id: '/_protected/family-members'
+      path: '/family-members'
+      fullPath: '/family-members'
+      preLoaderRoute: typeof ProtectedFamilyMembersRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/my-orders': {
+      id: '/_protected/my-orders'
+      path: '/my-orders'
+      fullPath: '/my-orders'
+      preLoaderRoute: typeof ProtectedMyOrdersRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/my-prescriptions': {
+      id: '/_protected/my-prescriptions'
+      path: '/my-prescriptions'
+      fullPath: '/my-prescriptions'
+      preLoaderRoute: typeof ProtectedMyPrescriptionsRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/my-reports': {
+      id: '/_protected/my-reports'
+      path: '/my-reports'
+      fullPath: '/my-reports'
+      preLoaderRoute: typeof ProtectedMyReportsRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/payment-status': {
+      id: '/_protected/payment-status'
+      path: '/payment-status'
+      fullPath: '/payment-status'
+      preLoaderRoute: typeof ProtectedPaymentStatusRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/profile': {
@@ -564,11 +751,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedProfileRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/saved-addresses': {
+      id: '/_protected/saved-addresses'
+      path: '/saved-addresses'
+      fullPath: '/saved-addresses'
+      preLoaderRoute: typeof ProtectedSavedAddressesRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/admin/accounts': {
+      id: '/admin/accounts'
+      path: '/accounts'
+      fullPath: '/admin/accounts'
+      preLoaderRoute: typeof AdminAccountsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/bookings': {
+      id: '/admin/bookings'
+      path: '/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AdminBookingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/calendar': {
+      id: '/admin/calendar'
+      path: '/calendar'
+      fullPath: '/admin/calendar'
+      preLoaderRoute: typeof AdminCalendarRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/patients': {
+      id: '/admin/patients'
+      path: '/patients'
+      fullPath: '/admin/patients'
+      preLoaderRoute: typeof AdminPatientsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/prescriptions': {
+      id: '/admin/prescriptions'
+      path: '/prescriptions'
+      fullPath: '/admin/prescriptions'
+      preLoaderRoute: typeof AdminPrescriptionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/staff': {
+      id: '/admin/staff'
+      path: '/staff'
+      fullPath: '/admin/staff'
+      preLoaderRoute: typeof AdminStaffRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/subscribers': {
+      id: '/admin/subscribers'
+      path: '/subscribers'
+      fullPath: '/admin/subscribers'
+      preLoaderRoute: typeof AdminSubscribersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/cleanup': {
+      id: '/api/cleanup'
+      path: '/api/cleanup'
+      fullPath: '/api/cleanup'
+      preLoaderRoute: typeof ApiCleanupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blogs/': {
       id: '/blogs/'
       path: '/blogs'
       fullPath: '/blogs/'
       preLoaderRoute: typeof BlogsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coo/tasks': {
+      id: '/coo/tasks'
+      path: '/coo/tasks'
+      fullPath: '/coo/tasks'
+      preLoaderRoute: typeof CooTasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invoice/$bookingId': {
+      id: '/invoice/$bookingId'
+      path: '/invoice/$bookingId'
+      fullPath: '/invoice/$bookingId'
+      preLoaderRoute: typeof InvoiceBookingIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/packages/': {
@@ -583,6 +854,13 @@ declare module '@tanstack/react-router' {
       path: '/packages/$package'
       fullPath: '/packages/$package'
       preLoaderRoute: typeof PackagesPackageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/phlebotomist/appointments': {
+      id: '/phlebotomist/appointments'
+      path: '/phlebotomist/appointments'
+      fullPath: '/phlebotomist/appointments'
+      preLoaderRoute: typeof PhlebotomistAppointmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/$': {
@@ -630,24 +908,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface AdminRouteChildren {
-  AdminBookingsRoute: typeof AdminBookingsRoute
-  AdminDashboardRoute: typeof AdminDashboardRoute
-  AdminPatientsRoute: typeof AdminPatientsRoute
-  AdminPrescriptionsRoute: typeof AdminPrescriptionsRoute
-  AdminSubscribersRoute: typeof AdminSubscribersRoute
-}
-
-const AdminRouteChildren: AdminRouteChildren = {
-  AdminBookingsRoute: AdminBookingsRoute,
-  AdminDashboardRoute: AdminDashboardRoute,
-  AdminPatientsRoute: AdminPatientsRoute,
-  AdminPrescriptionsRoute: AdminPrescriptionsRoute,
-  AdminSubscribersRoute: AdminSubscribersRoute,
-}
-
-const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
-
 interface AuthRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
@@ -662,35 +922,76 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface ProtectedRouteChildren {
   ProtectedBookingRoute: typeof ProtectedBookingRoute
+  ProtectedCalendarRoute: typeof ProtectedCalendarRoute
   ProtectedCartRoute: typeof ProtectedCartRoute
-  ProtectedPaymentSuccessRoute: typeof ProtectedPaymentSuccessRoute
+  ProtectedFamilyMembersRoute: typeof ProtectedFamilyMembersRoute
+  ProtectedMyOrdersRoute: typeof ProtectedMyOrdersRoute
+  ProtectedMyPrescriptionsRoute: typeof ProtectedMyPrescriptionsRoute
+  ProtectedMyReportsRoute: typeof ProtectedMyReportsRoute
+  ProtectedPaymentStatusRoute: typeof ProtectedPaymentStatusRoute
   ProtectedProfileRoute: typeof ProtectedProfileRoute
+  ProtectedSavedAddressesRoute: typeof ProtectedSavedAddressesRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedBookingRoute: ProtectedBookingRoute,
+  ProtectedCalendarRoute: ProtectedCalendarRoute,
   ProtectedCartRoute: ProtectedCartRoute,
-  ProtectedPaymentSuccessRoute: ProtectedPaymentSuccessRoute,
+  ProtectedFamilyMembersRoute: ProtectedFamilyMembersRoute,
+  ProtectedMyOrdersRoute: ProtectedMyOrdersRoute,
+  ProtectedMyPrescriptionsRoute: ProtectedMyPrescriptionsRoute,
+  ProtectedMyReportsRoute: ProtectedMyReportsRoute,
+  ProtectedPaymentStatusRoute: ProtectedPaymentStatusRoute,
   ProtectedProfileRoute: ProtectedProfileRoute,
+  ProtectedSavedAddressesRoute: ProtectedSavedAddressesRoute,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
   ProtectedRouteChildren,
 )
 
+interface AdminRouteChildren {
+  AdminAccountsRoute: typeof AdminAccountsRoute
+  AdminBookingsRoute: typeof AdminBookingsRoute
+  AdminCalendarRoute: typeof AdminCalendarRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminPatientsRoute: typeof AdminPatientsRoute
+  AdminPrescriptionsRoute: typeof AdminPrescriptionsRoute
+  AdminStaffRoute: typeof AdminStaffRoute
+  AdminSubscribersRoute: typeof AdminSubscribersRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAccountsRoute: AdminAccountsRoute,
+  AdminBookingsRoute: AdminBookingsRoute,
+  AdminCalendarRoute: AdminCalendarRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminPatientsRoute: AdminPatientsRoute,
+  AdminPrescriptionsRoute: AdminPrescriptionsRoute,
+  AdminStaffRoute: AdminStaffRoute,
+  AdminSubscribersRoute: AdminSubscribersRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRouteWithChildren,
   ProtectedRoute: ProtectedRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
   ContactUsRoute: ContactUsRoute,
+  InviteAcceptRoute: InviteAcceptRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndConditionRoute: TermsAndConditionRoute,
   TestsRoute: TestsRoute,
+  ApiCleanupRoute: ApiCleanupRoute,
+  CooTasksRoute: CooTasksRoute,
+  InvoiceBookingIdRoute: InvoiceBookingIdRoute,
   PackagesPackageRoute: PackagesPackageRoute,
+  PhlebotomistAppointmentsRoute: PhlebotomistAppointmentsRoute,
   BlogsIndexRoute: BlogsIndexRoute,
   PackagesIndexRoute: PackagesIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
