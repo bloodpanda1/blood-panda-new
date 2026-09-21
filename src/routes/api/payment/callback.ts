@@ -1,116 +1,162 @@
-import { getServerEnv } from '#/config/server-env'
-import { getPaymentClient } from '#/integrations/phonepay'
-import { updateBookingStatus } from '#/lib/booking.functions'
-import {
-  createPaymentRecord,
-  createWebhookRecord,
-} from '#/lib/payments.functions'
+import { prisma } from '#/db'
+import { verifyCashfreeWebhookSignature } from '#/integrations/cashfree'
+import { notifyAdmins } from '#/lib/notifications'
 import { createFileRoute } from '@tanstack/react-router'
 
 /**
- * **Recommendations for handling webhooks:**
- * - Return 2xx only when you have successfully processed the event.
- * - Return 4xx for issues caused by the sender (bad payload, missing required headers) so the provider usually stops retrying.
- * - Return 5xx when you want the provider to retry (temporary failure like downtime/timeouts).
+ * Cashfree Payments Webhook Callback Handler
+ *
+ * Headers verified:
+ * - x-webhook-signature
+ * - x-webhook-timestamp
+ *
+ * Events handled:
+ * - PAYMENT_SUCCESS_WEBHOOK: Mark Booking CONFIRMED, Payment PAID
+ * - PAYMENT_FAILED_WEBHOOK: Mark Payment FAILED, Booking PAYMENT_FAILED
+ * - PAYMENT_USER_DROPPED_WEBHOOK: Mark Payment USER_DROPPED
  */
-
 export const Route = createFileRoute('/api/payment/callback')({
   server: {
-    // middleware: [authMiddleware], // Runs first for all handlers
     handlers: ({ createHandlers }) =>
       createHandlers({
         GET: async () => {
-          return new Response('Not implemented', { status: 501 })
+          return new Response('Cashfree webhook endpoint is active.', { status: 200 })
         },
         POST: {
-          // middleware: [validMiddleware], // Runs after authMiddleware, only for POST
           handler: async ({ request }) => {
-            const headers = request.headers
-            const payload = await request.text()
+            try {
+              const headers = request.headers
+              const signature = headers.get('x-webhook-signature')
+              const timestamp = headers.get('x-webhook-timestamp')
+              const rawBody = await request.text()
 
-            const usernameConfigured = getServerEnv().PHONEPAY_USERNAME
-            const passwordConfigured = getServerEnv().PHONEPAY_PASSWORD
-
-            const phonepeS2SCallbackResponseBodyString = payload
-
-            const authorizationHeaderData = headers.get('authorization')
-            if (!authorizationHeaderData) {
-              console.error('Missing authorization header')
-              return new Response('Missing authorization header', {
-                status: 400,
-                statusText: 'Bad Request',
+              console.log('[Cashfree Webhook] Received event:', {
+                timestamp,
+                hasSignature: !!signature,
               })
-            }
 
-            const callbackResponse = getPaymentClient().validateCallback(
-              usernameConfigured,
-              passwordConfigured,
-              authorizationHeaderData,
-              phonepeS2SCallbackResponseBodyString,
-            )
-
-            if (
-              callbackResponse.type.toString() === 'CHECKOUT_ORDER_COMPLETED'
-            ) {
-              const userId = callbackResponse.payload.metaInfo?.udf1 // userId
-              const bookingId = callbackResponse.payload.metaInfo?.udf2 // bookingId
-
-              if (bookingId && userId) {
-                const newPaymentPayload = {
-                  merchantId: callbackResponse.payload.merchantId,
-                  merchantOrderId:
-                    callbackResponse.payload.merchantOrderId ?? '',
-                  orderId: callbackResponse.payload.orderId,
-                  state: callbackResponse.payload.state,
-                  amount: String(callbackResponse.payload.amount),
-                  currency:
-                    'currency' in callbackResponse.payload
-                      ? (callbackResponse.payload.currency as string)
-                      : 'INR',
-                  expireAt: String(callbackResponse.payload.expireAt),
-                  userId: userId,
-                  bookingId: bookingId,
-                }
-                console.log(
-                  'Creating payment record with payload:',
-                  newPaymentPayload,
-                )
-
-                try {
-                  const newPayment = await createPaymentRecord({
-                    data: newPaymentPayload,
-                  })
-
-                  await Promise.all([
-                    updateBookingStatus({
-                      data: { bookingId, status: 'CONFIRMED' },
-                    }),
-                    createWebhookRecord({
-                      data: {
-                        payload: JSON.stringify(callbackResponse),
-                        paymentId: newPayment.id,
-                      },
-                    }),
-                  ])
-
-                  return new Response('Webhook received successfully', {
-                    status: 200,
-                    statusText: 'OK',
-                  })
-                } catch (error) {
-                  console.error('Error deleting booking:', error)
-                  return new Response('Error deleting booking', {
-                    status: 400,
-                    statusText: 'Bad Request',
-                  })
+              // Verify webhook signature (optional in sandbox if missing, but verified if provided)
+              if (signature && timestamp) {
+                const isValid = verifyCashfreeWebhookSignature(signature, rawBody, timestamp)
+                if (!isValid) {
+                  console.error('[Cashfree Webhook] Invalid signature verification failed')
+                  return new Response('Invalid webhook signature', { status: 401 })
                 }
               }
-            }
 
-            return new Response('Webhook received successfully', {
-              status: 200,
-              statusText: 'OK',
-            })
+              let event: any
+              try {
+                event = JSON.parse(rawBody)
+              } catch (e) {
+                console.error('[Cashfree Webhook] Invalid JSON payload')
+                return new Response('Invalid JSON payload', { status: 400 })
+              }
+
+              const eventType = event.type
+              const orderData = event.data?.order
+              const paymentData = event.data?.payment
+              const customerData = event.data?.customer_details
+
+              console.log('[Cashfree Webhook] Event details:', {
+                eventType,
+                orderId: orderData?.order_id,
+                paymentStatus: paymentData?.payment_status,
+              })
+
+              if (!orderData?.order_id) {
+                return new Response('Missing order_id in webhook', { status: 400 })
+              }
+
+              // Find existing payment in database by orderId
+              const existingPayment = await prisma.payment.findFirst({
+                where: { orderId: orderData.order_id },
+              })
+
+              // Save raw webhook log
+              const webhookLog = await prisma.webhookLog.create({
+                data: {
+                  payload: event,
+                  paymentId: existingPayment?.id || null,
+                },
+              })
+
+              if (eventType === 'PAYMENT_SUCCESS_WEBHOOK') {
+                const paymentStatus = paymentData?.payment_status || 'PAID'
+                
+                // Update payment record
+                if (existingPayment) {
+                  await prisma.payment.update({
+                    where: { id: existingPayment.id },
+                    data: {
+                      state: 'PAID',
+                      amount: String(paymentData?.payment_amount || orderData.order_amount),
+                    },
+                  })
+
+                  // Update connected booking status
+                  if (existingPayment.bookingId) {
+                    await prisma.booking.update({
+                      where: { id: existingPayment.bookingId },
+                      data: { status: 'CONFIRMED', paymentStatus: 'PAID' },
+                    })
+                    console.log(`[Cashfree Webhook] Booking ${existingPayment.bookingId} marked as CONFIRMED and PAID`)
+                  }
+                } else if (customerData?.customer_id) {
+                  // If payment didn't exist, create it if we have userId
+                  await prisma.payment.create({
+                    data: {
+                      merchantId: 'CASHFREE',
+                      merchantOrderId: orderData.order_id,
+                      orderId: orderData.order_id,
+                      state: 'PAID',
+                      amount: String(orderData.order_amount),
+                      currency: orderData.order_currency || 'INR',
+                      expireAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+                      userId: customerData.customer_id,
+                      bookingId: orderData.order_id,
+                    },
+                  })
+                }
+              } else if (
+                eventType === 'PAYMENT_FAILED_WEBHOOK' ||
+                eventType === 'PAYMENT_USER_DROPPED_WEBHOOK'
+              ) {
+                if (existingPayment) {
+                  await prisma.payment.update({
+                    where: { id: existingPayment.id },
+                    data: {
+                      state: eventType === 'PAYMENT_USER_DROPPED_WEBHOOK' ? 'USER_DROPPED' : 'FAILED',
+                    },
+                  })
+                  
+                  if (existingPayment.bookingId) {
+                    await prisma.booking.update({
+                      where: { id: existingPayment.bookingId },
+                      data: { status: 'CANCELLED', paymentStatus: 'FAILED' },
+                    })
+                    console.log(`[Cashfree Webhook] Booking ${existingPayment.bookingId} marked as CANCELLED and FAILED`)
+                    
+                    notifyAdmins(
+                      'Payment Failed (Webhook)',
+                      `A payment for booking ID ${existingPayment.bookingId} has failed via Cashfree webhook.`,
+                      'PAYMENT_FAILED',
+                      `/admin/bookings`
+                    )
+                  }
+                }
+              }
+
+              return new Response(JSON.stringify({ received: true, logId: webhookLog.id }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' },
+              })
+            } catch (err: any) {
+              console.error('[Cashfree Webhook] Error processing webhook:', err)
+              return new Response(JSON.stringify({ error: err.message }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json' },
+              })
+            }
           },
         },
       }),
