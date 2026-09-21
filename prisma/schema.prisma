@@ -12,6 +12,8 @@ model User {
   name          String
   email         String    @unique
   emailVerified Boolean   @default(false)
+  phone         String?
+  address       String?
   image         String    @default("https://avatar.vercel.sh/rauchg?rounded=60")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -25,9 +27,20 @@ model User {
   banned     Boolean?
   banReason  String?
   banExpires DateTime? @db.Timestamptz(3)
+  lastActiveAt DateTime?
 
-  prescriptions String[] @default([])
+  availabilityStatus String?   @default("OFF_DUTY")
+  availableSetAt     DateTime?
+
   testReports   String[] @default([])
+
+  members       Member[]
+  addresses     Address[]
+  prescriptions Prescription[]
+  patientProfiles      PatientProfile[]
+  phlebotomistBookings Booking[]        @relation("BookingPhlebotomist")
+  cooBookings          Booking[]        @relation("BookingCoo")
+  notifications        Notification[]
 
   @@map("user")
 }
@@ -130,8 +143,11 @@ model BloodTest {
   secondaryCategoryId String            @db.Uuid
   createdAt           DateTime          @default(now())
   updatedAt           DateTime          @updatedAt
+  members             Member[]
+  
+  // Legacy field for backward compatibility with old deployed versions
   memberId            String?           @db.Uuid
-  member              Member?           @relation(fields: [memberId], references: [id])
+
   primaryCategory     PrimaryCategory   @relation(fields: [primaryCategoryId], references: [id], onDelete: Cascade)
   secondaryCategory   SecondaryCategory @relation(fields: [secondaryCategoryId], references: [id], onDelete: Cascade)
 
@@ -188,20 +204,50 @@ model MiniPackage {
   @@map("mini_package")
 }
 
+model PatientProfile {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String?     @db.Uuid
+  name      String
+  email     String
+  phone     String
+  gender    Gender
+  age       String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  
+  members   Member[]
+  user      User?       @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("patient_profile")
+}
+
 model Member {
   id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String?     @db.Uuid
+  patientProfileId String? @db.Uuid
   name      String
   email     String
   phone     String
   gender    Gender
   age       String
   bookingId String?     @db.Uuid
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  testItems BloodTest[]
+  createdAt    DateTime    @default(now())
+  updatedAt        DateTime        @updatedAt
+  sampleStatus     SampleStatus    @default(BOOKED)
+  collectedAt      DateTime?
+  labReceivedAt    DateTime?
+  reportUrl    String?
+  prescriptionUrl String?
+  testItems    BloodTest[]
   booking   Booking?    @relation(fields: [bookingId], references: [id])
+  user      User?       @relation(fields: [userId], references: [id])
+  patientProfile PatientProfile? @relation(fields: [patientProfileId], references: [id])
+  prescriptions Prescription[]
 
   @@index([bookingId])
+  @@index([userId])
+  @@index([patientProfileId])
   @@map("member")
 }
 
@@ -217,11 +263,14 @@ model Address {
   state         String?
   country       String?
   bookingId     String?     @db.Uuid
+  userId        String?     @db.Uuid
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   booking       Booking?    @relation(fields: [bookingId], references: [id])
+  user          User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([type, pinCode])
+  @@index([userId])
   @@map("address")
 }
 
@@ -239,17 +288,23 @@ model Schedule {
 }
 
 model Booking {
-  id        String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  type      BookingType   @default(COD)
-  status    BookingStatus @default(PENDING)
-  userId    String?       @db.Uuid
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  type          BookingType   @default(COD)
+  status        BookingStatus @default(CONFIRMED)
+  paymentStatus PaymentStatus @default(PENDING)
+  userId        String?       @db.Uuid
+  phlebotomistId String?      @db.Uuid
+  cooId          String?      @db.Uuid
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   addresses Address[]
   user      User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phlebotomist User?      @relation("BookingPhlebotomist", fields: [phlebotomistId], references: [id])
+  coo          User?      @relation("BookingCoo", fields: [cooId], references: [id])
   members   Member[]
   payments  Payment[]
   schedules Schedule[]
+  prescriptions Prescription[]
 
   fullName        String?
   mobileNumber    String?
@@ -297,9 +352,27 @@ model WebhookLog {
   @@map("webhook_log")
 }
 
+model Prescription {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  fileUrl   String
+  doctorName String?
+  memberId  String?  @db.Uuid
+  bookingId String?  @db.Uuid
+  userId    String?  @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  member    Member?  @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  booking   Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("prescription")
+}
+
 enum Role {
-  ADMIN
-  MODERATOR
+  SUPER_ADMIN
+  COO
+  PHLEBOTOMIST
   USER
 }
 
@@ -325,4 +398,52 @@ enum BookingType {
   COD
   ONLINE_PAYMENT
   INSTANT_BOOKING
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum SampleStatus {
+  BOOKED
+  COLLECTED
+  RECEIVED
+  ACCESSIONED
+  PROCESSING
+  VERIFIED
+  REPORT_RELEASED
+}
+
+model Notification {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String   @db.Uuid
+  title     String
+  message   String
+  type      String   // NEW_BOOKING, BOOKING_CANCELLED, COD_PENDING, SAMPLE_MISSED, SAMPLE_RECEIVED, REPORT_READY, PAYMENT_FAILED, PATIENT_MESSAGE
+  isRead    Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@map("notification")
+}
+
+model AdminInvite {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email     String   @unique
+  phone     String?
+  address   String?
+  role      Role
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@map("admin_invite")
 }

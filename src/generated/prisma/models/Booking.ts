@@ -28,7 +28,10 @@ export type BookingMinAggregateOutputType = {
   id: string | null
   type: $Enums.BookingType | null
   status: $Enums.BookingStatus | null
+  paymentStatus: $Enums.PaymentStatus | null
   userId: string | null
+  phlebotomistId: string | null
+  cooId: string | null
   createdAt: Date | null
   updatedAt: Date | null
   fullName: string | null
@@ -46,7 +49,10 @@ export type BookingMaxAggregateOutputType = {
   id: string | null
   type: $Enums.BookingType | null
   status: $Enums.BookingStatus | null
+  paymentStatus: $Enums.PaymentStatus | null
   userId: string | null
+  phlebotomistId: string | null
+  cooId: string | null
   createdAt: Date | null
   updatedAt: Date | null
   fullName: string | null
@@ -64,7 +70,10 @@ export type BookingCountAggregateOutputType = {
   id: number
   type: number
   status: number
+  paymentStatus: number
   userId: number
+  phlebotomistId: number
+  cooId: number
   createdAt: number
   updatedAt: number
   fullName: number
@@ -84,7 +93,10 @@ export type BookingMinAggregateInputType = {
   id?: true
   type?: true
   status?: true
+  paymentStatus?: true
   userId?: true
+  phlebotomistId?: true
+  cooId?: true
   createdAt?: true
   updatedAt?: true
   fullName?: true
@@ -102,7 +114,10 @@ export type BookingMaxAggregateInputType = {
   id?: true
   type?: true
   status?: true
+  paymentStatus?: true
   userId?: true
+  phlebotomistId?: true
+  cooId?: true
   createdAt?: true
   updatedAt?: true
   fullName?: true
@@ -120,7 +135,10 @@ export type BookingCountAggregateInputType = {
   id?: true
   type?: true
   status?: true
+  paymentStatus?: true
   userId?: true
+  phlebotomistId?: true
+  cooId?: true
   createdAt?: true
   updatedAt?: true
   fullName?: true
@@ -211,7 +229,10 @@ export type BookingGroupByOutputType = {
   id: string
   type: $Enums.BookingType
   status: $Enums.BookingStatus
+  paymentStatus: $Enums.PaymentStatus
   userId: string | null
+  phlebotomistId: string | null
+  cooId: string | null
   createdAt: Date
   updatedAt: Date
   fullName: string | null
@@ -250,7 +271,10 @@ export type BookingWhereInput = {
   id?: Prisma.UuidFilter<"Booking"> | string
   type?: Prisma.EnumBookingTypeFilter<"Booking"> | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
   userId?: Prisma.UuidNullableFilter<"Booking"> | string | null
+  phlebotomistId?: Prisma.UuidNullableFilter<"Booking"> | string | null
+  cooId?: Prisma.UuidNullableFilter<"Booking"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   fullName?: Prisma.StringNullableFilter<"Booking"> | string | null
@@ -264,16 +288,22 @@ export type BookingWhereInput = {
   agreeOfTerms?: Prisma.BoolNullableFilter<"Booking"> | boolean | null
   addresses?: Prisma.AddressListRelationFilter
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  phlebotomist?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  coo?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   members?: Prisma.MemberListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
   schedules?: Prisma.ScheduleListRelationFilter
+  prescriptions?: Prisma.PrescriptionListRelationFilter
 }
 
 export type BookingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  phlebotomistId?: Prisma.SortOrderInput | Prisma.SortOrder
+  cooId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   fullName?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -287,9 +317,12 @@ export type BookingOrderByWithRelationInput = {
   agreeOfTerms?: Prisma.SortOrderInput | Prisma.SortOrder
   addresses?: Prisma.AddressOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
+  phlebotomist?: Prisma.UserOrderByWithRelationInput
+  coo?: Prisma.UserOrderByWithRelationInput
   members?: Prisma.MemberOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
   schedules?: Prisma.ScheduleOrderByRelationAggregateInput
+  prescriptions?: Prisma.PrescriptionOrderByRelationAggregateInput
 }
 
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -299,7 +332,10 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BookingWhereInput | Prisma.BookingWhereInput[]
   type?: Prisma.EnumBookingTypeFilter<"Booking"> | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
   userId?: Prisma.UuidNullableFilter<"Booking"> | string | null
+  phlebotomistId?: Prisma.UuidNullableFilter<"Booking"> | string | null
+  cooId?: Prisma.UuidNullableFilter<"Booking"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   fullName?: Prisma.StringNullableFilter<"Booking"> | string | null
@@ -313,16 +349,22 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   agreeOfTerms?: Prisma.BoolNullableFilter<"Booking"> | boolean | null
   addresses?: Prisma.AddressListRelationFilter
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  phlebotomist?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  coo?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   members?: Prisma.MemberListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
   schedules?: Prisma.ScheduleListRelationFilter
+  prescriptions?: Prisma.PrescriptionListRelationFilter
 }, "id">
 
 export type BookingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  phlebotomistId?: Prisma.SortOrderInput | Prisma.SortOrder
+  cooId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   fullName?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -346,7 +388,10 @@ export type BookingScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"Booking"> | string
   type?: Prisma.EnumBookingTypeWithAggregatesFilter<"Booking"> | $Enums.BookingType
   status?: Prisma.EnumBookingStatusWithAggregatesFilter<"Booking"> | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusWithAggregatesFilter<"Booking"> | $Enums.PaymentStatus
   userId?: Prisma.UuidNullableWithAggregatesFilter<"Booking"> | string | null
+  phlebotomistId?: Prisma.UuidNullableWithAggregatesFilter<"Booking"> | string | null
+  cooId?: Prisma.UuidNullableWithAggregatesFilter<"Booking"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   fullName?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
@@ -364,6 +409,7 @@ export type BookingCreateInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -377,16 +423,22 @@ export type BookingCreateInput = {
   agreeOfTerms?: boolean | null
   addresses?: Prisma.AddressCreateNestedManyWithoutBookingInput
   user?: Prisma.UserCreateNestedOneWithoutBookingsInput
+  phlebotomist?: Prisma.UserCreateNestedOneWithoutPhlebotomistBookingsInput
+  coo?: Prisma.UserCreateNestedOneWithoutCooBookingsInput
   members?: Prisma.MemberCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   userId?: string | null
+  phlebotomistId?: string | null
+  cooId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -402,12 +454,14 @@ export type BookingUncheckedCreateInput = {
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleUncheckedCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -421,16 +475,22 @@ export type BookingUpdateInput = {
   agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   addresses?: Prisma.AddressUpdateManyWithoutBookingNestedInput
   user?: Prisma.UserUpdateOneWithoutBookingsNestedInput
+  phlebotomist?: Prisma.UserUpdateOneWithoutPhlebotomistBookingsNestedInput
+  coo?: Prisma.UserUpdateOneWithoutCooBookingsNestedInput
   members?: Prisma.MemberUpdateManyWithoutBookingNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -446,13 +506,17 @@ export type BookingUncheckedUpdateInput = {
   members?: Prisma.MemberUncheckedUpdateManyWithoutBookingNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUncheckedUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateManyInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   userId?: string | null
+  phlebotomistId?: string | null
+  cooId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -470,6 +534,7 @@ export type BookingUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -487,7 +552,10 @@ export type BookingUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -520,7 +588,10 @@ export type BookingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  phlebotomistId?: Prisma.SortOrder
+  cooId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
@@ -538,7 +609,10 @@ export type BookingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  phlebotomistId?: Prisma.SortOrder
+  cooId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
@@ -556,7 +630,10 @@ export type BookingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  phlebotomistId?: Prisma.SortOrder
+  cooId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
@@ -582,10 +659,38 @@ export type BookingCreateNestedManyWithoutUserInput = {
   connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
 }
 
+export type BookingCreateNestedManyWithoutPhlebotomistInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPhlebotomistInput, Prisma.BookingUncheckedCreateWithoutPhlebotomistInput> | Prisma.BookingCreateWithoutPhlebotomistInput[] | Prisma.BookingUncheckedCreateWithoutPhlebotomistInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPhlebotomistInput | Prisma.BookingCreateOrConnectWithoutPhlebotomistInput[]
+  createMany?: Prisma.BookingCreateManyPhlebotomistInputEnvelope
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+}
+
+export type BookingCreateNestedManyWithoutCooInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutCooInput, Prisma.BookingUncheckedCreateWithoutCooInput> | Prisma.BookingCreateWithoutCooInput[] | Prisma.BookingUncheckedCreateWithoutCooInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutCooInput | Prisma.BookingCreateOrConnectWithoutCooInput[]
+  createMany?: Prisma.BookingCreateManyCooInputEnvelope
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+}
+
 export type BookingUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput> | Prisma.BookingCreateWithoutUserInput[] | Prisma.BookingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.BookingCreateOrConnectWithoutUserInput | Prisma.BookingCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.BookingCreateManyUserInputEnvelope
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+}
+
+export type BookingUncheckedCreateNestedManyWithoutPhlebotomistInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPhlebotomistInput, Prisma.BookingUncheckedCreateWithoutPhlebotomistInput> | Prisma.BookingCreateWithoutPhlebotomistInput[] | Prisma.BookingUncheckedCreateWithoutPhlebotomistInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPhlebotomistInput | Prisma.BookingCreateOrConnectWithoutPhlebotomistInput[]
+  createMany?: Prisma.BookingCreateManyPhlebotomistInputEnvelope
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+}
+
+export type BookingUncheckedCreateNestedManyWithoutCooInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutCooInput, Prisma.BookingUncheckedCreateWithoutCooInput> | Prisma.BookingCreateWithoutCooInput[] | Prisma.BookingUncheckedCreateWithoutCooInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutCooInput | Prisma.BookingCreateOrConnectWithoutCooInput[]
+  createMany?: Prisma.BookingCreateManyCooInputEnvelope
   connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
 }
 
@@ -603,6 +708,34 @@ export type BookingUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
+export type BookingUpdateManyWithoutPhlebotomistNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPhlebotomistInput, Prisma.BookingUncheckedCreateWithoutPhlebotomistInput> | Prisma.BookingCreateWithoutPhlebotomistInput[] | Prisma.BookingUncheckedCreateWithoutPhlebotomistInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPhlebotomistInput | Prisma.BookingCreateOrConnectWithoutPhlebotomistInput[]
+  upsert?: Prisma.BookingUpsertWithWhereUniqueWithoutPhlebotomistInput | Prisma.BookingUpsertWithWhereUniqueWithoutPhlebotomistInput[]
+  createMany?: Prisma.BookingCreateManyPhlebotomistInputEnvelope
+  set?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  disconnect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  delete?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  update?: Prisma.BookingUpdateWithWhereUniqueWithoutPhlebotomistInput | Prisma.BookingUpdateWithWhereUniqueWithoutPhlebotomistInput[]
+  updateMany?: Prisma.BookingUpdateManyWithWhereWithoutPhlebotomistInput | Prisma.BookingUpdateManyWithWhereWithoutPhlebotomistInput[]
+  deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
+}
+
+export type BookingUpdateManyWithoutCooNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutCooInput, Prisma.BookingUncheckedCreateWithoutCooInput> | Prisma.BookingCreateWithoutCooInput[] | Prisma.BookingUncheckedCreateWithoutCooInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutCooInput | Prisma.BookingCreateOrConnectWithoutCooInput[]
+  upsert?: Prisma.BookingUpsertWithWhereUniqueWithoutCooInput | Prisma.BookingUpsertWithWhereUniqueWithoutCooInput[]
+  createMany?: Prisma.BookingCreateManyCooInputEnvelope
+  set?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  disconnect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  delete?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  update?: Prisma.BookingUpdateWithWhereUniqueWithoutCooInput | Prisma.BookingUpdateWithWhereUniqueWithoutCooInput[]
+  updateMany?: Prisma.BookingUpdateManyWithWhereWithoutCooInput | Prisma.BookingUpdateManyWithWhereWithoutCooInput[]
+  deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
+}
+
 export type BookingUncheckedUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput> | Prisma.BookingCreateWithoutUserInput[] | Prisma.BookingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.BookingCreateOrConnectWithoutUserInput | Prisma.BookingCreateOrConnectWithoutUserInput[]
@@ -614,6 +747,34 @@ export type BookingUncheckedUpdateManyWithoutUserNestedInput = {
   connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
   update?: Prisma.BookingUpdateWithWhereUniqueWithoutUserInput | Prisma.BookingUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.BookingUpdateManyWithWhereWithoutUserInput | Prisma.BookingUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
+}
+
+export type BookingUncheckedUpdateManyWithoutPhlebotomistNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPhlebotomistInput, Prisma.BookingUncheckedCreateWithoutPhlebotomistInput> | Prisma.BookingCreateWithoutPhlebotomistInput[] | Prisma.BookingUncheckedCreateWithoutPhlebotomistInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPhlebotomistInput | Prisma.BookingCreateOrConnectWithoutPhlebotomistInput[]
+  upsert?: Prisma.BookingUpsertWithWhereUniqueWithoutPhlebotomistInput | Prisma.BookingUpsertWithWhereUniqueWithoutPhlebotomistInput[]
+  createMany?: Prisma.BookingCreateManyPhlebotomistInputEnvelope
+  set?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  disconnect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  delete?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  update?: Prisma.BookingUpdateWithWhereUniqueWithoutPhlebotomistInput | Prisma.BookingUpdateWithWhereUniqueWithoutPhlebotomistInput[]
+  updateMany?: Prisma.BookingUpdateManyWithWhereWithoutPhlebotomistInput | Prisma.BookingUpdateManyWithWhereWithoutPhlebotomistInput[]
+  deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
+}
+
+export type BookingUncheckedUpdateManyWithoutCooNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutCooInput, Prisma.BookingUncheckedCreateWithoutCooInput> | Prisma.BookingCreateWithoutCooInput[] | Prisma.BookingUncheckedCreateWithoutCooInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutCooInput | Prisma.BookingCreateOrConnectWithoutCooInput[]
+  upsert?: Prisma.BookingUpsertWithWhereUniqueWithoutCooInput | Prisma.BookingUpsertWithWhereUniqueWithoutCooInput[]
+  createMany?: Prisma.BookingCreateManyCooInputEnvelope
+  set?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  disconnect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  delete?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  update?: Prisma.BookingUpdateWithWhereUniqueWithoutCooInput | Prisma.BookingUpdateWithWhereUniqueWithoutCooInput[]
+  updateMany?: Prisma.BookingUpdateManyWithWhereWithoutCooInput | Prisma.BookingUpdateManyWithWhereWithoutCooInput[]
   deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
@@ -673,6 +834,10 @@ export type EnumBookingStatusFieldUpdateOperationsInput = {
   set?: $Enums.BookingStatus
 }
 
+export type EnumPaymentStatusFieldUpdateOperationsInput = {
+  set?: $Enums.PaymentStatus
+}
+
 export type BookingCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.BookingCreateWithoutPaymentsInput, Prisma.BookingUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPaymentsInput
@@ -687,10 +852,27 @@ export type BookingUpdateOneRequiredWithoutPaymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutPaymentsInput, Prisma.BookingUpdateWithoutPaymentsInput>, Prisma.BookingUncheckedUpdateWithoutPaymentsInput>
 }
 
+export type BookingCreateNestedOneWithoutPrescriptionsInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPrescriptionsInput, Prisma.BookingUncheckedCreateWithoutPrescriptionsInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPrescriptionsInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingUpdateOneWithoutPrescriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutPrescriptionsInput, Prisma.BookingUncheckedCreateWithoutPrescriptionsInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutPrescriptionsInput
+  upsert?: Prisma.BookingUpsertWithoutPrescriptionsInput
+  disconnect?: Prisma.BookingWhereInput | boolean
+  delete?: Prisma.BookingWhereInput | boolean
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutPrescriptionsInput, Prisma.BookingUpdateWithoutPrescriptionsInput>, Prisma.BookingUncheckedUpdateWithoutPrescriptionsInput>
+}
+
 export type BookingCreateWithoutUserInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -703,15 +885,21 @@ export type BookingCreateWithoutUserInput = {
   testRequirement?: string | null
   agreeOfTerms?: boolean | null
   addresses?: Prisma.AddressCreateNestedManyWithoutBookingInput
+  phlebotomist?: Prisma.UserCreateNestedOneWithoutPhlebotomistBookingsInput
+  coo?: Prisma.UserCreateNestedOneWithoutCooBookingsInput
   members?: Prisma.MemberCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutUserInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  phlebotomistId?: string | null
+  cooId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -727,6 +915,7 @@ export type BookingUncheckedCreateWithoutUserInput = {
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleUncheckedCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutUserInput = {
@@ -736,6 +925,126 @@ export type BookingCreateOrConnectWithoutUserInput = {
 
 export type BookingCreateManyUserInputEnvelope = {
   data: Prisma.BookingCreateManyUserInput | Prisma.BookingCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type BookingCreateWithoutPhlebotomistInput = {
+  id?: string
+  type?: $Enums.BookingType
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fullName?: string | null
+  mobileNumber?: string | null
+  address?: string | null
+  city?: string | null
+  zipcode?: string | null
+  preferredTime?: string | null
+  preferredDate?: Date | string | null
+  testRequirement?: string | null
+  agreeOfTerms?: boolean | null
+  addresses?: Prisma.AddressCreateNestedManyWithoutBookingInput
+  user?: Prisma.UserCreateNestedOneWithoutBookingsInput
+  coo?: Prisma.UserCreateNestedOneWithoutCooBookingsInput
+  members?: Prisma.MemberCreateNestedManyWithoutBookingInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutBookingInput
+  schedules?: Prisma.ScheduleCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutBookingInput
+}
+
+export type BookingUncheckedCreateWithoutPhlebotomistInput = {
+  id?: string
+  type?: $Enums.BookingType
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  userId?: string | null
+  cooId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fullName?: string | null
+  mobileNumber?: string | null
+  address?: string | null
+  city?: string | null
+  zipcode?: string | null
+  preferredTime?: string | null
+  preferredDate?: Date | string | null
+  testRequirement?: string | null
+  agreeOfTerms?: boolean | null
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutBookingInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutBookingInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingInput
+  schedules?: Prisma.ScheduleUncheckedCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutBookingInput
+}
+
+export type BookingCreateOrConnectWithoutPhlebotomistInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutPhlebotomistInput, Prisma.BookingUncheckedCreateWithoutPhlebotomistInput>
+}
+
+export type BookingCreateManyPhlebotomistInputEnvelope = {
+  data: Prisma.BookingCreateManyPhlebotomistInput | Prisma.BookingCreateManyPhlebotomistInput[]
+  skipDuplicates?: boolean
+}
+
+export type BookingCreateWithoutCooInput = {
+  id?: string
+  type?: $Enums.BookingType
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fullName?: string | null
+  mobileNumber?: string | null
+  address?: string | null
+  city?: string | null
+  zipcode?: string | null
+  preferredTime?: string | null
+  preferredDate?: Date | string | null
+  testRequirement?: string | null
+  agreeOfTerms?: boolean | null
+  addresses?: Prisma.AddressCreateNestedManyWithoutBookingInput
+  user?: Prisma.UserCreateNestedOneWithoutBookingsInput
+  phlebotomist?: Prisma.UserCreateNestedOneWithoutPhlebotomistBookingsInput
+  members?: Prisma.MemberCreateNestedManyWithoutBookingInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutBookingInput
+  schedules?: Prisma.ScheduleCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutBookingInput
+}
+
+export type BookingUncheckedCreateWithoutCooInput = {
+  id?: string
+  type?: $Enums.BookingType
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  userId?: string | null
+  phlebotomistId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fullName?: string | null
+  mobileNumber?: string | null
+  address?: string | null
+  city?: string | null
+  zipcode?: string | null
+  preferredTime?: string | null
+  preferredDate?: Date | string | null
+  testRequirement?: string | null
+  agreeOfTerms?: boolean | null
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutBookingInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutBookingInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingInput
+  schedules?: Prisma.ScheduleUncheckedCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutBookingInput
+}
+
+export type BookingCreateOrConnectWithoutCooInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutCooInput, Prisma.BookingUncheckedCreateWithoutCooInput>
+}
+
+export type BookingCreateManyCooInputEnvelope = {
+  data: Prisma.BookingCreateManyCooInput | Prisma.BookingCreateManyCooInput[]
   skipDuplicates?: boolean
 }
 
@@ -762,7 +1071,10 @@ export type BookingScalarWhereInput = {
   id?: Prisma.UuidFilter<"Booking"> | string
   type?: Prisma.EnumBookingTypeFilter<"Booking"> | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
   userId?: Prisma.UuidNullableFilter<"Booking"> | string | null
+  phlebotomistId?: Prisma.UuidNullableFilter<"Booking"> | string | null
+  cooId?: Prisma.UuidNullableFilter<"Booking"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   fullName?: Prisma.StringNullableFilter<"Booking"> | string | null
@@ -776,10 +1088,43 @@ export type BookingScalarWhereInput = {
   agreeOfTerms?: Prisma.BoolNullableFilter<"Booking"> | boolean | null
 }
 
+export type BookingUpsertWithWhereUniqueWithoutPhlebotomistInput = {
+  where: Prisma.BookingWhereUniqueInput
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutPhlebotomistInput, Prisma.BookingUncheckedUpdateWithoutPhlebotomistInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutPhlebotomistInput, Prisma.BookingUncheckedCreateWithoutPhlebotomistInput>
+}
+
+export type BookingUpdateWithWhereUniqueWithoutPhlebotomistInput = {
+  where: Prisma.BookingWhereUniqueInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutPhlebotomistInput, Prisma.BookingUncheckedUpdateWithoutPhlebotomistInput>
+}
+
+export type BookingUpdateManyWithWhereWithoutPhlebotomistInput = {
+  where: Prisma.BookingScalarWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateManyMutationInput, Prisma.BookingUncheckedUpdateManyWithoutPhlebotomistInput>
+}
+
+export type BookingUpsertWithWhereUniqueWithoutCooInput = {
+  where: Prisma.BookingWhereUniqueInput
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutCooInput, Prisma.BookingUncheckedUpdateWithoutCooInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutCooInput, Prisma.BookingUncheckedCreateWithoutCooInput>
+}
+
+export type BookingUpdateWithWhereUniqueWithoutCooInput = {
+  where: Prisma.BookingWhereUniqueInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutCooInput, Prisma.BookingUncheckedUpdateWithoutCooInput>
+}
+
+export type BookingUpdateManyWithWhereWithoutCooInput = {
+  where: Prisma.BookingScalarWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateManyMutationInput, Prisma.BookingUncheckedUpdateManyWithoutCooInput>
+}
+
 export type BookingCreateWithoutMembersInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -793,15 +1138,21 @@ export type BookingCreateWithoutMembersInput = {
   agreeOfTerms?: boolean | null
   addresses?: Prisma.AddressCreateNestedManyWithoutBookingInput
   user?: Prisma.UserCreateNestedOneWithoutBookingsInput
+  phlebotomist?: Prisma.UserCreateNestedOneWithoutPhlebotomistBookingsInput
+  coo?: Prisma.UserCreateNestedOneWithoutCooBookingsInput
   payments?: Prisma.PaymentCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutMembersInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   userId?: string | null
+  phlebotomistId?: string | null
+  cooId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -816,6 +1167,7 @@ export type BookingUncheckedCreateWithoutMembersInput = {
   addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleUncheckedCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutMembersInput = {
@@ -838,6 +1190,7 @@ export type BookingUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -851,15 +1204,21 @@ export type BookingUpdateWithoutMembersInput = {
   agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   addresses?: Prisma.AddressUpdateManyWithoutBookingNestedInput
   user?: Prisma.UserUpdateOneWithoutBookingsNestedInput
+  phlebotomist?: Prisma.UserUpdateOneWithoutPhlebotomistBookingsNestedInput
+  coo?: Prisma.UserUpdateOneWithoutCooBookingsNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -874,12 +1233,14 @@ export type BookingUncheckedUpdateWithoutMembersInput = {
   addresses?: Prisma.AddressUncheckedUpdateManyWithoutBookingNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUncheckedUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutAddressesInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -892,16 +1253,22 @@ export type BookingCreateWithoutAddressesInput = {
   testRequirement?: string | null
   agreeOfTerms?: boolean | null
   user?: Prisma.UserCreateNestedOneWithoutBookingsInput
+  phlebotomist?: Prisma.UserCreateNestedOneWithoutPhlebotomistBookingsInput
+  coo?: Prisma.UserCreateNestedOneWithoutCooBookingsInput
   members?: Prisma.MemberCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutAddressesInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   userId?: string | null
+  phlebotomistId?: string | null
+  cooId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -916,6 +1283,7 @@ export type BookingUncheckedCreateWithoutAddressesInput = {
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleUncheckedCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutAddressesInput = {
@@ -938,6 +1306,7 @@ export type BookingUpdateWithoutAddressesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -950,16 +1319,22 @@ export type BookingUpdateWithoutAddressesInput = {
   testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   user?: Prisma.UserUpdateOneWithoutBookingsNestedInput
+  phlebotomist?: Prisma.UserUpdateOneWithoutPhlebotomistBookingsNestedInput
+  coo?: Prisma.UserUpdateOneWithoutCooBookingsNestedInput
   members?: Prisma.MemberUpdateManyWithoutBookingNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutAddressesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -974,12 +1349,14 @@ export type BookingUncheckedUpdateWithoutAddressesInput = {
   members?: Prisma.MemberUncheckedUpdateManyWithoutBookingNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUncheckedUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutSchedulesInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -993,15 +1370,21 @@ export type BookingCreateWithoutSchedulesInput = {
   agreeOfTerms?: boolean | null
   addresses?: Prisma.AddressCreateNestedManyWithoutBookingInput
   user?: Prisma.UserCreateNestedOneWithoutBookingsInput
+  phlebotomist?: Prisma.UserCreateNestedOneWithoutPhlebotomistBookingsInput
+  coo?: Prisma.UserCreateNestedOneWithoutCooBookingsInput
   members?: Prisma.MemberCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutSchedulesInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   userId?: string | null
+  phlebotomistId?: string | null
+  cooId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -1016,6 +1399,7 @@ export type BookingUncheckedCreateWithoutSchedulesInput = {
   addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutBookingInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutBookingInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutSchedulesInput = {
@@ -1038,6 +1422,7 @@ export type BookingUpdateWithoutSchedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1051,15 +1436,21 @@ export type BookingUpdateWithoutSchedulesInput = {
   agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   addresses?: Prisma.AddressUpdateManyWithoutBookingNestedInput
   user?: Prisma.UserUpdateOneWithoutBookingsNestedInput
+  phlebotomist?: Prisma.UserUpdateOneWithoutPhlebotomistBookingsNestedInput
+  coo?: Prisma.UserUpdateOneWithoutCooBookingsNestedInput
   members?: Prisma.MemberUpdateManyWithoutBookingNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutSchedulesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1074,12 +1465,14 @@ export type BookingUncheckedUpdateWithoutSchedulesInput = {
   addresses?: Prisma.AddressUncheckedUpdateManyWithoutBookingNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutBookingNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutPaymentsInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -1093,15 +1486,21 @@ export type BookingCreateWithoutPaymentsInput = {
   agreeOfTerms?: boolean | null
   addresses?: Prisma.AddressCreateNestedManyWithoutBookingInput
   user?: Prisma.UserCreateNestedOneWithoutBookingsInput
+  phlebotomist?: Prisma.UserCreateNestedOneWithoutPhlebotomistBookingsInput
+  coo?: Prisma.UserCreateNestedOneWithoutCooBookingsInput
   members?: Prisma.MemberCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutPaymentsInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   userId?: string | null
+  phlebotomistId?: string | null
+  cooId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -1116,6 +1515,7 @@ export type BookingUncheckedCreateWithoutPaymentsInput = {
   addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutBookingInput
   members?: Prisma.MemberUncheckedCreateNestedManyWithoutBookingInput
   schedules?: Prisma.ScheduleUncheckedCreateNestedManyWithoutBookingInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutPaymentsInput = {
@@ -1138,6 +1538,7 @@ export type BookingUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1151,15 +1552,21 @@ export type BookingUpdateWithoutPaymentsInput = {
   agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   addresses?: Prisma.AddressUpdateManyWithoutBookingNestedInput
   user?: Prisma.UserUpdateOneWithoutBookingsNestedInput
+  phlebotomist?: Prisma.UserUpdateOneWithoutPhlebotomistBookingsNestedInput
+  coo?: Prisma.UserUpdateOneWithoutCooBookingsNestedInput
   members?: Prisma.MemberUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1174,12 +1581,14 @@ export type BookingUncheckedUpdateWithoutPaymentsInput = {
   addresses?: Prisma.AddressUncheckedUpdateManyWithoutBookingNestedInput
   members?: Prisma.MemberUncheckedUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUncheckedUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutBookingNestedInput
 }
 
-export type BookingCreateManyUserInput = {
+export type BookingCreateWithoutPrescriptionsInput = {
   id?: string
   type?: $Enums.BookingType
   status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   fullName?: string | null
@@ -1191,12 +1600,61 @@ export type BookingCreateManyUserInput = {
   preferredDate?: Date | string | null
   testRequirement?: string | null
   agreeOfTerms?: boolean | null
+  addresses?: Prisma.AddressCreateNestedManyWithoutBookingInput
+  user?: Prisma.UserCreateNestedOneWithoutBookingsInput
+  phlebotomist?: Prisma.UserCreateNestedOneWithoutPhlebotomistBookingsInput
+  coo?: Prisma.UserCreateNestedOneWithoutCooBookingsInput
+  members?: Prisma.MemberCreateNestedManyWithoutBookingInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutBookingInput
+  schedules?: Prisma.ScheduleCreateNestedManyWithoutBookingInput
 }
 
-export type BookingUpdateWithoutUserInput = {
+export type BookingUncheckedCreateWithoutPrescriptionsInput = {
+  id?: string
+  type?: $Enums.BookingType
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  userId?: string | null
+  phlebotomistId?: string | null
+  cooId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fullName?: string | null
+  mobileNumber?: string | null
+  address?: string | null
+  city?: string | null
+  zipcode?: string | null
+  preferredTime?: string | null
+  preferredDate?: Date | string | null
+  testRequirement?: string | null
+  agreeOfTerms?: boolean | null
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutBookingInput
+  members?: Prisma.MemberUncheckedCreateNestedManyWithoutBookingInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutBookingInput
+  schedules?: Prisma.ScheduleUncheckedCreateNestedManyWithoutBookingInput
+}
+
+export type BookingCreateOrConnectWithoutPrescriptionsInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutPrescriptionsInput, Prisma.BookingUncheckedCreateWithoutPrescriptionsInput>
+}
+
+export type BookingUpsertWithoutPrescriptionsInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutPrescriptionsInput, Prisma.BookingUncheckedUpdateWithoutPrescriptionsInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutPrescriptionsInput, Prisma.BookingUncheckedCreateWithoutPrescriptionsInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutPrescriptionsInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutPrescriptionsInput, Prisma.BookingUncheckedUpdateWithoutPrescriptionsInput>
+}
+
+export type BookingUpdateWithoutPrescriptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1209,15 +1667,22 @@ export type BookingUpdateWithoutUserInput = {
   testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   addresses?: Prisma.AddressUpdateManyWithoutBookingNestedInput
+  user?: Prisma.UserUpdateOneWithoutBookingsNestedInput
+  phlebotomist?: Prisma.UserUpdateOneWithoutPhlebotomistBookingsNestedInput
+  coo?: Prisma.UserUpdateOneWithoutCooBookingsNestedInput
   members?: Prisma.MemberUpdateManyWithoutBookingNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutBookingNestedInput
   schedules?: Prisma.ScheduleUpdateManyWithoutBookingNestedInput
 }
 
-export type BookingUncheckedUpdateWithoutUserInput = {
+export type BookingUncheckedUpdateWithoutPrescriptionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1235,10 +1700,263 @@ export type BookingUncheckedUpdateWithoutUserInput = {
   schedules?: Prisma.ScheduleUncheckedUpdateManyWithoutBookingNestedInput
 }
 
+export type BookingCreateManyUserInput = {
+  id?: string
+  type?: $Enums.BookingType
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  phlebotomistId?: string | null
+  cooId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fullName?: string | null
+  mobileNumber?: string | null
+  address?: string | null
+  city?: string | null
+  zipcode?: string | null
+  preferredTime?: string | null
+  preferredDate?: Date | string | null
+  testRequirement?: string | null
+  agreeOfTerms?: boolean | null
+}
+
+export type BookingCreateManyPhlebotomistInput = {
+  id?: string
+  type?: $Enums.BookingType
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  userId?: string | null
+  cooId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fullName?: string | null
+  mobileNumber?: string | null
+  address?: string | null
+  city?: string | null
+  zipcode?: string | null
+  preferredTime?: string | null
+  preferredDate?: Date | string | null
+  testRequirement?: string | null
+  agreeOfTerms?: boolean | null
+}
+
+export type BookingCreateManyCooInput = {
+  id?: string
+  type?: $Enums.BookingType
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  userId?: string | null
+  phlebotomistId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fullName?: string | null
+  mobileNumber?: string | null
+  address?: string | null
+  city?: string | null
+  zipcode?: string | null
+  preferredTime?: string | null
+  preferredDate?: Date | string | null
+  testRequirement?: string | null
+  agreeOfTerms?: boolean | null
+}
+
+export type BookingUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zipcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  addresses?: Prisma.AddressUpdateManyWithoutBookingNestedInput
+  phlebotomist?: Prisma.UserUpdateOneWithoutPhlebotomistBookingsNestedInput
+  coo?: Prisma.UserUpdateOneWithoutCooBookingsNestedInput
+  members?: Prisma.MemberUpdateManyWithoutBookingNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutBookingNestedInput
+  schedules?: Prisma.ScheduleUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zipcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutBookingNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutBookingNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingNestedInput
+  schedules?: Prisma.ScheduleUncheckedUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutBookingNestedInput
+}
+
 export type BookingUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zipcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+}
+
+export type BookingUpdateWithoutPhlebotomistInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zipcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  addresses?: Prisma.AddressUpdateManyWithoutBookingNestedInput
+  user?: Prisma.UserUpdateOneWithoutBookingsNestedInput
+  coo?: Prisma.UserUpdateOneWithoutCooBookingsNestedInput
+  members?: Prisma.MemberUpdateManyWithoutBookingNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutBookingNestedInput
+  schedules?: Prisma.ScheduleUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutPhlebotomistInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zipcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutBookingNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutBookingNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingNestedInput
+  schedules?: Prisma.ScheduleUncheckedUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateManyWithoutPhlebotomistInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cooId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zipcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+}
+
+export type BookingUpdateWithoutCooInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zipcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  addresses?: Prisma.AddressUpdateManyWithoutBookingNestedInput
+  user?: Prisma.UserUpdateOneWithoutBookingsNestedInput
+  phlebotomist?: Prisma.UserUpdateOneWithoutPhlebotomistBookingsNestedInput
+  members?: Prisma.MemberUpdateManyWithoutBookingNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutBookingNestedInput
+  schedules?: Prisma.ScheduleUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutCooInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mobileNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  zipcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  testRequirement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agreeOfTerms?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutBookingNestedInput
+  members?: Prisma.MemberUncheckedUpdateManyWithoutBookingNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutBookingNestedInput
+  schedules?: Prisma.ScheduleUncheckedUpdateManyWithoutBookingNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateManyWithoutCooInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumBookingTypeFieldUpdateOperationsInput | $Enums.BookingType
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phlebotomistId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fullName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1262,6 +1980,7 @@ export type BookingCountOutputType = {
   members: number
   payments: number
   schedules: number
+  prescriptions: number
 }
 
 export type BookingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1269,6 +1988,7 @@ export type BookingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   members?: boolean | BookingCountOutputTypeCountMembersArgs
   payments?: boolean | BookingCountOutputTypeCountPaymentsArgs
   schedules?: boolean | BookingCountOutputTypeCountSchedulesArgs
+  prescriptions?: boolean | BookingCountOutputTypeCountPrescriptionsArgs
 }
 
 /**
@@ -1309,12 +2029,22 @@ export type BookingCountOutputTypeCountSchedulesArgs<ExtArgs extends runtime.Typ
   where?: Prisma.ScheduleWhereInput
 }
 
+/**
+ * BookingCountOutputType without action
+ */
+export type BookingCountOutputTypeCountPrescriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PrescriptionWhereInput
+}
+
 
 export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
   status?: boolean
+  paymentStatus?: boolean
   userId?: boolean
+  phlebotomistId?: boolean
+  cooId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   fullName?: boolean
@@ -1328,9 +2058,12 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   agreeOfTerms?: boolean
   addresses?: boolean | Prisma.Booking$addressesArgs<ExtArgs>
   user?: boolean | Prisma.Booking$userArgs<ExtArgs>
+  phlebotomist?: boolean | Prisma.Booking$phlebotomistArgs<ExtArgs>
+  coo?: boolean | Prisma.Booking$cooArgs<ExtArgs>
   members?: boolean | Prisma.Booking$membersArgs<ExtArgs>
   payments?: boolean | Prisma.Booking$paymentsArgs<ExtArgs>
   schedules?: boolean | Prisma.Booking$schedulesArgs<ExtArgs>
+  prescriptions?: boolean | Prisma.Booking$prescriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -1338,7 +2071,10 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   type?: boolean
   status?: boolean
+  paymentStatus?: boolean
   userId?: boolean
+  phlebotomistId?: boolean
+  cooId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   fullName?: boolean
@@ -1351,13 +2087,18 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   testRequirement?: boolean
   agreeOfTerms?: boolean
   user?: boolean | Prisma.Booking$userArgs<ExtArgs>
+  phlebotomist?: boolean | Prisma.Booking$phlebotomistArgs<ExtArgs>
+  coo?: boolean | Prisma.Booking$cooArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
 export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
   status?: boolean
+  paymentStatus?: boolean
   userId?: boolean
+  phlebotomistId?: boolean
+  cooId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   fullName?: boolean
@@ -1370,13 +2111,18 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   testRequirement?: boolean
   agreeOfTerms?: boolean
   user?: boolean | Prisma.Booking$userArgs<ExtArgs>
+  phlebotomist?: boolean | Prisma.Booking$phlebotomistArgs<ExtArgs>
+  coo?: boolean | Prisma.Booking$cooArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
 export type BookingSelectScalar = {
   id?: boolean
   type?: boolean
   status?: boolean
+  paymentStatus?: boolean
   userId?: boolean
+  phlebotomistId?: boolean
+  cooId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   fullName?: boolean
@@ -1390,20 +2136,27 @@ export type BookingSelectScalar = {
   agreeOfTerms?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "status" | "userId" | "createdAt" | "updatedAt" | "fullName" | "mobileNumber" | "address" | "city" | "zipcode" | "preferredTime" | "preferredDate" | "testRequirement" | "agreeOfTerms", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "status" | "paymentStatus" | "userId" | "phlebotomistId" | "cooId" | "createdAt" | "updatedAt" | "fullName" | "mobileNumber" | "address" | "city" | "zipcode" | "preferredTime" | "preferredDate" | "testRequirement" | "agreeOfTerms", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   addresses?: boolean | Prisma.Booking$addressesArgs<ExtArgs>
   user?: boolean | Prisma.Booking$userArgs<ExtArgs>
+  phlebotomist?: boolean | Prisma.Booking$phlebotomistArgs<ExtArgs>
+  coo?: boolean | Prisma.Booking$cooArgs<ExtArgs>
   members?: boolean | Prisma.Booking$membersArgs<ExtArgs>
   payments?: boolean | Prisma.Booking$paymentsArgs<ExtArgs>
   schedules?: boolean | Prisma.Booking$schedulesArgs<ExtArgs>
+  prescriptions?: boolean | Prisma.Booking$prescriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Booking$userArgs<ExtArgs>
+  phlebotomist?: boolean | Prisma.Booking$phlebotomistArgs<ExtArgs>
+  coo?: boolean | Prisma.Booking$cooArgs<ExtArgs>
 }
 export type BookingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Booking$userArgs<ExtArgs>
+  phlebotomist?: boolean | Prisma.Booking$phlebotomistArgs<ExtArgs>
+  coo?: boolean | Prisma.Booking$cooArgs<ExtArgs>
 }
 
 export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1411,15 +2164,21 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     addresses: Prisma.$AddressPayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs> | null
+    phlebotomist: Prisma.$UserPayload<ExtArgs> | null
+    coo: Prisma.$UserPayload<ExtArgs> | null
     members: Prisma.$MemberPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
     schedules: Prisma.$SchedulePayload<ExtArgs>[]
+    prescriptions: Prisma.$PrescriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     type: $Enums.BookingType
     status: $Enums.BookingStatus
+    paymentStatus: $Enums.PaymentStatus
     userId: string | null
+    phlebotomistId: string | null
+    cooId: string | null
     createdAt: Date
     updatedAt: Date
     fullName: string | null
@@ -1827,9 +2586,12 @@ export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   addresses<T extends Prisma.Booking$addressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.Booking$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  phlebotomist<T extends Prisma.Booking$phlebotomistArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$phlebotomistArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  coo<T extends Prisma.Booking$cooArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$cooArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   members<T extends Prisma.Booking$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.Booking$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   schedules<T extends Prisma.Booking$schedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  prescriptions<T extends Prisma.Booking$prescriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$prescriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1862,7 +2624,10 @@ export interface BookingFieldRefs {
   readonly id: Prisma.FieldRef<"Booking", 'String'>
   readonly type: Prisma.FieldRef<"Booking", 'BookingType'>
   readonly status: Prisma.FieldRef<"Booking", 'BookingStatus'>
+  readonly paymentStatus: Prisma.FieldRef<"Booking", 'PaymentStatus'>
   readonly userId: Prisma.FieldRef<"Booking", 'String'>
+  readonly phlebotomistId: Prisma.FieldRef<"Booking", 'String'>
+  readonly cooId: Prisma.FieldRef<"Booking", 'String'>
   readonly createdAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly fullName: Prisma.FieldRef<"Booking", 'String'>
@@ -2318,6 +3083,44 @@ export type Booking$userArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
+ * Booking.phlebotomist
+ */
+export type Booking$phlebotomistArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * Booking.coo
+ */
+export type Booking$cooArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
  * Booking.members
  */
 export type Booking$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2387,6 +3190,30 @@ export type Booking$schedulesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.ScheduleScalarFieldEnum | Prisma.ScheduleScalarFieldEnum[]
+}
+
+/**
+ * Booking.prescriptions
+ */
+export type Booking$prescriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Prescription
+   */
+  select?: Prisma.PrescriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Prescription
+   */
+  omit?: Prisma.PrescriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PrescriptionInclude<ExtArgs> | null
+  where?: Prisma.PrescriptionWhereInput
+  orderBy?: Prisma.PrescriptionOrderByWithRelationInput | Prisma.PrescriptionOrderByWithRelationInput[]
+  cursor?: Prisma.PrescriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PrescriptionScalarFieldEnum | Prisma.PrescriptionScalarFieldEnum[]
 }
 
 /**

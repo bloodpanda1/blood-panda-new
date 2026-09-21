@@ -26,6 +26,8 @@ export type AggregateMember = {
 
 export type MemberMinAggregateOutputType = {
   id: string | null
+  userId: string | null
+  patientProfileId: string | null
   name: string | null
   email: string | null
   phone: string | null
@@ -34,10 +36,17 @@ export type MemberMinAggregateOutputType = {
   bookingId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  sampleStatus: $Enums.SampleStatus | null
+  collectedAt: Date | null
+  labReceivedAt: Date | null
+  reportUrl: string | null
+  prescriptionUrl: string | null
 }
 
 export type MemberMaxAggregateOutputType = {
   id: string | null
+  userId: string | null
+  patientProfileId: string | null
   name: string | null
   email: string | null
   phone: string | null
@@ -46,10 +55,17 @@ export type MemberMaxAggregateOutputType = {
   bookingId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  sampleStatus: $Enums.SampleStatus | null
+  collectedAt: Date | null
+  labReceivedAt: Date | null
+  reportUrl: string | null
+  prescriptionUrl: string | null
 }
 
 export type MemberCountAggregateOutputType = {
   id: number
+  userId: number
+  patientProfileId: number
   name: number
   email: number
   phone: number
@@ -58,12 +74,19 @@ export type MemberCountAggregateOutputType = {
   bookingId: number
   createdAt: number
   updatedAt: number
+  sampleStatus: number
+  collectedAt: number
+  labReceivedAt: number
+  reportUrl: number
+  prescriptionUrl: number
   _all: number
 }
 
 
 export type MemberMinAggregateInputType = {
   id?: true
+  userId?: true
+  patientProfileId?: true
   name?: true
   email?: true
   phone?: true
@@ -72,10 +95,17 @@ export type MemberMinAggregateInputType = {
   bookingId?: true
   createdAt?: true
   updatedAt?: true
+  sampleStatus?: true
+  collectedAt?: true
+  labReceivedAt?: true
+  reportUrl?: true
+  prescriptionUrl?: true
 }
 
 export type MemberMaxAggregateInputType = {
   id?: true
+  userId?: true
+  patientProfileId?: true
   name?: true
   email?: true
   phone?: true
@@ -84,10 +114,17 @@ export type MemberMaxAggregateInputType = {
   bookingId?: true
   createdAt?: true
   updatedAt?: true
+  sampleStatus?: true
+  collectedAt?: true
+  labReceivedAt?: true
+  reportUrl?: true
+  prescriptionUrl?: true
 }
 
 export type MemberCountAggregateInputType = {
   id?: true
+  userId?: true
+  patientProfileId?: true
   name?: true
   email?: true
   phone?: true
@@ -96,6 +133,11 @@ export type MemberCountAggregateInputType = {
   bookingId?: true
   createdAt?: true
   updatedAt?: true
+  sampleStatus?: true
+  collectedAt?: true
+  labReceivedAt?: true
+  reportUrl?: true
+  prescriptionUrl?: true
   _all?: true
 }
 
@@ -173,6 +215,8 @@ export type MemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type MemberGroupByOutputType = {
   id: string
+  userId: string | null
+  patientProfileId: string | null
   name: string
   email: string
   phone: string
@@ -181,6 +225,11 @@ export type MemberGroupByOutputType = {
   bookingId: string | null
   createdAt: Date
   updatedAt: Date
+  sampleStatus: $Enums.SampleStatus
+  collectedAt: Date | null
+  labReceivedAt: Date | null
+  reportUrl: string | null
+  prescriptionUrl: string | null
   _count: MemberCountAggregateOutputType | null
   _min: MemberMinAggregateOutputType | null
   _max: MemberMaxAggregateOutputType | null
@@ -206,6 +255,8 @@ export type MemberWhereInput = {
   OR?: Prisma.MemberWhereInput[]
   NOT?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[]
   id?: Prisma.UuidFilter<"Member"> | string
+  userId?: Prisma.UuidNullableFilter<"Member"> | string | null
+  patientProfileId?: Prisma.UuidNullableFilter<"Member"> | string | null
   name?: Prisma.StringFilter<"Member"> | string
   email?: Prisma.StringFilter<"Member"> | string
   phone?: Prisma.StringFilter<"Member"> | string
@@ -214,12 +265,22 @@ export type MemberWhereInput = {
   bookingId?: Prisma.UuidNullableFilter<"Member"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFilter<"Member"> | $Enums.SampleStatus
+  collectedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  labReceivedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  reportUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  prescriptionUrl?: Prisma.StringNullableFilter<"Member"> | string | null
   testItems?: Prisma.BloodTestListRelationFilter
   booking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  patientProfile?: Prisma.XOR<Prisma.PatientProfileNullableScalarRelationFilter, Prisma.PatientProfileWhereInput> | null
+  prescriptions?: Prisma.PrescriptionListRelationFilter
 }
 
 export type MemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  patientProfileId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -228,8 +289,16 @@ export type MemberOrderByWithRelationInput = {
   bookingId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  sampleStatus?: Prisma.SortOrder
+  collectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  labReceivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  reportUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  prescriptionUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   testItems?: Prisma.BloodTestOrderByRelationAggregateInput
   booking?: Prisma.BookingOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
+  patientProfile?: Prisma.PatientProfileOrderByWithRelationInput
+  prescriptions?: Prisma.PrescriptionOrderByRelationAggregateInput
 }
 
 export type MemberWhereUniqueInput = Prisma.AtLeast<{
@@ -237,6 +306,8 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[]
   OR?: Prisma.MemberWhereInput[]
   NOT?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[]
+  userId?: Prisma.UuidNullableFilter<"Member"> | string | null
+  patientProfileId?: Prisma.UuidNullableFilter<"Member"> | string | null
   name?: Prisma.StringFilter<"Member"> | string
   email?: Prisma.StringFilter<"Member"> | string
   phone?: Prisma.StringFilter<"Member"> | string
@@ -245,12 +316,22 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   bookingId?: Prisma.UuidNullableFilter<"Member"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFilter<"Member"> | $Enums.SampleStatus
+  collectedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  labReceivedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  reportUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  prescriptionUrl?: Prisma.StringNullableFilter<"Member"> | string | null
   testItems?: Prisma.BloodTestListRelationFilter
   booking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
+  user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  patientProfile?: Prisma.XOR<Prisma.PatientProfileNullableScalarRelationFilter, Prisma.PatientProfileWhereInput> | null
+  prescriptions?: Prisma.PrescriptionListRelationFilter
 }, "id">
 
 export type MemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  patientProfileId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -259,6 +340,11 @@ export type MemberOrderByWithAggregationInput = {
   bookingId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  sampleStatus?: Prisma.SortOrder
+  collectedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  labReceivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  reportUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  prescriptionUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MemberCountOrderByAggregateInput
   _max?: Prisma.MemberMaxOrderByAggregateInput
   _min?: Prisma.MemberMinOrderByAggregateInput
@@ -269,6 +355,8 @@ export type MemberScalarWhereWithAggregatesInput = {
   OR?: Prisma.MemberScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MemberScalarWhereWithAggregatesInput | Prisma.MemberScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Member"> | string
+  userId?: Prisma.UuidNullableWithAggregatesFilter<"Member"> | string | null
+  patientProfileId?: Prisma.UuidNullableWithAggregatesFilter<"Member"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"Member"> | string
   email?: Prisma.StringWithAggregatesFilter<"Member"> | string
   phone?: Prisma.StringWithAggregatesFilter<"Member"> | string
@@ -277,6 +365,11 @@ export type MemberScalarWhereWithAggregatesInput = {
   bookingId?: Prisma.UuidNullableWithAggregatesFilter<"Member"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Member"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Member"> | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusWithAggregatesFilter<"Member"> | $Enums.SampleStatus
+  collectedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
+  labReceivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
+  reportUrl?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  prescriptionUrl?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
 }
 
 export type MemberCreateInput = {
@@ -288,12 +381,22 @@ export type MemberCreateInput = {
   age: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  testItems?: Prisma.BloodTestCreateNestedManyWithoutMemberInput
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestCreateNestedManyWithoutMembersInput
   booking?: Prisma.BookingCreateNestedOneWithoutMembersInput
+  user?: Prisma.UserCreateNestedOneWithoutMembersInput
+  patientProfile?: Prisma.PatientProfileCreateNestedOneWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateInput = {
   id?: string
+  userId?: string | null
+  patientProfileId?: string | null
   name: string
   email: string
   phone: string
@@ -302,7 +405,13 @@ export type MemberUncheckedCreateInput = {
   bookingId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  testItems?: Prisma.BloodTestUncheckedCreateNestedManyWithoutMemberInput
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestUncheckedCreateNestedManyWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUpdateInput = {
@@ -314,12 +423,22 @@ export type MemberUpdateInput = {
   age?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  testItems?: Prisma.BloodTestUpdateManyWithoutMemberNestedInput
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUpdateManyWithoutMembersNestedInput
   booking?: Prisma.BookingUpdateOneWithoutMembersNestedInput
+  user?: Prisma.UserUpdateOneWithoutMembersNestedInput
+  patientProfile?: Prisma.PatientProfileUpdateOneWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -328,11 +447,19 @@ export type MemberUncheckedUpdateInput = {
   bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  testItems?: Prisma.BloodTestUncheckedUpdateManyWithoutMemberNestedInput
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUncheckedUpdateManyWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateManyInput = {
   id?: string
+  userId?: string | null
+  patientProfileId?: string | null
   name: string
   email: string
   phone: string
@@ -341,6 +468,11 @@ export type MemberCreateManyInput = {
   bookingId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
 }
 
 export type MemberUpdateManyMutationInput = {
@@ -352,10 +484,17 @@ export type MemberUpdateManyMutationInput = {
   age?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -364,47 +503,11 @@ export type MemberUncheckedUpdateManyInput = {
   bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type MemberNullableScalarRelationFilter = {
-  is?: Prisma.MemberWhereInput | null
-  isNot?: Prisma.MemberWhereInput | null
-}
-
-export type MemberCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
-  age?: Prisma.SortOrder
-  bookingId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type MemberMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
-  age?: Prisma.SortOrder
-  bookingId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type MemberMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
-  age?: Prisma.SortOrder
-  bookingId?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MemberListRelationFilter = {
@@ -417,24 +520,192 @@ export type MemberOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type MemberCreateNestedOneWithoutTestItemsInput = {
-  create?: Prisma.XOR<Prisma.MemberCreateWithoutTestItemsInput, Prisma.MemberUncheckedCreateWithoutTestItemsInput>
-  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutTestItemsInput
-  connect?: Prisma.MemberWhereUniqueInput
+export type MemberCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  patientProfileId?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  sampleStatus?: Prisma.SortOrder
+  collectedAt?: Prisma.SortOrder
+  labReceivedAt?: Prisma.SortOrder
+  reportUrl?: Prisma.SortOrder
+  prescriptionUrl?: Prisma.SortOrder
 }
 
-export type MemberUpdateOneWithoutTestItemsNestedInput = {
-  create?: Prisma.XOR<Prisma.MemberCreateWithoutTestItemsInput, Prisma.MemberUncheckedCreateWithoutTestItemsInput>
-  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutTestItemsInput
-  upsert?: Prisma.MemberUpsertWithoutTestItemsInput
-  disconnect?: Prisma.MemberWhereInput | boolean
-  delete?: Prisma.MemberWhereInput | boolean
-  connect?: Prisma.MemberWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutTestItemsInput, Prisma.MemberUpdateWithoutTestItemsInput>, Prisma.MemberUncheckedUpdateWithoutTestItemsInput>
+export type MemberMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  patientProfileId?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  sampleStatus?: Prisma.SortOrder
+  collectedAt?: Prisma.SortOrder
+  labReceivedAt?: Prisma.SortOrder
+  reportUrl?: Prisma.SortOrder
+  prescriptionUrl?: Prisma.SortOrder
 }
 
-export type EnumGenderFieldUpdateOperationsInput = {
-  set?: $Enums.Gender
+export type MemberMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  patientProfileId?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  age?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  sampleStatus?: Prisma.SortOrder
+  collectedAt?: Prisma.SortOrder
+  labReceivedAt?: Prisma.SortOrder
+  reportUrl?: Prisma.SortOrder
+  prescriptionUrl?: Prisma.SortOrder
+}
+
+export type MemberNullableScalarRelationFilter = {
+  is?: Prisma.MemberWhereInput | null
+  isNot?: Prisma.MemberWhereInput | null
+}
+
+export type MemberCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutUserInput, Prisma.MemberUncheckedCreateWithoutUserInput> | Prisma.MemberCreateWithoutUserInput[] | Prisma.MemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutUserInput | Prisma.MemberCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.MemberCreateManyUserInputEnvelope
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+}
+
+export type MemberUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutUserInput, Prisma.MemberUncheckedCreateWithoutUserInput> | Prisma.MemberCreateWithoutUserInput[] | Prisma.MemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutUserInput | Prisma.MemberCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.MemberCreateManyUserInputEnvelope
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+}
+
+export type MemberUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutUserInput, Prisma.MemberUncheckedCreateWithoutUserInput> | Prisma.MemberCreateWithoutUserInput[] | Prisma.MemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutUserInput | Prisma.MemberCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.MemberUpsertWithWhereUniqueWithoutUserInput | Prisma.MemberUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.MemberCreateManyUserInputEnvelope
+  set?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  disconnect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  delete?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  update?: Prisma.MemberUpdateWithWhereUniqueWithoutUserInput | Prisma.MemberUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.MemberUpdateManyWithWhereWithoutUserInput | Prisma.MemberUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type MemberUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutUserInput, Prisma.MemberUncheckedCreateWithoutUserInput> | Prisma.MemberCreateWithoutUserInput[] | Prisma.MemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutUserInput | Prisma.MemberCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.MemberUpsertWithWhereUniqueWithoutUserInput | Prisma.MemberUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.MemberCreateManyUserInputEnvelope
+  set?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  disconnect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  delete?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  update?: Prisma.MemberUpdateWithWhereUniqueWithoutUserInput | Prisma.MemberUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.MemberUpdateManyWithWhereWithoutUserInput | Prisma.MemberUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type MemberCreateNestedManyWithoutTestItemsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutTestItemsInput, Prisma.MemberUncheckedCreateWithoutTestItemsInput> | Prisma.MemberCreateWithoutTestItemsInput[] | Prisma.MemberUncheckedCreateWithoutTestItemsInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutTestItemsInput | Prisma.MemberCreateOrConnectWithoutTestItemsInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+}
+
+export type MemberUncheckedCreateNestedManyWithoutTestItemsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutTestItemsInput, Prisma.MemberUncheckedCreateWithoutTestItemsInput> | Prisma.MemberCreateWithoutTestItemsInput[] | Prisma.MemberUncheckedCreateWithoutTestItemsInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutTestItemsInput | Prisma.MemberCreateOrConnectWithoutTestItemsInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+}
+
+export type MemberUpdateManyWithoutTestItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutTestItemsInput, Prisma.MemberUncheckedCreateWithoutTestItemsInput> | Prisma.MemberCreateWithoutTestItemsInput[] | Prisma.MemberUncheckedCreateWithoutTestItemsInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutTestItemsInput | Prisma.MemberCreateOrConnectWithoutTestItemsInput[]
+  upsert?: Prisma.MemberUpsertWithWhereUniqueWithoutTestItemsInput | Prisma.MemberUpsertWithWhereUniqueWithoutTestItemsInput[]
+  set?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  disconnect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  delete?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  update?: Prisma.MemberUpdateWithWhereUniqueWithoutTestItemsInput | Prisma.MemberUpdateWithWhereUniqueWithoutTestItemsInput[]
+  updateMany?: Prisma.MemberUpdateManyWithWhereWithoutTestItemsInput | Prisma.MemberUpdateManyWithWhereWithoutTestItemsInput[]
+  deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type MemberUncheckedUpdateManyWithoutTestItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutTestItemsInput, Prisma.MemberUncheckedCreateWithoutTestItemsInput> | Prisma.MemberCreateWithoutTestItemsInput[] | Prisma.MemberUncheckedCreateWithoutTestItemsInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutTestItemsInput | Prisma.MemberCreateOrConnectWithoutTestItemsInput[]
+  upsert?: Prisma.MemberUpsertWithWhereUniqueWithoutTestItemsInput | Prisma.MemberUpsertWithWhereUniqueWithoutTestItemsInput[]
+  set?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  disconnect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  delete?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  update?: Prisma.MemberUpdateWithWhereUniqueWithoutTestItemsInput | Prisma.MemberUpdateWithWhereUniqueWithoutTestItemsInput[]
+  updateMany?: Prisma.MemberUpdateManyWithWhereWithoutTestItemsInput | Prisma.MemberUpdateManyWithWhereWithoutTestItemsInput[]
+  deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type MemberCreateNestedManyWithoutPatientProfileInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutPatientProfileInput, Prisma.MemberUncheckedCreateWithoutPatientProfileInput> | Prisma.MemberCreateWithoutPatientProfileInput[] | Prisma.MemberUncheckedCreateWithoutPatientProfileInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPatientProfileInput | Prisma.MemberCreateOrConnectWithoutPatientProfileInput[]
+  createMany?: Prisma.MemberCreateManyPatientProfileInputEnvelope
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+}
+
+export type MemberUncheckedCreateNestedManyWithoutPatientProfileInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutPatientProfileInput, Prisma.MemberUncheckedCreateWithoutPatientProfileInput> | Prisma.MemberCreateWithoutPatientProfileInput[] | Prisma.MemberUncheckedCreateWithoutPatientProfileInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPatientProfileInput | Prisma.MemberCreateOrConnectWithoutPatientProfileInput[]
+  createMany?: Prisma.MemberCreateManyPatientProfileInputEnvelope
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+}
+
+export type MemberUpdateManyWithoutPatientProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutPatientProfileInput, Prisma.MemberUncheckedCreateWithoutPatientProfileInput> | Prisma.MemberCreateWithoutPatientProfileInput[] | Prisma.MemberUncheckedCreateWithoutPatientProfileInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPatientProfileInput | Prisma.MemberCreateOrConnectWithoutPatientProfileInput[]
+  upsert?: Prisma.MemberUpsertWithWhereUniqueWithoutPatientProfileInput | Prisma.MemberUpsertWithWhereUniqueWithoutPatientProfileInput[]
+  createMany?: Prisma.MemberCreateManyPatientProfileInputEnvelope
+  set?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  disconnect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  delete?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  update?: Prisma.MemberUpdateWithWhereUniqueWithoutPatientProfileInput | Prisma.MemberUpdateWithWhereUniqueWithoutPatientProfileInput[]
+  updateMany?: Prisma.MemberUpdateManyWithWhereWithoutPatientProfileInput | Prisma.MemberUpdateManyWithWhereWithoutPatientProfileInput[]
+  deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type MemberUncheckedUpdateManyWithoutPatientProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutPatientProfileInput, Prisma.MemberUncheckedCreateWithoutPatientProfileInput> | Prisma.MemberCreateWithoutPatientProfileInput[] | Prisma.MemberUncheckedCreateWithoutPatientProfileInput[]
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPatientProfileInput | Prisma.MemberCreateOrConnectWithoutPatientProfileInput[]
+  upsert?: Prisma.MemberUpsertWithWhereUniqueWithoutPatientProfileInput | Prisma.MemberUpsertWithWhereUniqueWithoutPatientProfileInput[]
+  createMany?: Prisma.MemberCreateManyPatientProfileInputEnvelope
+  set?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  disconnect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  delete?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  connect?: Prisma.MemberWhereUniqueInput | Prisma.MemberWhereUniqueInput[]
+  update?: Prisma.MemberUpdateWithWhereUniqueWithoutPatientProfileInput | Prisma.MemberUpdateWithWhereUniqueWithoutPatientProfileInput[]
+  updateMany?: Prisma.MemberUpdateManyWithWhereWithoutPatientProfileInput | Prisma.MemberUpdateManyWithWhereWithoutPatientProfileInput[]
+  deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+}
+
+export type EnumSampleStatusFieldUpdateOperationsInput = {
+  set?: $Enums.SampleStatus
 }
 
 export type MemberCreateNestedManyWithoutBookingInput = {
@@ -479,6 +750,110 @@ export type MemberUncheckedUpdateManyWithoutBookingNestedInput = {
   deleteMany?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
 }
 
+export type MemberCreateNestedOneWithoutPrescriptionsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutPrescriptionsInput, Prisma.MemberUncheckedCreateWithoutPrescriptionsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPrescriptionsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneWithoutPrescriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutPrescriptionsInput, Prisma.MemberUncheckedCreateWithoutPrescriptionsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutPrescriptionsInput
+  upsert?: Prisma.MemberUpsertWithoutPrescriptionsInput
+  disconnect?: Prisma.MemberWhereInput | boolean
+  delete?: Prisma.MemberWhereInput | boolean
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutPrescriptionsInput, Prisma.MemberUpdateWithoutPrescriptionsInput>, Prisma.MemberUncheckedUpdateWithoutPrescriptionsInput>
+}
+
+export type MemberCreateWithoutUserInput = {
+  id?: string
+  name: string
+  email: string
+  phone: string
+  gender: $Enums.Gender
+  age: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestCreateNestedManyWithoutMembersInput
+  booking?: Prisma.BookingCreateNestedOneWithoutMembersInput
+  patientProfile?: Prisma.PatientProfileCreateNestedOneWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutUserInput = {
+  id?: string
+  patientProfileId?: string | null
+  name: string
+  email: string
+  phone: string
+  gender: $Enums.Gender
+  age: string
+  bookingId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestUncheckedCreateNestedManyWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutUserInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutUserInput, Prisma.MemberUncheckedCreateWithoutUserInput>
+}
+
+export type MemberCreateManyUserInputEnvelope = {
+  data: Prisma.MemberCreateManyUserInput | Prisma.MemberCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type MemberUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.MemberWhereUniqueInput
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutUserInput, Prisma.MemberUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutUserInput, Prisma.MemberUncheckedCreateWithoutUserInput>
+}
+
+export type MemberUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.MemberWhereUniqueInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutUserInput, Prisma.MemberUncheckedUpdateWithoutUserInput>
+}
+
+export type MemberUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.MemberScalarWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateManyMutationInput, Prisma.MemberUncheckedUpdateManyWithoutUserInput>
+}
+
+export type MemberScalarWhereInput = {
+  AND?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+  OR?: Prisma.MemberScalarWhereInput[]
+  NOT?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
+  id?: Prisma.UuidFilter<"Member"> | string
+  userId?: Prisma.UuidNullableFilter<"Member"> | string | null
+  patientProfileId?: Prisma.UuidNullableFilter<"Member"> | string | null
+  name?: Prisma.StringFilter<"Member"> | string
+  email?: Prisma.StringFilter<"Member"> | string
+  phone?: Prisma.StringFilter<"Member"> | string
+  gender?: Prisma.EnumGenderFilter<"Member"> | $Enums.Gender
+  age?: Prisma.StringFilter<"Member"> | string
+  bookingId?: Prisma.UuidNullableFilter<"Member"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFilter<"Member"> | $Enums.SampleStatus
+  collectedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  labReceivedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
+  reportUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+  prescriptionUrl?: Prisma.StringNullableFilter<"Member"> | string | null
+}
+
 export type MemberCreateWithoutTestItemsInput = {
   id?: string
   name: string
@@ -488,11 +863,21 @@ export type MemberCreateWithoutTestItemsInput = {
   age: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
   booking?: Prisma.BookingCreateNestedOneWithoutMembersInput
+  user?: Prisma.UserCreateNestedOneWithoutMembersInput
+  patientProfile?: Prisma.PatientProfileCreateNestedOneWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutTestItemsInput = {
   id?: string
+  userId?: string | null
+  patientProfileId?: string | null
   name: string
   email: string
   phone: string
@@ -501,6 +886,12 @@ export type MemberUncheckedCreateWithoutTestItemsInput = {
   bookingId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutTestItemsInput = {
@@ -508,39 +899,86 @@ export type MemberCreateOrConnectWithoutTestItemsInput = {
   create: Prisma.XOR<Prisma.MemberCreateWithoutTestItemsInput, Prisma.MemberUncheckedCreateWithoutTestItemsInput>
 }
 
-export type MemberUpsertWithoutTestItemsInput = {
+export type MemberUpsertWithWhereUniqueWithoutTestItemsInput = {
+  where: Prisma.MemberWhereUniqueInput
   update: Prisma.XOR<Prisma.MemberUpdateWithoutTestItemsInput, Prisma.MemberUncheckedUpdateWithoutTestItemsInput>
   create: Prisma.XOR<Prisma.MemberCreateWithoutTestItemsInput, Prisma.MemberUncheckedCreateWithoutTestItemsInput>
-  where?: Prisma.MemberWhereInput
 }
 
-export type MemberUpdateToOneWithWhereWithoutTestItemsInput = {
-  where?: Prisma.MemberWhereInput
+export type MemberUpdateWithWhereUniqueWithoutTestItemsInput = {
+  where: Prisma.MemberWhereUniqueInput
   data: Prisma.XOR<Prisma.MemberUpdateWithoutTestItemsInput, Prisma.MemberUncheckedUpdateWithoutTestItemsInput>
 }
 
-export type MemberUpdateWithoutTestItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  age?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  booking?: Prisma.BookingUpdateOneWithoutMembersNestedInput
+export type MemberUpdateManyWithWhereWithoutTestItemsInput = {
+  where: Prisma.MemberScalarWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateManyMutationInput, Prisma.MemberUncheckedUpdateManyWithoutTestItemsInput>
 }
 
-export type MemberUncheckedUpdateWithoutTestItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  age?: Prisma.StringFieldUpdateOperationsInput | string
-  bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type MemberCreateWithoutPatientProfileInput = {
+  id?: string
+  name: string
+  email: string
+  phone: string
+  gender: $Enums.Gender
+  age: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestCreateNestedManyWithoutMembersInput
+  booking?: Prisma.BookingCreateNestedOneWithoutMembersInput
+  user?: Prisma.UserCreateNestedOneWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutPatientProfileInput = {
+  id?: string
+  userId?: string | null
+  name: string
+  email: string
+  phone: string
+  gender: $Enums.Gender
+  age: string
+  bookingId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestUncheckedCreateNestedManyWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutPatientProfileInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutPatientProfileInput, Prisma.MemberUncheckedCreateWithoutPatientProfileInput>
+}
+
+export type MemberCreateManyPatientProfileInputEnvelope = {
+  data: Prisma.MemberCreateManyPatientProfileInput | Prisma.MemberCreateManyPatientProfileInput[]
+  skipDuplicates?: boolean
+}
+
+export type MemberUpsertWithWhereUniqueWithoutPatientProfileInput = {
+  where: Prisma.MemberWhereUniqueInput
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutPatientProfileInput, Prisma.MemberUncheckedUpdateWithoutPatientProfileInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutPatientProfileInput, Prisma.MemberUncheckedCreateWithoutPatientProfileInput>
+}
+
+export type MemberUpdateWithWhereUniqueWithoutPatientProfileInput = {
+  where: Prisma.MemberWhereUniqueInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutPatientProfileInput, Prisma.MemberUncheckedUpdateWithoutPatientProfileInput>
+}
+
+export type MemberUpdateManyWithWhereWithoutPatientProfileInput = {
+  where: Prisma.MemberScalarWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateManyMutationInput, Prisma.MemberUncheckedUpdateManyWithoutPatientProfileInput>
 }
 
 export type MemberCreateWithoutBookingInput = {
@@ -552,11 +990,21 @@ export type MemberCreateWithoutBookingInput = {
   age: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  testItems?: Prisma.BloodTestCreateNestedManyWithoutMemberInput
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestCreateNestedManyWithoutMembersInput
+  user?: Prisma.UserCreateNestedOneWithoutMembersInput
+  patientProfile?: Prisma.PatientProfileCreateNestedOneWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutBookingInput = {
   id?: string
+  userId?: string | null
+  patientProfileId?: string | null
   name: string
   email: string
   phone: string
@@ -564,7 +1012,13 @@ export type MemberUncheckedCreateWithoutBookingInput = {
   age: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  testItems?: Prisma.BloodTestUncheckedCreateNestedManyWithoutMemberInput
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestUncheckedCreateNestedManyWithoutMembersInput
+  prescriptions?: Prisma.PrescriptionUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutBookingInput = {
@@ -593,22 +1047,7 @@ export type MemberUpdateManyWithWhereWithoutBookingInput = {
   data: Prisma.XOR<Prisma.MemberUpdateManyMutationInput, Prisma.MemberUncheckedUpdateManyWithoutBookingInput>
 }
 
-export type MemberScalarWhereInput = {
-  AND?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
-  OR?: Prisma.MemberScalarWhereInput[]
-  NOT?: Prisma.MemberScalarWhereInput | Prisma.MemberScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Member"> | string
-  name?: Prisma.StringFilter<"Member"> | string
-  email?: Prisma.StringFilter<"Member"> | string
-  phone?: Prisma.StringFilter<"Member"> | string
-  gender?: Prisma.EnumGenderFilter<"Member"> | $Enums.Gender
-  age?: Prisma.StringFilter<"Member"> | string
-  bookingId?: Prisma.UuidNullableFilter<"Member"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Member"> | Date | string
-}
-
-export type MemberCreateManyBookingInput = {
+export type MemberCreateWithoutPrescriptionsInput = {
   id?: string
   name: string
   email: string
@@ -617,6 +1056,320 @@ export type MemberCreateManyBookingInput = {
   age: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestCreateNestedManyWithoutMembersInput
+  booking?: Prisma.BookingCreateNestedOneWithoutMembersInput
+  user?: Prisma.UserCreateNestedOneWithoutMembersInput
+  patientProfile?: Prisma.PatientProfileCreateNestedOneWithoutMembersInput
+}
+
+export type MemberUncheckedCreateWithoutPrescriptionsInput = {
+  id?: string
+  userId?: string | null
+  patientProfileId?: string | null
+  name: string
+  email: string
+  phone: string
+  gender: $Enums.Gender
+  age: string
+  bookingId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+  testItems?: Prisma.BloodTestUncheckedCreateNestedManyWithoutMembersInput
+}
+
+export type MemberCreateOrConnectWithoutPrescriptionsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutPrescriptionsInput, Prisma.MemberUncheckedCreateWithoutPrescriptionsInput>
+}
+
+export type MemberUpsertWithoutPrescriptionsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutPrescriptionsInput, Prisma.MemberUncheckedUpdateWithoutPrescriptionsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutPrescriptionsInput, Prisma.MemberUncheckedCreateWithoutPrescriptionsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutPrescriptionsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutPrescriptionsInput, Prisma.MemberUncheckedUpdateWithoutPrescriptionsInput>
+}
+
+export type MemberUpdateWithoutPrescriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUpdateManyWithoutMembersNestedInput
+  booking?: Prisma.BookingUpdateOneWithoutMembersNestedInput
+  user?: Prisma.UserUpdateOneWithoutMembersNestedInput
+  patientProfile?: Prisma.PatientProfileUpdateOneWithoutMembersNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutPrescriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUncheckedUpdateManyWithoutMembersNestedInput
+}
+
+export type MemberCreateManyUserInput = {
+  id?: string
+  patientProfileId?: string | null
+  name: string
+  email: string
+  phone: string
+  gender: $Enums.Gender
+  age: string
+  bookingId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+}
+
+export type MemberUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUpdateManyWithoutMembersNestedInput
+  booking?: Prisma.BookingUpdateOneWithoutMembersNestedInput
+  patientProfile?: Prisma.PatientProfileUpdateOneWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUncheckedUpdateManyWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type MemberUpdateWithoutTestItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking?: Prisma.BookingUpdateOneWithoutMembersNestedInput
+  user?: Prisma.UserUpdateOneWithoutMembersNestedInput
+  patientProfile?: Prisma.PatientProfileUpdateOneWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutTestItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateManyWithoutTestItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type MemberCreateManyPatientProfileInput = {
+  id?: string
+  userId?: string | null
+  name: string
+  email: string
+  phone: string
+  gender: $Enums.Gender
+  age: string
+  bookingId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
+}
+
+export type MemberUpdateWithoutPatientProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUpdateManyWithoutMembersNestedInput
+  booking?: Prisma.BookingUpdateOneWithoutMembersNestedInput
+  user?: Prisma.UserUpdateOneWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutPatientProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUncheckedUpdateManyWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateManyWithoutPatientProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  age?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type MemberCreateManyBookingInput = {
+  id?: string
+  userId?: string | null
+  patientProfileId?: string | null
+  name: string
+  email: string
+  phone: string
+  gender: $Enums.Gender
+  age: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sampleStatus?: $Enums.SampleStatus
+  collectedAt?: Date | string | null
+  labReceivedAt?: Date | string | null
+  reportUrl?: string | null
+  prescriptionUrl?: string | null
 }
 
 export type MemberUpdateWithoutBookingInput = {
@@ -628,11 +1381,21 @@ export type MemberUpdateWithoutBookingInput = {
   age?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  testItems?: Prisma.BloodTestUpdateManyWithoutMemberNestedInput
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUpdateManyWithoutMembersNestedInput
+  user?: Prisma.UserUpdateOneWithoutMembersNestedInput
+  patientProfile?: Prisma.PatientProfileUpdateOneWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -640,11 +1403,19 @@ export type MemberUncheckedUpdateWithoutBookingInput = {
   age?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  testItems?: Prisma.BloodTestUncheckedUpdateManyWithoutMemberNestedInput
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  testItems?: Prisma.BloodTestUncheckedUpdateManyWithoutMembersNestedInput
+  prescriptions?: Prisma.PrescriptionUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateManyWithoutBookingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  patientProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -652,6 +1423,11 @@ export type MemberUncheckedUpdateManyWithoutBookingInput = {
   age?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sampleStatus?: Prisma.EnumSampleStatusFieldUpdateOperationsInput | $Enums.SampleStatus
+  collectedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  labReceivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reportUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  prescriptionUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -661,10 +1437,12 @@ export type MemberUncheckedUpdateManyWithoutBookingInput = {
 
 export type MemberCountOutputType = {
   testItems: number
+  prescriptions: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   testItems?: boolean | MemberCountOutputTypeCountTestItemsArgs
+  prescriptions?: boolean | MemberCountOutputTypeCountPrescriptionsArgs
 }
 
 /**
@@ -684,9 +1462,18 @@ export type MemberCountOutputTypeCountTestItemsArgs<ExtArgs extends runtime.Type
   where?: Prisma.BloodTestWhereInput
 }
 
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountPrescriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PrescriptionWhereInput
+}
+
 
 export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
+  patientProfileId?: boolean
   name?: boolean
   email?: boolean
   phone?: boolean
@@ -695,13 +1482,23 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   bookingId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  sampleStatus?: boolean
+  collectedAt?: boolean
+  labReceivedAt?: boolean
+  reportUrl?: boolean
+  prescriptionUrl?: boolean
   testItems?: boolean | Prisma.Member$testItemsArgs<ExtArgs>
   booking?: boolean | Prisma.Member$bookingArgs<ExtArgs>
+  user?: boolean | Prisma.Member$userArgs<ExtArgs>
+  patientProfile?: boolean | Prisma.Member$patientProfileArgs<ExtArgs>
+  prescriptions?: boolean | Prisma.Member$prescriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
 export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
+  patientProfileId?: boolean
   name?: boolean
   email?: boolean
   phone?: boolean
@@ -710,11 +1507,20 @@ export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   bookingId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  sampleStatus?: boolean
+  collectedAt?: boolean
+  labReceivedAt?: boolean
+  reportUrl?: boolean
+  prescriptionUrl?: boolean
   booking?: boolean | Prisma.Member$bookingArgs<ExtArgs>
+  user?: boolean | Prisma.Member$userArgs<ExtArgs>
+  patientProfile?: boolean | Prisma.Member$patientProfileArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
 export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
+  patientProfileId?: boolean
   name?: boolean
   email?: boolean
   phone?: boolean
@@ -723,11 +1529,20 @@ export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   bookingId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  sampleStatus?: boolean
+  collectedAt?: boolean
+  labReceivedAt?: boolean
+  reportUrl?: boolean
+  prescriptionUrl?: boolean
   booking?: boolean | Prisma.Member$bookingArgs<ExtArgs>
+  user?: boolean | Prisma.Member$userArgs<ExtArgs>
+  patientProfile?: boolean | Prisma.Member$patientProfileArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
 export type MemberSelectScalar = {
   id?: boolean
+  userId?: boolean
+  patientProfileId?: boolean
   name?: boolean
   email?: boolean
   phone?: boolean
@@ -736,19 +1551,31 @@ export type MemberSelectScalar = {
   bookingId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  sampleStatus?: boolean
+  collectedAt?: boolean
+  labReceivedAt?: boolean
+  reportUrl?: boolean
+  prescriptionUrl?: boolean
 }
 
-export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "gender" | "age" | "bookingId" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
+export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "patientProfileId" | "name" | "email" | "phone" | "gender" | "age" | "bookingId" | "createdAt" | "updatedAt" | "sampleStatus" | "collectedAt" | "labReceivedAt" | "reportUrl" | "prescriptionUrl", ExtArgs["result"]["member"]>
 export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   testItems?: boolean | Prisma.Member$testItemsArgs<ExtArgs>
   booking?: boolean | Prisma.Member$bookingArgs<ExtArgs>
+  user?: boolean | Prisma.Member$userArgs<ExtArgs>
+  patientProfile?: boolean | Prisma.Member$patientProfileArgs<ExtArgs>
+  prescriptions?: boolean | Prisma.Member$prescriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking?: boolean | Prisma.Member$bookingArgs<ExtArgs>
+  user?: boolean | Prisma.Member$userArgs<ExtArgs>
+  patientProfile?: boolean | Prisma.Member$patientProfileArgs<ExtArgs>
 }
 export type MemberIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking?: boolean | Prisma.Member$bookingArgs<ExtArgs>
+  user?: boolean | Prisma.Member$userArgs<ExtArgs>
+  patientProfile?: boolean | Prisma.Member$patientProfileArgs<ExtArgs>
 }
 
 export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -756,9 +1583,14 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     testItems: Prisma.$BloodTestPayload<ExtArgs>[]
     booking: Prisma.$BookingPayload<ExtArgs> | null
+    user: Prisma.$UserPayload<ExtArgs> | null
+    patientProfile: Prisma.$PatientProfilePayload<ExtArgs> | null
+    prescriptions: Prisma.$PrescriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    userId: string | null
+    patientProfileId: string | null
     name: string
     email: string
     phone: string
@@ -767,6 +1599,11 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     bookingId: string | null
     createdAt: Date
     updatedAt: Date
+    sampleStatus: $Enums.SampleStatus
+    collectedAt: Date | null
+    labReceivedAt: Date | null
+    reportUrl: string | null
+    prescriptionUrl: string | null
   }, ExtArgs["result"]["member"]>
   composites: {}
 }
@@ -1163,6 +2000,9 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   testItems<T extends Prisma.Member$testItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$testItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BloodTestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   booking<T extends Prisma.Member$bookingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$bookingArgs<ExtArgs>>): Prisma.Prisma__BookingClient<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.Member$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  patientProfile<T extends Prisma.Member$patientProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$patientProfileArgs<ExtArgs>>): Prisma.Prisma__PatientProfileClient<runtime.Types.Result.GetResult<Prisma.$PatientProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  prescriptions<T extends Prisma.Member$prescriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$prescriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1193,6 +2033,8 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface MemberFieldRefs {
   readonly id: Prisma.FieldRef<"Member", 'String'>
+  readonly userId: Prisma.FieldRef<"Member", 'String'>
+  readonly patientProfileId: Prisma.FieldRef<"Member", 'String'>
   readonly name: Prisma.FieldRef<"Member", 'String'>
   readonly email: Prisma.FieldRef<"Member", 'String'>
   readonly phone: Prisma.FieldRef<"Member", 'String'>
@@ -1201,6 +2043,11 @@ export interface MemberFieldRefs {
   readonly bookingId: Prisma.FieldRef<"Member", 'String'>
   readonly createdAt: Prisma.FieldRef<"Member", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Member", 'DateTime'>
+  readonly sampleStatus: Prisma.FieldRef<"Member", 'SampleStatus'>
+  readonly collectedAt: Prisma.FieldRef<"Member", 'DateTime'>
+  readonly labReceivedAt: Prisma.FieldRef<"Member", 'DateTime'>
+  readonly reportUrl: Prisma.FieldRef<"Member", 'String'>
+  readonly prescriptionUrl: Prisma.FieldRef<"Member", 'String'>
 }
     
 
@@ -1642,6 +2489,68 @@ export type Member$bookingArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   include?: Prisma.BookingInclude<ExtArgs> | null
   where?: Prisma.BookingWhereInput
+}
+
+/**
+ * Member.user
+ */
+export type Member$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
+ * Member.patientProfile
+ */
+export type Member$patientProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PatientProfile
+   */
+  select?: Prisma.PatientProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PatientProfile
+   */
+  omit?: Prisma.PatientProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PatientProfileInclude<ExtArgs> | null
+  where?: Prisma.PatientProfileWhereInput
+}
+
+/**
+ * Member.prescriptions
+ */
+export type Member$prescriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Prescription
+   */
+  select?: Prisma.PrescriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Prescription
+   */
+  omit?: Prisma.PrescriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PrescriptionInclude<ExtArgs> | null
+  where?: Prisma.PrescriptionWhereInput
+  orderBy?: Prisma.PrescriptionOrderByWithRelationInput | Prisma.PrescriptionOrderByWithRelationInput[]
+  cursor?: Prisma.PrescriptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PrescriptionScalarFieldEnum | Prisma.PrescriptionScalarFieldEnum[]
 }
 
 /**

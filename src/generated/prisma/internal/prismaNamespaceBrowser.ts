@@ -62,12 +62,16 @@ export const ModelName = {
   PackageCategory: 'PackageCategory',
   Package: 'Package',
   MiniPackage: 'MiniPackage',
+  PatientProfile: 'PatientProfile',
   Member: 'Member',
   Address: 'Address',
   Schedule: 'Schedule',
   Booking: 'Booking',
   Payment: 'Payment',
-  WebhookLog: 'WebhookLog'
+  WebhookLog: 'WebhookLog',
+  Prescription: 'Prescription',
+  Notification: 'Notification',
+  AdminInvite: 'AdminInvite'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -91,6 +95,8 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
+  phone: 'phone',
+  address: 'address',
   image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -98,7 +104,9 @@ export const UserScalarFieldEnum = {
   banned: 'banned',
   banReason: 'banReason',
   banExpires: 'banExpires',
-  prescriptions: 'prescriptions',
+  lastActiveAt: 'lastActiveAt',
+  availabilityStatus: 'availabilityStatus',
+  availableSetAt: 'availableSetAt',
   testReports: 'testReports'
 } as const
 
@@ -251,8 +259,25 @@ export const MiniPackageScalarFieldEnum = {
 export type MiniPackageScalarFieldEnum = (typeof MiniPackageScalarFieldEnum)[keyof typeof MiniPackageScalarFieldEnum]
 
 
+export const PatientProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  gender: 'gender',
+  age: 'age',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PatientProfileScalarFieldEnum = (typeof PatientProfileScalarFieldEnum)[keyof typeof PatientProfileScalarFieldEnum]
+
+
 export const MemberScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
+  patientProfileId: 'patientProfileId',
   name: 'name',
   email: 'email',
   phone: 'phone',
@@ -260,7 +285,12 @@ export const MemberScalarFieldEnum = {
   age: 'age',
   bookingId: 'bookingId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  sampleStatus: 'sampleStatus',
+  collectedAt: 'collectedAt',
+  labReceivedAt: 'labReceivedAt',
+  reportUrl: 'reportUrl',
+  prescriptionUrl: 'prescriptionUrl'
 } as const
 
 export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
@@ -278,6 +308,7 @@ export const AddressScalarFieldEnum = {
   state: 'state',
   country: 'country',
   bookingId: 'bookingId',
+  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -301,7 +332,10 @@ export const BookingScalarFieldEnum = {
   id: 'id',
   type: 'type',
   status: 'status',
+  paymentStatus: 'paymentStatus',
   userId: 'userId',
+  phlebotomistId: 'phlebotomistId',
+  cooId: 'cooId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   fullName: 'fullName',
@@ -345,6 +379,50 @@ export const WebhookLogScalarFieldEnum = {
 } as const
 
 export type WebhookLogScalarFieldEnum = (typeof WebhookLogScalarFieldEnum)[keyof typeof WebhookLogScalarFieldEnum]
+
+
+export const PrescriptionScalarFieldEnum = {
+  id: 'id',
+  fileUrl: 'fileUrl',
+  doctorName: 'doctorName',
+  memberId: 'memberId',
+  bookingId: 'bookingId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PrescriptionScalarFieldEnum = (typeof PrescriptionScalarFieldEnum)[keyof typeof PrescriptionScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  message: 'message',
+  type: 'type',
+  isRead: 'isRead',
+  link: 'link',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const AdminInviteScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  phone: 'phone',
+  address: 'address',
+  role: 'role',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdminInviteScalarFieldEnum = (typeof AdminInviteScalarFieldEnum)[keyof typeof AdminInviteScalarFieldEnum]
 
 
 export const SortOrder = {

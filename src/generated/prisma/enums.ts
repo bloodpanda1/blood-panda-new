@@ -10,8 +10,9 @@
 */
 
 export const Role = {
-  ADMIN: 'ADMIN',
-  MODERATOR: 'MODERATOR',
+  SUPER_ADMIN: 'SUPER_ADMIN',
+  COO: 'COO',
+  PHLEBOTOMIST: 'PHLEBOTOMIST',
   USER: 'USER'
 } as const
 
@@ -52,3 +53,26 @@ export const BookingType = {
 } as const
 
 export type BookingType = (typeof BookingType)[keyof typeof BookingType]
+
+
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const SampleStatus = {
+  BOOKED: 'BOOKED',
+  COLLECTED: 'COLLECTED',
+  RECEIVED: 'RECEIVED',
+  ACCESSIONED: 'ACCESSIONED',
+  PROCESSING: 'PROCESSING',
+  VERIFIED: 'VERIFIED',
+  REPORT_RELEASED: 'REPORT_RELEASED'
+} as const
+
+export type SampleStatus = (typeof SampleStatus)[keyof typeof SampleStatus]

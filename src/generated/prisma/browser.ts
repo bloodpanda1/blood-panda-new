@@ -73,6 +73,11 @@ export type Package = Prisma.PackageModel
  */
 export type MiniPackage = Prisma.MiniPackageModel
 /**
+ * Model PatientProfile
+ * 
+ */
+export type PatientProfile = Prisma.PatientProfileModel
+/**
  * Model Member
  * 
  */
@@ -102,3 +107,18 @@ export type Payment = Prisma.PaymentModel
  * 
  */
 export type WebhookLog = Prisma.WebhookLogModel
+/**
+ * Model Prescription
+ * 
+ */
+export type Prescription = Prisma.PrescriptionModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model AdminInvite
+ * 
+ */
+export type AdminInvite = Prisma.AdminInviteModel
