@@ -93,6 +93,7 @@ export const createBookingRecord = createServerFn({ method: 'POST' })
             paymentSessionId: checkoutResponse.paymentSessionId,
             orderId: checkoutResponse.orderId,
             paymentUrl: checkoutResponse.paymentUrl,
+            envMode: (checkoutResponse as any).envMode,
           }
         } else {
           return {
@@ -237,6 +238,7 @@ export const createBookingRecord = createServerFn({ method: 'POST' })
           paymentSessionId: checkoutResponse.paymentSessionId,
           orderId: checkoutResponse.orderId,
           paymentUrl: checkoutResponse.paymentUrl,
+          envMode: (checkoutResponse as any).envMode,
         }
       } else {
         await notifyAdmins('New Booking', `A new COD booking has been placed via checkout.`, 'NEW_BOOKING', '/admin/bookings')

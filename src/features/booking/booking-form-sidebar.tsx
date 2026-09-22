@@ -138,6 +138,8 @@ export default function BookingFormSidebar() {
             if (data.paymentSessionId) {
               const envMode = (data as any).envMode || 'sandbox'
               
+              console.log(`Proceeding to Cashfree checkout in ${envMode.toUpperCase()} mode...`)
+              
               await initiateCashfreePayment({
                 paymentSessionId: data.paymentSessionId,
                 mode: envMode,
