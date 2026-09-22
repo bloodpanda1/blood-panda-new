@@ -136,9 +136,11 @@ export default function BookingFormSidebar() {
               setCreatedBookingId(data.booking.id)
             }
             if (data.paymentSessionId) {
+              const envMode = import.meta.env.VITE_CASHFREE_ENV === 'PRODUCTION' ? 'production' : 'sandbox'
+              
               await initiateCashfreePayment({
                 paymentSessionId: data.paymentSessionId,
-                mode: 'sandbox',
+                mode: envMode,
                 redirectTarget: '_self',
               })
               clearStorage()
@@ -158,7 +160,7 @@ export default function BookingFormSidebar() {
             return data
           })(),
           {
-            loading: 'Initializing Cashfree Sandbox Checkout...',
+            loading: 'Initializing Cashfree Checkout...',
             success: 'Opening Cashfree Payment Gateway...',
             error: (err) => err?.message || 'Failed to initialize payment gateway.',
           },
