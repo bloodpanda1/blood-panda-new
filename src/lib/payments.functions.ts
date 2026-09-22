@@ -69,6 +69,7 @@ export const createCheckOutLink = createServerFn({ method: 'POST' })
         bookingId: data.bookingId,
         // In sandbox or hosted redirect mode, Cashfree provides hosted payment URL or session ID
         paymentUrl: null,
+        envMode: getServerEnv().CASHFREE_ENV === 'PRODUCTION' ? 'production' : 'sandbox',
       }
     } catch (error: any) {
       console.error('Error initiating Cashfree checkout:', error)

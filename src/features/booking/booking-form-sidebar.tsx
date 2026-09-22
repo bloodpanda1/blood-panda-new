@@ -136,7 +136,7 @@ export default function BookingFormSidebar() {
               setCreatedBookingId(data.booking.id)
             }
             if (data.paymentSessionId) {
-              const envMode = import.meta.env.VITE_CASHFREE_ENV === 'PRODUCTION' ? 'production' : 'sandbox'
+              const envMode = (data as any).envMode || 'sandbox'
               
               await initiateCashfreePayment({
                 paymentSessionId: data.paymentSessionId,
