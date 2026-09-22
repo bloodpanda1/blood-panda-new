@@ -43,8 +43,8 @@ export const createCheckOutLink = createServerFn({ method: 'POST' })
           customerEmail: user.email || primaryMember?.email || 'patient@bloodpanda.com',
           customerPhone: primaryMember?.phone || '9999999999',
         },
-        returnUrl: `${baseUrl}/payment-status?order_id={order_id}&bookingId=${data.bookingId}`,
-        notifyUrl: `${baseUrl}/api/payment/callback`,
+        returnUrl: `${baseUrl.replace('http://', 'https://')}/payment-status?order_id={order_id}&bookingId=${data.bookingId}`,
+        notifyUrl: `${baseUrl.replace('http://', 'https://')}/api/payment/callback`,
         orderNote: `Blood Test Booking #${data.bookingId.slice(0, 8)}`,
       })
 

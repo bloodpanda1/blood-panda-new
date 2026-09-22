@@ -42,12 +42,20 @@ const membersRouter = {
       age: z.string().min(1, 'Age is required'),
     }))
     .mutation(async ({ ctx, input }) => {
-      return prisma.patientProfile.create({
-        data: {
-          ...input,
-          userId: ctx.user.id
-        }
-      })
+      console.log('TRPC patientProfile.create called.');
+      console.log('ctx.user:', ctx.user);
+      
+      try {
+        return await prisma.patientProfile.create({
+          data: {
+            ...input,
+            userId: ctx.user.id
+          }
+        })
+      } catch (err: any) {
+        console.error('PatientProfile create error:', err);
+        throw err;
+      }
     }),
   update: protectedProcedure
     .input(z.object({
