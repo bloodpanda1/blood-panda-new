@@ -34,6 +34,19 @@ Key Points
 import { initiateCashfreePayment } from '#/lib/cashfree-checkout'
 import { cartStore } from '#/stores/cart-store'
 
+function parseErrorMessage(err: any, fallback: string) {
+  if (!err?.message) return fallback
+  try {
+    const parsed = JSON.parse(err.message)
+    if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].message) {
+      return parsed.map((e: any) => e.message).join(', ')
+    }
+  } catch (e) {
+    // Not a JSON string, fallback to err.message
+  }
+  return err.message
+}
+
 export default function BookingFormSidebar() {
   const form = useFormContext<BookingFormData>()
   const {
@@ -126,7 +139,7 @@ export default function BookingFormSidebar() {
             })
             return 'Booking placed successfully!'
           },
-          error: (err) => err?.message || 'Failed to create booking.',
+          error: (err) => parseErrorMessage(err, 'Failed to create booking.'),
         })
       } else {
         toast.promise(
@@ -164,7 +177,7 @@ export default function BookingFormSidebar() {
           {
             loading: 'Initializing Cashfree Checkout...',
             success: 'Opening Cashfree Payment Gateway...',
-            error: (err) => err?.message || 'Failed to initialize payment gateway.',
+            error: (err) => parseErrorMessage(err, 'Failed to initialize payment gateway.'),
           },
         )
       }
