@@ -123,8 +123,7 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
 
       const baseTotalPrice = discountedPrice * memberList.length
 
-      const collectionCharges =
-        baseTotalPrice > 500 ? 0 : baseTotalPrice > 0 ? 150 : 0
+      const collectionCharges = 0
 
       const totalPrice = baseTotalPrice + collectionCharges
 

@@ -195,17 +195,7 @@ export default function BookingFormSidebar() {
             {formatCurrency(String(discountedPrice))}
           </span>
         </p>
-        <Separator />
-        <p className={'flex items-center justify-between'}>
-          <span className={'font-medium'}>Collection Charges</span>
-          <span className={'font-semibold'}>
-            {collectionCharges === 0 ? (
-              <span className="text-green-600">Free</span>
-            ) : (
-              formatCurrency(String(collectionCharges))
-            )}
-          </span>
-        </p>
+
       </CardContent>
 
       <CardFooter className={'flex-col gap-4'}>
