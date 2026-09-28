@@ -40,7 +40,7 @@ export const auth = betterAuth({
     sendResetPassword: async ({ user, url }, request) => {
       const resend = new Resend(getServerEnv().RESEND_API_KEY)
       await resend.emails.send({
-        from: 'BloodPanda Admin <onboarding@resend.dev>', // Use a verified domain in production
+        from: 'BloodPanda <info@bloodpanda.com>',
         to: user.email,
         subject: `Reset your password for BloodPanda`,
         html: `

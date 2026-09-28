@@ -21,8 +21,10 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionRouteImport } from './routes/terms-and-condition'
 import { Route as TestsRouteImport } from './routes/tests'
+import { Route as AuthForgotPasswordRouteImport } from './routes/_auth/forgot-password'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
+import { Route as AuthResetPasswordRouteImport } from './routes/_auth/reset-password'
 import { Route as ProtectedBookingRouteImport } from './routes/_protected/booking'
 import { Route as ProtectedCalendarRouteImport } from './routes/_protected/calendar'
 import { Route as ProtectedCartRouteImport } from './routes/_protected/cart'
@@ -113,6 +115,11 @@ const TestsRoute = TestsRouteImport.update({
   path: '/tests',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -121,6 +128,11 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => AuthRoute,
 } as any)
 const ProtectedBookingRoute = ProtectedBookingRouteImport.update({
@@ -293,8 +305,10 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-condition': typeof TermsAndConditionRoute
   '/tests': typeof TestsRoute
+  '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/reset-password': typeof AuthResetPasswordRoute
   '/booking': typeof ProtectedBookingRoute
   '/calendar': typeof ProtectedCalendarRoute
   '/cart': typeof ProtectedCartRoute
@@ -338,8 +352,10 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-condition': typeof TermsAndConditionRoute
   '/tests': typeof TestsRoute
+  '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/reset-password': typeof AuthResetPasswordRoute
   '/booking': typeof ProtectedBookingRoute
   '/calendar': typeof ProtectedCalendarRoute
   '/cart': typeof ProtectedCartRoute
@@ -386,8 +402,10 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-condition': typeof TermsAndConditionRoute
   '/tests': typeof TestsRoute
+  '/_auth/forgot-password': typeof AuthForgotPasswordRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
+  '/_auth/reset-password': typeof AuthResetPasswordRoute
   '/_protected/booking': typeof ProtectedBookingRoute
   '/_protected/calendar': typeof ProtectedCalendarRoute
   '/_protected/cart': typeof ProtectedCartRoute
@@ -433,8 +451,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms-and-condition'
     | '/tests'
+    | '/forgot-password'
     | '/login'
     | '/register'
+    | '/reset-password'
     | '/booking'
     | '/calendar'
     | '/cart'
@@ -478,8 +498,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms-and-condition'
     | '/tests'
+    | '/forgot-password'
     | '/login'
     | '/register'
+    | '/reset-password'
     | '/booking'
     | '/calendar'
     | '/cart'
@@ -525,8 +547,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms-and-condition'
     | '/tests'
+    | '/_auth/forgot-password'
     | '/_auth/login'
     | '/_auth/register'
+    | '/_auth/reset-password'
     | '/_protected/booking'
     | '/_protected/calendar'
     | '/_protected/cart'
@@ -674,6 +698,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_auth/forgot-password': {
+      id: '/_auth/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_auth/login': {
       id: '/_auth/login'
       path: '/login'
@@ -686,6 +717,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof AuthRegisterRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/reset-password': {
+      id: '/_auth/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof AuthResetPasswordRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_protected/booking': {
@@ -909,13 +947,17 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthRouteChildren {
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)

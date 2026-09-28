@@ -1053,7 +1053,7 @@ const adminRouter = {
       try {
         const resend = new Resend(getServerEnv().RESEND_API_KEY)
         await resend.emails.send({
-          from: 'BloodPanda Admin <onboarding@resend.dev>', // Use a verified domain in production
+          from: 'BloodPanda <info@bloodpanda.com>',
           to: input.email,
           subject: `You have been invited as ${input.role.replace('_', ' ')} on BloodPanda`,
           html: `

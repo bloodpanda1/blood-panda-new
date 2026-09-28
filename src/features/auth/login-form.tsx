@@ -149,7 +149,16 @@ export default function LoginForm() {
             <Field>
               <Field>
                 <Field>
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <div className="flex items-center justify-between">
+                    <FieldLabel htmlFor="password">Password</FieldLabel>
+                    <Link
+                      to="/forgot-password"
+                      viewTransition
+                      className="text-xs text-muted-foreground underline-offset-4 hover:underline"
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
                   <Input
                     id="password"
                     type="password"
