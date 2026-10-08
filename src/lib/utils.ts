@@ -74,8 +74,10 @@ export function formattedCategoryName(value: string) {
  * @returns boolean
  */
 export function disablePastDates(date: Date) {
-  // 1st check if the date is in the past
-  if (date < new Date()) {
+  // 1st check if the date is in the past (before today)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  if (date < today) {
     return true
   }
 

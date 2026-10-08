@@ -63,21 +63,7 @@ export const scheduleFormSchema = z.object({
       })
       return
     }
-
-    if (isToday(selectedDate)) {
-      try {
-        const slotTimeDate = parse(data.slotTime, 'hh:mm aaa', new Date())
-        if (isBefore(slotTimeDate, new Date())) {
-          ctx.addIssue({
-            code: 'custom',
-            path: ['slotTime'],
-            message: 'Selected time slot has already passed',
-          })
-        }
-      } catch (e) {
-        // ignore format errors
-      }
-    }
+    // Trust client-side validation for past time slots to avoid UTC timezone mismatches on Vercel
   }
 })
 
@@ -109,7 +95,7 @@ export const instantBookingFormSchema = z
       .max(30, 'City must be at most 100 characters'),
     zipcode: z.string().min(1, 'Pincode is required'),
     preferredTime: z.string().min(1, 'Preferred time is required'),
-    preferredDate: z.date().min(new Date(), 'Preferred date is required'),
+    preferredDate: z.date({ required_error: 'Preferred date is required' }),
     testRequirement: z
       .string()
       .min(10, 'Test requirement is required')
