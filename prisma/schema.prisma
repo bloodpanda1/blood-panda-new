@@ -384,6 +384,7 @@ enum Gender {
 
 enum AddressType {
   HOME
+  OFFICE
   OTHER
 }
 

@@ -387,8 +387,36 @@ export default function MobileMenu() {
             </Button>
           ) : (
             <div className="flex flex-col gap-2 w-full">
+              {/* AI AGENTS: If you add, remove, or modify links in this section, 
+                  you MUST also make the corresponding changes in `src/components/user-button.tsx` 
+                  to keep the mobile and desktop navigation menus in sync. */}
+              <Button asChild className="w-full justify-start" variant="outline">
+                <Link to="/profile" viewTransition onClick={handleClose}>
+                  Profile
+                </Link>
+              </Button>
+              <Button asChild className="w-full justify-start" variant="outline">
+                <Link to="/settings" viewTransition onClick={handleClose}>
+                  Settings
+                </Link>
+              </Button>
+              <Button asChild className="w-full justify-start" variant="outline">
+                <Link to="/bookings" viewTransition onClick={handleClose}>
+                  My Orders
+                </Link>
+              </Button>
+              <Button asChild className="w-full justify-start" variant="outline">
+                <Link to="/calendar" viewTransition onClick={handleClose}>
+                  My Calendar
+                </Link>
+              </Button>
+              <Button asChild className="w-full justify-start" variant="outline">
+                <Link to="/saved-addresses" viewTransition onClick={handleClose}>
+                  Saved Addresses
+                </Link>
+              </Button>
               {data.user.role !== 'USER' && (
-                <Button asChild className="w-full" variant="outline">
+                <Button asChild className="w-full justify-start border-primary/50 text-primary" variant="outline">
                   {data.user.role === 'ADMIN' || data.user.role === 'SUPER_ADMIN' ? (
                     <Link to="/admin/dashboard" viewTransition onClick={handleClose}>
                       Admin Dashboard

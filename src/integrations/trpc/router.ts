@@ -448,7 +448,7 @@ const adminRouter = {
         ? { createdAt: { gte: startDate, lte: endDate } }
         : { createdAt: { gte: startDate } }
 
-      const [totalUsers, totalBookings, totalInstant, totalCOD, totalOnline, pendingPayments, pendingSamples, pendingReports, totalCompleted, totalPendingOrders, totalCancelled, totalRefunds, paidBookings, unassignedBookings] = await Promise.all([
+      const [totalUsers, totalBookings, totalInstant, totalCOD, totalOnline, pendingPayments, pendingSamples, pendingReports, totalCompleted, totalPendingOrders, totalConfirmedOrders, totalCancelled, totalRefunds, paidBookings, unassignedBookings] = await Promise.all([
         prisma.patientProfile.count({ where: dateFilter }),
         prisma.booking.count({ where: dateFilter }),
         prisma.booking.count({ where: { type: 'INSTANT_BOOKING', ...dateFilter } }),
@@ -459,6 +459,7 @@ const adminRouter = {
         prisma.member.count({ where: { sampleStatus: 'PROCESSING' } }),
         prisma.booking.count({ where: { status: 'COMPLETED', ...dateFilter } }),
         prisma.booking.count({ where: { status: 'PENDING', ...dateFilter } }),
+        prisma.booking.count({ where: { status: 'CONFIRMED', ...dateFilter } }),
         prisma.booking.count({ where: { status: 'CANCELLED', ...dateFilter } }),
         prisma.booking.count({ where: { paymentStatus: 'REFUNDED', ...dateFilter } }),
         prisma.booking.findMany({
@@ -474,7 +475,7 @@ const adminRouter = {
         return acc + bookingAmt
       }, 0)
 
-      return { totalUsers, totalBookings, totalInstant, totalCOD, totalOnline, pendingPayments, pendingSamples, pendingReports, totalCompleted, totalPendingOrders, totalCancelled, totalRefunds, revenue, unassignedBookings }
+      return { totalUsers, totalBookings, totalInstant, totalCOD, totalOnline, pendingPayments, pendingSamples, pendingReports, totalCompleted, totalPendingOrders, totalConfirmedOrders, totalCancelled, totalRefunds, revenue, unassignedBookings }
     }),
 
   accounts: adminProcedure

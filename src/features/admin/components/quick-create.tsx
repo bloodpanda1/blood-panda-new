@@ -26,7 +26,7 @@ import { useTRPC } from '#/integrations/trpc/react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { useSession } from '#/lib/auth-client'
-import { cn } from '#/lib/utils'
+import { cn, DEFAULT_TIME_SLOTS } from '#/lib/utils'
 
 type Step = 'menu' | 'add-patient' | 'create-order-select-patient' | 'create-order-form'
 
@@ -38,12 +38,6 @@ interface PatientProfile {
   gender: string
   age: string
 }
-
-const TIME_SLOTS = [
-  'Morning (6AM - 10AM)',
-  'Afternoon (10AM - 2PM)',
-  'Evening (2PM - 6PM)',
-]
 
 export function QuickCreateButton() {
   const { data: session } = useSession()
@@ -410,7 +404,7 @@ export function QuickCreateButton() {
                         onValueChange={v => setOrderForm(f => ({ ...f, preferredTime: v }))}>
                         <SelectTrigger id="o-time"><SelectValue placeholder="Select slot" /></SelectTrigger>
                         <SelectContent>
-                          {TIME_SLOTS.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
+                          {DEFAULT_TIME_SLOTS.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
                         </SelectContent>
                       </Select>
                     </div>

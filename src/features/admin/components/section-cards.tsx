@@ -28,10 +28,10 @@ import { Button } from '#/components/ui/button'
 const operationalStats = [
   { key: 'totalBookings', label: 'Total Bookings', icon: CalendarCheckIcon, color: 'text-primary' },
   { key: 'totalCompleted', label: 'Completed Orders', icon: CheckCircleIcon, color: 'text-emerald-500' },
+  { key: 'totalConfirmedOrders', label: 'Confirmed Orders', icon: CheckCircleIcon, color: 'text-sky-500' },
   { key: 'totalPendingOrders', label: 'Pending Orders', icon: ClockIcon, color: 'text-amber-500' },
   { key: 'totalCancelled', label: 'Cancelled Orders', icon: XCircleIcon, color: 'text-red-500' },
   { key: 'totalUsers', label: 'Registered Patients', icon: UsersIcon, color: 'text-blue-500' },
-  { key: 'totalInstant', label: 'Instant Bookings', icon: ZapIcon, color: 'text-orange-500' },
 ] as const
 
 const financialStats = [

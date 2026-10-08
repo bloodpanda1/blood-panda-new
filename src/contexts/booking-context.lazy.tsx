@@ -24,7 +24,8 @@ type BookingStats = {
 
 type BookingContextType = {
   step: number
-  nextStep: () => void
+  goToStep: (step: number) => void
+  nextStep: () => void | Promise<void>
   prevStep: () => void
   canGoToNextStep: boolean
   canGoToPreviousStep: boolean
@@ -221,47 +222,23 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
     return await formInstance.trigger(fieldToValidate)
   }
 
-  function nextStep() {
-    // const validatingForm: Promise<boolean> = new Promise(async (res, rej) => {
-    //   const ok =
-    //     step === 1
-    //       ? await formInstance.trigger('memberDetails')
-    //       : step === 2
-    //         ? await formInstance.trigger('address')
-    //         : step === 3
-    //           ? await formInstance.trigger('schedule')
-    //           : true
-
-    //   if (ok) {
-    //     res(true)
-    //   } else {
-    //     rej(false)
-    //   }
-    // })
-
-    toast.promise(validateStep(step), {
-      loading: 'Validating form...',
-      success: (result) => {
-        if (result) {
-          setStep((prev) => Math.min(prev + 1, 4))
-          setBookingStats((prev) => ({
-            ...prev,
-            currentStep: Math.min(prev.currentStep + 1, 4),
-            isFirstStepCompleted: step >= 1,
-            isSecondStepCompleted: step >= 2,
-            isThirdStepCompleted: step >= 3,
-
-            firstStepProgress: step >= 1 ? 100 : 0,
-            secondStepProgress: step >= 2 ? 100 : 0,
-            thirdStepProgress: step >= 3 ? 100 : 0,
-          }))
-        }
-        return result
-          ? 'Form is valid! Moving to next step...'
-          : 'Form is invalid. Please fix the errors.'
-      },
-      error: 'Please fix the errors in the form before proceeding.',
-    })
+  async function nextStep() {
+    const isValid = await validateStep(step)
+    if (isValid) {
+      setStep((prev) => Math.min(prev + 1, 4))
+      setBookingStats((prev) => ({
+        ...prev,
+        currentStep: Math.min(prev.currentStep + 1, 4),
+        isFirstStepCompleted: step >= 1,
+        isSecondStepCompleted: step >= 2,
+        isThirdStepCompleted: step >= 3,
+        firstStepProgress: step >= 1 ? 100 : 0,
+        secondStepProgress: step >= 2 ? 100 : 0,
+        thirdStepProgress: step >= 3 ? 100 : 0,
+      }))
+    } else {
+      toast.error('Please check the highlighted fields and fix any errors.')
+    }
   }
 
   function prevStep() {
@@ -277,6 +254,15 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
       secondStepProgress: step >= 3 ? 100 : 0,
       thirdStepProgress: step >= 4 ? 100 : 0,
     }))
+  }
+
+  function goToStep(targetStep: number) {
+    if (targetStep < 1 || targetStep > 4) return;
+    setStep(targetStep);
+    setBookingStats((prev) => ({
+      ...prev,
+      currentStep: targetStep,
+    }));
   }
 
   const { clear: clearStorage } = useFormPersist('booking-form', {
@@ -303,6 +289,7 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
 
   const values: BookingContextType = {
     step,
+    goToStep,
     nextStep,
     prevStep,
     canGoToNextStep,

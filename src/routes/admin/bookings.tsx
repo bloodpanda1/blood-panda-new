@@ -13,7 +13,7 @@ import {
 } from '#/components/ui/table'
 import { seo } from '#/constants/seo-details'
 import { useTRPC } from '#/integrations/trpc/react'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
 import {
   ChevronLeftIcon,
@@ -36,7 +36,7 @@ import {
   ShoppingBagIcon,
 } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/components/ui/tabs'
-import { cn } from '#/lib/utils'
+import { cn, DEFAULT_TIME_SLOTS } from '#/lib/utils'
 import { useState, useRef, useEffect } from 'react'
 import { useSession } from '#/lib/auth-client'
 import {
@@ -126,6 +126,8 @@ function RouteComponent() {
   const { data: session } = useSession()
   const userRole = (session?.user as any)?.role || 'USER'
 
+  const queryClient = useQueryClient()
+
   const { data, isLoading, refetch } = useQuery(
     trpc.admin.bookings.queryOptions({ page, limit })
   )
@@ -134,6 +136,7 @@ function RouteComponent() {
     onSuccess: () => {
       toast.success('Status updated successfully')
       refetch()
+      queryClient.invalidateQueries({ queryKey: [['admin']] })
     },
     onError: (error) => {
       toast.error(error.message || 'Failed to update status')
@@ -151,6 +154,7 @@ function RouteComponent() {
     onSuccess: () => {
       toast.success('Assignments updated successfully')
       refetch()
+      queryClient.invalidateQueries({ queryKey: [['admin']] })
     },
     onError: (error) => {
       toast.error(error.message || 'Failed to update assignments')
@@ -169,6 +173,7 @@ function RouteComponent() {
       toast.success('Schedule updated successfully')
       setIsEditingSchedule(false)
       refetch()
+      queryClient.invalidateQueries({ queryKey: [['admin']] })
     },
     onError: (error) => {
       toast.error(error.message || 'Failed to update schedule')
@@ -246,6 +251,7 @@ function RouteComponent() {
     onSuccess: () => {
       toast.success('Payment status updated successfully')
       refetch()
+      queryClient.invalidateQueries({ queryKey: [['admin']] })
     },
     onError: (error) => {
       toast.error(error.message || 'Failed to update payment status')
@@ -564,12 +570,7 @@ function RouteComponent() {
                                 setEditDate(d)
                                 
                                 const savedSlot = t.toLowerCase()
-                                const timeSlots = [
-                                  "06:00 am - 07:00 am", "07:00 am - 08:00 am", "08:00 am - 09:00 am",
-                                  "09:00 am - 10:00 am", "10:00 am - 11:00 am", "11:00 am - 12:00 pm",
-                                  "12:00 pm - 01:00 pm", "01:00 pm - 02:00 pm", "02:00 pm - 03:00 pm",
-                                  "03:00 pm - 04:00 pm", "04:00 pm - 05:00 pm", "05:00 pm - 06:00 pm"
-                                ]
+                                const timeSlots = DEFAULT_TIME_SLOTS
                                 const matchedSlot = savedSlot ? (timeSlots.find(s => s.startsWith(savedSlot) || savedSlot.startsWith(s.split(' - ')[0])) || savedSlot) : ''
                                 setEditTime(matchedSlot)
                               }} className="text-[11px] text-primary hover:underline font-medium">Edit</button>

@@ -95,6 +95,9 @@ export default function UserButton({ user }: UserButtonProps) {
             {user.name || user.email || 'User'}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
+          {/* AI AGENTS: If you add, remove, or modify links in this section, 
+              you MUST also make the corresponding changes in `src/components/mobile-menu.tsx` 
+              to keep the mobile and desktop navigation menus in sync. */}
           <DropdownMenuItem asChild>
             <Link to="/profile" viewTransition>
               <IconUserScan className={'size-4'} /> Profile

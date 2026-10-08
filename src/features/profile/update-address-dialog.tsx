@@ -10,6 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '#/components/ui/dialog'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '#/components/ui/alert-dialog'
 import { Input } from '#/components/ui/input'
 import { Label } from '#/components/ui/label'
 import {
@@ -102,7 +113,19 @@ export default function UpdateAddressDialog({
     },
   })
 
-  const isPending = createMutation.isPending || updateMutation.isPending
+  const deleteMutation = useMutation({
+    ...trpc.addresses.delete.mutationOptions(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: trpc.addresses.list.queryKey() })
+      toast.success('Address deleted successfully!')
+      setOpen(false)
+    },
+    onError: (err: any) => {
+      toast.error(err.message || 'Failed to delete address')
+    },
+  })
+
+  const isPending = createMutation.isPending || updateMutation.isPending || deleteMutation.isPending
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -141,6 +164,12 @@ export default function UpdateAddressDialog({
         city: city || undefined,
         state: state || undefined,
       })
+    }
+  }
+
+  const handleDelete = () => {
+    if (address?.id) {
+      deleteMutation.mutate({ id: address.id })
     }
   }
 
@@ -254,16 +283,50 @@ export default function UpdateAddressDialog({
             </div>
           </div>
 
-          <DialogFooter className="gap-2 sm:gap-0">
-            <DialogClose asChild>
-              <Button type="button" variant="outline" disabled={isPending}>
-                Cancel
+          <DialogFooter className="gap-2 sm:gap-0 sm:justify-between w-full flex-row">
+            {isEditing ? (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button 
+                    type="button" 
+                    variant="destructive" 
+                    disabled={isPending}
+                  >
+                    Delete
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This will permanently delete this address from your saved addresses. This action cannot be undone.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction 
+                      onClick={handleDelete}
+                      className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                    >
+                      Delete Address
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            ) : (
+              <div /> // Placeholder to push the rest to the right
+            )}
+            <div className="flex gap-2">
+              <DialogClose asChild>
+                <Button type="button" variant="outline" disabled={isPending}>
+                  Cancel
+                </Button>
+              </DialogClose>
+              <Button type="submit" disabled={isPending}>
+                {isPending && <Spinner className="size-4 mr-2" />}
+                {isEditing ? 'Save Changes' : 'Add Address'}
               </Button>
-            </DialogClose>
-            <Button type="submit" disabled={isPending}>
-              {isPending && <Spinner className="size-4 mr-2" />}
-              {isEditing ? 'Save Changes' : 'Add Address'}
-            </Button>
+            </div>
           </DialogFooter>
         </form>
       </DialogContent>

@@ -13,6 +13,13 @@ import { Alert, AlertDescription, AlertTitle } from '#/components/ui/alert'
 import { Skeleton } from '#/components/ui/skeleton'
 import { Spinner } from '#/components/ui/spinner'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogClose } from '#/components/ui/dialog'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '#/components/ui/dropdown-menu'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/components/ui/tooltip'
 import { Label } from '#/components/ui/label'
 import {
   Table,
@@ -27,7 +34,7 @@ import { useTRPC } from '#/integrations/trpc/react'
 import { useSession } from '#/lib/auth-client'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { SearchIcon, ShieldIcon, UserIcon, AlertCircle, EditIcon } from 'lucide-react'
+import { SearchIcon, ShieldIcon, UserIcon, AlertCircle, EditIcon, MoreVerticalIcon, UserXIcon } from 'lucide-react'
 import { toast } from 'sonner'
 import { useState, useEffect } from 'react'
 import InviteAdminDialog from '#/features/admin/invite-admin-dialog'
@@ -278,14 +285,47 @@ function RouteComponent() {
                     {new Date(member.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button 
-                      variant="ghost" 
-                      size="icon" 
-                      disabled={currentUserId === member.id}
-                      onClick={() => openEditModal(member)}
-                    >
-                      <EditIcon className="size-4" />
-                    </Button>
+                    {currentUserId === member.id ? (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <span tabIndex={0} className="inline-block cursor-not-allowed">
+                              <Button variant="ghost" size="icon" disabled className="pointer-events-none">
+                                <MoreVerticalIcon className="size-4" />
+                              </Button>
+                            </span>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Can't edit self</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <MoreVerticalIcon className="size-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem onClick={() => openEditModal(member)}>
+                            <EditIcon className="size-4 mr-2" />
+                            Edit Staff
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            className="text-destructive focus:bg-destructive/10"
+                            onClick={() => {
+                              if (window.confirm('Are you sure you want to revoke staff access for this user? They will be downgraded to a regular user.')) {
+                                updateStaffMutation.mutate({ id: member.id, role: 'USER' })
+                              }
+                            }}
+                          >
+                            <UserXIcon className="size-4 mr-2" />
+                            Revoke Access
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
                   </TableCell>
                 </TableRow>
               ))

@@ -129,7 +129,7 @@ export default function PopularPackages() {
                         <CardHeader className={'relative'}>
                           <CardAction
                             className={cn(
-                              'absolute top-px left-0 col-start-1 rounded-lg p-1.5 md:p-2',
+                              'absolute top-1/2 -translate-y-1/2 left-0 col-start-1 rounded-lg p-1.5 md:p-2',
                               returnStyles(idx, 'icon'),
                             )}
                           >
@@ -138,16 +138,21 @@ export default function PopularPackages() {
                             />
                           </CardAction>
                           <div className="flex items-start sm:items-center justify-between ml-12 gap-2">
-                            <CardTitle className={'capitalize'}>
-                              <h3
-                                className={cn(
-                                  'text-xl font-semibold',
-                                  returnStyles(idx, 'title'),
-                                )}
-                              >
-                                {item.name}
-                              </h3>
-                            </CardTitle>
+                            <div className="flex flex-col items-start gap-1">
+                              <Badge variant="secondary" className="text-[10px] uppercase font-bold tracking-wider rounded-sm px-1.5 py-0.5 bg-primary/10 text-primary border-primary/20">
+                                Full Body Checkup
+                              </Badge>
+                              <CardTitle className={'capitalize'}>
+                                <h3
+                                  className={cn(
+                                    'text-xl font-semibold',
+                                    returnStyles(idx, 'title'),
+                                  )}
+                                >
+                                  {item.name}
+                                </h3>
+                              </CardTitle>
+                            </div>
                             {isPopular && (
                               <Badge className={'rounded-full shadow-sm whitespace-nowrap'}>
                                 <StarIcon
@@ -162,8 +167,26 @@ export default function PopularPackages() {
                         </CardHeader>
                         <CardContent>
                           <ul className={'list-inside space-y-2'}>
-                            {item.extraFeatures.map((feat) => {
-                              return (
+                            {(() => {
+                              let features = [...item.extraFeatures];
+                              const pkgName = item.name.toLowerCase();
+                              let overrideStr = '';
+                              if (pkgName === 'signature') overrideStr = '100+ Tests Included';
+                              else if (pkgName === 'platinum') overrideStr = '90+ Tests Included';
+                              else if (pkgName === 'diamond') overrideStr = '85+ Tests Included';
+                              else if (pkgName === 'gold') overrideStr = '80+ Tests Included';
+                              else if (pkgName === 'silver') overrideStr = '60+ Tests Included';
+                              
+                              if (overrideStr) {
+                                const testIndex = features.findIndex(f => /test|parameter/i.test(f));
+                                if (testIndex !== -1) {
+                                  features[testIndex] = overrideStr;
+                                } else {
+                                  features.unshift(overrideStr);
+                                }
+                              }
+                              
+                              return features.map((feat) => (
                                 <li
                                   key={crypto.randomUUID()}
                                   className={'flex items-center gap-2'}
@@ -173,8 +196,8 @@ export default function PopularPackages() {
                                   />
                                   {feat}
                                 </li>
-                              )
-                            })}
+                              ))
+                            })()}
                           </ul>
                         </CardContent>
                         <CardFooter

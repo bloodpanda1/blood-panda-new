@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Button } from '#/components/ui/button'
+import { DEFAULT_TIME_SLOTS } from '#/lib/utils'
 import { Card, CardContent, CardHeader } from '#/components/ui/card'
 import { Badge } from '#/components/ui/badge'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '#/components/ui/tabs'
@@ -160,12 +161,7 @@ function AppointmentsPage() {
     
     // Fix slot matching when DB only has '06:00 am'
     const savedSlot = schedule.slot?.toLowerCase() || ''
-    const timeSlots = [
-      "06:00 am - 07:00 am", "07:00 am - 08:00 am", "08:00 am - 09:00 am",
-      "09:00 am - 10:00 am", "10:00 am - 11:00 am", "11:00 am - 12:00 pm",
-      "12:00 pm - 01:00 pm", "01:00 pm - 02:00 pm", "02:00 pm - 03:00 pm",
-      "03:00 pm - 04:00 pm", "04:00 pm - 05:00 pm", "05:00 pm - 06:00 pm"
-    ]
+    const timeSlots = DEFAULT_TIME_SLOTS
     const matchedSlot = savedSlot ? (timeSlots.find(s => s.startsWith(savedSlot) || savedSlot.startsWith(s.split(' - ')[0])) || savedSlot) : ''
     setEditSlot(matchedSlot)
   }

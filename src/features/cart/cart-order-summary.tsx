@@ -16,7 +16,7 @@ import { Label } from '#/components/ui/label'
 import { Separator } from '#/components/ui/separator'
 import { formatCurrency } from '#/lib/utils'
 import { useCart } from '#/stores/useCart'
-import { CreditCard, Package, Shield, Trash2, Truck } from 'lucide-react'
+import { CreditCard, Home, Activity, Trash2, Users } from 'lucide-react'
 import { useState } from 'react'
 import { useSession } from '#/lib/auth-client'
 import { useTRPC } from '#/integrations/trpc/react'
@@ -143,16 +143,16 @@ export default function CartOrderSummary() {
           {/* Features */}
           <div className="space-y-4 border-t pt-4">
             <div className="flex items-center gap-2 text-sm">
-              <Package className="h-4 w-4 text-primary" />
-              <span>Free returns within 30 days</span>
+              <Home className="h-4 w-4 text-primary" />
+              <span>Free home sample collection</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <Shield className="h-4 w-4 text-primary" />
-              <span>Cash on Delivery</span>
+              <Activity className="h-4 w-4 text-primary" />
+              <span>Fast sample processing and reporting</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
-              <Truck className="h-4 w-4 text-primary" />
-              <span>Fast delivery</span>
+              <Users className="h-4 w-4 text-primary" />
+              <span>Trusted by doctors and patients</span>
             </div>
           </div>
 

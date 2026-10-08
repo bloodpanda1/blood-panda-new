@@ -18,7 +18,7 @@ import {
 } from '#/components/ui/card'
 import { ScrollArea } from '#/components/ui/scroll-area'
 import { Separator } from '#/components/ui/separator'
-import { disablePastDates, generateTimeSlots } from '#/lib/utils'
+import { disablePastDates, DEFAULT_TIME_SLOTS } from '#/lib/utils'
 import type { BookingFormData } from '#/lib/validators/booking-schema'
 
 function CalendarFooter({
@@ -63,7 +63,7 @@ export default function ScheduleSlot() {
     undefined,
   )
 
-  const allSlots = generateTimeSlots('06:00', '18:00', 15)
+  const allSlots = DEFAULT_TIME_SLOTS
   const slots = allSlots.filter((slot) => {
     if (date && isToday(date)) {
       const slotTime = parse(slot, 'hh:mm aaa', new Date())

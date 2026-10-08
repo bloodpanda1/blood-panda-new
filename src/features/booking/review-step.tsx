@@ -53,7 +53,7 @@ const paymentOptions = [
 
 export default function ReviewStep() {
   const form = useFormContext<BookingFormData>()
-  const { totalPrice } = useBookingContext()
+  const { totalPrice, goToStep } = useBookingContext()
 
   const watchedAddressValues = useWatch({
     name: 'address',
@@ -106,7 +106,7 @@ export default function ReviewStep() {
                   </ItemDescription>
                 </ItemContent>
                 <ItemActions>
-                  <Button type="button" size="sm" variant="outline">
+                  <Button type="button" size="sm" variant="outline" onClick={() => goToStep(2)}>
                     Edit
                   </Button>
                 </ItemActions>
@@ -128,7 +128,7 @@ export default function ReviewStep() {
                   </ItemDescription>
                 </ItemContent>
                 <ItemActions>
-                  <Button type="button" size="sm" variant="outline">
+                  <Button type="button" size="sm" variant="outline" onClick={() => goToStep(3)}>
                     Edit
                   </Button>
                 </ItemActions>

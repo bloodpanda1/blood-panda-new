@@ -1,5 +1,5 @@
 // Force database URL to PROD
-process.env.DATABASE_URL = "postgresql://neondb_owner:npg_diZAUa9XBGH6@ep-empty-mode-aogwj6x7-pooler.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=verify-full&channel_binding=require";
+// process.env.DATABASE_URL = "postgresql://neondb_owner:npg_diZAUa9XBGH6@ep-empty-mode-aogwj6x7-pooler.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=verify-full&channel_binding=require";
 
 import { auth } from "../src/lib/auth.js";
 import { prisma } from "../src/db.js";
@@ -12,7 +12,7 @@ async function main() {
     throw new Error("Missing SUPERADMIN_EMAIL or SUPERADMIN_PASS in environment");
   }
 
-  console.log(`Seeding super admin with email: ${email} to prod database...`);
+  console.log(`Seeding super admin with email: ${email} to database...`);
 
   // Delete existing user so we can seed with the EXACT password from .env
   const existing = await prisma.user.findUnique({ where: { email } });

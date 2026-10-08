@@ -150,6 +150,8 @@ export function generateTimeSlots(
   return slots
 }
 
+export const DEFAULT_TIME_SLOTS = generateTimeSlots('06:00', '22:00', 15)
+
 export function formatWithOffset(date = new Date()) {
   const dtf = new Intl.DateTimeFormat('en-CA', {
     year: 'numeric',

@@ -10,7 +10,7 @@ import WizardHeader from './wizard-header'
 export default function BookingForm() {
   return (
     <Card
-      className={'grid gap-4 rounded-none shadow-none ring-0 lg:grid-cols-3'}
+      className={'grid gap-4 rounded-none shadow-none ring-0 lg:grid-cols-3 overflow-visible'}
     >
       <CardHeader className={'col-span-full'}>
         <WizardHeader />

@@ -35,7 +35,7 @@ import {
 } from '#/components/ui/select'
 import { Separator } from '#/components/ui/separator'
 import { createInstanstBookingRecord } from '#/lib/booking.functions'
-import { disablePastDates, generateTimeSlots } from '#/lib/utils'
+import { disablePastDates, DEFAULT_TIME_SLOTS } from '#/lib/utils'
 import type { InstantBookingFormData } from '#/lib/validators/booking-schema'
 import { instantBookingFormSchema } from '#/lib/validators/booking-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -61,7 +61,7 @@ const isDev = import.meta.env.DEV
 export default function ContactBookingForm() {
   const [date, setDate] = useState<Date | undefined>(today)
 
-  const slots = generateTimeSlots('06:00', '22:00', 15)
+  const slots = DEFAULT_TIME_SLOTS
 
   const form = useForm<InstantBookingFormData>({
     resolver: zodResolver(instantBookingFormSchema),

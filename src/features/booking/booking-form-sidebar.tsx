@@ -188,7 +188,6 @@ export default function BookingFormSidebar() {
     <Card className={'col-span-full grid h-fit content-start lg:col-span-1'}>
       <CardHeader>
         <CardTitle>{totalMembers.length || 0} Member added</CardTitle>
-        <CardAction>{formatCurrency(String(totalPrice))}</CardAction>
       </CardHeader>
 
       <CardContent className={'space-y-4'}>
@@ -198,17 +197,27 @@ export default function BookingFormSidebar() {
             {formatCurrency(String(originalPrice))}
           </span>
         </p>
+        
+        {discountPercentage > 0 && (
+          <p className={'flex items-center justify-between'}>
+            <span className={'font-medium flex items-center'}>
+              Discount
+              <span className={'ml-2 text-muted-foreground'}>{discountPercentage}%</span>
+            </span>
+            <span className={'font-semibold'}>
+              - {formatCurrency(String(originalPrice * (discountPercentage / 100)))}
+            </span>
+          </p>
+        )}
+
         <Separator />
+        
         <p className={'flex items-center justify-between'}>
-          <span className={'font-medium'}>
-            Discount on MRP
-            <Badge className={'text-xs'}>{discountPercentage}%</Badge>
-          </span>
-          <span className={'font-semibold'}>
-            {formatCurrency(String(discountedPrice))}
+          <span className={'font-medium'}>Total Payable</span>
+          <span className={'font-bold'}>
+            {formatCurrency(String(totalPrice))}
           </span>
         </p>
-
       </CardContent>
 
       <CardFooter className={'flex-col gap-4'}>

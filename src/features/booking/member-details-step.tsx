@@ -139,11 +139,22 @@ export default function BasicDetailsStep() {
     <FieldGroup className={'gap-6'}>
       
       {/* SELECTION SECTION */}
-      <Card className="rounded-none shadow-none ring-0 border bg-muted/20">
+      <Card 
+        className={cn(
+          "rounded-none shadow-none ring-0 border transition-colors",
+          fields.length === 0 
+            ? "border-destructive/50 bg-destructive/5" 
+            : "bg-muted/20"
+        )}
+      >
         <CardHeader>
-          <CardTitle>Select Family Members for Testing</CardTitle>
-          <p className="text-sm text-muted-foreground mt-1">
-            Choose who is getting tested from your saved family members, or add a new one.
+          <CardTitle className={cn(fields.length === 0 && "text-destructive")}>
+            Select Family Members for Testing
+          </CardTitle>
+          <p className={cn("text-sm mt-1", fields.length === 0 ? "text-destructive/80 font-medium" : "text-muted-foreground")}>
+            {fields.length === 0 
+              ? "⚠️ Please select at least one family member to proceed." 
+              : "Choose who is getting tested from your saved family members, or add a new one."}
           </p>
         </CardHeader>
         <CardContent className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -156,13 +167,15 @@ export default function BasicDetailsStep() {
                 key={member.id} 
                 onClick={() => toggleMemberSelection(member)}
                 className={cn(
-                  "relative flex flex-col p-4 border rounded-md cursor-pointer transition-all hover:border-primary",
-                  isMemberSelected(member.id) ? "border-primary bg-primary/5 ring-1 ring-primary" : "bg-card"
+                  "relative flex flex-col p-4 border rounded-xl cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md",
+                  isMemberSelected(member.id) 
+                    ? "border-primary border-2 bg-primary/10 shadow-primary/20 scale-[1.02]" 
+                    : "border-border/50 bg-card hover:border-primary/50"
                 )}
               >
                 {isMemberSelected(member.id) && (
-                  <div className="absolute top-3 right-3 text-primary">
-                    <CheckIcon className="size-5" />
+                  <div className="absolute -top-3 -right-3 bg-primary text-primary-foreground rounded-full p-1 shadow-md">
+                    <CheckIcon className="size-4 stroke-[3]" />
                   </div>
                 )}
                 <div className="flex items-center gap-2 mb-1">
@@ -235,13 +248,7 @@ export default function BasicDetailsStep() {
       </Card>
 
       {/* DETAILS SECTION */}
-      {fields.length === 0 ? (
-        <Card className="rounded-none shadow-none ring-0 border-dashed">
-          <CardContent className="flex items-center justify-center py-12 text-muted-foreground">
-            Please select at least one family member above to continue.
-          </CardContent>
-        </Card>
-      ) : (
+      {fields.length > 0 && (
         <Card className={'rounded-none shadow-none ring-0 bg-transparent'}>
           <CardHeader className="px-0">
             <CardTitle>Test Details</CardTitle>
