@@ -116,13 +116,13 @@ export function BookingContextProvider(props: BookingContextProviderProps) {
       const testItems = memberList.flatMap((item) => item?.testItems || [])
 
       const originalPrice = testItems.reduce(
-        (acc, cur) => acc + (cur?.originalPrice || 0),
+        (acc, cur) => acc + (cur?.discountedPrice || 0),
         0,
       )
       const discountedPrice =
         originalPrice - originalPrice * (discountPercentage / 100)
 
-      const baseTotalPrice = discountedPrice * memberList.length
+      const baseTotalPrice = discountedPrice
 
       const collectionCharges = 0
 
