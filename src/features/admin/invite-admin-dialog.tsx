@@ -18,24 +18,57 @@ import {
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { CopyIcon, SendIcon } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
 
-export default function InviteAdminDialog() {
+export default function InviteAdminDialog({
+  trigger,
+  open: controlledOpen,
+  onOpenChange: setControlledOpen,
+  defaultValues,
+  onSuccess,
+  initialInviteUrl
+}: {
+  trigger?: React.ReactNode
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+  defaultValues?: { email: string, phone: string, address: string, role: any }
+  onSuccess?: () => void
+  initialInviteUrl?: string
+} = {}) {
   const trpc = useTRPC()
-  const [open, setOpen] = useState(false)
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [address, setAddress] = useState('')
-  const [role, setRole] = useState<'SUPER_ADMIN' | 'COO' | 'PHLEBOTOMIST'>('COO')
-  const [inviteUrl, setInviteUrl] = useState('')
+  const [internalOpen, setInternalOpen] = useState(false)
+  const isControlled = controlledOpen !== undefined
+  const open = isControlled ? controlledOpen : internalOpen
+  const setOpen = isControlled ? setControlledOpen! : setInternalOpen
+
+  const [email, setEmail] = useState(defaultValues?.email || '')
+  const [phone, setPhone] = useState(defaultValues?.phone || '')
+  const [address, setAddress] = useState(defaultValues?.address || '')
+  const [role, setRole] = useState<'SUPER_ADMIN' | 'COO' | 'PHLEBOTOMIST'>(defaultValues?.role || 'COO')
+  const [inviteUrl, setInviteUrl] = useState(initialInviteUrl || '')
+
+  useEffect(() => {
+    if (open) {
+      if (defaultValues) {
+        setEmail(defaultValues.email)
+        setPhone(defaultValues.phone)
+        setAddress(defaultValues.address)
+        setRole(defaultValues.role)
+      }
+      if (initialInviteUrl) {
+        setInviteUrl(initialInviteUrl)
+      }
+    }
+  }, [open, defaultValues, initialInviteUrl])
 
   const inviteMutation = useMutation({
     ...trpc.admin.createInvite.mutationOptions(),
     onSuccess: (data) => {
       const url = `${window.location.origin}/invite-accept?token=${data.token}`
       setInviteUrl(url)
-      toast.success('Invite link generated!')
+      toast.success(defaultValues ? 'Link regenerated successfully!' : 'Invite link generated!')
+      if (onSuccess) onSuccess()
     },
     onError: (err) => {
       toast.error(err.message || 'Failed to create invite')
@@ -50,22 +83,28 @@ export default function InviteAdminDialog() {
   const handleOpenChange = (val: boolean) => {
     setOpen(val)
     if (!val) {
-      setEmail('')
-      setPhone('')
-      setAddress('')
-      setRole('COO')
+      if (!defaultValues) {
+        setEmail('')
+        setPhone('')
+        setAddress('')
+        setRole('COO')
+      }
       setInviteUrl('')
     }
   }
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button>
-          <SendIcon className="size-4 mr-2" />
-          Invite Staff
-        </Button>
-      </DialogTrigger>
+      {trigger ? (
+        <DialogTrigger asChild>{trigger}</DialogTrigger>
+      ) : !isControlled ? (
+        <DialogTrigger asChild>
+          <Button>
+            <SendIcon className="size-4 mr-2" />
+            Invite Staff
+          </Button>
+        </DialogTrigger>
+      ) : null}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Invite Staff Member</DialogTitle>
@@ -84,6 +123,7 @@ export default function InviteAdminDialog() {
                 placeholder="colleague@bloodpanda.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                disabled={!!defaultValues}
               />
             </div>
             <div className="grid gap-2">

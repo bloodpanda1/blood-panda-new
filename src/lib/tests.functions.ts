@@ -51,53 +51,54 @@ export const getAllTests = createServerFn()
       }
 
       return [...specificTests, ...remainingTests]
-      const [tests, packages, miniPackages] = await Promise.all([
-        prisma.bloodTest.findMany({
-          orderBy: [
-            { order: 'asc' },
-            { name: 'asc' },
-          ],
-        }),
-        prisma.package.findMany({
-          orderBy: { name: 'asc' },
-        }),
-        prisma.miniPackage.findMany({
-          orderBy: { name: 'asc' },
-        }),
-      ])
-
-      const mappedPackages = packages.map((pkg) => ({
-        id: pkg.id,
-        name: pkg.name.startsWith('Package: ') ? pkg.name : `Package: ${pkg.name}`,
-        description: pkg.description,
-        originalPrice: Number(pkg.originalAmount) || 0,
-        discountedPrice: Number(pkg.discountedAmount) || 0,
-        discountAmount: Number(pkg.offerAmount) || 0,
-        isFastingRequired: false,
-        isRegularItem: false,
-        order: 9999,
-        primaryCategoryId: null,
-        secondaryCategoryId: null,
-        type: 'PACKAGE',
-      }))
-
-      const mappedMiniPackages = miniPackages.map((mpkg) => ({
-        id: mpkg.id,
-        name: mpkg.name.startsWith('Mini Package: ') ? mpkg.name : `Mini Package: ${mpkg.name}`,
-        description: mpkg.description,
-        originalPrice: Number(mpkg.originalAmount) || 0,
-        discountedPrice: Number(mpkg.discountedAmount) || 0,
-        discountAmount: Number(mpkg.offerAmount) || 0,
-        isFastingRequired: false,
-        isRegularItem: false,
-        order: 9999,
-        primaryCategoryId: null,
-        secondaryCategoryId: null,
-        type: 'MINI_PACKAGE',
-      }))
-
-      return [...tests, ...mappedPackages, ...mappedMiniPackages]
     }
+
+    const [tests, packages, miniPackages] = await Promise.all([
+      prisma.bloodTest.findMany({
+        orderBy: [
+          { order: 'asc' },
+          { name: 'asc' },
+        ],
+      }),
+      prisma.package.findMany({
+        orderBy: { name: 'asc' },
+      }),
+      prisma.miniPackage.findMany({
+        orderBy: { name: 'asc' },
+      }),
+    ])
+
+    const mappedPackages = packages.map((pkg) => ({
+      id: pkg.id,
+      name: pkg.name.startsWith('Package: ') ? pkg.name : `Package: ${pkg.name}`,
+      description: pkg.description,
+      originalPrice: Number(pkg.originalAmount) || 0,
+      discountedPrice: Number(pkg.discountedAmount) || 0,
+      discountAmount: Number(pkg.offerAmount) || 0,
+      isFastingRequired: false,
+      isRegularItem: false,
+      order: 9999,
+      primaryCategoryId: null,
+      secondaryCategoryId: null,
+      type: 'PACKAGE',
+    }))
+
+    const mappedMiniPackages = miniPackages.map((mpkg) => ({
+      id: mpkg.id,
+      name: mpkg.name.startsWith('Mini Package: ') ? mpkg.name : `Mini Package: ${mpkg.name}`,
+      description: mpkg.description,
+      originalPrice: Number(mpkg.originalAmount) || 0,
+      discountedPrice: Number(mpkg.discountedAmount) || 0,
+      discountAmount: Number(mpkg.offerAmount) || 0,
+      isFastingRequired: false,
+      isRegularItem: false,
+      order: 9999,
+      primaryCategoryId: null,
+      secondaryCategoryId: null,
+      type: 'MINI_PACKAGE',
+    }))
+
+    return [...tests, ...mappedPackages, ...mappedMiniPackages]
   })
 
 export const getPrimaryCategoryList = createServerFn().handler(async () => {
@@ -143,10 +144,9 @@ export const loadTestsBasedOnSearch = createServerFn()
         where.secondaryCategoryId = secondary
       }
 
-      // If neither is provided, keep the original fallback default
+      // If neither is provided, keep the original fallback default for primary only
       if (!primary && !secondary) {
         where.primaryCategoryId = '754513c0-4454-4fa0-83fc-c31bfd3c0e17'
-        where.secondaryCategoryId = 'd5ac78e9-9937-489b-ac13-4f3a4692386b'
       }
 
       const tests = await prisma.bloodTest.findMany({

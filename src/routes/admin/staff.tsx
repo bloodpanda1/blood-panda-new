@@ -34,7 +34,7 @@ import { useTRPC } from '#/integrations/trpc/react'
 import { useSession } from '#/lib/auth-client'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { SearchIcon, ShieldIcon, UserIcon, AlertCircle, EditIcon, MoreVerticalIcon, UserXIcon } from 'lucide-react'
+import { SearchIcon, ShieldIcon, UserIcon, AlertCircle, EditIcon, MoreVerticalIcon, UserXIcon, SendIcon } from 'lucide-react'
 import { toast } from 'sonner'
 import { useState, useEffect } from 'react'
 import InviteAdminDialog from '#/features/admin/invite-admin-dialog'
@@ -83,13 +83,44 @@ function RouteComponent() {
     enabled: userRole === 'SUPER_ADMIN',
   })
 
-  const { data: pendingInvites = [] } = useQuery({
+  const { data: pendingInvites = [], refetch: refetchInvites } = useQuery({
     ...trpc.admin.pendingInvites.queryOptions(),
     enabled: userRole === 'SUPER_ADMIN',
   })
 
   const [editingStaff, setEditingStaff] = useState<any>(null)
   const [editForm, setEditForm] = useState({ name: '', phone: '', address: '', role: '' })
+  const [showPendingInvites, setShowPendingInvites] = useState(false)
+  const [editingInvite, setEditingInvite] = useState<any>(null)
+  const [revokingInvite, setRevokingInvite] = useState<any>(null)
+  const [editInviteForm, setEditInviteForm] = useState({ id: '', email: '', phone: '', address: '', role: '' })
+  const [regeneratedInvite, setRegeneratedInvite] = useState<{ email: string, token: string } | null>(null)
+
+  const deleteInviteMutation = useMutation({
+    ...trpc.admin.deleteInvite.mutationOptions(),
+    onSuccess: () => {
+      toast.success('Invite revoked successfully')
+      setRevokingInvite(null)
+      refetchInvites()
+    }
+  })
+
+  const regenerateInviteMutation = useMutation({
+    ...trpc.admin.createInvite.mutationOptions(),
+    onSuccess: (data, variables) => {
+      setRegeneratedInvite({ email: variables.email, token: data.token })
+      refetchInvites()
+    }
+  })
+
+  const updateInviteMutation = useMutation({
+    ...trpc.admin.updateInvite.mutationOptions(),
+    onSuccess: () => {
+      toast.success('Pending invite updated successfully')
+      setEditingInvite(null)
+      refetchInvites()
+    }
+  })
 
   const updateStaffMutation = useMutation({
     ...trpc.admin.updateStaffMember.mutationOptions(),
@@ -166,8 +197,13 @@ function RouteComponent() {
           <Alert variant="default" className="bg-amber-50 border-amber-200 text-amber-800 dark:bg-amber-950/50 dark:border-amber-800 dark:text-amber-200">
             <AlertCircle className="size-4 text-amber-600 dark:text-amber-400" />
             <AlertTitle>Pending Invitations</AlertTitle>
-            <AlertDescription>
-              There {pendingInvites.length === 1 ? 'is' : 'are'} {pendingInvites.length} pending staff invitation{pendingInvites.length === 1 ? '' : 's'} waiting to be accepted.
+            <AlertDescription className="flex items-center justify-between">
+              <span>
+                There {pendingInvites.length === 1 ? 'is' : 'are'} {pendingInvites.length} pending staff invitation{pendingInvites.length === 1 ? '' : 's'} waiting to be accepted.
+              </span>
+              <Button variant="link" className="h-auto p-0 text-amber-700 dark:text-amber-300" onClick={() => setShowPendingInvites(true)}>
+                View Details
+              </Button>
             </AlertDescription>
           </Alert>
         )}
@@ -388,6 +424,189 @@ function RouteComponent() {
             </DialogClose>
             <Button onClick={handleUpdate} disabled={updateStaffMutation.isPending}>
               {updateStaffMutation.isPending ? 'Saving...' : 'Save Changes'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showPendingInvites} onOpenChange={setShowPendingInvites}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>Pending Invitations</DialogTitle>
+          </DialogHeader>
+          <div className="rounded-lg border overflow-hidden mt-4">
+            <Table>
+              <TableHeader className="bg-muted">
+                <TableRow>
+                  <TableHead>Email</TableHead>
+                  <TableHead>Role</TableHead>
+                  <TableHead>Expires At</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {pendingInvites.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">
+                      No pending invitations.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  pendingInvites.map((invite: any) => (
+                    <TableRow key={invite.id}>
+                      <TableCell className="font-medium">{invite.email}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className={roleColors[invite.role] ?? 'bg-gray-100 text-gray-800'}>
+                          {invite.role.replace('_', ' ')}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-sm text-muted-foreground">
+                        {new Date(invite.expiresAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreVerticalIcon className="size-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => {
+                              setEditingInvite(invite)
+                              setEditInviteForm({ id: invite.id, email: invite.email, phone: invite.phone || '', address: invite.address || '', role: invite.role })
+                            }}>
+                              <EditIcon className="size-4 mr-2" />
+                              Edit Invite
+                            </DropdownMenuItem>
+                            <DropdownMenuItem 
+                              onClick={(e) => {
+                                e.preventDefault()
+                                regenerateInviteMutation.mutate({ email: invite.email, role: invite.role, phone: invite.phone || undefined, address: invite.address || undefined })
+                              }}
+                              disabled={regenerateInviteMutation.isPending}
+                            >
+                              <SendIcon className="size-4 mr-2" />
+                              Regenerate Link
+                            </DropdownMenuItem>
+                            <DropdownMenuItem 
+                              className="text-destructive focus:bg-destructive/10"
+                              onClick={() => setRevokingInvite(invite)}
+                            >
+                              <UserXIcon className="size-4 mr-2" />
+                              Revoke Invite
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={!!editingInvite} onOpenChange={(open) => !open && setEditingInvite(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Pending Invite</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="inviteEmail">Email Address</Label>
+              <Input
+                id="inviteEmail"
+                value={editInviteForm.email}
+                disabled
+              />
+              <p className="text-xs text-muted-foreground">Email cannot be changed. Revoke and create a new invite instead.</p>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="invitePhone">Phone Number</Label>
+              <Input
+                id="invitePhone"
+                value={editInviteForm.phone}
+                onChange={(e) => setEditInviteForm({ ...editInviteForm, phone: e.target.value })}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="inviteAddress">Address</Label>
+              <Input
+                id="inviteAddress"
+                value={editInviteForm.address}
+                onChange={(e) => setEditInviteForm({ ...editInviteForm, address: e.target.value })}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="inviteRole">Role</Label>
+              <Select
+                value={editInviteForm.role}
+                onValueChange={(val: any) => setEditInviteForm({ ...editInviteForm, role: val })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="SUPER_ADMIN">SUPER ADMIN</SelectItem>
+                  <SelectItem value="COO">COO</SelectItem>
+                  <SelectItem value="PHLEBOTOMIST">PHLEBOTOMIST</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button 
+              onClick={() => updateInviteMutation.mutate({ 
+                id: editInviteForm.id,
+                role: editInviteForm.role as any, 
+                phone: editInviteForm.phone || undefined,
+                address: editInviteForm.address || undefined
+              })} 
+              disabled={updateInviteMutation.isPending}
+            >
+              {updateInviteMutation.isPending ? 'Saving...' : 'Save Details'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <InviteAdminDialog 
+        open={!!regeneratedInvite} 
+        onOpenChange={(open) => !open && setRegeneratedInvite(null)} 
+        defaultValues={regeneratedInvite ? { email: regeneratedInvite.email, phone: '', address: '', role: 'USER' } : undefined}
+        initialInviteUrl={regeneratedInvite ? `${window.location.origin}/invite-accept?token=${regeneratedInvite.token}` : undefined}
+      />
+
+      <Dialog open={!!revokingInvite} onOpenChange={(open) => !open && setRevokingInvite(null)}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Revoke Invitation</DialogTitle>
+          </DialogHeader>
+          <div className="py-4">
+            <p className="text-sm text-muted-foreground">
+              Are you sure you want to completely revoke the invitation for <strong className="text-foreground">{revokingInvite?.email}</strong>? 
+              This action cannot be undone and any existing invite links will become invalid immediately.
+            </p>
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button 
+              variant="destructive"
+              onClick={() => deleteInviteMutation.mutate({ id: revokingInvite?.id })} 
+              disabled={deleteInviteMutation.isPending}
+            >
+              {deleteInviteMutation.isPending ? 'Revoking...' : 'Revoke Invite'}
             </Button>
           </DialogFooter>
         </DialogContent>

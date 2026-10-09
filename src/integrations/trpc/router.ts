@@ -1075,6 +1075,23 @@ const adminRouter = {
       return { token: invite.token }
     }),
 
+  updateInvite: adminProcedure
+    .input(z.object({ id: z.string(), phone: z.string().optional(), address: z.string().optional(), role: z.enum(['SUPER_ADMIN', 'COO', 'PHLEBOTOMIST']) }))
+    .mutation(async ({ input, ctx }) => {
+      // Only SUPER_ADMIN can update invites
+      const userRole = (ctx.user as any)?.role
+      if (userRole !== 'SUPER_ADMIN') {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'Only SUPER_ADMIN can update invites' })
+      }
+
+      await prisma.adminInvite.update({
+        where: { id: input.id },
+        data: { role: input.role, phone: input.phone, address: input.address },
+      })
+
+      return { success: true }
+    }),
+
   pendingInvites: adminProcedure
     .query(async ({ ctx }) => {
       const userRole = (ctx.user as any)?.role
@@ -1084,6 +1101,18 @@ const adminRouter = {
       return prisma.adminInvite.findMany({
         where: { expiresAt: { gt: new Date() } },
         orderBy: { createdAt: 'desc' }
+      })
+    }),
+
+  deleteInvite: adminProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const userRole = (ctx.user as any)?.role
+      if (userRole !== 'SUPER_ADMIN') {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'Only SUPER_ADMIN can revoke invites' })
+      }
+      return prisma.adminInvite.delete({
+        where: { id: input.id }
       })
     }),
 
